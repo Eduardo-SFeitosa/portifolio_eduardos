@@ -53,6 +53,8 @@ function App() {
 
     renderer.render(cena, camera)
 
+    const controle = new OrbitControls(camera, renderer.domElement)
+
     const redesenhar = () => {
 
       requestAnimationFrame(redesenhar)
