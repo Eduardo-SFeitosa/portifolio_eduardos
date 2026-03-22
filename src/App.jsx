@@ -1,16 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
-import './App.css'
 import { OrbitControls } from 'three/examples/jsm/Addons.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import './App.css'
 import * as THREE from "three"
 
 function App() {
 
   const sceneCanvas = useRef(null)
 
+  const modeloPrincipal = useRef(null)
+
+  const gltfLoader = new GLTFLoader()
+
+
+
   //inicializa cena do three js 
   useEffect(() => {
 
-    const scene = new THREE.Scene()
+    const cena = new THREE.Scene()
 
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000)
   
@@ -22,32 +29,39 @@ function App() {
   
     renderer.setSize(window.innerWidth , window.innerHeight)
   
-    camera.position.setZ(60)
+    camera.position.setZ(20)
+
+    camera.position.setY(10)
+
+    camera.lookAt(0, -15, 0)
+
+    const iluminacao = new THREE.AmbientLight( 0xFFFFFF )
+
+    cena.add(iluminacao)
   
-  
-    renderer.render(scene, camera)
+    renderer.render(cena, camera)
 
-    const geometrt = new THREE.TorusGeometry(20,10,20,40)
+    gltfLoader.load("../models/cena_principal.glb", (gltf) => {
 
-    const material = new THREE.MeshBasicMaterial({color : 0xFF6347, wireframe : true})
+      modeloPrincipal.current = gltf.scene
 
-    const torus = new THREE.Mesh(geometrt, material)
+      modeloPrincipal.current.position.set(0, 0, 0)
 
-    scene.add(torus)
+      cena.add(modeloPrincipal.current)
 
-    renderer.render(scene, camera)
+    })
+
+    renderer.render(cena, camera)
 
     const redesenhar = () => {
 
       requestAnimationFrame(redesenhar)
 
-      torus.rotation.x += 0.01
-
-      torus.rotation.y += 0.02
-
-      torus.rotation.z += 0.03
+      if (modeloPrincipal.current) {
+        modeloPrincipal.current.rotation.y -= 0.005
+      }
   
-      renderer.render(scene, camera)
+      renderer.render(cena, camera)
   
     }  
 
