@@ -1,7 +1,9 @@
 import './App.css'
 import { Canvas} from '@react-three/fiber'
-import ModeloBase from './modelos_auxiliares/modeloBase'
 import { OrbitControls } from '@react-three/drei'
+
+import ModeloBase from './modelos_auxiliares/modeloBase'
+import AguaAnimada from './modelos_auxiliares/AguaAnimada'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
         <ambientLight />
 
         <ModeloBase />
+
+        <AguaAnimada />
 
         <OrbitControls />
 
