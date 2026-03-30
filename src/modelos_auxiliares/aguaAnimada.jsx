@@ -1,56 +1,63 @@
-import { useLoader, useFrame } from '@react-three/fiber'
-import { TextureLoader } from 'three'
 import { useRef, useEffect } from 'react'
-import * as THREE from 'three'
+import { useFrame, useLoader } from '@react-three/fiber'
+import { TextureLoader, RepeatWrapping } from 'three'
+import * as THREE from "three"
 
-export default function AguaAnimada() {
-  
-  const materialRef = useRef()
+export default function AguaAnimada(props) {
 
-  // Carrega as três texturas
-  const colorMap = useLoader(TextureLoader, '/texturas/Water.png')
-  const normalMap = useLoader(TextureLoader, '/texturas/Water_n.png')
-  const noiseMap = useLoader(TextureLoader, '/texturas/Water_noise.png')
+  const referenciaAgua = useRef()
 
-  // Configura repetição e wrap das texturas após o carregamento
+  // Load all textures
+  const texturaPrincipal = useLoader(TextureLoader, '/texturas/Water.png')
+  const texturaReferencia = useLoader(TextureLoader, '/texturas/Water_n.png')
+  const texturaBarulho = useLoader(TextureLoader, '/texturas/Water_noise.png')
+
+  // configura texturas para se repitirem e não esticar
   useEffect(() => {
-    const textures = [colorMap, normalMap, noiseMap]
-    textures.forEach(tex => {
-      if (tex) {
-        tex.wrapS = THREE.RepeatWrapping
-        tex.wrapT = THREE.RepeatWrapping
-        tex.repeat.set(2, 2)
-      }
+    const texturas = [texturaPrincipal, texturaReferencia, texturaBarulho]
+    texturas.forEach(textura => {
+      textura.wrapS = RepeatWrapping
+      textura.wrapT = RepeatWrapping
+      textura.repeat.set(3, 3)
     })
-  }, [colorMap, normalMap, noiseMap])
-  
+  }, [texturaPrincipal, texturaReferencia, texturaBarulho])
 
-  // Animação do offset UV
+  // Animação
   useFrame(({ clock }) => {
-    if (materialRef.current) {
-      // clock.getElapsedTime() is safe – it's not THREE.Clock
-      const t = clock.getElapsedTime()
-      materialRef.current.map.offset.x = t * 0.05
-      materialRef.current.map.offset.y = t * 0.03
-      materialRef.current.normalMap.offset.x = t * 0.07
-      materialRef.current.normalMap.offset.y = t * 0.04
+
+    const delta = clock.getElapsedTime()
+
+    if (referenciaAgua.current) {
+      // Velocidade da animação da agua
+      referenciaAgua.current.map.offset.x = delta * 0.01
+      referenciaAgua.current.normalMap.offset.x = delta * 0.04
+
+      // Velocidade da animação de noise
+      referenciaAgua.current.emissiveMap.offset.x = delta * 0.1
+      
     }
   })
 
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]}>
-      <planeGeometry args={[20, 20, 128, 128]} />
-      <meshStandardMaterial
-        ref={materialRef}
-        map={colorMap}
-        normalMap={normalMap}
-        color={0x88aaff}
-        roughness={0.3}
-        metalness={0.85}
-        emissive={0x112233}
-        emissiveIntensity={0.2}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
+    <>
+      
+      <mesh {...props} receiveShadow>
+        <planeGeometry args={props.size} />
+          <meshStandardMaterial
+            ref={referenciaAgua}
+            map={texturaPrincipal}
+            normalMap={texturaReferencia}
+            emissiveMap={texturaBarulho}    
+            emissive={0x88aaff}      
+            emissiveIntensity={0.6}
+            color={0x88aaff}
+            roughness={0.3}
+            metalness={0.1}
+            transparent
+            opacity={0.6}
+            side={THREE.DoubleSide}
+          />
+      </mesh>
+    </>
   )
 }

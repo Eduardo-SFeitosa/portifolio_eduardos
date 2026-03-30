@@ -1,18 +1,11 @@
 import './App.css'
 import { Canvas} from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { useState, useEffect } from 'react'
 
 import ModeloBase from './modelos_auxiliares/modeloBase'
 import AguaAnimada from './modelos_auxiliares/aguaAnimada'
 
 function App() {
-  const [version, setVersion] = useState(0)
-
-  useEffect(() => {
-    setVersion(v => v + 1)
-  }, [])
-  
 
   return (
     <>
@@ -27,7 +20,11 @@ function App() {
 
         <ModeloBase />
 
-        <AguaAnimada key={version} />
+        <AguaAnimada 
+        rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
+        position={[ 0 , -2.5 , 0.05 ]} 
+        size={[30, 20, 128, 128]}
+        />
 
         <OrbitControls />
 
