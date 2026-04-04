@@ -11,6 +11,8 @@ import BauDoTesouro from "./modelos_auxiliares/bauDoTesouro"
 
 import Acampamento from "./modelos_auxiliares/acampamento"
 
+import Porta from "./modelos_auxiliares/Porta"
+
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
 function App() {
