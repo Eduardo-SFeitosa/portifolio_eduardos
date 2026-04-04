@@ -58,6 +58,7 @@ export default function AguaAnimada(props) {
             side={THREE.DoubleSide}
           />
       </mesh>
+    
     </>
   )
 }
