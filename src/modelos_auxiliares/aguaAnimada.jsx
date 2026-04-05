@@ -28,6 +28,7 @@ export default function AguaAnimada(props) {
     const delta = clock.getElapsedTime()
 
     if (referenciaAgua.current) {
+
       // Velocidade da animação da agua
       referenciaAgua.current.map.offset.x = delta * 0.01
       referenciaAgua.current.normalMap.offset.x = delta * 0.04
@@ -36,29 +37,48 @@ export default function AguaAnimada(props) {
       referenciaAgua.current.emissiveMap.offset.x = delta * 0.1
       
     }
+    
   })
 
   return (
     <>
       
       <mesh {...props} receiveShadow>
+
         <planeGeometry args={props.size} />
+
           <meshStandardMaterial
+            
             ref={referenciaAgua}
+            
             map={texturaPrincipal}
+            
             normalMap={texturaReferencia}
+            
             emissiveMap={texturaBarulho}    
+            
             emissive={0x88aaff}      
+            
             emissiveIntensity={0.6}
+            
             color={0x88aaff}
+            
             roughness={0.3}
+            
             metalness={0.1}
+            
             transparent
+            
             opacity={0.6}
+            
             side={THREE.DoubleSide}
+          
           />
+      
       </mesh>
     
     </>
+  
   )
+
 }

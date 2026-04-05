@@ -11,9 +11,9 @@ import BauDoTesouro from "./modelos_auxiliares/bauDoTesouro"
 
 import Acampamento from "./modelos_auxiliares/acampamento"
 
-import Porta from "./modelos_auxiliares/Porta"
+import Porta from "./modelos_auxiliares/porta"
 
-import Orbe from "./modelos_auxiliares/Orbe"
+import Orbe from "./modelos_auxiliares/orbe"
 
 import CarrinhoDaMina from "./modelos_auxiliares/carrinhoDaMina"
 
@@ -25,9 +25,7 @@ function App() {
 
     <>
 
-      <Canvas camera={{ position: [0, 10, 20] }} id="canvas">
-
-        
+      <Canvas camera={{ position: [0, 10, 20] }} id="canvas">   
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
