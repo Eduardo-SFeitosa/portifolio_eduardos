@@ -15,6 +15,8 @@ import Porta from "./modelos_auxiliares/Porta"
 
 import Orbe from "./modelos_auxiliares/Orbe"
 
+import CarrinhoDaMina from "./modelos_auxiliares/carrinhoDaMina"
+
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
           < Porta />
 
           < Orbe />
+
+          < CarrinhoDaMina />
 
           < AguaAnimada 
           rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
