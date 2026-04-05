@@ -37,15 +37,15 @@ function App() {
 
           < ModeloBase />
 
-          < BauDoTesouro />
+          < BauDoTesouro position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
 
-          < Acampamento />
+          < Acampamento position={[ -6.2 , 2 , 13 ]} />
 
-          < Porta />
+          < Porta position={[ -8.8, .1, 2.9 ]} />
 
-          < Orbe />
+          < Orbe position={[ 1.3, 3, 2 ]} />
 
-          < CarrinhoDaMina />
+          < CarrinhoDaMina position={[ 9.25 , 2.05 , -3 ]} />
 
           < AguaAnimada 
           rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
