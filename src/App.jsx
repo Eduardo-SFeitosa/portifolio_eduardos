@@ -13,11 +13,14 @@ import Acampamento from "./modelos_auxiliares/acampamento"
 
 import Porta from "./modelos_auxiliares/Porta"
 
+import Orbe from "./modelos_auxiliares/Orbe"
+
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
 function App() {
 
   return (
+
     <>
 
       <Canvas camera={{ position: [0, 10, 20] }} id="canvas">
@@ -35,6 +38,10 @@ function App() {
           < BauDoTesouro />
 
           < Acampamento />
+
+          < Porta />
+
+          < Orbe />
 
           < AguaAnimada 
           rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
