@@ -25,7 +25,7 @@ function App() {
 
     <>
 
-      <Canvas camera={{ position: [0, 10, 20] }} id="canvas">   
+      <Canvas camera={{ position: [0, 10, -20] }} id="canvas">   
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
