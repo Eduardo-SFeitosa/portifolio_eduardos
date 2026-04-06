@@ -65,6 +65,7 @@ export default function BauDoTesouro(props) {
         geometry={nodes.Box.geometry} 
         
         material={materials.chests} 
+        
       />
 
       <mesh 

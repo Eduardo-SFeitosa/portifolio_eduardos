@@ -11,8 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-/models
-public/texturas
 
 # Editor directories and files
 .vscode/*
