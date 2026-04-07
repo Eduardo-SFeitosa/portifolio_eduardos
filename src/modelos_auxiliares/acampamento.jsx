@@ -4,11 +4,18 @@ Command: npx gltfjsx@6.5.3 acampamento.glb
 */
 
 import React from 'react'
+
 import { useGLTF } from '@react-three/drei'
+
+import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
 export default function Acampamento(props) {
 
   const { nodes, materials } = useGLTF('/models/acampamento.glb')
+
+  const fogueiraPosicao = [-0.179, 0.112, -1.14]
+
+  console.log(fogueiraPosicao.map((valor) => valor + .4))
 
   return (
 
@@ -18,13 +25,61 @@ export default function Acampamento(props) {
 
       <mesh geometry={nodes.Bucket.geometry} material={materials['props.006']} position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]} />
 
-      <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={[-0.179, 0.112, -1.14]} rotation={[Math.PI, -1.566, Math.PI]} />
+      <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={fogueiraPosicao} rotation={[Math.PI, -1.566, Math.PI]} />
 
       <mesh geometry={nodes.Camp2_tent.geometry} material={materials['camp_02.002']} position={[-0.158, 0.112, 0.48]} rotation={[Math.PI, -0.781, Math.PI]} scale={[1, 1, 1.279]} />
       
       <mesh geometry={nodes.Chest1B.geometry} material={materials['chests.004']} position={[1.817, 0.112, 1.119]} rotation={[Math.PI, -0.14, Math.PI]} />
 
       <mesh geometry={nodes.Chest1B001.geometry} material={materials['chests.001']} position={[1.817, 0.461, 1.119]} rotation={[Math.PI, -0.675, Math.PI]} />
+
+      <VFXParticles 
+            name="fire"
+            
+            settings={{
+              nbParticles: 1000,
+              gravity: [0, 2, -2],
+              renderMode: 'billboard',
+              }
+            }
+          />
+          
+          <VFXEmitter 
+
+            emitter="fire"
+
+            settings={{
+              
+              loop:true,
+
+              velocity: {
+                direction: [0, 1, 0],
+                spread: 0.5,
+                speed: [1, 3]
+              },
+
+              size: [0.02, 0.1],
+
+              spawnMode: "continuous",
+
+              duration: 2,
+
+              position : {fogueiraPosicao},
+
+              startPositionMin: fogueiraPosicao.map((valor) => valor - .4),
+
+              startPositionMax: fogueiraPosicao.map((valor) => valor + .4),
+
+              nbParticles: 90,
+
+              lifetime: [0.5, 1.5],
+
+              colorStart: ['#ff6b35', '#f7931e'],
+
+              colorEnd: ['#ff0000', '#8b0000'],
+
+            }}
+          />
 
     </group>
 

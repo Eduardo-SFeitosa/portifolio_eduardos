@@ -46,9 +46,11 @@ function App() {
           < CarrinhoDaMina position={[ 9.25 , 2.05 , -3 ]} />
 
           < AguaAnimada 
+          
           rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
           position={[ 0 , -2.5 , 0.05 ]} 
           size={[30, 20, 128, 128]}
+          
           />
 
           < OrbitControls />
