@@ -42,9 +42,9 @@ export default function Porta(props) {
 
     {
 
-      rotation: aberta ? [-Math.PI, -1 , -Math.PI] : [-Math.PI, 0, -Math.PI],
+      rotation: aberta ? [-Math.PI, -1.2 , -Math.PI] : [-Math.PI, 0, -Math.PI],
       
-      config: { tension: 120, friction: 14 }
+      config: { tension: 40, friction: 20 }
   
     }
 
