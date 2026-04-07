@@ -17,7 +17,7 @@ export default function Porta(props) {
 
   const [ aberta , setAberta] = useState(false)
 
-    const fechar = ( ) => {
+  const fechar = ( ) => {
 
     if (porta.current){
 
@@ -80,7 +80,7 @@ export default function Porta(props) {
 
         ref={porta}
 
-        position={[ .53, -.09 , 0 ]}
+        position={[ .515, -.09 , 0 ]}
 
         rotation={rotation}
       >

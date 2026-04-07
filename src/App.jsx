@@ -15,7 +15,7 @@ import Porta from "./modelos_auxiliares/porta"
 
 import Orbe from "./modelos_auxiliares/orbe"
 
-import CarrinhoDaMina from "./modelos_auxiliares/carrinhoDaMina"
+import Mina from "./modelos_auxiliares/mina"
 
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
@@ -43,7 +43,7 @@ function App() {
 
           < Orbe position={[ 1.3, 3, 2 ]} />
 
-          < CarrinhoDaMina position={[ 9.25 , 2.05 , -3 ]} />
+          < Mina position={[ 9.222 , 1.975 , -3.066 ]} />
 
           < AguaAnimada 
           
