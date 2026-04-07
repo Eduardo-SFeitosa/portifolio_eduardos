@@ -13,22 +13,35 @@ export default function BauDoTesouro(props) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
+  const posicaoGlobal = props.position
+
+  const rotacaoGlobal = props.rotation
+
   const tampa = useRef(null)
 
   const [aberto, setAberto] = useState(false)
 
   //animação da tampa do bau
-  const { rotation } = useSpring(
+  const { rotacaoTampa } = useSpring({
 
-    {
-
-      rotation: aberto ? [-1, 0, 0] : [1.6, 0, 0],
+      rotacaoTampa: aberto ? [-1.3, 0, 0] : [1.6, 0, 0],
       
       config: { tension: 120, friction: 14 }
   
-    }
+  })
 
-  )
+  //animação do bau
+  const { bauEscala , bauRotacao , bauPosicao } = useSpring({
+
+    bauRotacao: aberto ? [rotacaoGlobal[0] + 0.8, rotacaoGlobal[1], rotacaoGlobal[2] + 0.4] : rotacaoGlobal,
+
+    bauEscala : aberto ? [1.5, 1.5, 1.5] : [1, 1, 1],
+
+    bauPosicao : aberto ? [posicaoGlobal[0], posicaoGlobal[1] + .3, posicaoGlobal[2]] : posicaoGlobal,
+      
+    config: { tension: 120, friction: 14 }
+
+  })
 
   const fechar = ( ) => {
 
@@ -52,7 +65,15 @@ export default function BauDoTesouro(props) {
 
   return (
 
-    <group {...props} dispose={null}
+    <animated.group {...props} 
+
+      rotation={bauRotacao}
+    
+      position={bauPosicao} 
+
+      scale={bauEscala}
+    
+      dispose={null}
     
       onPointerOver={ () => abrir() }
 
@@ -84,13 +105,13 @@ export default function BauDoTesouro(props) {
 
         material={materials.chests} 
 
-        rotation= { rotation }
+        rotation = { rotacaoTampa }
         
         position={[-0.172, 0.429, -0.285]} 
 
       />
 
-    </group>
+    </animated.group>
 
   )
   

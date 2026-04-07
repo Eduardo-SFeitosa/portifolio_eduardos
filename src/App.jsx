@@ -47,9 +47,9 @@ function App() {
 
           < AguaAnimada 
           
-          rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
-          position={[ 0 , -2.5 , 0.05 ]} 
-          size={[30, 20, 128, 128]}
+            rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
+            position={[ 0 , -2.5 , 0.05 ]} 
+            size={[30, 20, 128, 128]}
           
           />
 

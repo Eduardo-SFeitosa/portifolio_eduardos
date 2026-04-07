@@ -15,8 +15,6 @@ export default function Acampamento(props) {
 
   const fogueiraPosicao = [-0.179, 0.112, -1.14]
 
-  console.log(fogueiraPosicao.map((valor) => valor + .4))
-
   return (
 
     <group {...props} dispose={null}>
