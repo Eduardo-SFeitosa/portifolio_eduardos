@@ -9,6 +9,8 @@ import { useGLTF } from '@react-three/drei'
 
 import { useSpring, animated } from '@react-spring/three'
 
+import { Html } from '@react-three/drei'
+
 export default function BauDoTesouro(props) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
@@ -33,11 +35,11 @@ export default function BauDoTesouro(props) {
   //animação do bau
   const { bauEscala , bauRotacao , bauPosicao } = useSpring({
 
-    bauRotacao: aberto ? [rotacaoGlobal[0] + 0.8, rotacaoGlobal[1], rotacaoGlobal[2] + 0.4] : rotacaoGlobal,
+    bauRotacao: aberto ? [0.8, 0, 0.4] : [0, 0, 0],
 
     bauEscala : aberto ? [1.5, 1.5, 1.5] : [1, 1, 1],
 
-    bauPosicao : aberto ? [posicaoGlobal[0], posicaoGlobal[1] + .3, posicaoGlobal[2]] : posicaoGlobal,
+    bauPosicao : aberto ? [0, .3, 0] : [0, 0, 0],
       
     config: { tension: 120, friction: 14 }
 
@@ -65,53 +67,59 @@ export default function BauDoTesouro(props) {
 
   return (
 
-    <animated.group {...props} 
+    <group position={posicaoGlobal} rotation={rotacaoGlobal}>
 
-      rotation={bauRotacao}
-    
-      position={bauPosicao} 
-
-      scale={bauEscala}
-    
-      dispose={null}
-    
-      onPointerOver={ () => abrir() }
-
-      onPointerOut={ () => fechar() }
-
-    >
-
-      <mesh 
       
-        geometry={nodes.Box.geometry} 
-        
-        material={materials.chests} 
-        
-      />
+      {/* bau */}
+      <animated.group
 
-      <mesh 
+        rotation={bauRotacao}
       
-        geometry={nodes.Gold.geometry} 
-        
-        material={materials.chests} position={[0, 0.379, 0]} 
+        position={bauPosicao} 
+
+        scale={bauEscala}
       
-      />
+        dispose={null}
+      
+        onPointerOver={ () => abrir() }
 
-      <animated.mesh 
+        onPointerOut={ () => fechar() }
 
-        ref={tampa}
+      >
 
-        geometry={nodes.Lid.geometry} 
-
-        material={materials.chests} 
-
-        rotation = { rotacaoTampa }
+        <mesh 
         
-        position={[-0.172, 0.429, -0.285]} 
+          geometry={nodes.Box.geometry} 
+          
+          material={materials.chests} 
+          
+        />
 
-      />
+        <mesh 
+        
+          geometry={nodes.Gold.geometry} 
+          
+          material={materials.chests} position={[0, 0.379, 0]} 
+        
+        />
 
-    </animated.group>
+        <animated.mesh 
+
+          ref={tampa}
+
+          geometry={nodes.Lid.geometry} 
+
+          material={materials.chests} 
+
+          rotation = { rotacaoTampa }
+          
+          position={[-0.172, 0.429, -0.285]} 
+
+        />
+
+      </animated.group>
+
+    </group>
 
   )
   

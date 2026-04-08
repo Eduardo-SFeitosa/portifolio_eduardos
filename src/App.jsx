@@ -1,7 +1,8 @@
 import "./App.css"
 
 import { Canvas} from "@react-three/fiber"
-import { OrbitControls, ScrollControls } from "@react-three/drei"
+
+import { Html, OrbitControls, ScrollControls } from "@react-three/drei"
 
 import ModeloBase from "./modelos_auxiliares/modeloBase"
 
