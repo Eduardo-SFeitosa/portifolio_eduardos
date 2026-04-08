@@ -19,6 +19,8 @@ import Mina from "./modelos_auxiliares/mina"
 
 import EstrelaCadente from "./modelos_auxiliares/estrelaCadente"
 
+import EstrelaEstatica from "./modelos_auxiliares/estrelaEstatica"
+
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
 function App() {
@@ -47,7 +49,15 @@ function App() {
 
           < Mina position={[ 9.222 , 1.975 , -3.066 ]} />
 
-          < EstrelaCadente position={[ -20, 10, 10 ]} />
+          < EstrelaEstatica nome="estrelasEsquerda" position={[ -50, 10, 10 ]} largura={5} altura={20} profundidade={50} particulas={800} />
+
+          < EstrelaEstatica nome="estrelasDireita" position={[ 50, 10, 10 ]} largura={5} altura={20} profundidade={50} particulas={800}/>
+
+          < EstrelaEstatica nome="estrelasFrente" position={[ 0, 10, 50 ]} largura={80} altura={20} profundidade={10} particulas={800}/>
+
+          < EstrelaEstatica nome="estrelasTras" position={[ 0, 10, -50 ]} largura={80} altura={20} profundidade={10} particulas={800}/>
+
+          < EstrelaEstatica nome="estrelasCima" position={[ 0, 20, 0 ]} largura={60} altura={10} profundidade={60} particulas={1200}/>
 
           < AguaAnimada 
           
