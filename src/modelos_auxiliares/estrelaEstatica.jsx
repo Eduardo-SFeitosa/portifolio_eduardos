@@ -49,6 +49,8 @@ export default function EstrelaEstatica(props) {
 
                     renderMode: "billboard",
 
+                    blending: "additive",
+
                 }
                 }
             />

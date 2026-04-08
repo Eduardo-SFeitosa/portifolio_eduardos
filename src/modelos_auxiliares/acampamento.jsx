@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.5.3 acampamento.glb
 
 import { useState, useRef } from 'react'
 
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Text3D  } from '@react-three/drei'
 
 import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
@@ -44,6 +44,22 @@ export default function Acampamento(props) {
       <mesh geometry={nodes.Bench2.geometry} material={materials['props.006']} position={[1.467, 0.112, -0.43]} rotation={[Math.PI, -0.833, Math.PI]} />
 
       <mesh geometry={nodes.Bucket.geometry} material={materials['props.006']} position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]} />
+
+      <Text3D 
+      
+        size={0.5}
+        position={fogueiraPosicao}
+        font={"/font3d/gt.json"}
+        height={0.2}
+        curveSegments={12}
+        bevelEnabled
+        bevelThickness={0.03}
+        bevelSize={0.02}
+        bevelSegments={5}
+      >
+        Acampamento
+        <meshStandardMaterial color="lightBlue" />
+      </Text3D >
 
       <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={fogueiraPosicao} rotation={[Math.PI, -1.566, Math.PI]} />
 
