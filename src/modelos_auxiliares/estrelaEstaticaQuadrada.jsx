@@ -1,7 +1,6 @@
-
 import { VFXEmitter, VFXParticles } from "wawa-vfx"
 
-export default function EstrelaEstatica(props) {
+export default function EstrelaEstaticaQuadrada(props) {
 
     const profundidade = props.profundidade
 
