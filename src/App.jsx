@@ -17,6 +17,8 @@ import Orbe from "./modelos_auxiliares/orbe"
 
 import Mina from "./modelos_auxiliares/mina"
 
+import EstrelaCadente from "./modelos_auxiliares/estrelaCadente"
+
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
           < Orbe position={[ 1.3, 3, 2 ]} />
 
           < Mina position={[ 9.222 , 1.975 , -3.066 ]} />
+
+          < EstrelaCadente position={[ -20, 10, 10 ]} />
 
           < AguaAnimada 
           
