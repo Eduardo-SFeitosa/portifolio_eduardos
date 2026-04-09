@@ -50,15 +50,15 @@ function App() {
 
           < Mina position={[ 9.222 , 1.975 , -3.066 ]} />
 
-          < EstrelaEstaticaQuadrada nome="estrelasEsquerda" position={[ -50, 10, 10 ]} largura={5} altura={20} profundidade={50} particulas={600} />
+          < EstrelaEstaticaQuadrada nome="estrelasEsquerda" position={[ -50, 15, 10 ]} largura={5} altura={30} profundidade={50} particulas={800} />
 
-          < EstrelaEstaticaQuadrada nome="estrelasDireita" position={[ 50, 10, 10 ]} largura={5} altura={20} profundidade={50} particulas={600}/>
+          < EstrelaEstaticaQuadrada nome="estrelasDireita" position={[ 50, 15, 10 ]} largura={5} altura={30} profundidade={50} particulas={800}/>
 
-          < EstrelaEstaticaQuadrada nome="estrelasFrente" position={[ 0, 10, 40 ]} largura={80} altura={20} profundidade={10} particulas={600}/>
+          < EstrelaEstaticaQuadrada nome="estrelasFrente" position={[ 0, 15, 40 ]} largura={80} altura={30} profundidade={10} particulas={800}/>
 
-          < EstrelaEstaticaQuadrada nome="estrelasTras" position={[ 0, 10, -40 ]} largura={80} altura={20} profundidade={10} particulas={600}/>
+          < EstrelaEstaticaQuadrada nome="estrelasTras" position={[ 0, 15, -40 ]} largura={80} altura={30} profundidade={10} particulas={800}/>
 
-          < EstrelaEstaticaQuadrada nome="estrelasCima" position={[ 0, 25, 0 ]} largura={60} altura={10} profundidade={60} particulas={800}/>
+          < EstrelaEstaticaQuadrada nome="estrelasCima" position={[ 0, 50, 0 ]} largura={80} altura={4} profundidade={80} particulas={1000}/>
 
           < AguaAnimada 
           

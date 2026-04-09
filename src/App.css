@@ -1,8 +1,6 @@
 *{
 
   box-sizing: border-box;
-  background-color: black;
-
 }
 
 html, body, #root {
@@ -17,6 +15,6 @@ html, body, #root {
 
   width: 100vw;
   height: 100vh;
-  
+  background: linear-gradient(black, rgb(1, 1, 75));
 
 }

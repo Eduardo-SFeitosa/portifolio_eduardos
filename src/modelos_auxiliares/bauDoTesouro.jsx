@@ -68,7 +68,6 @@ export default function BauDoTesouro(props) {
   return (
 
     <group position={posicaoGlobal} rotation={rotacaoGlobal}>
-
       
       {/* bau */}
       <animated.group
