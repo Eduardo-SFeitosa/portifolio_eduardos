@@ -68,12 +68,9 @@ function App() {
           
           />
 
-          < OrbitControls />
+          <OrbitControls target={[0, 0, 0]} />
           
-
-
-
-      </Canvas>      
+      </Canvas>           
       
     </>
   )

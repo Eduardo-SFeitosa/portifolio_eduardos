@@ -61,6 +61,8 @@ export default function EstrelaCadente(props) {
 
                 emitter={nome}
 
+                frustumCulled={false}
+
                 settings={{
 
                     loop: true,

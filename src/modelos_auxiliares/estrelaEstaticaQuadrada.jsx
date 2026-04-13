@@ -40,6 +40,8 @@ export default function EstrelaEstaticaQuadrada(props) {
 
                 name={nome}
 
+                frustumCulled={false}
+
                 settings={{
 
                     nbParticles: particulas,

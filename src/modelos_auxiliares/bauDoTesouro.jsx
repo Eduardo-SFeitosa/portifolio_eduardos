@@ -9,7 +9,7 @@ import { useGLTF } from '@react-three/drei'
 
 import { useSpring, animated } from '@react-spring/three'
 
-import { Html } from '@react-three/drei'
+import { Html, Text } from '@react-three/drei'
 
 export default function BauDoTesouro(props) {
 
