@@ -9,7 +9,7 @@ import { useGLTF } from '@react-three/drei'
 
 import { useSpring, animated } from '@react-spring/three'
 
-import { Html, Text } from '@react-three/drei'
+import Interface_bau from '../interfaces/interface_bau'
 
 export default function BauDoTesouro(props) {
 
@@ -100,7 +100,7 @@ export default function BauDoTesouro(props) {
           
           material={materials.chests} position={[0, 0.379, 0]} 
         
-        />
+        />       
 
         <animated.mesh 
 
@@ -117,6 +117,8 @@ export default function BauDoTesouro(props) {
         />
 
       </animated.group>
+
+      <Interface_bau/>
 
     </group>
 

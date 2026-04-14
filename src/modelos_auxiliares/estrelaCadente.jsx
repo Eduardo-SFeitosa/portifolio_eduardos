@@ -47,7 +47,7 @@ export default function EstrelaCadente(props) {
 
                     gravity: [0, -3, 0],
 
-                    renderMode: "billboard",
+                    renderMode: "stretchBillboard",
 
                 }
                 }
@@ -69,9 +69,9 @@ export default function EstrelaCadente(props) {
 
                     spread: 6,
 
-                    speed: [15, 25],
+                    speed: [20, 30],
 
-                    size: [.5, 1.5],
+                    size: [0.1, 0.4],
 
                     startPositionMin: [-largura, altura, -profundidade],
 

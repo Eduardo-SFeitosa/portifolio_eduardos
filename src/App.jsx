@@ -62,13 +62,6 @@ function App() {
 
           < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
 
-
-          {/*
-          
-          
-
-          */}
-
           < AguaAnimada 
           
             rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 

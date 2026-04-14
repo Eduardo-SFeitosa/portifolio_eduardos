@@ -1,0 +1,20 @@
+import "./interface_bau.css"
+import { Html } from "@react-three/drei"
+
+export default function Interface_bau () {
+
+    return (
+
+        <Html className={"interface-bau"} occlude zIndexRange={[100, 0]} style={{ position: "static" }}>
+
+            <div className="wraper" style={{minWidth:"600px", minHeight:"200px", backgroundColor:"black", color:"white",display: "inline-block", outline: "3px solid red"}}>
+            
+                <p style={{overflowWrap: "break-word"}}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta dolorum perspiciatis, corrupti laboriosam consequatur ab nobis repellendus numquam in nihil dolorem ipsam et aspernatur, aliquam tenetur dolor dolore voluptatem iusto porro distinctio corporis excepturi hic maiores praesentium! Tenetur tempore aliquid quas, ipsa enim facere necessitatibus repellat accusantium iure? Saepe iusto amet harum aut autem doloribus fugit distinctio praesentium nisi dolore.</p>
+            
+            </div>
+
+        </Html>
+        
+    )
+
+}
