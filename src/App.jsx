@@ -22,6 +22,8 @@ import EstrelaCadente from "./modelos_auxiliares/estrelaCadente"
 
 import EstrelaEstaticaQuadrada from "./modelos_auxiliares/estrelaEstaticaQuadrada"
 
+import EstrelaEstatica from "./modelos_auxiliares/estrelaEstaticaCirculo"
+
 import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
 
 function App() {
@@ -50,15 +52,22 @@ function App() {
 
           < Mina position={[ 9.222 , 1.975 , -3.066 ]} />
 
-          < EstrelaEstaticaQuadrada nome="estrelasEsquerda" position={[ -50, 15, 10 ]} largura={5} altura={30} profundidade={50} particulas={800} />
+          < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
-          < EstrelaEstaticaQuadrada nome="estrelasDireita" position={[ 50, 15, 10 ]} largura={5} altura={30} profundidade={50} particulas={800}/>
+          < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800}/>
 
-          < EstrelaEstaticaQuadrada nome="estrelasFrente" position={[ 0, 15, 40 ]} largura={80} altura={30} profundidade={10} particulas={800}/>
+          < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
 
-          < EstrelaEstaticaQuadrada nome="estrelasTras" position={[ 0, 15, -40 ]} largura={80} altura={30} profundidade={10} particulas={800}/>
+          < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
 
-          < EstrelaEstaticaQuadrada nome="estrelasCima" position={[ 0, 50, 0 ]} largura={80} altura={4} profundidade={80} particulas={1000}/>
+          < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
+
+
+          {/*
+          
+          
+
+          */}
 
           < AguaAnimada 
           

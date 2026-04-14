@@ -1,10 +1,6 @@
 
 import { VFXEmitter, VFXParticles } from "wawa-vfx"
 
-import { BoxGeometry } from "three"
-
-import { DoubleSide, MeshBasicMaterial } from "three"
-
 export default function EstrelaCadente(props) {
 
     const profundidade = props.profundidade
@@ -49,9 +45,9 @@ export default function EstrelaCadente(props) {
 
                     nbParticles: particulas,
 
-                    gravity: [0, -2, 0],
+                    gravity: [0, -3, 0],
 
-                    renderMode: "stretchBillboard",
+                    renderMode: "billboard",
 
                 }
                 }
@@ -73,9 +69,9 @@ export default function EstrelaCadente(props) {
 
                     spread: 6,
 
-                    speed: [8, 12],
+                    speed: [15, 25],
 
-                    size: [0.1, 0.4],
+                    size: [.5, 1.5],
 
                     startPositionMin: [-largura, altura, -profundidade],
 
@@ -83,7 +79,7 @@ export default function EstrelaCadente(props) {
 
                     spawnMode: "continuous",
 
-                    duration: 20,
+                    duration: 90,
 
                     nbParticles: particulas,
 
