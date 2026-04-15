@@ -4,27 +4,21 @@ import { Canvas} from "@react-three/fiber"
 
 import { Html, OrbitControls, ScrollControls } from "@react-three/drei"
 
-import ModeloBase from "./modelos_auxiliares/modeloBase"
+import ModeloBase from "./modelos_auxiliares/modelo_base"
 
-import AguaAnimada from "./modelos_auxiliares/aguaAnimada"
+import AguaAnimada from "./modelos_auxiliares/agua_animada"
 
-import BauDoTesouro from "./modelos_auxiliares/bauDoTesouro"
+import BauDoTesouro from "./cenas/bau/bau_do_tesouro"
 
-import Acampamento from "./modelos_auxiliares/acampamento"
+import Acampamento from "./cenas/acampamento/acampamento"
 
-import Porta from "./modelos_auxiliares/porta"
+import Porta from "./cenas/porta/porta"
 
-import Orbe from "./modelos_auxiliares/orbe"
+import Orbe from "./cenas/orbe/orbe"
 
-import Mina from "./modelos_auxiliares/mina"
+import Mina from "./cenas/mina/mina"
 
-import EstrelaCadente from "./modelos_auxiliares/estrelaCadente"
-
-import EstrelaEstaticaQuadrada from "./modelos_auxiliares/estrelaEstaticaQuadrada"
-
-import EstrelaEstatica from "./modelos_auxiliares/estrelaEstaticaCirculo"
-
-import ControleDeCamera from "./componentes_auxiliares/controleDeCamera"
+import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 function App() {
 

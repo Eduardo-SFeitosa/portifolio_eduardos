@@ -9,7 +9,7 @@ import { useGLTF } from '@react-three/drei'
 
 import { useSpring, animated } from '@react-spring/three'
 
-import Interface_bau from '../interfaces/interface_bau'
+import Interface_bau from './interface_bau'
 
 export default function BauDoTesouro(props) {
 
