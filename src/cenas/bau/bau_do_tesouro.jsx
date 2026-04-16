@@ -15,13 +15,17 @@ export default function BauDoTesouro(props) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
-  const posicaoGlobal = props.position
+  const [aberto, set_aberto] = useState(false)
 
-  const rotacaoGlobal = props.rotation
+  const [interface_ativa, set_interface_ativa] = useState(false)
+
+  const posicao_global = props.position
+
+  const rotacao_global = props.rotation
 
   const tampa = useRef(null)
 
-  const [aberto, setAberto] = useState(false)
+  
 
   //animação da tampa do bau
   const { rotacaoTampa } = useSpring({
@@ -49,7 +53,7 @@ export default function BauDoTesouro(props) {
 
     if (tampa.current){
 
-      setAberto(false)
+      set_aberto(false)
 
     }
 
@@ -59,7 +63,7 @@ export default function BauDoTesouro(props) {
 
     if ( tampa.current ) {
 
-      setAberto(true)
+      set_aberto(true)
 
     }
 
@@ -67,7 +71,7 @@ export default function BauDoTesouro(props) {
 
   return (
 
-    <group position={posicaoGlobal} rotation={rotacaoGlobal}>
+    <group position={posicao_global} rotation={rotacao_global}>
       
       {/* bau */}
       <animated.group
@@ -118,7 +122,13 @@ export default function BauDoTesouro(props) {
 
       </animated.group>
 
-      <Interface_bau/>
+      {interface_ativa ? 
+      
+        <Interface_bau/>
+        
+        : <></>
+      }
+      
 
     </group>
 

@@ -9,19 +9,23 @@ import { useSpring, animated } from '@react-spring/three'
 
 import { useGLTF } from '@react-three/drei'
 
+import Interface_porta from './interface_porta'
+
 export default function Porta(props) {
+
+  const [ aberta , set_aberta] = useState(false)
+
+  const [interface_ativa, set_interface_ativa] = useState(false)
 
   const { nodes, materials } = useGLTF('/models/porta.glb')
 
   const porta = useRef(null)
 
-  const [ aberta , setAberta] = useState(false)
-
   const fechar = ( ) => {
 
     if (porta.current){
 
-      setAberta(false)
+      set_aberta(false)
 
     }
 
@@ -31,7 +35,7 @@ export default function Porta(props) {
 
     if ( porta.current ) {
 
-      setAberta(true)
+      set_aberta(true)
 
     }
 
@@ -52,50 +56,63 @@ export default function Porta(props) {
 
   return (
 
-    <group 
-    
-    {...props} 
-    
-    dispose={null}
+    <group>
 
-    onPointerOver={ () => abrir() }
-
-    onPointerOut={ () => fechar() }
-
-    >
-
-      <mesh 
+      {/* modelo 3d */}
+      <group 
       
-        geometry={nodes.doorway.geometry} 
-        
-        material={materials['Dungeon_passage.001']} 
-        
-        position={[0.019, -0.084, 0.079]} 
-        
-        rotation={[-Math.PI, 0, -Math.PI]} 
+      {...props} 
       
-      />
+      dispose={null}
 
-      <animated.group
+      onPointerOver={ () => abrir() }
 
-        ref={porta}
+      onPointerOut={ () => fechar() }
 
-        position={[ .515, -.09 , 0 ]}
-
-        rotation={rotation}
       >
-        
+
         <mesh 
-
-          geometry={nodes.door.geometry} 
-
-          material={materials['Dungeon_passage.002']} 
-
-          position={[ .5, 0, 0 ]}
-
+        
+          geometry={nodes.doorway.geometry} 
+          
+          material={materials['Dungeon_passage.001']} 
+          
+          position={[0.019, -0.084, 0.079]} 
+          
+          rotation={[-Math.PI, 0, -Math.PI]} 
+        
         />
 
-      </animated.group>
+        <animated.group
+
+          ref={porta}
+
+          position={[ .515, -.09 , 0 ]}
+
+          rotation={rotation}
+        >
+          
+          <mesh 
+
+            geometry={nodes.door.geometry} 
+
+            material={materials['Dungeon_passage.002']} 
+
+            position={[ .5, 0, 0 ]}
+
+          />
+
+        </animated.group>
+
+      </group>
+
+      {interface_ativa ? 
+
+        <Interface_porta/>
+        
+        : <></>
+
+      }
 
     </group>
 

@@ -9,15 +9,17 @@ import { useGLTF } from '@react-three/drei'
 
 import { useSpring, animated } from '@react-spring/three'
 
-export default function Mina(props) {
+import Interface_mina from './interface_mina'
 
-  const posicaoGlobal = props.position
+export default function Mina(props) {
 
   const [ativo, setAtivo] = useState(false)
 
-  const { posicaoCarrinho } = useSpring({
+  const [interface_ativa, set_interface_ativa] = useState(false)
 
-    posicaoCarrinho : ativo ? [-0.026, 0.059, 0] : [-0.026, 0.059, 3],
+  const { posicao_carrinho } = useSpring({
+
+    posicao_carrinho : ativo ? [-0.026, 0.059, 0] : [-0.026, 0.059, 3],
 
     config: { tension: 40, friction: 20 }
     
@@ -29,26 +31,37 @@ export default function Mina(props) {
 
   return (
 
-    <group {...props} dispose={null} onPointerUp={() => setAtivo(!ativo)}>
+    <group>
 
-      <mesh geometry={nodes.Mine_Box.geometry} material={materials['Mine1.002']} position={[0.696, 0.109, -0.476]} rotation={[0, -0.851, 0]} />
+      {/* modelo 3d */}
+      <group {...props} dispose={null} onPointerUp={() => setAtivo(!ativo)}>
+
+        <mesh geometry={nodes.Mine_Box.geometry} material={materials['Mine1.002']} position={[0.696, 0.109, -0.476]} rotation={[0, -0.851, 0]} />
+        
+        <mesh geometry={nodes['Mine_Box_(1)'].geometry} material={materials['Mine1.002']} position={[-0.707, 0.109, 0.441]} />
+        
+        <animated.mesh geometry={nodes.Mine_Cart.geometry} ref={carrinho} material={materials['Mine1.002']} position={posicao_carrinho} rotation={[0, -1.571, 0]} />
+        
+        <mesh geometry={nodes.Mine_Ore.geometry} material={materials['Mine1.002']} position={[0.746, 0.109, 0.207]} />
+        
+        <mesh geometry={nodes['Mine_Ore_(1)'].geometry} material={materials['Mine1.002']} position={[-0.686, 0.109, -0.184]} rotation={[Math.PI, -1.554, Math.PI]} />
+        
+        <mesh geometry={nodes['Mine_Ore_(2)'].geometry} material={materials['Mine1.002']} position={[0.634, 0.109, -1.042]} rotation={[Math.PI, -1.147, Math.PI]} />
+        
+        <mesh geometry={nodes.Mine_Enter.geometry} material={materials['Mine1.001']} position={[0, 0.026, 2.101]} rotation={[-Math.PI, 0, -Math.PI]} />
+        
+        <mesh geometry={nodes.Mine_tracks1.geometry} material={materials['Mine1.001']} position={[0, 0.106, 2.111]} rotation={[0, 1.571, 0]} />
+        
+        <mesh geometry={nodes['Mine_tracks1_(1)'].geometry} material={materials['Mine1.001']} position={[0, 0.106, 0.111]} rotation={[0, 1.571, 0]} />
       
-      <mesh geometry={nodes['Mine_Box_(1)'].geometry} material={materials['Mine1.002']} position={[-0.707, 0.109, 0.441]} />
-      
-      <animated.mesh geometry={nodes.Mine_Cart.geometry} ref={carrinho} material={materials['Mine1.002']} position={posicaoCarrinho} rotation={[0, -1.571, 0]} />
-      
-      <mesh geometry={nodes.Mine_Ore.geometry} material={materials['Mine1.002']} position={[0.746, 0.109, 0.207]} />
-      
-      <mesh geometry={nodes['Mine_Ore_(1)'].geometry} material={materials['Mine1.002']} position={[-0.686, 0.109, -0.184]} rotation={[Math.PI, -1.554, Math.PI]} />
-      
-      <mesh geometry={nodes['Mine_Ore_(2)'].geometry} material={materials['Mine1.002']} position={[0.634, 0.109, -1.042]} rotation={[Math.PI, -1.147, Math.PI]} />
-      
-      <mesh geometry={nodes.Mine_Enter.geometry} material={materials['Mine1.001']} position={[0, 0.026, 2.101]} rotation={[-Math.PI, 0, -Math.PI]} />
-      
-      <mesh geometry={nodes.Mine_tracks1.geometry} material={materials['Mine1.001']} position={[0, 0.106, 2.111]} rotation={[0, 1.571, 0]} />
-      
-      <mesh geometry={nodes['Mine_tracks1_(1)'].geometry} material={materials['Mine1.001']} position={[0, 0.106, 0.111]} rotation={[0, 1.571, 0]} />
-    
+      </group>
+
+      {/* interface */}
+      {interface_ativa ?
+        <Interface_mina/>
+        :<></>
+      }
+
     </group>
   
   )

@@ -9,101 +9,118 @@ import { useGLTF, Text3D  } from '@react-three/drei'
 
 import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
+import Interface_acampamento from './interface_acampamento'
+
 export default function Acampamento(props) {
 
-  const [fogueiraAtiva, setfogueiraAtiva] = useState(false)
+  const [fogueira_ativa, set_fogueira_ativa] = useState(false)
+
+  const [interface_ativa, set_interface_ativa] = useState(false)
 
   const { nodes, materials } = useGLTF('/models/acampamento.glb')
 
-  const fogueiraPosicao = [-0.179, 0.112, -1.14]
+  const fogueira_posicao = [-0.179, 0.112, -1.14]
 
-  const emissorParticulas = useRef(null)
+  const emissor_particulas = useRef(null)
 
   return (
+    
+    <group>
 
-    <group {...props} dispose={null} onPointerUp={(e) => {
-      
-        if (fogueiraAtiva) {
-
-          emissorParticulas.current.stopEmitting()
-
-        }
-
-        else{
-
-          emissorParticulas.current.startEmitting()
-
-        }
-
-        setfogueiraAtiva(!fogueiraAtiva) 
+      {/*modelo 3d*/}
+      <group {...props} dispose={null} onPointerUp={(e) => {
         
-      }}
-      
-    >
+          if (fogueira_ativa) {
 
-      <mesh geometry={nodes.Bench2.geometry} material={materials['props.006']} position={[1.467, 0.112, -0.43]} rotation={[Math.PI, -0.833, Math.PI]} />
+            emissor_particulas.current.stopEmitting()
 
-      <mesh geometry={nodes.Bucket.geometry} material={materials['props.006']} position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]} />
+          }
 
+          else{
 
+            emissor_particulas.current.startEmitting()
 
-      <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={fogueiraPosicao} rotation={[Math.PI, -1.566, Math.PI]} />
+          }
 
-      <mesh geometry={nodes.Camp2_tent.geometry} material={materials['camp_02.002']} position={[-0.158, 0.112, 0.48]} rotation={[Math.PI, -0.781, Math.PI]} scale={[1, 1, 1.279]} />
-      
-      <mesh geometry={nodes.Chest1B.geometry} material={materials['chests.004']} position={[1.817, 0.112, 1.119]} rotation={[Math.PI, -0.14, Math.PI]} />
-
-      <mesh geometry={nodes.Chest1B001.geometry} material={materials['chests.001']} position={[1.817, 0.461, 1.119]} rotation={[Math.PI, -0.675, Math.PI]} />
-
-      <VFXParticles 
-            name="fire"
-            
-            settings={{
-              nbParticles: 1000,
-              gravity: [0, 2, -2],
-              renderMode: 'billboard',
-              }
-            }
-      />
+          set_fogueira_ativa(!fogueira_ativa) 
           
-      <VFXEmitter 
+        }}
+        
+      >
 
-            ref={emissorParticulas}
+        <mesh geometry={nodes.Bench2.geometry} material={materials['props.006']} position={[1.467, 0.112, -0.43]} rotation={[Math.PI, -0.833, Math.PI]} />
 
-            emitter="fire"
+        <mesh geometry={nodes.Bucket.geometry} material={materials['props.006']} position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]} />
 
-            settings={{
+
+
+        <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={fogueira_posicao} rotation={[Math.PI, -1.566, Math.PI]} />
+
+        <mesh geometry={nodes.Camp2_tent.geometry} material={materials['camp_02.002']} position={[-0.158, 0.112, 0.48]} rotation={[Math.PI, -0.781, Math.PI]} scale={[1, 1, 1.279]} />
+        
+        <mesh geometry={nodes.Chest1B.geometry} material={materials['chests.004']} position={[1.817, 0.112, 1.119]} rotation={[Math.PI, -0.14, Math.PI]} />
+
+        <mesh geometry={nodes.Chest1B001.geometry} material={materials['chests.001']} position={[1.817, 0.461, 1.119]} rotation={[Math.PI, -0.675, Math.PI]} />
+
+        <VFXParticles 
+              name="fire"
               
-              loop:true,
+              settings={{
+                nbParticles: 1000,
+                gravity: [0, 2, -2],
+                renderMode: 'billboard',
+                }
+              }
+        />
+            
+        <VFXEmitter 
 
-              velocity: {
-                direction: [0, 1, 0],
-                spread: 0.5,
-                speed: [1, 3]
-              },
+              ref={emissor_particulas}
 
-              size: [0.02, 0.1],
+              emitter="fire"
 
-              spawnMode: "continuous",
+              settings={{
+                
+                loop:true,
 
-              duration: 2,
+                velocity: {
+                  direction: [0, 1, 0],
+                  spread: 0.5,
+                  speed: [1, 3]
+                },
 
-              position : {fogueiraPosicao},
+                size: [0.02, 0.1],
 
-              startPositionMin: fogueiraPosicao.map((valor) => valor - .4),
+                spawnMode: "continuous",
 
-              startPositionMax: fogueiraPosicao.map((valor) => valor + .4),
+                duration: 2,
 
-              nbParticles: 90,
+                position : {fogueira_posicao},
 
-              lifetime: [0.5, 1.5],
+                startPositionMin: fogueira_posicao.map((valor) => valor - .4),
 
-              colorStart: ['#ff6b35', '#f7931e'],
+                startPositionMax: fogueira_posicao.map((valor) => valor + .4),
 
-              colorEnd: ['#ff0000', '#8b0000'],
+                nbParticles: 90,
 
-          }}
-      />
+                lifetime: [0.5, 1.5],
+
+                colorStart: ['#ff6b35', '#f7931e'],
+
+                colorEnd: ['#ff0000', '#8b0000'],
+
+            }}
+        />
+
+      </group>
+
+      {/*interface*/}
+
+      {interface_ativa ? 
+        <Interface_acampamento/> 
+        
+        : <></>
+      }
 
     </group>
 
