@@ -37,6 +37,8 @@ export default function Porta(props) {
 
       set_aberta(true)
 
+      set_interface_ativa(true)
+
     }
 
   }
@@ -56,12 +58,10 @@ export default function Porta(props) {
 
   return (
 
-    <group>
+    <group {...props} >
 
       {/* modelo 3d */}
       <group 
-      
-      {...props} 
       
       dispose={null}
 
@@ -108,7 +108,11 @@ export default function Porta(props) {
 
       {interface_ativa ? 
 
-        <Interface_porta/>
+        <Interface_porta 
+        
+          position={[0,0,0]}
+
+        />
         
         : <></>
 

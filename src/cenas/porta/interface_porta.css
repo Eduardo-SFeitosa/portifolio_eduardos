@@ -1,0 +1,13 @@
+.interface-porta {
+
+  pointer-events: auto;
+  position: static;
+}
+
+.background{
+
+  background-color: black;
+  width: 200px;
+  height: 400px;
+
+}

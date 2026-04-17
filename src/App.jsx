@@ -1,8 +1,10 @@
 import "./App.css"
 
+import { useState, useEffect, useRef } from "react"
+
 import { Canvas} from "@react-three/fiber"
 
-import { Html, OrbitControls, ScrollControls } from "@react-three/drei"
+import { OrbitControls } from "@react-three/drei"
 
 import ModeloBase from "./modelos_auxiliares/modelo_base"
 
@@ -22,11 +24,86 @@ import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 function App() {
 
+  const [cena_em_foco , set_cena_em_foco] = useState(null)
+
+  var ultima_camera = {
+      posicao : [0, 0, 0],
+      rotacao : [0, 0, 0]
+    }
+
+  const posicao_de_cenas = {
+
+    porta : {
+      posicao : [-8.71, 0.77, 1.89],
+      rotacao : [-3.11, 0.01, 3.14]
+    },
+
+    porta_centrada : {
+      position : [-8.71, 0.75, 2.52],
+      rotation : [-3.11, 0.05, 3.14]
+    },
+
+    bau : {
+      posicao : [-2.34, 1.59, -15.88],
+      rotacao : [-0.49, -0.54, -0.27]
+    }
+
+  }
+
+  const travar_camera = (cena) => {
+
+    const camera_atual = camera_referencia.current
+
+    if (cena) {
+
+      ultima_camera.posicao = camera_atual.position
+
+      ultima_camera.rotacao = camera_atual.ratation
+
+      camera_atual.position.set(...posicao_de_cenas[cena].posicao)
+
+      camera_atual.rotation.set(...posicao_de_cenas[cena].rotacao)
+
+      set_cena_em_foco(cena)
+
+    }else {
+
+      camera_atual.position.set(...ultima_camera.posicao)
+
+      camera_atual.rotation.set(...ultima_camera.rotacao)
+
+      set_cena_em_foco(null)
+
+    }
+    
+  }
+
+  const camera_referencia = useRef(null)
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+
+      const cam = camera_referencia.current
+
+      console.log(`position [${cam.position.x.toFixed(2)}, ${cam.position.y.toFixed(2)}, ${cam.position.z.toFixed(2)}]`);
+      console.log(`rotation [${cam.rotation.x.toFixed(2)}, ${cam.rotation.y.toFixed(2)}, ${cam.rotation.z.toFixed(2)}]`);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup: remove listener when component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
 
     <>
 
-      <Canvas camera={{ position: [0, 10, -20] }} id="canvas">   
+      <Canvas onCreated={(state) => {
+        camera_referencia.current = state.camera
+      }} camera={{ position: [0, 10, -20] }} id="canvas">   
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
@@ -36,15 +113,15 @@ function App() {
 
           < ModeloBase />
 
-          < BauDoTesouro position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
+          <BauDoTesouro funcao_travar_camera={travar_camera} position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
 
-          < Acampamento position={[ -6.2 , 2 , 13 ]} />
+          <Acampamento funcao_travar_camera={travar_camera} position={[ -6.2 , 2 , 13 ]} />
 
-          < Porta position={[ -8.8, .1, 2.9 ]} />
+          <Porta funcao_travar_camera={travar_camera} position={[ -8.8, .1, 2.9 ]} />
 
-          < Orbe position={[ 1.3, 3, 2 ]} />
+          <Orbe funcao_travar_camera={travar_camera} position={[ 1.3, 3, 2 ]} />
 
-          < Mina position={[ 9.222 , 1.975 , -3.066 ]} />
+          <Mina funcao_travar_camera={travar_camera} position={[ 9.222 , 1.975 , -3.066 ]} />
 
           < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
@@ -64,7 +141,8 @@ function App() {
           
           />
 
-          <OrbitControls target={[0, 0, 0]} />
+          <OrbitControls/>
+          
           
       </Canvas>           
       

@@ -11,7 +11,7 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_bau from './interface_bau'
 
-export default function BauDoTesouro(props) {
+export default function BauDoTesouro({funcao_travar_camera , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
@@ -39,11 +39,11 @@ export default function BauDoTesouro(props) {
   //animação do bau
   const { bauEscala , bauRotacao , bauPosicao } = useSpring({
 
-    bauRotacao: aberto ? [0.8, 0, 0.4] : [0, 0, 0],
+    bauRotacao: aberto ? [0.8, 0, 0] : [0, .1, 0],
 
-    bauEscala : aberto ? [1.5, 1.5, 1.5] : [1, 1, 1],
+    bauEscala : aberto ? [1.8, 1.8, 1.8] : [1, 1, 1],
 
-    bauPosicao : aberto ? [0, .3, 0] : [0, 0, 0],
+    bauPosicao : aberto ? [.1, .2, .3] : [0, 0, 0],
       
     config: { tension: 120, friction: 14 }
 
@@ -55,6 +55,10 @@ export default function BauDoTesouro(props) {
 
       set_aberto(false)
 
+      set_interface_ativa(false)
+
+      funcao_travar_camera(null)
+
     }
 
   }
@@ -64,6 +68,10 @@ export default function BauDoTesouro(props) {
     if ( tampa.current ) {
 
       set_aberto(true)
+
+      set_interface_ativa(true)
+
+      funcao_travar_camera("bau")
 
     }
 
