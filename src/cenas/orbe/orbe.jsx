@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import Interface_orbe from './interface_orbe'
 
-export default function Orbe(props) {
+export default function Orbe({funcao_travar_camera, ...props}) {
 
   const [interface_ativa, set_interface_ativa] = useState(false)
 
@@ -34,11 +34,38 @@ export default function Orbe(props) {
 
   )
 
+    const fechar = ( ) => {
+
+    set_interface_ativa(false)
+
+    funcao_travar_camera(null)
+
+
+  }
+
+  const abrir = ( ) => {
+
+    set_interface_ativa(true)
+
+    funcao_travar_camera("orbe")
+
+  }
+
   return (
 
     <group {...props} dispose={null}>
 
-      <mesh geometry={nodes.Magic_Shrine1.geometry} material={materials['Magic_Pillars.002']} position={[-0.025, 0.024, -0.005]}>
+      <mesh 
+
+        onPointerOver={ () => abrir() }
+
+        onPointerDown={ () => fechar() }
+
+        geometry={nodes.Magic_Shrine1.geometry} 
+      
+        material={materials['Magic_Pillars.002']} 
+        
+        position={[-0.025, 0.024, -0.005]}>
 
         <mesh 
 
@@ -58,7 +85,7 @@ export default function Orbe(props) {
 
       {interface_ativa ? 
 
-        <Interface_orbe/>
+        <Interface_orbe position={[0,1.9,.85]}/>
 
         :<></>
         

@@ -1,0 +1,15 @@
+.interface-orbe{
+
+    width: 850px;
+
+    height: 700px;
+
+    background-color: rgba(173, 216, 230, 0.747);
+
+    display: flex;
+
+    align-items: center;
+
+    align-content: center;
+
+}

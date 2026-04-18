@@ -34,14 +34,19 @@ function App() {
     },
 
     porta_centrada : {
-      position : [-8.71, 0.75, 2.52],
-      rotation : [-3.11, 0.05, 3.14]
+      posicao : [-8.71, 0.75, 2.52],
+      rotacao : [-3.11, 0.05, 3.14]
     },
 
     bau : {
       posicao : [-2.34, 1.59, -15.88],
       rotacao : [-0.49, -0.54, -0.27]
-    }
+    },
+
+    orbe : {
+      posicao : [2.64, 4.47, 2.00],
+      rotacao : [-1.81, 1.33, 1.82]
+    },
 
   }
 

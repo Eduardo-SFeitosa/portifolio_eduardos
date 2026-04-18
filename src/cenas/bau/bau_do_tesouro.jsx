@@ -132,7 +132,7 @@ export default function BauDoTesouro({funcao_travar_camera , ...props}) {
 
       {interface_ativa ? 
       
-        <Interface_bau position={[-1.5,2,0]}/>
+        <Interface_bau position={[-1.5, 2,0]}/>
         
         : <></>
       }
