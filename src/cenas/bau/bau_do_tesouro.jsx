@@ -94,7 +94,7 @@ export default function BauDoTesouro({funcao_travar_camera , ...props}) {
       
         onPointerOver={ () => abrir() }
 
-        onPointerOut={ () => fechar() }
+        onPointerDown={ () => fechar() }
 
       >
 
@@ -132,7 +132,7 @@ export default function BauDoTesouro({funcao_travar_camera , ...props}) {
 
       {interface_ativa ? 
       
-        <Interface_bau/>
+        <Interface_bau position={[-1.5,2,0]}/>
         
         : <></>
       }

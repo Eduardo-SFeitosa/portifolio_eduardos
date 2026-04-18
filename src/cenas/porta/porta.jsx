@@ -11,7 +11,7 @@ import { useGLTF } from '@react-three/drei'
 
 import Interface_porta from './interface_porta'
 
-export default function Porta(props) {
+export default function Porta({funcao_travar_camera, ...props}) {
 
   const [ aberta , set_aberta] = useState(false)
 
@@ -27,6 +27,8 @@ export default function Porta(props) {
 
       set_aberta(false)
 
+      funcao_travar_camera(null)
+
     }
 
   }
@@ -38,6 +40,8 @@ export default function Porta(props) {
       set_aberta(true)
 
       set_interface_ativa(true)
+
+      funcao_travar_camera("porta")
 
     }
 
@@ -87,7 +91,7 @@ export default function Porta(props) {
 
           ref={porta}
 
-          position={[ .515, -.09 , 0 ]}
+          position={[ .52, -.09 , 0 ]}
 
           rotation={rotation}
         >
@@ -110,7 +114,7 @@ export default function Porta(props) {
 
         <Interface_porta 
         
-          position={[0,0,0]}
+          position={[0,1,0]}
 
         />
         

@@ -26,11 +26,6 @@ function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
-  var ultima_camera = {
-      posicao : [0, 0, 0],
-      rotacao : [0, 0, 0]
-    }
-
   const posicao_de_cenas = {
 
     porta : {
@@ -56,10 +51,6 @@ function App() {
 
     if (cena) {
 
-      ultima_camera.posicao = camera_atual.position
-
-      ultima_camera.rotacao = camera_atual.ratation
-
       camera_atual.position.set(...posicao_de_cenas[cena].posicao)
 
       camera_atual.rotation.set(...posicao_de_cenas[cena].rotacao)
@@ -67,10 +58,6 @@ function App() {
       set_cena_em_foco(cena)
 
     }else {
-
-      camera_atual.position.set(...ultima_camera.posicao)
-
-      camera_atual.rotation.set(...ultima_camera.rotacao)
 
       set_cena_em_foco(null)
 
@@ -103,7 +90,7 @@ function App() {
 
       <Canvas onCreated={(state) => {
         camera_referencia.current = state.camera
-      }} camera={{ position: [0, 10, -20] }} id="canvas">   
+      }} camera={{ position: [0, 10, -30] }} id="canvas">   
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
@@ -141,7 +128,6 @@ function App() {
           
           />
 
-          <OrbitControls/>
           
           
       </Canvas>           
