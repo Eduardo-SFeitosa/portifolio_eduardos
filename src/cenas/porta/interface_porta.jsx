@@ -6,6 +6,7 @@ export default function Interface_porta(props) {
     return (
     
     <Html position={props.position} className={"interface-porta elemento-html"} occlude zIndexRange={[100, 0]} style={{ position: "static" }} scale={0.5}>
+        
 
         <div className="fundo">
 

@@ -114,7 +114,7 @@ export default function Porta({funcao_travar_camera, ...props}) {
 
         <Interface_porta 
         
-          position={[0,1,0]}
+          position={[.46,1.32,0]}
 
         />
         
