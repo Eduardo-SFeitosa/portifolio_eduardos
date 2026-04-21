@@ -65,10 +65,10 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
 
   return (
     
-    <group>
+    <group {...props}>
 
       {/*modelo 3d*/}
-      <group {...props} dispose={null} onPointerUp={(e) => {
+      <group dispose={null} onPointerUp={(e) => {
         
           if (fogueira_ativa) {
 
@@ -157,7 +157,7 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
       {/*interface*/}
 
       {interface_ativa ? 
-        <Interface_acampamento/> 
+        <Interface_acampamento position={[0,0,0]}/> 
         
         : <></>
       }

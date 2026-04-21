@@ -53,21 +53,17 @@ export default function Mina({funcao_travar_camera , ...props}) {
 
   return (
 
-    <group>
+    <group {...props}>
 
       {/* modelo 3d */}
-      <group {...props} dispose={null} onPointerUp={() => {
+      <group dispose={null} onPointerUp={() => {
 
         if (ativo) {
-
-          console.log("desativando")
 
           desativar_carrinho()
 
         }
         else{
-
-          console.log("ativando")
 
           ativar_carrinho()
 
@@ -97,9 +93,10 @@ export default function Mina({funcao_travar_camera , ...props}) {
       {/* interface */}
       {interface_ativa ?
 
-        <Interface_mina/>
+        <Interface_mina position={[0,0,0]}/>
         
         :<></>
+        
       }
 
     </group>

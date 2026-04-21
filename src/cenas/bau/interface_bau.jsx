@@ -5,7 +5,11 @@ export default function Interface_bau (props) {
 
     return (
 
-        <Html position={props.position} className={"interface-bau"} occlude zIndexRange={[100, 0]} style={{ position: "static" }} scale={0.5}>
+        <Html position={props.position} 
+        className={"interface-bau"} 
+        zIndexRange={[100, 0]} 
+        style={{ position: "static" }} 
+        scale={0.5}>
 
             <div className="fundo-bau" >
             
