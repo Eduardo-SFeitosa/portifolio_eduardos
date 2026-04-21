@@ -27,6 +27,8 @@ export default function Porta({funcao_travar_camera, ...props}) {
 
       set_aberta(false)
 
+      set_interface_ativa(false)
+
       funcao_travar_camera(null)
 
     }
@@ -69,9 +71,17 @@ export default function Porta({funcao_travar_camera, ...props}) {
       
       dispose={null}
 
-      onPointerOver={ () => abrir() }
-
-      onPointerDown={ () => fechar() }
+      onPointerDown={ () => {
+          
+          if (aberta) {
+            fechar()
+          }
+          else {
+            abrir()
+          }
+          
+        
+      }}
 
       >
 

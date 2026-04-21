@@ -73,9 +73,9 @@ function App() {
     },
 
     mina : {
-      position : [8.82, 2.99, -3.56],
-      rotation : [-2.11, -0.56, -2.41]
-    }
+      posicao : [8.82, 2.99, -3.56],
+      rotacao : [-2.11, -0.56, -2.41]
+    },
 
   }
 
@@ -99,15 +99,13 @@ function App() {
     
   }
 
-  
-
   return (
 
     <>
 
       <Canvas onCreated={(state) => {
         camera_referencia.current = state.camera
-      }} camera={{ position: [0, 10, -10] }} id="canvas">   
+      }} camera={{ position: [0, 10, -25] }} id="canvas">   
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 

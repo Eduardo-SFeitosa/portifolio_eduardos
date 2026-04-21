@@ -11,9 +11,9 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_mina from './interface_mina'
 
-export default function Mina(props) {
+export default function Mina({funcao_travar_camera , ...props}) {
 
-  const [ativo, setAtivo] = useState(false)
+  const [ativo, set_ativo] = useState(false)
 
   const [interface_ativa, set_interface_ativa] = useState(false)
 
@@ -29,12 +29,50 @@ export default function Mina(props) {
 
   const { nodes, materials } = useGLTF('/models/mina.glb')
 
+  function ativar_carrinho() {
+
+    set_interface_ativa(true)
+
+    set_ativo(true)
+
+    funcao_travar_camera("mina")
+
+  }
+
+  function desativar_carrinho() {
+
+    set_interface_ativa(false)
+
+    set_ativo(false)
+
+    funcao_travar_camera(null)
+
+  }
+
+
+
   return (
 
     <group>
 
       {/* modelo 3d */}
-      <group {...props} dispose={null} onPointerUp={() => setAtivo(!ativo)}>
+      <group {...props} dispose={null} onPointerUp={() => {
+
+        if (ativo) {
+
+          console.log("desativando")
+
+          desativar_carrinho()
+
+        }
+        else{
+
+          console.log("ativando")
+
+          ativar_carrinho()
+
+        }
+      }}>
 
         <mesh geometry={nodes.Mine_Box.geometry} material={materials['Mine1.002']} position={[0.696, 0.109, -0.476]} rotation={[0, -0.851, 0]} />
         
@@ -58,7 +96,9 @@ export default function Mina(props) {
 
       {/* interface */}
       {interface_ativa ?
+
         <Interface_mina/>
+        
         :<></>
       }
 

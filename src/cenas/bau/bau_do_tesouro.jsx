@@ -92,9 +92,17 @@ export default function BauDoTesouro({funcao_travar_camera , ...props}) {
       
         dispose={null}
       
-        onPointerOver={ () => abrir() }
-
-        onPointerDown={ () => fechar() }
+        onPointerDown={ () => {
+          
+          if (aberto) {
+            fechar()
+          }
+          else {
+            abrir()
+          }
+          
+        
+        } }
 
       >
 

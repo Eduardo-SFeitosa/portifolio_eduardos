@@ -24,6 +24,7 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
   const emissor_particulas = useRef(null)
 
   function trocar_particulas(bool) {
+
     if (bool) {
 
       emissor_particulas.current.startEmitting()
@@ -43,6 +44,8 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
 
     trocar_particulas(fogueira_ativa)
 
+    set_interface_ativa(true)
+
     funcao_travar_camera("acampamento")
 
   }
@@ -50,6 +53,8 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
   function desativar_acampamento() {
 
     set_fogueira_ativa(false)
+
+    set_interface_ativa(false)
 
     trocar_particulas(fogueira_ativa)
 

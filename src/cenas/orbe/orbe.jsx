@@ -34,7 +34,7 @@ export default function Orbe({funcao_travar_camera, ...props}) {
 
   )
 
-    const fechar = ( ) => {
+  const fechar = ( ) => {
 
     set_interface_ativa(false)
 
@@ -57,9 +57,17 @@ export default function Orbe({funcao_travar_camera, ...props}) {
 
       <mesh 
 
-        onPointerOver={ () => abrir() }
-
-        onPointerDown={ () => fechar() }
+        onPointerDown={ () => {
+          
+          if (interface_ativa) {
+            fechar()
+          }
+          else {
+            abrir()
+          }
+          
+        
+        }}
 
         geometry={nodes.Magic_Shrine1.geometry} 
       
