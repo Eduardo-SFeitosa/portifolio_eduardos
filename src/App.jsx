@@ -26,6 +26,25 @@ function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
+  const camera_referencia = useRef(null)
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+
+      const cam = camera_referencia.current
+
+      console.log(`position [${cam.position.x.toFixed(2)}, ${cam.position.y.toFixed(2)}, ${cam.position.z.toFixed(2)}]`);
+      console.log(`rotation [${cam.rotation.x.toFixed(2)}, ${cam.rotation.y.toFixed(2)}, ${cam.rotation.z.toFixed(2)}]`);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup: remove listener when component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const posicao_de_cenas = {
 
     porta : {
@@ -47,6 +66,16 @@ function App() {
       posicao : [2.64, 4.47, 2.00],
       rotacao : [-1.81, 1.33, 1.82]
     },
+
+    acampamento : {
+      posicao : [-4.48, 3.11, 12.61],
+      rotacao : [-1.81, 1.10, 1.83]
+    },
+
+    mina : {
+      position : [8.82, 2.99, -3.56],
+      rotation : [-2.11, -0.56, -2.41]
+    }
 
   }
 
@@ -70,24 +99,7 @@ function App() {
     
   }
 
-  const camera_referencia = useRef(null)
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-
-      const cam = camera_referencia.current
-
-      console.log(`position [${cam.position.x.toFixed(2)}, ${cam.position.y.toFixed(2)}, ${cam.position.z.toFixed(2)}]`);
-      console.log(`rotation [${cam.rotation.x.toFixed(2)}, ${cam.rotation.y.toFixed(2)}, ${cam.rotation.z.toFixed(2)}]`);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    // Cleanup: remove listener when component unmounts
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+  
 
   return (
 
@@ -95,7 +107,7 @@ function App() {
 
       <Canvas onCreated={(state) => {
         camera_referencia.current = state.camera
-      }} camera={{ position: [0, 10, -30] }} id="canvas">   
+      }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 

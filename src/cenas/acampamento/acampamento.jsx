@@ -11,7 +11,7 @@ import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
 import Interface_acampamento from './interface_acampamento'
 
-export default function Acampamento(props) {
+export default function Acampamento({funcao_travar_camera , ...props}) {
 
   const [fogueira_ativa, set_fogueira_ativa] = useState(false)
 
@@ -23,6 +23,41 @@ export default function Acampamento(props) {
 
   const emissor_particulas = useRef(null)
 
+  function trocar_particulas(bool) {
+    if (bool) {
+
+      emissor_particulas.current.startEmitting()
+
+    }
+
+    else{
+
+      emissor_particulas.current.stopEmitting()
+
+    }
+  }
+
+  function ativar_acampamento () {
+
+    set_fogueira_ativa(true)
+
+    trocar_particulas(fogueira_ativa)
+
+    funcao_travar_camera("acampamento")
+
+  }
+
+  function desativar_acampamento() {
+
+    set_fogueira_ativa(false)
+
+    trocar_particulas(fogueira_ativa)
+
+    funcao_travar_camera(null)
+
+  }
+
+
   return (
     
     <group>
@@ -32,13 +67,13 @@ export default function Acampamento(props) {
         
           if (fogueira_ativa) {
 
-            emissor_particulas.current.stopEmitting()
+            desativar_acampamento()
 
           }
 
           else{
 
-            emissor_particulas.current.startEmitting()
+            ativar_acampamento()
 
           }
 
