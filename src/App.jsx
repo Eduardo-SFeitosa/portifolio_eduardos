@@ -6,6 +6,8 @@ import { Canvas} from "@react-three/fiber"
 
 import { OrbitControls } from "@react-three/drei"
 
+import { ScrollControls, Scroll } from "@react-three/drei"
+
 import ModeloBase from "./modelos_auxiliares/modelo_base"
 
 import AguaAnimada from "./modelos_auxiliares/agua_animada"
@@ -27,6 +29,8 @@ function App() {
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
   const camera_referencia = useRef(null)
+
+  const controle_de_camera = useRef(null)
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -109,43 +113,49 @@ function App() {
         camera_referencia.current = state.camera
       }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
-          < directionalLight position={[2, 5, 3]} intensity={1.2} />
+        <ScrollControls pages={5} damping={0.2}>
 
-          < pointLight position={[0, 1, 0]} intensity={0.5} color={"#4466cc"} />
+          <Scroll>
 
-          < ambientLight />
+            < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
-          < ModeloBase />
+            < pointLight position={[0, 1, 0]} intensity={0.5} color={"#4466cc"} />
 
-          <BauDoTesouro funcao_travar_camera={travar_camera} position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
+            < ambientLight />
 
-          <Acampamento funcao_travar_camera={travar_camera} position={[ -6.2 , 2 , 13 ]} />
+            < ModeloBase />
 
-          <Porta funcao_travar_camera={travar_camera} position={[ -8.8, .1, 2.9 ]} />
+            <BauDoTesouro funcao_travar_camera={travar_camera} position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
 
-          <Orbe funcao_travar_camera={travar_camera} position={[ 1.3, 3, 2 ]} />
+            <Acampamento funcao_travar_camera={travar_camera} position={[ -6.2 , 2 , 13 ]} />
 
-          <Mina funcao_travar_camera={travar_camera} position={[ 9.222 , 1.975 , -3.066 ]} />
+            <Porta funcao_travar_camera={travar_camera} position={[ -8.8, .1, 2.9 ]} />
 
-          < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
+            <Orbe funcao_travar_camera={travar_camera} position={[ 1.3, 3, 2 ]} />
 
-          < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800}/>
+            <Mina funcao_travar_camera={travar_camera} position={[ 9.222 , 1.975 , -3.066 ]} />
 
-          < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
+            < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
-          < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
+            < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800}/>
 
-          < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
+            < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
 
-          < AguaAnimada 
-          
-            rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
-            position={[ 0 , -2.5 , 0.05 ]} 
-            size={[30, 20, 128, 128]}
-          
-          />
+            < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
 
-          <OrbitControls/>
+            < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
+
+            < AguaAnimada 
+            
+              rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
+              position={[ 0 , -2.5 , 0.05 ]} 
+              size={[30, 20, 128, 128]}
+            
+            />
+
+          </Scroll>
+
+        </ScrollControls>
           
       </Canvas>           
       

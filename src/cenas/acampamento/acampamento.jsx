@@ -157,7 +157,7 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
       {/*interface*/}
 
       {interface_ativa ? 
-        <Interface_acampamento position={[0,0,0]}/> 
+        <Interface_acampamento position={[0,1,0]}/> 
         
         : <></>
       }
