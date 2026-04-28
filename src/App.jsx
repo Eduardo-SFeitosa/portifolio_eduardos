@@ -2,11 +2,15 @@ import "./App.css"
 
 import { useState, useEffect, useRef } from "react"
 
-import { Canvas} from "@react-three/fiber"
+import { Canvas, useFrame} from "@react-three/fiber"
 
 import { OrbitControls } from "@react-three/drei"
 
 import { ScrollControls, Scroll } from "@react-three/drei"
+
+import { CatmullRomCurve3, Vector3  } from 'three'
+
+import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
 
 import ModeloBase from "./modelos_auxiliares/modelo_base"
 
@@ -28,17 +32,25 @@ function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
-  const camera_referencia = useRef(null)
+  const referencia_scroll = useRef(null)
 
-  const controle_de_camera = useRef(null)
+  const coordenadas_camera = new CatmullRomCurve3([
+        new Vector3(-17.273895445147936, 0.17435063514935267, -7.924548618573722),
+        new Vector3(-12.667034440860542, 0.11703956181207542, -8.27945314606222),
+        new Vector3(-12.610173593156063, 0.2289561281966621, -6.06968132936681),
+        new Vector3(-12.934931052851862, 1.0047466670622465, -1.715009725526468),
+        new Vector3(-9.861991425274706, 1.3664923156961648, -1.6379958722986954)
+  ])
+
+  const referencia_camera = useRef(null)
 
   useEffect(() => {
     const handleKeyDown = (event) => {
 
-      const cam = camera_referencia.current
+      const cam = referencia_camera.current
 
-      console.log(`position [${cam.position.x.toFixed(2)}, ${cam.position.y.toFixed(2)}, ${cam.position.z.toFixed(2)}]`);
-      console.log(`rotation [${cam.rotation.x.toFixed(2)}, ${cam.rotation.y.toFixed(2)}, ${cam.rotation.z.toFixed(2)}]`);
+      console.log(`position [${cam.position.x}, ${cam.position.y}, ${cam.position.z}]`);
+      
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -85,7 +97,7 @@ function App() {
 
   const travar_camera = (cena) => {
 
-    const camera_atual = camera_referencia.current
+    const camera_atual = referencia_camera.current
 
     if (cena) {
 
@@ -103,19 +115,24 @@ function App() {
     
   }
 
-  
-
   return (
 
     <>
 
       <Canvas onCreated={(state) => {
-        camera_referencia.current = state.camera
+        referencia_camera.current = state.camera
       }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
-        <ScrollControls pages={5} damping={0.2}>
+        <ScrollControls pages={3} damping={0.2}>
 
-          <Scroll>
+          <Controle_de_camera
+          coordenadas_camera={coordenadas_camera}
+          referencia_camera={referencia_camera}
+          >
+
+          </Controle_de_camera>
+
+          <Scroll useRef={referencia_scroll}>
 
             < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
