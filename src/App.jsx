@@ -132,9 +132,7 @@ function App() {
 
           </Controle_de_camera>
 
-          <Scroll useRef={referencia_scroll}>
-
-            < directionalLight position={[2, 5, 3]} intensity={1.2} />
+          < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
             < pointLight position={[0, 1, 0]} intensity={0.5} color={"#4466cc"} />
 
@@ -169,8 +167,6 @@ function App() {
               size={[30, 20, 128, 128]}
             
             />
-
-          </Scroll>
 
         </ScrollControls>
           
