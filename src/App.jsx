@@ -36,22 +36,6 @@ function App() {
 
   const referencia_scroll = useRef(null)
 
-  //inicio
-
-  //divisao
-
-    //lago vai
-
-  // chega na porta
-
-  //vai para acampamento
-
-  //vai para orbe
-
-  //vai para mina
-
-  //vai para bau
-
   const coordenadas_caminhos = {
 
     inicio : {
@@ -200,7 +184,7 @@ function App() {
   const travar_camera = (cena) => {
 
     const camera_atual = referencia_camera.current
-
+    
     if (cena) {
 
       camera_atual.position.set(...posicao_de_cenas[cena].posicao)
@@ -225,11 +209,12 @@ function App() {
         referencia_camera.current = state.camera
       }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
-        <ScrollControls pages={3} damping={0.2}>
+        <ScrollControls pages={3} damping={0.2} enabled={cena_em_foco == null} ref={referencia_scroll}>
 
           <Controle_de_camera
           coordenadas_camera={coordenadas_caminhos[caminho_atual]["posicao"]}
           referencia_camera={referencia_camera}
+          travar_camera={cena_em_foco == null}
           >
 
           </Controle_de_camera>

@@ -2,13 +2,13 @@ import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
 
-export default function Controle_de_camera({coordenadas_camera, referencia_camera}) {
+export default function Controle_de_camera({coordenadas_camera, referencia_camera, travar_camera}) {
 
   const scroll = useScroll()
 
   useFrame(() => {
 
-    if (referencia_camera){
+    if (referencia_camera && travar_camera){
 
       const progresso = scroll.offset
     
