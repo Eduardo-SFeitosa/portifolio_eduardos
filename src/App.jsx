@@ -41,15 +41,21 @@ function App() {
     inicio : {
       
       posicao : new CatmullRomCurve3([
-        new Vector3(-17.273895445147936, 0.17435063514935267, -7.924548618573722),
-        new Vector3(-12.667034440860542, 0.17435063514935267, -8.27945314606222),
-        new Vector3(-12.610173593156063, 0.17435063514935267, -6.06968132936681),
-        new Vector3(-12.934931052851862, 0.17435063514935267, -1.715009725526468),
-        new Vector3(-9.861991425274706, 1.3664923156961648, -1.6379958722986954)
+        new Vector3(-17.273895445147936, 0, -8),
+        new Vector3(-12.667034440860542, 0, -8),
+        new Vector3(-12.610173593156063, 0, -6.06968132936681),
+        new Vector3(-12.934931052851862, 1, -1.715009725526468),
+        new Vector3(-11, 1.3664923156961648, -1.6379958722986954),
+        new Vector3(-11, 1.3664923156961648, 2)
       ]),
 
       direcao : new CatmullRomCurve3([
-
+       new Vector3(-17.273895445147936, 0, -8),
+        new Vector3(-12.667034440860542, 0, -8),
+        new Vector3(-12.610173593156063, 0, -6.06968132936681),
+        new Vector3(-12.934931052851862, 1, -1.715009725526468),
+        new Vector3(-11, 1.3664923156961648, -1.6379958722986954),
+        new Vector3(-11, 1.3664923156961648, 2)
       ])
 
     },
@@ -213,6 +219,7 @@ function App() {
 
           <Controle_de_camera
           coordenadas_camera={coordenadas_caminhos[caminho_atual]["posicao"]}
+          direcao_camera={coordenadas_caminhos[caminho_atual]["direcao"]}
           referencia_camera={referencia_camera}
           travar_camera={cena_em_foco == null}
           >
