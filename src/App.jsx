@@ -4,9 +4,7 @@ import { useState, useEffect, useRef } from "react"
 
 import { Canvas, useFrame} from "@react-three/fiber"
 
-import { OrbitControls } from "@react-three/drei"
-
-import { ScrollControls, Scroll } from "@react-three/drei"
+import { OrbitControls, ScrollControls, Scroll, useScroll } from "@react-three/drei"
 
 import { CatmullRomCurve3, Vector3  } from 'three'
 
@@ -35,6 +33,8 @@ function App() {
   const [caminho_atual , set_caminho] = useState("inicio")
 
   const referencia_scroll = useRef(null)
+
+  const referencia_camera = useRef(null)
 
   const coordenadas_caminhos = {
 
@@ -134,9 +134,7 @@ function App() {
 
   }
 
-  const referencia_camera = useRef(null)
-
-  useEffect(() => {
+   useEffect(() => {
     const handleKeyDown = (event) => {
 
       const cam = referencia_camera.current
@@ -197,9 +195,13 @@ function App() {
 
       camera_atual.rotation.set(...posicao_de_cenas[cena].rotacao)
 
+      set_caminho(cena)
+
       set_cena_em_foco(cena)
 
     }else {
+
+      
 
       set_cena_em_foco(null)
 
@@ -215,13 +217,15 @@ function App() {
         referencia_camera.current = state.camera
       }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
-        <ScrollControls pages={3} damping={0.2} enabled={cena_em_foco == null} ref={referencia_scroll}>
+        <ScrollControls pages={3} damping={0.2} enabled={cena_em_foco == null}  >
 
           <Controle_de_camera
           coordenadas_camera={coordenadas_caminhos[caminho_atual]["posicao"]}
           direcao_camera={coordenadas_caminhos[caminho_atual]["direcao"]}
           referencia_camera={referencia_camera}
-          travar_camera={cena_em_foco == null}
+          caminho_atual={caminho_atual}
+          camera_travada={cena_em_foco == null}
+          ref={referencia_scroll}
           >
 
           </Controle_de_camera>
