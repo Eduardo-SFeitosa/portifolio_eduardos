@@ -32,15 +32,117 @@ function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
+  const [caminho_atual , set_caminho] = useState("inicio")
+
   const referencia_scroll = useRef(null)
 
-  const coordenadas_camera = new CatmullRomCurve3([
+  //inicio
+
+  //divisao
+
+    //lago vai
+
+  // chega na porta
+
+  //vai para acampamento
+
+  //vai para orbe
+
+  //vai para mina
+
+  //vai para bau
+
+  const coordenadas_caminhos = {
+
+    inicio : {
+      
+      posicao : new CatmullRomCurve3([
         new Vector3(-17.273895445147936, 0.17435063514935267, -7.924548618573722),
         new Vector3(-12.667034440860542, 0.17435063514935267, -8.27945314606222),
         new Vector3(-12.610173593156063, 0.17435063514935267, -6.06968132936681),
         new Vector3(-12.934931052851862, 0.17435063514935267, -1.715009725526468),
         new Vector3(-9.861991425274706, 1.3664923156961648, -1.6379958722986954)
-  ])
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+    rio : {
+      
+      posicao : new CatmullRomCurve3([
+
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+    porta : {
+      
+      posicao : new CatmullRomCurve3([
+
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+    acampameto : {
+      
+      posicao : new CatmullRomCurve3([
+
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+    orbe : {
+      
+      posicao : new CatmullRomCurve3([
+
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+    mina : {
+      
+      posicao : new CatmullRomCurve3([
+
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+    bau : {
+      
+      posicao : new CatmullRomCurve3([
+
+      ]),
+
+      direcao : new CatmullRomCurve3([
+
+      ])
+
+    },
+
+  }
 
   const referencia_camera = useRef(null)
 
@@ -126,7 +228,7 @@ function App() {
         <ScrollControls pages={3} damping={0.2}>
 
           <Controle_de_camera
-          coordenadas_camera={coordenadas_camera}
+          coordenadas_camera={coordenadas_caminhos[caminho_atual]["posicao"]}
           referencia_camera={referencia_camera}
           >
 
