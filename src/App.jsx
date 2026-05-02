@@ -2,11 +2,9 @@ import "./App.css"
 
 import { useState, useEffect, useRef } from "react"
 
-import { Canvas, useFrame} from "@react-three/fiber"
+import { Canvas } from "@react-three/fiber"
 
-import { OrbitControls, ScrollControls, Scroll, useScroll } from "@react-three/drei"
-
-import { CatmullRomCurve3, Vector3  } from 'three'
+import { OrbitControls, ScrollControls } from "@react-three/drei"
 
 import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
 
@@ -32,152 +30,7 @@ function App() {
 
   const [caminho_atual , set_caminho] = useState("inicio")
 
-  const referencia_scroll = useRef(null)
-
   const referencia_camera = useRef(null)
-
-  const coordenadas_caminhos = {
-
-    inicio : {
-      
-      posicao : new CatmullRomCurve3([
-        new Vector3(-17.273895445147936, 0, -8),
-        new Vector3(-12.667034440860542, 0, -8),
-        new Vector3(-12.610173593156063, 0, -6.06968132936681),
-        new Vector3(-12.934931052851862, 1, -1.715009725526468),
-        new Vector3(-11, 1.3664923156961648, -1.6379958722986954),
-        new Vector3(-11, 1.3664923156961648, 2)
-      ]),
-
-      direcao : new CatmullRomCurve3([
-       new Vector3(-17.273895445147936, 0, -8),
-        new Vector3(-12.667034440860542, 0, -8),
-        new Vector3(-12.610173593156063, 0, -6.06968132936681),
-        new Vector3(-12.934931052851862, 1, -1.715009725526468),
-        new Vector3(-11, 1.3664923156961648, -1.6379958722986954),
-        new Vector3(-11, 1.3664923156961648, 2)
-      ])
-
-    },
-
-    rio : {
-      
-      posicao : new CatmullRomCurve3([
-
-      ]),
-
-      direcao : new CatmullRomCurve3([
-
-      ])
-
-    },
-
-    porta : {
-      
-      posicao : new CatmullRomCurve3([
-
-      ]),
-
-      direcao : new CatmullRomCurve3([
-
-      ])
-
-    },
-
-    acampameto : {
-      
-      posicao : new CatmullRomCurve3([
-
-      ]),
-
-      direcao : new CatmullRomCurve3([
-
-      ])
-
-    },
-
-    orbe : {
-      
-      posicao : new CatmullRomCurve3([
-
-      ]),
-
-      direcao : new CatmullRomCurve3([
-
-      ])
-
-    },
-
-    mina : {
-      
-      posicao : new CatmullRomCurve3([
-
-      ]),
-
-      direcao : new CatmullRomCurve3([
-
-      ])
-
-    },
-
-    bau : {
-      
-      posicao : new CatmullRomCurve3([
-
-      ]),
-
-      direcao : new CatmullRomCurve3([
-
-      ])
-
-    },
-
-  }
-
-  const coordenadas_decisoes = {
-
-    porta : {
-
-      rotacao : [-1.5707973260741874, 3.795917873777866e-8, 3.1036243530453027],
-      
-      posicao : [-8.456733005501444, 3.2868203201560813, 2.3165971323725607]
-
-    },
-
-    acampamento : {
-
-      rotacao : [-1.5707971560256422, -5.589064063782636e-7, -2.5485262456046573],
-      
-      posicao : [-4.0184470184083745, 6.224340374771204, 10.624272808241919]
-
-    },
-
-    orbe : {
-
-      rotacao : [-1.5707953272056208, 2.865798293463784e-8, 0.028661907086076834],
-      
-      posicao : [2.7727011088553293, 6.896761090625276, 2.431893417251977]
-
-    },
-
-    mina : {
-
-      rotacao : [-1.5707958619252793, -8.853791498842958e-7, -1.0873089834052614],
-      
-      posicao : [7.625877384180385, 5.336587564243731, -3.991256943623446]
-
-    },
-
-    bau : {
-
-      rotacao : [-1.5707958618015005, -8.856151143544813e-7, -1.0873090846069526],
-      
-      posicao : [-2.133894018214775, 4.34668147646163, -16.619114817879197]
-
-    }
-
-
-  }
 
    useEffect(() => {
     const handleKeyDown = (event) => {
@@ -199,8 +52,6 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
-
 
   const posicao_de_cenas = {
 
@@ -266,20 +117,17 @@ function App() {
         referencia_camera.current = state.camera
       }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
-        <ScrollControls pages={cena_em_foco == null ? 3 : null} damping={0.2} >
+        <ScrollControls pages={cena_em_foco == null ? 4 : null} damping={0.2} >
 
-          {/* 
           <Controle_de_camera
-          coordenadas_camera={coordenadas_caminhos[caminho_atual]["posicao"]}
-          direcao_camera={coordenadas_caminhos[caminho_atual]["direcao"]}
           referencia_camera={referencia_camera}
           caminho_atual={caminho_atual}
           camera_travada={cena_em_foco == null}
-          ref={referencia_scroll}
           >
 
           </Controle_de_camera>
-          */}
+          
+          
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
@@ -319,7 +167,7 @@ function App() {
 
         </ScrollControls>
 
-        <OrbitControls/>
+
           
       </Canvas>           
       

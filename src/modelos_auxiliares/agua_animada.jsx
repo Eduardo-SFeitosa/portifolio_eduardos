@@ -14,12 +14,18 @@ export default function AguaAnimada(props) {
 
   // configura texturas para se repitirem e não esticar
   useEffect(() => {
+    
     const texturas = [texturaPrincipal, texturaReferencia, texturaBarulho]
+
     texturas.forEach(textura => {
+
       textura.wrapS = RepeatWrapping
       textura.wrapT = RepeatWrapping
+      
+      //impede que textura se estique e que bugue quando a pagina recarrega
       textura.repeat.set(3, 3)
       textura.needsUpdate = true
+    
     })
   }, [texturaPrincipal, texturaReferencia, texturaBarulho])
 

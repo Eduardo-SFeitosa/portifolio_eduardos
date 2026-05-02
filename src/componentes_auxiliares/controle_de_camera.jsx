@@ -1,8 +1,121 @@
 import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useEffect } from 'react'
+import { CatmullRomCurve3, Vector3  } from 'three'
 
-export default function Controle_de_camera({coordenadas_camera, referencia_camera, camera_travada, caminho_atual, direcao_camera}) {
+export default function Controle_de_camera({referencia_camera, camera_travada, caminho_atual }) {
+
+  const coordenadas_caminhos = {
+  
+      inicio : {
+        
+        posicao : new CatmullRomCurve3([
+          new Vector3(-17.2, 0, -8),
+          new Vector3(-12.6, 0, -8),
+        ]),
+        direcao : new CatmullRomCurve3([
+          new Vector3(-12, 0, -8),
+          new Vector3(-12, 0, 0),
+        ])
+  
+      },
+  
+      rio : {
+        
+        posicao : new CatmullRomCurve3([
+  
+        ]),
+        direcao : new CatmullRomCurve3([
+  
+        ])
+  
+      },
+  
+      porta : {
+        
+        posicao : new CatmullRomCurve3([
+          new Vector3(-12.6, 0, -8),
+          new Vector3(-13, 0, -6.1),
+          new Vector3(-13, 1.4, -1.7),
+          new Vector3(-11, 1.4, -1.6),
+          new Vector3(-11, 1.4, 2),
+          new Vector3(-8.71, 0.77, 1.89),
+        ]),
+        direcao : new CatmullRomCurve3([
+          new Vector3(-12, 0, 0),
+          new Vector3(10, 0, 150),
+          new Vector3(0, 1.6, -2),
+          new Vector3(0, 1.6, -2),
+          new Vector3(-11, 1.6, 150),
+          new Vector3(-3.11, 0.01, 3.14)
+        ])
+  
+      },
+  
+      acampameto : {
+        posicao : new CatmullRomCurve3([
+  
+        ]),
+        direcao : new CatmullRomCurve3([
+  
+        ])
+      },
+  
+      orbe : {
+        posicao : new CatmullRomCurve3([
+  
+        ]),
+        direcao : new CatmullRomCurve3([
+  
+        ])
+      },
+  
+      mina : {
+        posicao : new CatmullRomCurve3([
+  
+        ]),
+        direcao : new CatmullRomCurve3([
+  
+        ])
+      },
+  
+      bau : {
+        posicao : new CatmullRomCurve3([
+  
+        ]),
+        direcao : new CatmullRomCurve3([
+  
+        ])
+      },
+  
+  }
+  
+  const coordenadas_decisoes = {
+      porta : {
+        rotacao : [-1.5707973260741874, 3.795917873777866e-8, 3.1036243530453027],
+        posicao : [-8.456733005501444, 3.2868203201560813, 2.3165971323725607]
+      },
+  
+      acampamento : {
+        rotacao : [-1.5707971560256422, -5.589064063782636e-7, -2.5485262456046573],
+        posicao : [-4.0184470184083745, 6.224340374771204, 10.624272808241919]
+      },
+  
+      orbe : {
+        rotacao : [-1.5707953272056208, 2.865798293463784e-8, 0.028661907086076834],
+        posicao : [2.7727011088553293, 6.896761090625276, 2.431893417251977]
+      },
+  
+      mina : {
+        rotacao : [-1.5707958619252793, -8.853791498842958e-7, -1.0873089834052614],
+        posicao : [7.625877384180385, 5.336587564243731, -3.991256943623446]
+      },
+  
+      bau : {
+        rotacao : [-1.5707958618015005, -8.856151143544813e-7, -1.0873090846069526],
+        posicao : [-2.133894018214775, 4.34668147646163, -16.619114817879197]
+      }
+  }
 
   const scroll = useScroll()
 
@@ -14,16 +127,16 @@ export default function Controle_de_camera({coordenadas_camera, referencia_camer
 
   useFrame(() => {
 
-    if (referencia_camera && camera_travada){
+    if (referencia_camera && camera_travada && caminho_atual){
 
       const progresso = scroll.offset
   
-      const localizacao = coordenadas_camera.getPoint(progresso)
-
-      const direcao = direcao_camera.getPoint(progresso)
+      const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso)
+      
+      const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso)
       
       referencia_camera.current.lookAt(direcao)
-    
+      
       referencia_camera.current.position.copy(localizacao)
 
     }
