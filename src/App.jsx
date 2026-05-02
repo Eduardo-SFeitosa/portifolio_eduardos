@@ -134,12 +134,61 @@ function App() {
 
   }
 
+  const coordenadas_decisoes = {
+
+    porta : {
+
+      rotacao : [-1.5707973260741874, 3.795917873777866e-8, 3.1036243530453027],
+      
+      posicao : [-8.456733005501444, 3.2868203201560813, 2.3165971323725607]
+
+    },
+
+    acampamento : {
+
+      rotacao : [-1.5707971560256422, -5.589064063782636e-7, -2.5485262456046573],
+      
+      posicao : [-4.0184470184083745, 6.224340374771204, 10.624272808241919]
+
+    },
+
+    orbe : {
+
+      rotacao : [-1.5707953272056208, 2.865798293463784e-8, 0.028661907086076834],
+      
+      posicao : [2.7727011088553293, 6.896761090625276, 2.431893417251977]
+
+    },
+
+    mina : {
+
+      rotacao : [-1.5707958619252793, -8.853791498842958e-7, -1.0873089834052614],
+      
+      posicao : [7.625877384180385, 5.336587564243731, -3.991256943623446]
+
+    },
+
+    bau : {
+
+      rotacao : [-1.5707958618015005, -8.856151143544813e-7, -1.0873090846069526],
+      
+      posicao : [-2.133894018214775, 4.34668147646163, -16.619114817879197]
+
+    }
+
+
+  }
+
    useEffect(() => {
     const handleKeyDown = (event) => {
 
       const cam = referencia_camera.current
 
+      console.log(`rotation [${cam.rotation.x}, ${cam.rotation.y}, ${cam.rotation.z}]`);
+
       console.log(`position [${cam.position.x}, ${cam.position.y}, ${cam.position.z}]`);
+
+      travar_camera(null)
       
     };
 
@@ -150,6 +199,8 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+
 
   const posicao_de_cenas = {
 
@@ -201,8 +252,6 @@ function App() {
 
     }else {
 
-      
-
       set_cena_em_foco(null)
 
     }
@@ -217,8 +266,9 @@ function App() {
         referencia_camera.current = state.camera
       }} camera={{ position: [0, 10, -10] }} id="canvas">   
 
-        <ScrollControls pages={3} damping={0.2} enabled={cena_em_foco == null}  >
+        <ScrollControls pages={cena_em_foco == null ? 3 : null} damping={0.2} >
 
+          {/* 
           <Controle_de_camera
           coordenadas_camera={coordenadas_caminhos[caminho_atual]["posicao"]}
           direcao_camera={coordenadas_caminhos[caminho_atual]["direcao"]}
@@ -229,6 +279,7 @@ function App() {
           >
 
           </Controle_de_camera>
+          */}
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
@@ -267,6 +318,8 @@ function App() {
             />
 
         </ScrollControls>
+
+        <OrbitControls/>
           
       </Canvas>           
       
