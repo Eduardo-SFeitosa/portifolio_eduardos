@@ -8,14 +8,6 @@ html, body, #root {
 
 }
 
-*{
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-}
-
 #canvas{
 
   width: 100vw;

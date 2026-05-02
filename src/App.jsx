@@ -26,6 +26,8 @@ import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 function App() {
 
+  const [ estado_camera , set_estado_camera ] = useState("caminho")
+
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
   const [caminho_atual , set_caminho] = useState("inicio")
@@ -88,14 +90,8 @@ function App() {
   }
 
   const travar_camera = (cena) => {
-
-    const camera_atual = referencia_camera.current
     
     if (cena) {
-
-      camera_atual.position.set(...posicao_de_cenas[cena].posicao)
-
-      camera_atual.rotation.set(...posicao_de_cenas[cena].rotacao)
 
       set_caminho(cena)
 
@@ -115,19 +111,18 @@ function App() {
 
       <Canvas onCreated={(state) => {
         referencia_camera.current = state.camera
-      }} camera={{ position: [0, 10, -10] }} id="canvas">   
+      }} id="canvas">   
 
-        <ScrollControls pages={cena_em_foco == null ? 4 : null} damping={0.2} >
+        <ScrollControls pages={cena_em_foco == null ? 4 : 5} damping={0.2} enabled={cena_em_foco == null}>
 
           <Controle_de_camera
           referencia_camera={referencia_camera}
           caminho_atual={caminho_atual}
-          camera_travada={cena_em_foco == null}
+          camera_travada={cena_em_foco != null}
+          
           >
 
           </Controle_de_camera>
-          
-          
 
           < directionalLight position={[2, 5, 3]} intensity={1.2} />
 

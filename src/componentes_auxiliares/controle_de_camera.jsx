@@ -1,9 +1,11 @@
 import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { CatmullRomCurve3, Vector3  } from 'three'
 
 export default function Controle_de_camera({referencia_camera, camera_travada, caminho_atual }) {
+
+  const  ignorar_scroll = useRef(false)
 
   const coordenadas_caminhos = {
   
@@ -15,7 +17,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         ]),
         direcao : new CatmullRomCurve3([
           new Vector3(-12, 0, -8),
-          new Vector3(-12, 0, 0),
+          new Vector3(-12, 0, -6),
         ])
   
       },
@@ -42,7 +44,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
           new Vector3(-8.71, 0.77, 1.89),
         ]),
         direcao : new CatmullRomCurve3([
-          new Vector3(-12, 0, 0),
+          new Vector3(-12, 0, -6),
           new Vector3(10, 0, 150),
           new Vector3(0, 1.6, -2),
           new Vector3(0, 1.6, -2),
@@ -119,27 +121,46 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
 
   const scroll = useScroll()
 
-  useEffect(() => {
 
-    scroll.el.scrollTop = 0
+  //resetar o scroll
+  useLayoutEffect(() => {
 
-  },[caminho_atual])
+    ignorar_scroll.current = true;
+
+    if (scroll?.el) {
+
+      scroll.el.style.overflow = 'hidden';
+
+      scroll.el.scrollTop = 0;
+      
+      scroll.el.dispatchEvent(new Event('scroll'));
+    }
+
+    setTimeout(() => {
+      if (scroll?.el) {
+        
+        scroll.el.style.overflow = 'auto';
+
+      }
+      
+      ignorar_scroll.current = false;
+    }, 50);
+
+  }, [caminho_atual]);
 
   useFrame(() => {
 
-    if (referencia_camera && camera_travada && caminho_atual){
+    if (!referencia_camera || camera_travada || ignorar_scroll.current) return
 
-      const progresso = scroll.offset
-  
-      const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso)
-      
-      const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso)
-      
-      referencia_camera.current.lookAt(direcao)
-      
-      referencia_camera.current.position.copy(localizacao)
+    const progresso = scroll.offset
 
-    }
+    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso)
+      
+    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso)
+      
+    referencia_camera.current.lookAt(direcao)
+      
+    referencia_camera.current.position.copy(localizacao)
 
   })
 
