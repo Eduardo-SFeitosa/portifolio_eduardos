@@ -19,6 +19,7 @@ export default function AguaAnimada(props) {
       textura.wrapS = RepeatWrapping
       textura.wrapT = RepeatWrapping
       textura.repeat.set(3, 3)
+      textura.needsUpdate = true
     })
   }, [texturaPrincipal, texturaReferencia, texturaBarulho])
 
