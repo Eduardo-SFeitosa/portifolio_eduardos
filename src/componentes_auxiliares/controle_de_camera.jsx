@@ -36,20 +36,23 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
       porta : {
         
         posicao : new CatmullRomCurve3([
-          new Vector3(-12.6, 0, -8),
+          new Vector3(-17.2, 0, -7.8),
+          new Vector3(-13, 0, -7.8),
           new Vector3(-13, 0, -6.1),
           new Vector3(-13, 1.4, -1.7),
           new Vector3(-11, 1.4, -1.6),
           new Vector3(-11, 1.4, 2),
-          new Vector3(-8.71, 0.77, 1.89),
+          new Vector3(-9, 0.77, 1.89),
         ]),
+
         direcao : new CatmullRomCurve3([
+          new Vector3(-12, 0, -7.8),
           new Vector3(-12, 0, -6),
-          new Vector3(10, 0, 150),
+          new Vector3(10, 0, 300),
           new Vector3(0, 1.6, -2),
           new Vector3(0, 1.6, -2),
           new Vector3(-11, 1.6, 150),
-          new Vector3(-3.11, 0.01, 3.14)
+          new Vector3(0, 1, 500)
         ])
   
       },
@@ -93,6 +96,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
   }
   
   const coordenadas_decisoes = {
+
       porta : {
         rotacao : [-1.5707973260741874, 3.795917873777866e-8, 3.1036243530453027],
         posicao : [-8.456733005501444, 3.2868203201560813, 2.3165971323725607]

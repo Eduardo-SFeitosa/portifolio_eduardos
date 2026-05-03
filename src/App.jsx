@@ -30,11 +30,11 @@ function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
-  const [caminho_atual , set_caminho] = useState("inicio")
+  const [caminho_atual , set_caminho] = useState("porta")
 
   const referencia_camera = useRef(null)
 
-   useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (event) => {
 
       const cam = referencia_camera.current
@@ -91,7 +91,7 @@ function App() {
 
   const travar_camera = (cena) => {
     
-    if (cena) {
+    if (cena && cena == caminho_atual) {
 
       set_caminho(cena)
 
