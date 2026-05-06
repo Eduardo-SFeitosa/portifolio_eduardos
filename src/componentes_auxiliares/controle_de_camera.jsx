@@ -61,8 +61,8 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         posicao : new CatmullRomCurve3([
 
           new Vector3(-9, 0.77, 1.89),
-          new Vector3(-9.11, 1.07, 2.12),
-          new Vector3(-7.51, 1.27, 2.08),
+          new Vector3(-7, 0.77, 1.89),
+          new Vector3(-7, 1.3, 2.08),
           new Vector3(-6.87, 2.82, 5.25),
           new Vector3(-5.39, 2.52, 5.71),
           new Vector3(-4.21, 3.95, 10.00),
@@ -72,11 +72,11 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         direcao : new CatmullRomCurve3([
 
           new Vector3(-9, 1, 10),
-          new Vector3(-1.09, -1.46, 6),
-          new Vector3(-8, 2, 12),
-          new Vector3(-3.08, -0.50, -3.11),
-          new Vector3(-3.10, -1.32, -3.11),
-          new Vector3(-2.81, 0.37, 3.02),
+          new Vector3(-1.09, 1, 0),
+          new Vector3(-7, 2, 12),
+          new Vector3(-2, 2, 6),
+          new Vector3(-3.10, 2, 12),
+          new Vector3(-6, 1.6, 17),
   
         ])
       },
