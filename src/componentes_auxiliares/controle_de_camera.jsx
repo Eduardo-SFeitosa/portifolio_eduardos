@@ -36,7 +36,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
       porta : {
         
         posicao : new CatmullRomCurve3([
-          new Vector3(-17.2, 0, -7.8),
+          new Vector3(-17.2, 0, -7.9),
           new Vector3(-13, 0, -7.8),
           new Vector3(-13, 0, -6.1),
           new Vector3(-13, 1.4, -1.7),
@@ -46,13 +46,12 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         ]),
 
         direcao : new CatmullRomCurve3([
-          new Vector3(-12, 0, -7.8),
+          new Vector3(-12, 0, -8.3),
           new Vector3(-12, 0, -6),
-          new Vector3(10, 0, 300),
+          new Vector3(-9, 0, 20),
           new Vector3(0, 1.6, -2),
-          new Vector3(0, 1.6, -2),
-          new Vector3(-11, 1.6, 150),
-          new Vector3(0, 1, 500)
+          new Vector3(-11, 1.6, 10),
+          new Vector3(-9, 1, 10),
         ])
   
       },
@@ -62,23 +61,22 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         posicao : new CatmullRomCurve3([
 
           new Vector3(-9, 0.77, 1.89),
-
-          new Vector3(-9, 1.1638161796821167, 2.0934465072055444),
-          new Vector3(-6.6, 1.1380044853810525, 2.0315852543617083),
-          new Vector3(-7, 2.4357155078625228, 5.912774312178762),
-          new Vector3(-4.7, 2.613480285224395, 5.628657216888813),
-          new Vector3(-4.5, 3.6, 9.612795012334084),
+          new Vector3(-9.11, 1.07, 2.12),
+          new Vector3(-7.51, 1.27, 2.08),
+          new Vector3(-6.87, 2.82, 5.25),
+          new Vector3(-5.39, 2.52, 5.71),
+          new Vector3(-4.21, 3.95, 10.00),
   
         ]),
+
         direcao : new CatmullRomCurve3([
 
-          new Vector3(0, 1, 500),
-
-          new Vector3(-1.1247934360202119, -1.4304761277904006, -1.1209375956796985),
-          new Vector3(-3.0494515675959994, -0.01567934495027623, -3.140143899637158),
-          new Vector3(-0.26861830479855825, -1.4908136905076705, -0.2678000902184276),
-          new Vector3(-2.99653481844655, -0.11694453054873762, -3.124549504132997),
-          new Vector3(-2.76080460383091, 0.05417539598980463, 3.119918793689745),
+          new Vector3(-9, 1, 10),
+          new Vector3(-1.09, -1.46, 6),
+          new Vector3(-8, 2, 12),
+          new Vector3(-3.08, -0.50, -3.11),
+          new Vector3(-3.10, -1.32, -3.11),
+          new Vector3(-2.81, 0.37, 3.02),
   
         ])
       },
@@ -178,7 +176,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
     const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso)
       
     const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso)
-      
+    
     referencia_camera.current.lookAt(direcao)
       
     referencia_camera.current.position.copy(localizacao)
