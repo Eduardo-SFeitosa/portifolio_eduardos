@@ -80,12 +80,25 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
   
         ])
       },
-  
+
       orbe : {
         posicao : new CatmullRomCurve3([
+
+          new Vector3(-4.21, 3.95, 10),
+          new Vector3(-0.73, 4.15, 10),
+          new Vector3(3.25, 4.15, 10),
+          new Vector3(3.25, 4.15, 4.35),
+          new Vector3(3.25, 4.15, 2.13),
   
         ]),
+        
         direcao : new CatmullRomCurve3([
+
+          new Vector3(-6, 1.6, 17),
+          new Vector3(20, 2, 6.5),
+          new Vector3(-0.52, 2, -0.52),
+          new Vector3(0, 4, 0),
+          new Vector3(-3.14, 4, 2.3),
   
         ])
       },
