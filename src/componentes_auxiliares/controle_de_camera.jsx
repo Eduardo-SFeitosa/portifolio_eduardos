@@ -132,26 +132,29 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
 
         posicao : new CatmullRomCurve3([
 
+          new Vector3(8.30, 3.11, -3.98),
           new Vector3(7.11, 3.26, -4.13),
-          new Vector3(7.28, 2.46, -7.69),
+          new Vector3(7.11, 2.46, -7.69),
           new Vector3(3.09, 1.25, -7.61),
-          new Vector3(2.99, 1.29, -9.52),
-          new Vector3(3.59, 0.47, -13.91),
-          new Vector3(0.62, 0.22, -13.72),
-          new Vector3(-2.56, 1.39, -13.56),
-          new Vector3(-2.13, 1.64, -16.19),
+          new Vector3(3.09, 1.29, -9.52),
+          new Vector3(3.59, 0.22, -13.91),
+          new Vector3(0.62, 0.22, -13.91),
+          new Vector3(-3, 1.39, -13.91),
+          new Vector3(-2, 1.64, -16.19),
   
         ]),
+
         direcao : new CatmullRomCurve3([
 
-          new Vector3(-0.35, 0.02, 0.01),
-          new Vector3(-1.81, 1.18, 1.83),
-          new Vector3(-0.02, 0.09, 0.00),
-          new Vector3(-0.14, 0.03, 0.00),
-          new Vector3(2.96, 1.43, -2.96),
-          new Vector3(-1.27, 1.49, 1.27),
-          new Vector3(-0.05, 0.51, 0.02),
-          new Vector3(-0.32, -0.54, -0.17),
+          new Vector3(9.5, 2.4, -2),
+          new Vector3(8, 2, -7),
+          new Vector3(5, 1.18, -8),
+          new Vector3(3, 1, -9),
+          new Vector3(3, 1, -10),
+          new Vector3(3, 0, -16),
+          new Vector3(-8, 0, -15),
+          new Vector3(1, 1, -18),
+          new Vector3(-.5, .5, -18.5),
   
         ])
       },
