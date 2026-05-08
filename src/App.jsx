@@ -119,7 +119,7 @@ function App() {
             
             >
 
-            </Controle_de_camera>
+          </Controle_de_camera>
 
           {/* 
 
