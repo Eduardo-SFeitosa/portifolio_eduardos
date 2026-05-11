@@ -22,17 +22,6 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
   
       },
   
-      rio : {
-        
-        posicao : new CatmullRomCurve3([
-  
-        ]),
-        direcao : new CatmullRomCurve3([
-  
-        ])
-  
-      },
-  
       porta : {
         
         posicao : new CatmullRomCurve3([
@@ -66,6 +55,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
           new Vector3(-6.87, 2.82, 5.25),
           new Vector3(-5.39, 2.52, 5.71),
           new Vector3(-4.21, 3.95, 10.00),
+          new Vector3(-4.8, 3.2, 12.50),
   
         ]),
 
@@ -77,6 +67,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
           new Vector3(-2, 2, 6),
           new Vector3(-3.10, 2, 12),
           new Vector3(-6, 1.6, 17),
+          new Vector3(-6, 2.7, 12.7),
   
         ])
       },
@@ -84,6 +75,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
       orbe : {
         posicao : new CatmullRomCurve3([
 
+          new Vector3(-4.8, 3.2, 12.50),
           new Vector3(-4.21, 3.95, 10),
           new Vector3(-0.73, 4.15, 10),
           new Vector3(3.25, 4.15, 10),
@@ -94,6 +86,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         
         direcao : new CatmullRomCurve3([
 
+          new Vector3(-6, 2.7, 12.7),
           new Vector3(-6, 1.6, 17),
           new Vector3(20, 2, 6.5),
           new Vector3(-0.52, 2, -0.52),
