@@ -93,7 +93,7 @@ export default function Mina({funcao_travar_camera , ...props}) {
       {/* interface */}
       {interface_ativa ?
 
-        <Interface_mina position={[0,0,0]}/>
+        <Interface_mina position={[7,2.7,1]}/>
         
         :<></>
         
