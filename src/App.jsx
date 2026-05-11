@@ -110,7 +110,7 @@ function App() {
         referencia_camera.current = state.camera
       }} id="canvas">   
 
-        <ScrollControls pages={cena_em_foco == null ? 4 : 5} damping={0.2} enabled={cena_em_foco == null}>
+        <ScrollControls pages={cena_em_foco == null ? 4 : 0} damping={0.2} enabled={cena_em_foco == null}>
 
           <Controle_de_camera
             referencia_camera={referencia_camera}
