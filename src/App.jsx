@@ -90,9 +90,17 @@ function App() {
 
       const index_atual = cenas_ordem.indexOf(cena)
 
-      set_caminho(cenas_ordem[index_atual + 1])
+      console.log(cenas_ordem.length, index_atual)
 
-      set_cena_em_foco(cena)
+      if ( cenas_ordem.length > index_atual + 1 ){
+
+        set_caminho(cenas_ordem[index_atual + 1])
+
+        set_cena_em_foco(cena)
+
+      }
+
+      
 
     }else {
 
