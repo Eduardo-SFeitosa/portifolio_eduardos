@@ -26,8 +26,6 @@ import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 function App() {
 
-  const [ estado_camera , set_estado_camera ] = useState("caminho")
-
   const [cena_em_foco , set_cena_em_foco] = useState(null)
 
   const [caminho_atual , set_caminho] = useState("porta")
@@ -108,6 +106,28 @@ function App() {
 
     }
     
+  }
+
+  const voltar_caminho = ( cena ) => {
+
+    if (cena && cena == caminho_atual) {
+
+      const cenas_ordem = Object.keys(posicao_de_cenas)
+
+      const index_atual = cenas_ordem.indexOf(cena)
+
+      console.log(cenas_ordem.length, index_atual)
+
+      if ( 0 < index_atual - 1 ){
+
+        set_caminho(cenas_ordem[index_atual - 1])
+
+        set_cena_em_foco(null)
+
+      }
+
+    }
+
   }
 
   return (
