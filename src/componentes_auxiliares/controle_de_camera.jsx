@@ -73,6 +73,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
       },
 
       orbe : {
+
         posicao : new CatmullRomCurve3([
 
           new Vector3(-4.8, 3.2, 12.50),
@@ -185,11 +186,11 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
 
   useFrame(() => {
 
-    console.log(caminho_atual)
+    const progresso = scroll.offset
 
     if (!referencia_camera || camera_travada || ignorar_scroll.current) return
 
-    const progresso = scroll.offset
+    if (!coordenadas_caminhos[caminho_atual] || progresso < 0) return    
 
     const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso)
       
