@@ -153,34 +153,6 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
       },
   
   }
-  
-  const coordenadas_decisoes = {
-
-      porta : {
-        rotacao : [-1.5707973260741874, 3.795917873777866e-8, 3.1036243530453027],
-        posicao : [-8.456733005501444, 3.2868203201560813, 2.3165971323725607]
-      },
-  
-      acampamento : {
-        rotacao : [-1.5707971560256422, -5.589064063782636e-7, -2.5485262456046573],
-        posicao : [-4.0184470184083745, 6.224340374771204, 10.624272808241919]
-      },
-  
-      orbe : {
-        rotacao : [-1.5707953272056208, 2.865798293463784e-8, 0.028661907086076834],
-        posicao : [2.7727011088553293, 6.896761090625276, 2.431893417251977]
-      },
-  
-      mina : {
-        rotacao : [-1.5707958619252793, -8.853791498842958e-7, -1.0873089834052614],
-        posicao : [7.625877384180385, 5.336587564243731, -3.991256943623446]
-      },
-  
-      bau : {
-        rotacao : [-1.5707958618015005, -8.856151143544813e-7, -1.0873090846069526],
-        posicao : [-2.133894018214775, 4.34668147646163, -16.619114817879197]
-      }
-  }
 
   const scroll = useScroll()
 
@@ -212,6 +184,8 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
   }, [caminho_atual]);
 
   useFrame(() => {
+
+    console.log(caminho_atual)
 
     if (!referencia_camera || camera_travada || ignorar_scroll.current) return
 

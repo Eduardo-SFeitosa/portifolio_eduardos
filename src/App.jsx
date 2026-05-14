@@ -90,15 +90,13 @@ function App() {
 
       console.log(cenas_ordem.length, index_atual)
 
-      if ( cenas_ordem.length > index_atual + 1 ){
+      set_cena_em_foco(cena)
+
+      if ( cenas_ordem.length > index_atual + 1){
 
         set_caminho(cenas_ordem[index_atual + 1])
 
-        set_cena_em_foco(cena)
-
       }
-
-      
 
     }else {
 
@@ -138,7 +136,7 @@ function App() {
         referencia_camera.current = state.camera
       }} id="canvas">   
 
-        <ScrollControls pages={cena_em_foco == null ? 4 : 0} damping={0.2} enabled={cena_em_foco == null}>
+        <ScrollControls pages={cena_em_foco == null ? 4 : 0} damping={0.6} enabled={cena_em_foco == null}>
 
           <Controle_de_camera
             referencia_camera={referencia_camera}
