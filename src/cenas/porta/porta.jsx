@@ -11,7 +11,7 @@ import { useGLTF } from '@react-three/drei'
 
 import Interface_porta from './interface_porta'
 
-export default function Porta({funcao_travar_camera, ...props}) {
+export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
 
   const [ aberta , set_aberta] = useState(false)
 
@@ -29,7 +29,7 @@ export default function Porta({funcao_travar_camera, ...props}) {
 
       set_interface_ativa(false)
 
-      funcao_travar_camera(null)
+      proximo_caminho(null)
 
     }
 
@@ -43,7 +43,7 @@ export default function Porta({funcao_travar_camera, ...props}) {
 
       set_interface_ativa(true)
 
-      funcao_travar_camera("porta")
+      proximo_caminho("porta")
 
     }
 

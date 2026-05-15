@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import Interface_orbe from './interface_orbe'
 
-export default function Orbe({funcao_travar_camera, ...props}) {
+export default function Orbe({proximo_caminho, voltar_caminho , ...props}) {
 
   const [interface_ativa, set_interface_ativa] = useState(false)
 
@@ -38,7 +38,7 @@ export default function Orbe({funcao_travar_camera, ...props}) {
 
     set_interface_ativa(false)
 
-    funcao_travar_camera(null)
+    proximo_caminho(null)
 
 
   }
@@ -47,7 +47,7 @@ export default function Orbe({funcao_travar_camera, ...props}) {
 
     set_interface_ativa(true)
 
-    funcao_travar_camera("orbe")
+    proximo_caminho("orbe")
 
   }
 

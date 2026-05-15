@@ -11,7 +11,7 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_mina from './interface_mina'
 
-export default function Mina({funcao_travar_camera , ...props}) {
+export default function Mina({proximo_caminho, voltar_caminho  , ...props}) {
 
   const [ativo, set_ativo] = useState(false)
 
@@ -35,7 +35,7 @@ export default function Mina({funcao_travar_camera , ...props}) {
 
     set_ativo(true)
 
-    funcao_travar_camera("mina")
+    proximo_caminho("mina")
 
   }
 
@@ -45,7 +45,7 @@ export default function Mina({funcao_travar_camera , ...props}) {
 
     set_ativo(false)
 
-    funcao_travar_camera(null)
+    proximo_caminho(null)
 
   }
 

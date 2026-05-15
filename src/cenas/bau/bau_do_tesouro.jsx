@@ -11,7 +11,7 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_bau from './interface_bau'
 
-export default function BauDoTesouro({funcao_travar_camera , ...props}) {
+export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
@@ -57,7 +57,7 @@ export default function BauDoTesouro({funcao_travar_camera , ...props}) {
 
       set_interface_ativa(false)
 
-      funcao_travar_camera(null)
+       proximo_camimho, voltar_caminho(null)
 
     }
 
@@ -71,7 +71,7 @@ export default function BauDoTesouro({funcao_travar_camera , ...props}) {
 
       set_interface_ativa(true)
 
-      funcao_travar_camera("bau")
+       proximo_camimho, voltar_caminho("bau")
 
     }
 

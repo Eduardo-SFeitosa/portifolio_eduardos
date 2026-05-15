@@ -170,15 +170,15 @@ function App() {
 
             < ModeloBase />
 
-            <BauDoTesouro funcao_travar_camera={proximo_caminho} position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
+            <BauDoTesouro proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
 
-            <Acampamento funcao_travar_camera={proximo_caminho} position={[ -6.2 , 2 , 13 ]} />
+            <Acampamento proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ -6.2 , 2 , 13 ]} />
 
-            <Porta funcao_travar_camera={proximo_caminho} position={[ -8.8, .1, 2.9 ]} />
+            <Porta proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ -8.8, .1, 2.9 ]} />
 
-            <Orbe funcao_travar_camera={proximo_caminho} position={[ 1.3, 3, 2 ]} />
+            <Orbe proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ 1.3, 3, 2 ]} />
 
-            <Mina funcao_travar_camera={proximo_caminho} position={[ 9.222 , 1.975 , -3.066 ]} />
+            <Mina proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ 9.222 , 1.975 , -3.066 ]} />
 
             < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 

@@ -11,7 +11,7 @@ import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
 import Interface_acampamento from './interface_acampamento'
 
-export default function Acampamento({funcao_travar_camera , ...props}) {
+export default function Acampamento({proximo_caminho, voltar_camimho , ...props}) {
 
   const [fogueira_ativa, set_fogueira_ativa] = useState(false)
 
@@ -46,7 +46,7 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
 
     set_interface_ativa(true)
 
-    funcao_travar_camera("acampamento")
+    proximo_caminho("acampamento")
 
   }
 
@@ -58,7 +58,7 @@ export default function Acampamento({funcao_travar_camera , ...props}) {
 
     trocar_particulas(fogueira_ativa)
 
-    funcao_travar_camera(null)
+    proximo_caminho(null)
 
   }
 
