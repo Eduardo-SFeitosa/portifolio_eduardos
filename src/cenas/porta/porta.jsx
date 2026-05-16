@@ -11,6 +11,8 @@ import { useGLTF } from '@react-three/drei'
 
 import Interface_porta from './interface_porta'
 
+import Texto_3d from '../../componentes_auxiliares/texto_3d'
+
 export default function Porta({proximo_caminho, voltar_caminho, ativado, ...props}) {
 
   const { nodes, materials } = useGLTF('/models/porta.glb')
@@ -53,6 +55,11 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
   return (
 
     <group {...props} >
+
+      <Texto_3d
+      texto="testando 123"
+      position={[0,0,0]}
+      />
 
       {/* modelo 3d */}
       <group 
