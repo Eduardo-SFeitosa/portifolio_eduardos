@@ -42,7 +42,9 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
     <group {...props}>
 
       {/* modelo 3d */}
-      <group dispose={null} onPointerDown={() => {
+      <group dispose={null} 
+      
+        onPointerDown={() => {
 
         if (!ativado) return
 
