@@ -1,9 +1,18 @@
 import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useLayoutEffect, useRef } from 'react'
+import { forwardRef, useImperativeHandle } from "react"
 import { CatmullRomCurve3, Vector3  } from 'three'
 
-export default function Controle_de_camera({referencia_camera, camera_travada, caminho_atual }) {
+const Controle_de_camera = forwardRef((props, ref ) => {
+
+  const referencia_camera = props.referencia_camera 
+  const camera_travada = props.camera_travada 
+  const caminho_atual = props.caminho_atual
+
+  useImperativeHandle( ref, () => ({
+    resetar_scroll
+  }))
 
   const  ignorar_scroll = useRef(false)
 
@@ -121,7 +130,6 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
         ])
       },
 
-
       bau : {
 
         posicao : new CatmullRomCurve3([
@@ -158,8 +166,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
   const scroll = useScroll()
 
 
-  //resetar o scroll
-  useLayoutEffect(() => {
+  const resetar_scroll = () => {
 
     ignorar_scroll.current = true;
 
@@ -182,7 +189,7 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
       ignorar_scroll.current = false;
     }, 50);
 
-  }, [caminho_atual]);
+  };
 
   useFrame(() => {
 
@@ -202,5 +209,6 @@ export default function Controle_de_camera({referencia_camera, camera_travada, c
 
   })
 
-  return null
-}
+})
+
+export default Controle_de_camera

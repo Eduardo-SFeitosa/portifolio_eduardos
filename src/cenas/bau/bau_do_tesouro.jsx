@@ -25,7 +25,6 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
 
   const tampa = useRef(null)
 
-  
 
   //animação da tampa do bau
   const { rotacaoTampa } = useSpring({

@@ -32,6 +32,8 @@ function App() {
 
   const referencia_camera = useRef(null)
 
+  const controle_de_camera_ref = useRef(null)
+
   useEffect(() => {
     const handleKeyDown = (event) => {
 
@@ -83,6 +85,8 @@ function App() {
   const proximo_caminho = (cena) => {
     
     if (cena && cena == caminho_atual) {
+
+      controle_de_camera_ref.current.resetar_scroll()
 
       const cenas_ordem = Object.keys(posicao_de_cenas)
 
@@ -140,10 +144,11 @@ function App() {
 
           <Controle_de_camera
             referencia_camera={referencia_camera}
+            ref={controle_de_camera_ref}
             caminho_atual={caminho_atual}
             camera_travada={cena_em_foco != null}
             
-            >
+          >
 
           </Controle_de_camera>
 

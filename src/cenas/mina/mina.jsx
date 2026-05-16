@@ -49,8 +49,6 @@ export default function Mina({proximo_caminho, voltar_caminho  , ...props}) {
 
   }
 
-
-
   return (
 
     <group {...props}>
