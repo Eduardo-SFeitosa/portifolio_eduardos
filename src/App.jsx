@@ -56,28 +56,28 @@ function App() {
   const posicao_de_cenas = {
 
     porta : {
-      posicao : [-8.71, 0.77, 1.89],
-      rotacao : [-3.11, 0.01, 3.14]
+      posicao : [ -8.8, .1, 2.9 ] ,
+      rotacao : [ 0, 0, 0]
     },
 
     acampamento : {
-      posicao : [-4.48, 3.11, 12.61],
-      rotacao : [-1.81, 1.10, 1.83]
+      posicao : [ -6.2 , 2 , 13 ] ,
+      rotacao : [ 0, 0, 0]
     },
 
     orbe : {
-      posicao : [2.64, 4.47, 2.00],
-      rotacao : [-1.81, 1.33, 1.82]
+      posicao : [ 1.3, 3, 2 ],
+      rotacao : [ 0, 0, 0]
     },
 
     mina : {
-      posicao : [8.82, 2.99, -3.56],
-      rotacao : [-2.11, -0.56, -2.41]
+      posicao : [ 9.222 , 1.975 , -3.066 ],
+      rotacao : [ 0, 0, 0]
     },
 
     bau : {
-      posicao : [-2.34, 1.59, -15.88],
-      rotacao : [-0.49, -0.54, -0.27]
+      posicao : [-.9, 0, -17.8],
+      rotacao : [ 0, -.7, 0]
     },
 
   }
@@ -173,15 +173,40 @@ function App() {
 
             < ModeloBase />
 
-            <BauDoTesouro proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[-.9, 0, -17.8]} rotation={[ 0, -.7, 0]} />
+            <Porta 
+            onPointerDown={() => console.log("funfa")} 
+            proximo_caminho={proximo_caminho} 
+            voltar_caminho={voltar_caminho} 
+            position={posicao_de_cenas["porta"]["posicao"]} 
+            rotation={posicao_de_cenas["porta"]["rotacao"]} />
 
-            <Acampamento proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ -6.2 , 2 , 13 ]} />
+            <Acampamento 
+            onPointerDown={() => console.log("funfa")} 
+            proximo_caminho={proximo_caminho} 
+            voltar_caminho={voltar_caminho} 
+            position={posicao_de_cenas["acampamento"]["posicao"]} 
+            rotation={posicao_de_cenas["acampamento"]["rotacao"]} />
 
-            <Porta proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ -8.8, .1, 2.9 ]} />
+            <Orbe 
+            onPointerDown={() => console.log("funfa")} 
+            proximo_caminho={proximo_caminho} 
+            voltar_caminho={voltar_caminho} 
+            position={posicao_de_cenas["orbe"]["posicao"]} 
+            rotation={posicao_de_cenas["orbe"]["rotacao"]} />
 
-            <Orbe proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ 1.3, 3, 2 ]} />
+            <Mina 
+            onPointerDown={() => console.log("funfa")} 
+            proximo_caminho={proximo_caminho} 
+            voltar_caminho={voltar_caminho} 
+            position={posicao_de_cenas["mina"]["posicao"]} 
+            rotation={posicao_de_cenas["mina"]["rotacao"]} />
 
-            <Mina proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho} position={[ 9.222 , 1.975 , -3.066 ]} />
+            <BauDoTesouro 
+            onPointerDown={() => console.log("funfa")} 
+            proximo_caminho={proximo_caminho} 
+            voltar_caminho={voltar_caminho} 
+            position={posicao_de_cenas["bau"]["posicao"]} 
+            rotation={posicao_de_cenas["bau"]["rotacao"]} />            
 
             < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
