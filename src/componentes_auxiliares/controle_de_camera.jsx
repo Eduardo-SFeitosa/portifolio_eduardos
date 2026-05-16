@@ -10,8 +10,17 @@ const Controle_de_camera = forwardRef((props, ref ) => {
   const camera_travada = props.camera_travada 
   const caminho_atual = props.caminho_atual
 
+  let progresso
+
   useImperativeHandle( ref, () => ({
+
+    progresso,
+
+    progresso_scroll() {
+      return progresso
+    },
     resetar_scroll
+
   }))
 
   const  ignorar_scroll = useRef(false)
@@ -165,7 +174,6 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   const scroll = useScroll()
 
-
   const resetar_scroll = () => {
 
     ignorar_scroll.current = true;
@@ -193,7 +201,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   useFrame(() => {
 
-    const progresso = scroll.offset
+    progresso = scroll.offset
 
     if (!referencia_camera || camera_travada || ignorar_scroll.current) return
 

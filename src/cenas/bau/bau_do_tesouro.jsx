@@ -56,7 +56,7 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
 
       set_interface_ativa(false)
 
-       proximo_camimho, voltar_caminho(null)
+      proximo_camimho, voltar_caminho("bau")
 
     }
 
@@ -70,7 +70,7 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
 
       set_interface_ativa(true)
 
-       proximo_camimho, voltar_caminho("bau")
+      proximo_camimho
 
     }
 

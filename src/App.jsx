@@ -88,11 +88,11 @@ function App() {
 
       controle_de_camera_ref.current.resetar_scroll()
 
+      console.log(controle_de_camera_ref.current.progresso_scroll())
+
       const cenas_ordem = Object.keys(posicao_de_cenas)
 
       const index_atual = cenas_ordem.indexOf(cena)
-
-      console.log(cenas_ordem.length, index_atual)
 
       set_cena_em_foco(cena)
 
@@ -117,8 +117,6 @@ function App() {
       const cenas_ordem = Object.keys(posicao_de_cenas)
 
       const index_atual = cenas_ordem.indexOf(cena)
-
-      console.log(cenas_ordem.length, index_atual)
 
       if ( 0 < index_atual - 1 ){
 
@@ -210,6 +208,7 @@ function App() {
       </Canvas>           
       
     </>
+
   )
 }
 
