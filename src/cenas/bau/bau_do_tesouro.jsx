@@ -110,7 +110,7 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho, ativado 
 
       {ativado ? 
       
-        <Interface_bau position={[-1.5, 2,0]}/>
+        <Interface_bau position={[-1.5, 1.9, .5]}/>
         
         : <></>
       }
