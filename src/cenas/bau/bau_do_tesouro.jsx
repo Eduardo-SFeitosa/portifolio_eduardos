@@ -11,13 +11,9 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_bau from './interface_bau'
 
-export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...props}) {
+export default function BauDoTesouro({ proximo_camimho, voltar_caminho, travar_camera, ativado , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
-
-  const [aberto, set_aberto] = useState(false)
-
-  const [interface_ativa, set_interface_ativa] = useState(false)
 
   const posicao_global = props.position
 
@@ -25,11 +21,22 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
 
   const tampa = useRef(null)
 
+  const abrir = () => {
+
+    voltar_caminho("bau")
+
+  }
+
+  const fechar = () => {
+
+    voltar_caminho("bau")
+
+  }
 
   //animação da tampa do bau
   const { rotacaoTampa } = useSpring({
 
-      rotacaoTampa: aberto ? [-1.3, 0, 0] : [1.6, 0, 0],
+      rotacaoTampa: ativado ? [-1.3, 0, 0] : [1.6, 0, 0],
       
       config: { tension: 120, friction: 14 }
   
@@ -38,43 +45,15 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
   //animação do bau
   const { bauEscala , bauRotacao , bauPosicao } = useSpring({
 
-    bauRotacao: aberto ? [0.8, 0, 0] : [0, .1, 0],
+    bauRotacao: ativado ? [0.8, 0, 0] : [0, .1, 0],
 
-    bauEscala : aberto ? [1.8, 1.8, 1.8] : [1, 1, 1],
+    bauEscala : ativado ? [1.8, 1.8, 1.8] : [1, 1, 1],
 
-    bauPosicao : aberto ? [.1, .2, .3] : [0, 0, 0],
+    bauPosicao : ativado ? [.1, .2, .3] : [0, 0, 0],
       
     config: { tension: 120, friction: 14 }
 
   })
-
-  const fechar = ( ) => {
-
-    if (tampa.current){
-
-      set_aberto(false)
-
-      set_interface_ativa(false)
-
-      proximo_camimho, voltar_caminho("bau")
-
-    }
-
-  }
-
-  const abrir = ( ) => {
-
-    if ( tampa.current ) {
-
-      set_aberto(true)
-
-      set_interface_ativa(true)
-
-      proximo_camimho
-
-    }
-
-  }
 
   return (
 
@@ -92,14 +71,10 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
         dispose={null}
       
         onPointerDown={ () => {
+
+          if (!ativado) return
           
-          if (aberto) {
-            fechar()
-          }
-          else {
-            abrir()
-          }
-          
+          fechar()          
         
         } }
 
@@ -137,7 +112,7 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho , ...prop
 
       </animated.group>
 
-      {interface_ativa ? 
+      {ativado ? 
       
         <Interface_bau position={[-1.5, 2,0]}/>
         

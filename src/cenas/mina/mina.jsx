@@ -11,15 +11,11 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_mina from './interface_mina'
 
-export default function Mina({proximo_caminho, voltar_caminho  , ...props}) {
-
-  const [ativo, set_ativo] = useState(false)
-
-  const [interface_ativa, set_interface_ativa] = useState(false)
+export default function Mina({proximo_caminho, voltar_caminho , ativado , ...props}) {
 
   const { posicao_carrinho } = useSpring({
 
-    posicao_carrinho : ativo ? [-0.026, 0.059, 0] : [-0.026, 0.059, 3],
+    posicao_carrinho : ativado ? [-0.026, 0.059, 0] : [-0.026, 0.059, 3],
 
     config: { tension: 40, friction: 20 }
     
@@ -31,21 +27,13 @@ export default function Mina({proximo_caminho, voltar_caminho  , ...props}) {
 
   function ativar_carrinho() {
 
-    set_interface_ativa(true)
-
-    set_ativo(true)
-
     proximo_caminho("mina")
 
   }
 
   function desativar_carrinho() {
 
-    set_interface_ativa(false)
-
-    set_ativo(false)
-
-    proximo_caminho(null)
+    proximo_caminho("mina")
 
   }
 
@@ -54,18 +42,12 @@ export default function Mina({proximo_caminho, voltar_caminho  , ...props}) {
     <group {...props}>
 
       {/* modelo 3d */}
-      <group dispose={null} onPointerUp={() => {
+      <group dispose={null} onPointerDown={() => {
 
-        if (ativo) {
+        if (!ativado) return
 
-          desativar_carrinho()
+        desativar_carrinho()
 
-        }
-        else{
-
-          ativar_carrinho()
-
-        }
       }}>
 
         <mesh geometry={nodes.Mine_Box.geometry} material={materials['Mine1.002']} position={[0.696, 0.109, -0.476]} rotation={[0, -0.851, 0]} />
@@ -89,7 +71,7 @@ export default function Mina({proximo_caminho, voltar_caminho  , ...props}) {
       </group>
 
       {/* interface */}
-      {interface_ativa ?
+      {ativado ?
 
         <Interface_mina position={[7,2.7,1]}/>
         

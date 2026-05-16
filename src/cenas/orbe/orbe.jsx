@@ -8,9 +8,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import Interface_orbe from './interface_orbe'
 
-export default function Orbe({proximo_caminho, voltar_caminho , ...props}) {
-
-  const [interface_ativa, set_interface_ativa] = useState(false)
+export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...props}) {
 
   const referenciaOrbe = useRef(null)
 
@@ -36,16 +34,11 @@ export default function Orbe({proximo_caminho, voltar_caminho , ...props}) {
 
   const fechar = ( ) => {
 
-    set_interface_ativa(false)
-
-    proximo_caminho(null)
-
+    proximo_caminho("orbe")
 
   }
 
   const abrir = ( ) => {
-
-    set_interface_ativa(true)
 
     proximo_caminho("orbe")
 
@@ -58,14 +51,10 @@ export default function Orbe({proximo_caminho, voltar_caminho , ...props}) {
       <mesh 
 
         onPointerDown={ () => {
+
+          if (!ativado) return
           
-          if (interface_ativa) {
-            fechar()
-          }
-          else {
-            abrir()
-          }
-          
+          fechar()
         
         }}
 
@@ -91,7 +80,7 @@ export default function Orbe({proximo_caminho, voltar_caminho , ...props}) {
 
       </mesh>
 
-      {interface_ativa ? 
+      {ativado ? 
 
         <Interface_orbe position={[0,1.9,.85]}/>
 

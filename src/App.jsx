@@ -35,6 +35,7 @@ function App() {
   const controle_de_camera_ref = useRef(null)
 
   useEffect(() => {
+
     const handleKeyDown = (event) => {
 
       const cam = referencia_camera.current
@@ -82,13 +83,15 @@ function App() {
 
   }
 
-  const proximo_caminho = (cena) => {
-    
-    if (cena && cena == caminho_atual) {
+  const travar_camera = (cena) => {
+
+    if ( cena && caminho_atual == cena) {
 
       controle_de_camera_ref.current.resetar_scroll()
 
       console.log(controle_de_camera_ref.current.progresso_scroll())
+
+      console.log(cena, caminho_atual)
 
       const cenas_ordem = Object.keys(posicao_de_cenas)
 
@@ -96,37 +99,47 @@ function App() {
 
       set_cena_em_foco(cena)
 
-      if ( cenas_ordem.length > index_atual + 1){
+    }
+
+  }
+
+  const destravar_camera = ( cena ) => {
+
+    set_cena_em_foco(null)
+
+  }
+
+  const proximo_caminho = ( cena ) => {
+
+    const cenas_ordem = Object.keys(posicao_de_cenas)
+
+    const index_atual = cenas_ordem.indexOf(cena)
+
+    if ( cenas_ordem.length > index_atual + 1){
 
         set_caminho(cenas_ordem[index_atual + 1])
 
-      }
-
-    }else {
-
-      set_cena_em_foco(null)
-
     }
+
+    destravar_camera(cena)
     
   }
 
   const voltar_caminho = ( cena ) => {
 
-    if (cena && cena == caminho_atual) {
+    const cenas_ordem = Object.keys(posicao_de_cenas)
 
-      const cenas_ordem = Object.keys(posicao_de_cenas)
+    const index_atual = cenas_ordem.indexOf(cena)
 
-      const index_atual = cenas_ordem.indexOf(cena)
+    if ( 0 < index_atual - 1 ){
 
-      if ( 0 < index_atual - 1 ){
+      set_caminho(cenas_ordem[index_atual - 1])
 
-        set_caminho(cenas_ordem[index_atual - 1])
-
-        set_cena_em_foco(null)
-
-      }
+      set_cena_em_foco(null)
 
     }
+
+    destravar_camera(cena)
 
   }
 
@@ -174,39 +187,49 @@ function App() {
             < ModeloBase />
 
             <Porta 
-            onPointerDown={() => console.log("funfa")} 
+            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["porta"]["posicao"]} 
-            rotation={posicao_de_cenas["porta"]["rotacao"]} />
+            rotation={posicao_de_cenas["porta"]["rotacao"]} 
+            ativado={ cena_em_foco == "porta" ? true : false}
+            />
 
             <Acampamento 
-            onPointerDown={() => console.log("funfa")} 
+            onPointerDown={() => { cena_em_foco != "acampamento" ? travar_camera("acampamento") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["acampamento"]["posicao"]} 
-            rotation={posicao_de_cenas["acampamento"]["rotacao"]} />
+            rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
+            ativado={ cena_em_foco == "acampamento" ? true : false}
+            />
 
             <Orbe 
-            onPointerDown={() => console.log("funfa")} 
+            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["orbe"]["posicao"]} 
-            rotation={posicao_de_cenas["orbe"]["rotacao"]} />
+            rotation={posicao_de_cenas["orbe"]["rotacao"]} 
+            ativado={ cena_em_foco == "orbe" ? true : false}
+            />
 
             <Mina 
-            onPointerDown={() => console.log("funfa")} 
+            onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["mina"]["posicao"]} 
-            rotation={posicao_de_cenas["mina"]["rotacao"]} />
+            rotation={posicao_de_cenas["mina"]["rotacao"]} 
+            ativado={ cena_em_foco == "mina" ? true : false}
+            />
 
             <BauDoTesouro 
-            onPointerDown={() => console.log("funfa")} 
+            onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["bau"]["posicao"]} 
-            rotation={posicao_de_cenas["bau"]["rotacao"]} />            
+            rotation={posicao_de_cenas["bau"]["rotacao"]} 
+            ativado={ cena_em_foco == "bau" ? true : false}
+            />            
 
             < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
@@ -227,8 +250,6 @@ function App() {
             />
 
         </ScrollControls>
-
-
           
       </Canvas>           
       

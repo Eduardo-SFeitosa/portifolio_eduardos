@@ -11,11 +11,7 @@ import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
 import Interface_acampamento from './interface_acampamento'
 
-export default function Acampamento({proximo_caminho, voltar_camimho , ...props}) {
-
-  const [fogueira_ativa, set_fogueira_ativa] = useState(false)
-
-  const [interface_ativa, set_interface_ativa] = useState(false)
+export default function Acampamento({proximo_caminho, voltar_camimho, ativado , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/acampamento.glb')
 
@@ -23,28 +19,7 @@ export default function Acampamento({proximo_caminho, voltar_camimho , ...props}
 
   const emissor_particulas = useRef(null)
 
-  function trocar_particulas(bool) {
-
-    if (bool) {
-
-      emissor_particulas.current.startEmitting()
-
-    }
-
-    else{
-
-      emissor_particulas.current.stopEmitting()
-
-    }
-  }
-
   function ativar_acampamento () {
-
-    set_fogueira_ativa(true)
-
-    trocar_particulas(fogueira_ativa)
-
-    set_interface_ativa(true)
 
     proximo_caminho("acampamento")
 
@@ -52,13 +27,7 @@ export default function Acampamento({proximo_caminho, voltar_camimho , ...props}
 
   function desativar_acampamento() {
 
-    set_fogueira_ativa(false)
-
-    set_interface_ativa(false)
-
-    trocar_particulas(fogueira_ativa)
-
-    proximo_caminho(null)
+    proximo_caminho("acampamento")
 
   }
 
@@ -68,21 +37,11 @@ export default function Acampamento({proximo_caminho, voltar_camimho , ...props}
     <group {...props}>
 
       {/*modelo 3d*/}
-      <group dispose={null} onPointerUp={(e) => {
+      <group dispose={null} onPointerDown={() => {
+
+          if (!ativado) return
         
-          if (fogueira_ativa) {
-
-            desativar_acampamento()
-
-          }
-
-          else{
-
-            ativar_acampamento()
-
-          }
-
-          set_fogueira_ativa(!fogueira_ativa) 
+          desativar_acampamento()
           
         }}
         
@@ -156,7 +115,7 @@ export default function Acampamento({proximo_caminho, voltar_camimho , ...props}
 
       {/*interface*/}
 
-      {interface_ativa ? 
+      {ativado ? 
         <Interface_acampamento position={[0,1,0]}/> 
         
         : <></>

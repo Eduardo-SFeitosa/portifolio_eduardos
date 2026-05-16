@@ -11,11 +11,7 @@ import { useGLTF } from '@react-three/drei'
 
 import Interface_porta from './interface_porta'
 
-export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
-
-  const [ aberta , set_aberta] = useState(false)
-
-  const [interface_ativa, set_interface_ativa] = useState(false)
+export default function Porta({proximo_caminho, voltar_caminho, ativado, ...props}) {
 
   const { nodes, materials } = useGLTF('/models/porta.glb')
 
@@ -25,11 +21,7 @@ export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
 
     if (porta.current){
 
-      set_aberta(false)
-
-      set_interface_ativa(false)
-
-      proximo_caminho(null)
+      proximo_caminho("porta")
 
     }
 
@@ -38,10 +30,6 @@ export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
   const abrir = ( ) => {
 
     if ( porta.current ) {
-
-      set_aberta(true)
-
-      set_interface_ativa(true)
 
       proximo_caminho("porta")
 
@@ -54,7 +42,7 @@ export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
 
     {
 
-      rotation: aberta ? [-Math.PI, -1.2 , -Math.PI] : [-Math.PI, 0, -Math.PI],
+      rotation: ativado ? [-Math.PI, -1.2 , -Math.PI] : [-Math.PI, 0, -Math.PI],
       
       config: { tension: 40, friction: 20 }
   
@@ -72,14 +60,10 @@ export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
       dispose={null}
 
       onPointerDown={ () => {
+
+          if (!ativado) return
           
-          if (aberta) {
-            fechar()
-          }
-          else {
-            abrir()
-          }
-          
+          fechar()
         
       }}
 
@@ -120,7 +104,7 @@ export default function Porta({proximo_caminho, voltar_caminho, ...props}) {
 
       </group>
 
-      {interface_ativa ? 
+      {ativado ? 
 
         <Interface_porta 
         
