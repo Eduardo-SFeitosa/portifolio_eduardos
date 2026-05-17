@@ -1,11 +1,28 @@
 import "./interface_porta.css"
+import { Html } from "@react-three/drei"
 
-export default function Interface_porta() {
+export default function Interface_porta(props) {
+    
   return (
-    <div className="interface-porta">
-      <div className="fundo-porta">
-        <h1>TESTE</h1>
+
+    <Html {...props} style={{ position: "static" }}>
+
+      <div className="interface-porta">
+
+        <div className="topo">
+
+          <h1>SOBRE MIM</h1>
+
+        </div>
+
+        <div className="fundo-porta">
+
+          <h1>TESTE</h1>
+
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia fugit commodi rem magnam praesentium error sed expedita velit iure vero excepturi minus molestias enim optio, labore aut libero mollitia.
+
+        </div>
       </div>
-    </div>
+    </Html>
   )
 }

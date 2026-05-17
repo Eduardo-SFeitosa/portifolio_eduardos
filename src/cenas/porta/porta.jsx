@@ -5,9 +5,13 @@ Command: npx gltfjsx@6.5.3 porta.glb
 
 import { useRef } from 'react'
 
+import { Html } from '@react-three/drei'
+
 import { useSpring, animated } from '@react-spring/three'
 
 import { useGLTF } from '@react-three/drei'
+
+import Interface_porta from './interface_porta'
 
 import Texto_3d from '../../componentes_auxiliares/texto_3d'
 
@@ -21,7 +25,13 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
 
     if (porta.current){
 
-      proximo_caminho("porta")
+      console.log("avanco")
+
+      {/*
+      
+        proximo_caminho("porta")
+
+      */}
 
     }
 
@@ -53,11 +63,6 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
   return (
 
     <group {...props} >
-
-      <Texto_3d
-      texto="testando 123"
-      position={[0,0,0]}
-      />
 
       {/* modelo 3d */}
       <group 
@@ -91,11 +96,16 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
             geometry={nodes.door.geometry} 
             material={materials['Dungeon_passage.002']} 
             position={[ .5, 0, 0 ]}
+
           />
 
         </animated.group>
 
       </group>
+
+      {ativado && (
+        <Interface_porta position={[0.5, 1.32, 0]}/>
+      )}
 
     </group>
 

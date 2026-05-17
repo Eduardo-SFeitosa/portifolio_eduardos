@@ -257,8 +257,6 @@ function App() {
         </ScrollControls>
           
       </Canvas>
-
-      {cena_em_foco === "porta" && <Interface_porta />}
       
     </>
 
