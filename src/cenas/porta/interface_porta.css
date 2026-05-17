@@ -1,19 +1,22 @@
 .interface-porta {
-
-  pointer-events: auto;
-  position: static;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
 }
 
-.fundo-porta{
-
-  padding-top: 250px;
-  padding-left: 50px;
-
-  background-color: black;
+.fundo-porta {
+  position: fixed;
+  top: 250px;
+  right: 50px;
   width: 30vw;
   height: 85vh;
-
+  background-color: black;
+  color: white;
   border-top-left-radius: 45%;
   border-top-right-radius: 45%;
-
+  padding-top: 250px;
+  padding-left: 50px;
+  pointer-events: auto;
+  box-sizing: border-box;
 }

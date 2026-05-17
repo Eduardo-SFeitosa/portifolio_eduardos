@@ -5,7 +5,7 @@ export default function Texto_3d( { texto, tamanho, cor, ...props} ) {
 
     return (
 
-        <Text3D {...props} font="public/font3d/gt.json">
+        <Text3D {...props} font="font3d/gt.json">
             {texto}
         </Text3D>
 
