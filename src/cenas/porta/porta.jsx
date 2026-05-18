@@ -69,11 +69,11 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
       
       dispose={null}
 
+      
+
       onPointerDown={ () => {
 
           if (!ativado) return
-          
-          fechar()
         
       }}
 

@@ -5,7 +5,7 @@ export default function Interface_porta(props) {
     
   return (
 
-    <Html {...props} style={{ position: "static" }}>
+    <Html {...props} style={{ position: "static" }} onClick={console.log("aaa")}>
 
       <div className="interface-porta">
 
@@ -22,6 +22,13 @@ export default function Interface_porta(props) {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia fugit commodi rem magnam praesentium error sed expedita velit iure vero excepturi minus molestias enim optio, labore aut libero mollitia.
 
         </div>
+
+        <div className="curriculo" onClick={() => console.log("aaa")} >
+
+          <h2>Baixar curriculo</h2>
+
+        </div>
+
       </div>
     </Html>
   )
