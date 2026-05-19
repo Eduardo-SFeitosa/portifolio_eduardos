@@ -109,6 +109,8 @@ function App() {
 
     set_cena_em_foco(null)
 
+    controle_de_camera_ref.current.resetar_scroll()
+
   }
 
   const proximo_caminho = ( cena ) => {
