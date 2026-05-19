@@ -192,7 +192,7 @@ function App() {
             < ModeloBase />
 
             <Porta 
-            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : console.log(cena_em_foco, caminho_atual)}} 
+            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : proximo_caminho("porta")}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["porta"]["posicao"]} 

@@ -40,8 +40,6 @@ export default function Acampamento({proximo_caminho, voltar_camimho, ativado , 
       <group dispose={null} onPointerDown={() => {
 
           if (!ativado) return
-        
-          desativar_acampamento()
           
         }}
         

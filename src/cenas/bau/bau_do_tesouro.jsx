@@ -68,9 +68,7 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho, ativado 
       
         onPointerDown={ () => {
 
-          if (!ativado) return
-          
-          fechar()          
+          if (!ativado) return       
         
         } }
 

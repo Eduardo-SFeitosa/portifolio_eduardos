@@ -53,8 +53,6 @@ export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...pro
         onPointerDown={ () => {
 
           if (!ativado) return
-          
-          fechar()
         
         }}
 

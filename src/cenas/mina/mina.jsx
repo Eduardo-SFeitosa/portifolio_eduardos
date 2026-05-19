@@ -48,8 +48,6 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
 
         if (!ativado) return
 
-        desativar_carrinho()
-
       }}>
 
         <mesh geometry={nodes.Mine_Box.geometry} material={materials['Mine1.002']} position={[0.696, 0.109, -0.476]} rotation={[0, -0.851, 0]} />
