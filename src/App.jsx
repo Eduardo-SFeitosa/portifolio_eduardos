@@ -192,7 +192,7 @@ function App() {
             < ModeloBase />
 
             <Porta 
-            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : proximo_caminho("porta")}} 
+            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : console.log(cena_em_foco, caminho_atual)}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["porta"]["posicao"]} 
@@ -257,6 +257,16 @@ function App() {
         </ScrollControls>
           
       </Canvas>
+
+      <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0,}}>
+
+            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("porta")} >porta</div>
+            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("acampamento")} >acampamento</div>
+            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("orbe")} >orbe</div>
+            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("mina")} >mina</div>
+            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("bau")} >bau</div>
+
+      </div>
       
     </>
 
