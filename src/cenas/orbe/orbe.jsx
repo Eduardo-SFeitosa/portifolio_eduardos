@@ -80,7 +80,7 @@ export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...pro
 
       {ativado ? 
 
-        <Interface_orbe position={[0,1.9,.85]}/>
+        <Interface_orbe position={[0,2.3,2.4]}/>
 
         :<></>
         

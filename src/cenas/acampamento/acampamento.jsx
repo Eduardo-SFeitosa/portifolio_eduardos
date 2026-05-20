@@ -114,7 +114,7 @@ export default function Acampamento({proximo_caminho, voltar_camimho, ativado , 
       {/*interface*/}
 
       {ativado ? 
-        <Interface_acampamento position={[0,1,0]}/> 
+        <Interface_acampamento position={[0,1.5,1.5]}/> 
         
         : <></>
       }
