@@ -87,17 +87,21 @@ function App() {
 
   const travar_camera = (cena) => {
 
-    if ( cena && caminho_atual == cena) {
+    if ( !cena ) return
+
+    const cenas_ordem = Object.keys(posicao_de_cenas)
+
+    const index_atual = cenas_ordem.indexOf(cena)
+
+    if ( caminho_atual == cena ) {
+
+      controle_de_camera_ref.current.travar_camera("final")
 
       controle_de_camera_ref.current.resetar_scroll()
 
       console.log(controle_de_camera_ref.current.progresso_scroll())
 
       console.log(cena, caminho_atual)
-
-      const cenas_ordem = Object.keys(posicao_de_cenas)
-
-      const index_atual = cenas_ordem.indexOf(cena)
 
       set_cena_em_foco(cena)
 
@@ -115,6 +119,10 @@ function App() {
 
   const proximo_caminho = ( cena ) => {
 
+    destravar_camera(cena)
+
+    if ( cena == caminho_atual ) return
+
     const cenas_ordem = Object.keys(posicao_de_cenas)
 
     const index_atual = cenas_ordem.indexOf(cena)
@@ -124,8 +132,6 @@ function App() {
         set_caminho(cenas_ordem[index_atual + 1])
 
     }
-
-    destravar_camera(cena)
     
   }
 
@@ -194,7 +200,7 @@ function App() {
             < ModeloBase />
 
             <Porta 
-            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : console.log(cena_em_foco, caminho_atual)}} 
+            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : proximo_caminho("porta")}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["porta"]["posicao"]} 
@@ -203,7 +209,7 @@ function App() {
             />
 
             <Acampamento 
-            onPointerDown={() => { cena_em_foco != "acampamento" ? travar_camera("acampamento") : console.log(cena_em_foco, caminho_atual)}} 
+            onPointerDown={() => { cena_em_foco != "acampamento" ? travar_camera("acampamento") : proximo_caminho("acampamento")}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["acampamento"]["posicao"]} 
@@ -212,7 +218,7 @@ function App() {
             />
 
             <Orbe 
-            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : console.log(cena_em_foco, caminho_atual)}} 
+            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : proximo_caminho("orbe")}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["orbe"]["posicao"]} 
@@ -221,7 +227,7 @@ function App() {
             />
 
             <Mina 
-            onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : console.log(cena_em_foco, caminho_atual)}} 
+            onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : proximo_caminho("mina")}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["mina"]["posicao"]} 
@@ -230,7 +236,7 @@ function App() {
             />
 
             <BauDoTesouro 
-            onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : console.log(cena_em_foco, caminho_atual)}} 
+            onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : proximo_caminho("bau")}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["bau"]["posicao"]} 

@@ -19,26 +19,14 @@ const Controle_de_camera = forwardRef((props, ref ) => {
     progresso_scroll() {
       return progresso
     },
-    resetar_scroll
+    resetar_scroll,
+    travar_camera
 
   }))
 
-  const  ignorar_scroll = useRef(false)
+  const ignorar_scroll = useRef(false)
 
   const coordenadas_caminhos = {
-  
-      inicio : {
-        
-        posicao : new CatmullRomCurve3([
-          new Vector3(-17.2, 0, -8),
-          new Vector3(-12.6, 0, -8),
-        ]),
-        direcao : new CatmullRomCurve3([
-          new Vector3(-12, 0, -8),
-          new Vector3(-12, 0, -6),
-        ])
-  
-      },
   
       porta : {
         
@@ -198,6 +186,20 @@ const Controle_de_camera = forwardRef((props, ref ) => {
     }, 50);
 
   };
+
+  const travar_camera = ( posicao ) => {
+
+    const travar_em = posicao == "inicio" ? 0 : 1 
+
+    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(travar_em)
+      
+    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(travar_em)
+    
+    referencia_camera.current.lookAt(direcao)
+      
+    referencia_camera.current.position.copy(localizacao)
+
+  }
 
   useFrame(() => {
 
