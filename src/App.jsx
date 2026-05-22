@@ -93,11 +93,23 @@ function App() {
 
     const index_atual = cenas_ordem.indexOf(cena)
 
-    if ( caminho_atual == cena ) {
+    const cena_passada = (cenas_ordem.indexOf(caminho_atual) -1 == index_atual)
 
-      controle_de_camera_ref.current.travar_camera("final")
+    if ( caminho_atual == cena || cena_passada ) {
 
-      controle_de_camera_ref.current.resetar_scroll()
+      if ( cena_passada ) {
+
+        controle_de_camera_ref.current.travar_camera("comeco")
+
+      }else{
+
+        controle_de_camera_ref.current.travar_camera("final")
+
+        controle_de_camera_ref.current.resetar_scroll()
+
+      }
+
+      
 
       console.log(controle_de_camera_ref.current.progresso_scroll())
 
@@ -121,7 +133,7 @@ function App() {
 
     destravar_camera(cena)
 
-    if ( cena == caminho_atual ) return
+    if ( cena != cena_em_foco ) return
 
     const cenas_ordem = Object.keys(posicao_de_cenas)
 
