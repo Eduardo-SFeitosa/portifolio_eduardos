@@ -1,6 +1,6 @@
 import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { forwardRef, useImperativeHandle } from "react"
 import { CatmullRomCurve3, Vector3  } from 'three'
 
@@ -10,7 +10,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
   const camera_travada_em = useRef(null)
   const caminho_atual = props.caminho_atual
 
-  let progresso
+  var progresso
 
   useImperativeHandle( ref, () => ({
 
@@ -192,7 +192,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
     const pontos_alvo_direcao = coordenadas_caminhos[caminho_atual]["direcao"].points
 
-    if (posicao != "comeco") { resetar_scroll() }
+    resetar_scroll()
 
     const travar_em = posicao == "comeco" ? 0 : pontos_alvo_posicao.length - 1
 
@@ -215,9 +215,11 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
       const { posicao, direcao } = camera_travada_em.current
 
+      const camera = referencia_camera.current
+
       referencia_camera.current.lookAt(direcao)
 
-      referencia_camera.current.position.copy(posicao)
+      camera.position.lerp(posicao, 0.1)
 
       return
 
