@@ -192,11 +192,9 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
     const pontos_alvo_direcao = coordenadas_caminhos[caminho_atual]["direcao"].points
 
-    console.log(pontos_alvo_direcao)
+    if (posicao != "comeco") { resetar_scroll() }
 
-    if (posicao != "inicio") { resetar_scroll() }
-
-    const travar_em = posicao == "inicio" ? 0 : pontos_alvo_posicao.length - 1
+    const travar_em = posicao == "comeco" ? 0 : pontos_alvo_posicao.length - 1
 
     camera_travada_em.current = {
       "posicao" : pontos_alvo_posicao[travar_em],
