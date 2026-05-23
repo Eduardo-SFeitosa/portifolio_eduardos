@@ -97,6 +97,8 @@ function App() {
 
     if ( caminho_atual == cena || cena_passada ) {
 
+      set_cena_em_foco(cena)
+
       if ( cena_passada ) {
 
         controle_de_camera_ref.current.travar_camera("comeco")
@@ -105,17 +107,7 @@ function App() {
 
         controle_de_camera_ref.current.travar_camera("final")
 
-        controle_de_camera_ref.current.resetar_scroll()
-
       }
-
-      
-
-      console.log(controle_de_camera_ref.current.progresso_scroll())
-
-      console.log(cena, caminho_atual)
-
-      set_cena_em_foco(cena)
 
     }
 
@@ -125,7 +117,7 @@ function App() {
 
     set_cena_em_foco(null)
 
-    controle_de_camera_ref.current.resetar_scroll()
+    controle_de_camera_ref.current.destravar_camera()
 
   }
 
@@ -174,8 +166,6 @@ function App() {
       }} id="canvas">   
 
         <ScrollControls pages={cena_em_foco == null ? 4 : 0} damping={0.6} enabled={cena_em_foco == null}>
-
-
 
           <Controle_de_camera
             referencia_camera={referencia_camera}

@@ -1,26 +1,24 @@
 import { useScroll } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useLayoutEffect, useRef } from 'react'
+import { useRef, useState } from 'react'
 import { forwardRef, useImperativeHandle } from "react"
 import { CatmullRomCurve3, Vector3  } from 'three'
 
 const Controle_de_camera = forwardRef((props, ref ) => {
 
   const referencia_camera = props.referencia_camera 
-  const camera_travada = props.camera_travada 
+  const camera_travada_em = useRef(null)
   const caminho_atual = props.caminho_atual
 
   let progresso
 
   useImperativeHandle( ref, () => ({
 
-    progresso,
-
     progresso_scroll() {
       return progresso
     },
-    resetar_scroll,
-    travar_camera
+    travar_camera,
+    destravar_camera
 
   }))
 
@@ -46,6 +44,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
           new Vector3(-9, 0, 20),
           new Vector3(0, 1.6, -2),
           new Vector3(-11, 1.6, 10),
+          new Vector3(-9, 1, 10),
           new Vector3(-9, 1, 10),
         ])
   
@@ -189,23 +188,46 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   const travar_camera = ( posicao ) => {
 
-    const travar_em = posicao == "inicio" ? 0 : 1 
+    const pontos_alvo_posicao = coordenadas_caminhos[caminho_atual]["posicao"].points
 
-    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(travar_em)
-      
-    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(travar_em)
+    const pontos_alvo_direcao = coordenadas_caminhos[caminho_atual]["direcao"].points
+
+    console.log(pontos_alvo_direcao)
+
+    if (posicao != "inicio") { resetar_scroll() }
+
+    const travar_em = posicao == "inicio" ? 0 : pontos_alvo_posicao.length - 1
+
+    camera_travada_em.current = {
+      "posicao" : pontos_alvo_posicao[travar_em],
+      "direcao" : pontos_alvo_direcao[travar_em]
+    }
     
-    referencia_camera.current.lookAt(direcao)
-      
-    referencia_camera.current.position.copy(localizacao)
+  }
+
+  const destravar_camera = () => {
+
+    camera_travada_em.current = null
 
   }
 
   useFrame(() => {
 
+    if ( camera_travada_em.current ) {
+
+      const { posicao, direcao } = camera_travada_em.current
+
+      referencia_camera.current.lookAt(direcao)
+
+      referencia_camera.current.position.copy(posicao)
+
+      return
+
+    }
+
     progresso = scroll.offset
 
-    if (!referencia_camera || camera_travada || ignorar_scroll.current) return
+    if (!referencia_camera || ignorar_scroll.current) return
 
     if (!coordenadas_caminhos[caminho_atual] || progresso < 0) return    
 
@@ -214,7 +236,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
     const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso)
     
     referencia_camera.current.lookAt(direcao)
-      
+
     referencia_camera.current.position.copy(localizacao)
 
   })
