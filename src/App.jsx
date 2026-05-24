@@ -85,6 +85,16 @@ function App() {
 
   }
 
+  const teleportar = ( cena ) =>  {
+
+    set_caminho(cena)
+
+    set_cena_em_foco(cena)
+
+    console.log(cena, cena_em_foco, caminho_atual)
+
+  }
+
   const travar_camera = (cena) => {
 
     if ( !cena ) return
@@ -98,16 +108,6 @@ function App() {
     if ( caminho_atual == cena || cena_passada ) {
 
       set_cena_em_foco(cena)
-
-      if ( cena_passada ) {
-
-        controle_de_camera_ref.current.travar_camera("comeco")
-
-      }else{
-
-        controle_de_camera_ref.current.travar_camera("final")
-
-      }
 
     }
 
@@ -156,6 +156,22 @@ function App() {
     destravar_camera(cena)
 
   }
+
+  useEffect(() => {
+
+    if (!cena_em_foco) return
+    
+    if (cena_em_foco == caminho_atual){
+
+      controle_de_camera_ref.current.travar_camera("final", cena_em_foco)
+
+    }else{
+
+      controle_de_camera_ref.current.travar_camera("comeco", caminho_atual)
+
+    }
+
+  }, [cena_em_foco])
 
   return (
 
@@ -270,11 +286,11 @@ function App() {
 
       <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0,}}>
 
-            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("porta")} >porta</div>
-            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("acampamento")} >acampamento</div>
-            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("orbe")} >orbe</div>
-            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("mina")} >mina</div>
-            <div className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => proximo_caminho("bau")} >bau</div>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >porta</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >acampamento</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("orbe")} >orbe</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >mina</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("bau")} >bau</button>
 
       </div>
       

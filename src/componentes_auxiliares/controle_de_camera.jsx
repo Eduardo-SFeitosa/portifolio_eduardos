@@ -186,11 +186,11 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   };
 
-  const travar_camera = ( posicao ) => {
+  const travar_camera = ( posicao, cena ) => {
 
-    const pontos_alvo_posicao = coordenadas_caminhos[caminho_atual]["posicao"].points
+    const pontos_alvo_posicao = coordenadas_caminhos[cena]["posicao"].points
 
-    const pontos_alvo_direcao = coordenadas_caminhos[caminho_atual]["direcao"].points
+    const pontos_alvo_direcao = coordenadas_caminhos[cena]["direcao"].points
 
     resetar_scroll()
 
