@@ -17,7 +17,21 @@ export default function Interface_orbe(props) {
             
     scale={0.5}>
 
-        <h1>TESTE</h1>
+        <div className="stacks">
+
+            <div className="stack">Python</div>
+            <div className="stack">Javascript</div>
+            <div className="stack">HTML/CSS</div>
+            <div className="stack">SQL</div>
+            <div className="stack">C#</div>
+
+        </div>
+
+        <div className="conteudo-stacks">
+
+            
+
+        </div>
     
     </Html>)
 
