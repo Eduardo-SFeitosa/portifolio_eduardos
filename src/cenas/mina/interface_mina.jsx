@@ -25,11 +25,27 @@ export default function Interface_mina(props) {
             {mostrar_sites ? 
             
             <div className="conteudo-sites">
-                sites mt brabos
+                
+                <div className="bloco">
+
+                    <img className="bloco-imagem" src="/projetos/cine_ja.jpg" alt="" />
+                    
+                    <h2 className="bloco-nome">Cine Já</h2>
+
+                </div>
+
             </div>:
 
             <div className="conteudo-jogos">
-                jogos mt brabos
+
+                <div className="bloco">
+
+                    <img className="bloco-imagem" src="/projetos/diver.jpg" alt="" />
+                    
+                    <h2 className="bloco-nome">Mine diver</h2>
+
+                </div>
+
             </div>
         }
 
