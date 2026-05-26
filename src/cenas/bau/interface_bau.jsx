@@ -21,12 +21,16 @@ export default function Interface_bau (props) {
 
                     <form action="">
 
-                        <label htmlFor="nome">Nome</label>
-                        <input type="text" name="nome" />
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" />
-                        <label htmlFor="mensagem">Mensagem</label>
-                        <textarea name="mensagem" id="mensagem"></textarea>
+                        <label htmlFor="nome">Nome*</label>
+                        <input required type="text" name="nome" />
+                        <label htmlFor="email">Email*</label>
+                        <input required type="email" name="email" />
+                        <label htmlFor="mensagem">Mensagem*</label>
+                        <textarea required name="mensagem" id="mensagem"></textarea>
+                        <label htmlFor="telefone">Telefone</label>
+                        <input type="number" name="telefone" id="telefone" />
+                        <label htmlFor="whatssap">Resposta via whatssap</label>
+                        <input type="checkbox" name="whatssap" id="whatssap" />
                         <input type="submit" value="Enviar" />
 
                     </form>
@@ -35,7 +39,7 @@ export default function Interface_bau (props) {
 
                 <div className="gema">
 
-                    <h1>Baixar curriculo</h1>
+                    <a href="/curriculo/curriculo.pdf" download>Baixar curriculo</a>
 
                 </div>          
 
