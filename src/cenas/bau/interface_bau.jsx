@@ -10,50 +10,50 @@ export default function Interface_bau (props) {
         zIndexRange={[100, 0]} 
         style={{ position: "static" }} 
         scale={0.5}>
-
-            <div className="fundo-bau" >
             
-            <div className="contato-gemas">
+                <div className="contato-gemas">
 
-                <div className="gema">
+                    <div className="gema">
 
-                    <h1>Entre em contato</h1>
+                        <h1>Entre em contato</h1>
 
-                    <form action="">
+                        <div className="formulario">
 
-                        <label htmlFor="nome">Nome*</label>
-                        <input required type="text" name="nome" />
-                        <label htmlFor="email">Email*</label>
-                        <input required type="email" name="email" />
-                        <label htmlFor="mensagem">Mensagem*</label>
-                        <textarea required name="mensagem" id="mensagem"></textarea>
-                        <label htmlFor="telefone">Telefone</label>
-                        <input type="number" name="telefone" id="telefone" />
-                        <label htmlFor="whatssap">Resposta via whatssap</label>
-                        <input type="checkbox" name="whatssap" id="whatssap" />
-                        <input type="submit" value="Enviar" />
+                            <form action="">
 
-                    </form>
+                                <label htmlFor="nome">Nome*</label>
+                                <input required type="text" name="nome" />
+                                <label htmlFor="email">Email*</label>
+                                <input required type="email" name="email" />
+                                <label htmlFor="mensagem">Mensagem*</label>
+                                <textarea required name="mensagem" id="mensagem"></textarea>
+                                <label htmlFor="telefone">Telefone</label>
+                                <input type="number" name="telefone" id="telefone" />
+                                <label htmlFor="whatssap">Resposta via whatssap</label>
+                                <input type="checkbox" name="whatssap" id="whatssap" />
+                                <input type="submit" value="Enviar" />
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <div className="gema">
+
+                        <a href="/curriculo/curriculo.pdf" download>Baixar curriculo</a>
+
+                    </div>          
 
                 </div>
 
-                <div className="gema">
+                <div className="contato-moedas">
 
-                    <a href="/curriculo/curriculo.pdf" download>Baixar curriculo</a>
+                    <div className="moeda">Github</div>
+                    <div className="moeda">Itch.io</div>
+                    <div className="moeda">Linkedin</div>
 
-                </div>          
-
-            </div>
-
-            <div className="contato-moedas">
-
-                <div className="moeda">Github</div>
-                <div className="moeda">Itch.io</div>
-                <div className="moeda">Linkedin</div>
-
-            </div>
-                
-            </div>
+                </div>
 
         </Html>
         
