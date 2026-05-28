@@ -13,7 +13,29 @@ export default function Interface_acampamento(props) {
     style={{ position: "static" }} 
     scale={0.5}>
 
-        <h1>TESTE</h1>
+        <h1 className="titulo" >JORNADA</h1>
+
+        <div className="caminhos">
+
+            <div className="caminho">
+
+
+
+            </div>
+
+            <div className="caminho">
+
+
+
+            </div>
+
+            <div className="caminho">
+
+
+
+            </div>
+
+        </div>
     
     </Html>)
 
