@@ -8,14 +8,14 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   const referencia_camera = props.referencia_camera 
   const camera_travada_em = useRef(null)
+  const progresso = useRef(0)
+  const caminho_invertido = useRef(false)
   const caminho_atual = props.caminho_atual
-
-  var progresso
 
   useImperativeHandle( ref, () => ({
 
     progresso_scroll() {
-      return progresso
+      return progresso.current
     },
     travar_camera,
     destravar_camera
@@ -161,7 +161,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   const scroll = useScroll()
 
-  const resetar_scroll = () => {
+  const travar_scroll = ( posicao ) => {
 
     ignorar_scroll.current = true;
 
@@ -169,9 +169,10 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
       scroll.el.style.overflow = 'hidden';
 
-      scroll.el.scrollTop = 0;
+      scroll.el.scrollTop = 0
       
       scroll.el.dispatchEvent(new Event('scroll'));
+
     }
 
     setTimeout(() => {
@@ -184,7 +185,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
       ignorar_scroll.current = false;
     }, 50);
 
-  };
+  }
 
   const travar_camera = ( posicao, cena ) => {
 
@@ -192,7 +193,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
     const pontos_alvo_direcao = coordenadas_caminhos[cena]["direcao"].points
 
-    resetar_scroll()
+    travar_scroll(posicao)
 
     const travar_em = posicao == "comeco" ? 0 : pontos_alvo_posicao.length - 1
 
@@ -203,9 +204,11 @@ const Controle_de_camera = forwardRef((props, ref ) => {
     
   }
 
-  const destravar_camera = () => {
+  const destravar_camera = ( voltar ) => {
 
     camera_travada_em.current = null
+
+    caminho_invertido.current = voltar ? true : false
 
   }
 
@@ -225,15 +228,15 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
     }
 
-    progresso = scroll.offset
+    progresso.current = caminho_invertido.current ? 1 - scroll.offset : scroll.offset 
 
     if (!referencia_camera || ignorar_scroll.current) return
 
-    if (!coordenadas_caminhos[caminho_atual] || progresso < 0) return    
+    if (!coordenadas_caminhos[caminho_atual] || progresso.current < 0) return    
 
-    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso)
+    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso.current)
       
-    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso)
+    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso.current)
     
     referencia_camera.current.lookAt(direcao)
 

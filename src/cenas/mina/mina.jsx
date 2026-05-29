@@ -25,18 +25,6 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
 
   const { nodes, materials } = useGLTF('/models/mina.glb')
 
-  function ativar_carrinho() {
-
-    proximo_caminho("mina")
-
-  }
-
-  function desativar_carrinho() {
-
-    proximo_caminho("mina")
-
-  }
-
   return (
 
     <group {...props}>
@@ -73,7 +61,9 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
       {/* interface */}
       {ativado ?
 
-        <Interface_mina position={[7,2.7,1]}/>
+        <Interface_mina position={[7,2.7,1]}
+          proximo_caminho={proximo_caminho} 
+          voltar_caminho={voltar_caminho} />
         
         :<></>
         

@@ -91,8 +91,6 @@ function App() {
 
     set_cena_em_foco(cena)
 
-    console.log(cena, cena_em_foco, caminho_atual)
-
   }
 
   const travar_camera = (cena) => {
@@ -113,17 +111,15 @@ function App() {
 
   }
 
-  const destravar_camera = ( cena ) => {
+  const destravar_camera = ( voltar = false ) => {
 
     set_cena_em_foco(null)
 
-    controle_de_camera_ref.current.destravar_camera()
+    controle_de_camera_ref.current.destravar_camera(voltar)
 
   }
 
   const proximo_caminho = ( cena ) => {
-
-    destravar_camera(cena)
 
     if ( cena != cena_em_foco ) return
 
@@ -136,6 +132,8 @@ function App() {
         set_caminho(cenas_ordem[index_atual + 1])
 
     }
+
+    destravar_camera()
     
   }
 
@@ -145,15 +143,13 @@ function App() {
 
     const index_atual = cenas_ordem.indexOf(cena)
 
-    if ( 0 < index_atual - 1 ){
+    if ( index_atual){
 
-      set_caminho(cenas_ordem[index_atual - 1])
-
-      set_cena_em_foco(null)
+      set_caminho(cenas_ordem[index_atual])
 
     }
 
-    destravar_camera(cena)
+    destravar_camera("voltar")
 
   }
 
@@ -218,7 +214,7 @@ function App() {
             < ModeloBase />
 
             <Porta 
-            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : proximo_caminho("porta")}} 
+            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["porta"]["posicao"]} 
@@ -227,7 +223,7 @@ function App() {
             />
 
             <Acampamento 
-            onPointerDown={() => { cena_em_foco != "acampamento" ? travar_camera("acampamento") : proximo_caminho("acampamento")}} 
+            onPointerDown={() => { cena_em_foco != "acampamento" ? travar_camera("acampamento") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["acampamento"]["posicao"]} 
@@ -245,7 +241,7 @@ function App() {
             />
 
             <Mina 
-            onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : proximo_caminho("mina")}} 
+            onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["mina"]["posicao"]} 

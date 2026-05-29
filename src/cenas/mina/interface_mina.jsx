@@ -2,7 +2,7 @@ import { Html } from "@react-three/drei";
 import { useState } from "react";
 import "./interface_mina.css"
 
-export default function Interface_mina(props) {
+export default function Interface_mina({proximo_caminho, voltar_caminho , ...props}) {
 
     const [mostrar_sites, set_mostrar_sites] = useState(true)
 
@@ -24,30 +24,38 @@ export default function Interface_mina(props) {
 
             {mostrar_sites ? 
             
-            <div className="conteudo-sites">
-                
-                <div className="bloco">
-
-                    <img className="bloco-imagem" src="/projetos/cine_ja.jpg" alt="" />
+                <div className="conteudo-sites">
                     
-                    <h2 className="bloco-nome">Cine Já</h2>
+                    <div className="bloco">
+
+                        <img className="bloco-imagem" src="/projetos/cine_ja.jpg" alt="" />
+                        
+                        <h2 className="bloco-nome">Cine Já</h2>
+
+                    </div>
+
+                </div>:
+
+                <div className="conteudo-jogos">
+
+                    <div className="bloco">
+
+                        <img className="bloco-imagem" src="/projetos/diver.jpg" alt="" />
+                        
+                        <h2 className="bloco-nome">Mine diver</h2>
+
+                    </div>
 
                 </div>
+            }
 
-            </div>:
+        </div>
 
-            <div className="conteudo-jogos">
+        <div className="controle-mina">
 
-                <div className="bloco">
+            <h1 className="botao" onClick={() => voltar_caminho("mina")}>VOLTAR PARA STACKS</h1>
 
-                    <img className="bloco-imagem" src="/projetos/diver.jpg" alt="" />
-                    
-                    <h2 className="bloco-nome">Mine diver</h2>
-
-                </div>
-
-            </div>
-        }
+            <h1 className="botao" onClick={() => proximo_caminho("mina")}>AVANCAR PARA CONTATO</h1>
 
         </div>
     
