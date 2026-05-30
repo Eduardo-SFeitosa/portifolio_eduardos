@@ -11,7 +11,7 @@ import { useSpring, animated } from '@react-spring/three'
 
 import Interface_bau from './interface_bau'
 
-export default function BauDoTesouro({ proximo_camimho, voltar_caminho, ativado , ...props}) {
+export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
@@ -108,7 +108,9 @@ export default function BauDoTesouro({ proximo_camimho, voltar_caminho, ativado 
 
       {ativado ? 
       
-        <Interface_bau position={[-1.5, 1.9, .5]}/>
+        <Interface_bau position={[-1.5, 1.9, .5]}
+          proximo_caminho={proximo_caminho} 
+          voltar_caminho={voltar_caminho}/>
         
         : <></>
       }

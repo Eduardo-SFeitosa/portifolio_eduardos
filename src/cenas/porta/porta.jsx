@@ -96,7 +96,9 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
       </group>
 
       {ativado && (
-        <Interface_porta position={[0.5, 1.32, 0]}/>
+        <Interface_porta position={[0.5, 1.32, 0]}
+          proximo_caminho={proximo_caminho} 
+          voltar_caminho={voltar_caminho}/>
       )}
 
     </group>

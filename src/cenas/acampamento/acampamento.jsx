@@ -11,7 +11,7 @@ import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
 import Interface_acampamento from './interface_acampamento'
 
-export default function Acampamento({proximo_caminho, voltar_camimho, ativado , ...props}) {
+export default function Acampamento({proximo_caminho, voltar_caminho, ativado , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/acampamento.glb')
 
@@ -114,7 +114,9 @@ export default function Acampamento({proximo_caminho, voltar_camimho, ativado , 
       {/*interface*/}
 
       {ativado ? 
-        <Interface_acampamento position={[0,1.5,1.5]}/> 
+        <Interface_acampamento position={[0,1.5,1.5]}
+          proximo_caminho={proximo_caminho} 
+          voltar_caminho={voltar_caminho}/> 
         
         : <></>
       }

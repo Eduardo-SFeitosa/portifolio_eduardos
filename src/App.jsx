@@ -250,7 +250,7 @@ function App() {
             />
 
             <BauDoTesouro 
-            onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : destravar_camera("bau") }} 
+            onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : null }} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["bau"]["posicao"]} 
