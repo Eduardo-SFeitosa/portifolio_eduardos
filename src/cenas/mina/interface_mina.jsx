@@ -51,7 +51,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
         </div>
 
-        <div className="controle-mina">
+        <div className="controle-caminhos">
 
             <h1 className="botao" onClick={() => voltar_caminho("mina")}>VOLTAR PARA STACKS</h1>
 

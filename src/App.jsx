@@ -232,7 +232,7 @@ function App() {
             />
 
             <Orbe 
-            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : proximo_caminho("orbe")}} 
+            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : null}} 
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["orbe"]["posicao"]} 

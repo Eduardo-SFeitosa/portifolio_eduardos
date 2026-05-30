@@ -2,7 +2,7 @@ import { Html } from "@react-three/drei";
 import { useState } from "react";
 import "./interface_orbe.css"
 
-export default function Interface_orbe(props) {
+export default function Interface_orbe({proximo_caminho, voltar_caminho , ...props}) {
 
     const [stack, set_stack] = useState("python")
 
@@ -82,6 +82,14 @@ export default function Interface_orbe(props) {
                 <div className="tecnologia">API REST</div>
 
             </div>)}
+
+        </div>
+
+        <div className="controle-caminhos">
+
+            <h1 className="botao" onClick={() => voltar_caminho("orbe")}>VOLTAR PARA JORNADA</h1>
+
+            <h1 className="botao" onClick={() => proximo_caminho("orbe")}>AVANCAR PARA PROJETOS</h1>
 
         </div>
     

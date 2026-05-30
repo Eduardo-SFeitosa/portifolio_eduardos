@@ -1,7 +1,7 @@
 import "./interface_bau.css"
 import { Html } from "@react-three/drei"
 
-export default function Interface_bau (props) {
+export default function Interface_bau ({proximo_caminho, voltar_caminho , ...props}) {
 
     return (
 
@@ -52,6 +52,12 @@ export default function Interface_bau (props) {
                     <div className="moeda">Github</div>
                     <div className="moeda">Itch.io</div>
                     <div className="moeda">Linkedin</div>
+
+                </div>
+
+                <div className="controle-caminhos">
+
+                    <h1 className="botao" onClick={() => voltar_caminho("bau")}>VOLTAR PARA STACKS</h1>
 
                 </div>
 
