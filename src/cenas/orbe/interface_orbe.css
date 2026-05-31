@@ -18,6 +18,18 @@
 
     }
 
+    .stacks{
+
+        width: 100%;
+        height: 20%;
+        display: flex;
+        gap: 5%;
+
+        align-items: center;
+        justify-content: center;
+
+    }
+
     .controle-caminhos{
 
         width: 90%;
@@ -39,22 +51,11 @@
 
     }
 
-    .stacks{
+    .esfera-nome {
 
-        width: 100%;
-        height: 20%;
-        display: flex;
-        gap: 5%;
-
-        align-items: center;
-        justify-content: center;
-
-    }
-
-    .conteudo-stacks{
-
-        width: 100%;
-        height: 80%;
+        color: white;
+        width: fit-content;
+        height: fit-content;
 
     }
 

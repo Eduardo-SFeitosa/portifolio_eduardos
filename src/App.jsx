@@ -36,26 +36,6 @@ function App() {
 
   const controle_de_camera_ref = useRef(null)
 
-  useEffect(() => {
-
-    const handleKeyDown = (event) => {
-
-      const cam = referencia_camera.current
-
-      console.log(`rotation [${cam.rotation.x.toFixed(2)}, ${cam.rotation.y.toFixed(2)}, ${cam.rotation.z.toFixed(2)}]`);
-
-      console.log(`position [${cam.position.x.toFixed(2)}, ${cam.position.y.toFixed(2)}, ${cam.position.z.toFixed(2)}]`);
-      
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    // Cleanup: remove listener when component unmounts
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
   const posicao_de_cenas = {
 
     porta : {
