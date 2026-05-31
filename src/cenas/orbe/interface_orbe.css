@@ -10,6 +10,36 @@
     align-items: center;
     align-content: center;
 
+    .canvas-orbe {
+
+        background-color: black;
+
+        width: 80%;
+        height: 80%;
+
+    }
+
+    .controle-caminhos{
+
+        width: 90%;
+        height: 20%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15%;
+
+        .botao {
+
+            background-color: aquamarine;
+            padding: 1%;
+            border: 1px solid black;
+            border-radius: 15px;
+
+        }
+
+    }
+
     .stacks{
 
         width: 100%;

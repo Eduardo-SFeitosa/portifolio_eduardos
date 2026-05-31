@@ -1,6 +1,8 @@
 import { Html } from "@react-three/drei";
 import { useState } from "react";
+import { Canvas } from "@react-three/fiber"
 import "./interface_orbe.css"
+import Esfera_stack from "./esfera_stack";
 
 export default function Interface_orbe({proximo_caminho, voltar_caminho , ...props}) {
 
@@ -30,60 +32,64 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
         </div>
 
-        <div className="conteudo-stacks">
+        <Canvas className="canvas-orbe" camera={{ position: [0, 0, 5] }}>
+
+            <ambientLight intensity={1} />
 
             {stack == "python" ?  
-            (<div className="conteudo-stack">
+            (<group className="conteudo-stack">
                 
-                <div className="tecnologia">DJANGO e FASTAPI</div>
-                <div className="tecnologia">PANDAS e NUMPY e MATPLOTLIB</div>
-                <div className="tecnologia">REQUESTS / BEAULTIFULSOUP / SELENIUM</div>
+                <Esfera_stack cor={"blue"} nome={"DJANGO e FASTAPI"}/>
+                <Esfera_stack cor={"blue"} nome={"PANDAS e NUMPY e MATPLOTLIB"}/>
+                <Esfera_stack cor={"blue"} nome={"REQUESTS / BEAULTIFULSOUP / SELENIUM"}/>
 
-            </div>)
+            </group>)
             : stack == "javascript" ? 
-                (<>
+                (<group>
 
-                    <div className="tecnologia">THREE.JS</div>
-                    <div className="tecnologia">REACT</div>
-                    <div className="tecnologia">ROUTER</div>
-                    <div className="tecnologia">ANGULAR</div>
-                    <div className="tecnologia">NODE.JS</div>
-                    <div className="tecnologia">TYPESCRIPT</div>
-                    <div className="tecnologia">ANGULAR</div>
-                    <div className="tecnologia">VITE</div>
+                    <Esfera_stack cor={"blue"} nome={"THREE.JS"}/>
+                    <Esfera_stack cor={"blue"} nome={"REACT"}/>
+                    <Esfera_stack cor={"blue"} nome={"ROUTER"}/>
+                    <Esfera_stack cor={"blue"} nome={"ANGULAR"}/>
+                    <Esfera_stack cor={"blue"} nome={"NODE.JS"}/>
+                    <Esfera_stack cor={"blue"} nome={"TYPESCRIPT"}/>
+                    <Esfera_stack cor={"blue"} nome={"ANGULAR"}/>
+                    <Esfera_stack cor={"blue"} nome={"VITE"}/>
                     
-                </>)
+                </group>)
 
             : stack == "html/css" ? 
-            (<div className="conteudo-stack">
+            (<group className="conteudo-stack">
                 
-                <div className="tecnologia">FORMS</div>
-                <div className="tecnologia">ANIMACOES</div>
-                <div className="tecnologia">SASS</div>
-                <div className="tecnologia">TAILWIND</div>
+                <Esfera_stack cor={"blue"} nome={"FORMS"}/>
+                <Esfera_stack cor={"blue"} nome={"ANIMACOES"}/>
+                <Esfera_stack cor={"blue"} nome={"SASS"}/>
+                <Esfera_stack cor={"blue"} nome={"TAILWIND"}/>
 
-            </div>)
+            </group>)
 
             : stack == "sql" ? 
-            (<div className="conteudo-stack">
+            (<group className="conteudo-stack">
                 
-                <div className="tecnologia">SQLITE</div>
-                <div className="tecnologia">MODELAGEM</div>
-                <div className="tecnologia">JOINS</div>
-                <div className="tecnologia">PROCEDURES</div>
-                <div className="tecnologia">CONSULTAS OTIMIZADAS</div>
+                <Esfera_stack cor={"blue"} nome={"SQLITE"}/>
+                <Esfera_stack cor={"blue"} nome={"MODELAGEM"}/>
+                <Esfera_stack cor={"blue"} nome={"JOINS"}/>
+                <Esfera_stack cor={"blue"} nome={"PROCEDURES"}/>
+                <Esfera_stack cor={"blue"} nome={"CONSULTAS OTIMIZADAS"}/>
 
-            </div>)
+            </group>)
 
-            :(<div className="conteudo-stack">
+            :(<group className="conteudo-stack">
                 
-                <div className="tecnologia">ASP.NET</div>
-                <div className="tecnologia">WINDOWS FORMS</div>
-                <div className="tecnologia">API REST</div>
+                <Esfera_stack cor={"blue"} nome={"ASP.NET"}/>
+                <Esfera_stack cor={"blue"} nome={"WINDOWS FORMS"}/>
+                <Esfera_stack cor={"blue"} nome={"API REST"}/>
 
-            </div>)}
+            </group>)}
 
-        </div>
+        </Canvas>
+
+
 
         <div className="controle-caminhos">
 
