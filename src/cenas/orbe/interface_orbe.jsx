@@ -2,7 +2,6 @@ import { Html } from "@react-three/drei";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber"
 import { Physics, RigidBody } from "@react-three/rapier";
-import { CameraControls } from "@react-three/drei";
 import "./interface_orbe.css"
 import Esfera_stack from "./esfera_stack";
 import { randFloat } from "three/src/math/MathUtils.js";

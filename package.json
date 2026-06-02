@@ -15,6 +15,7 @@
     "@react-three/fiber": "^9.6.0",
     "@react-three/rapier": "^2.2.0",
     "gltfpack": "^1.0.0",
+    "rapier": "^1.0.5",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "three": "^0.183.2",
