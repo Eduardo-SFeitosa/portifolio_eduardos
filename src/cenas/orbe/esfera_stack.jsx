@@ -11,13 +11,13 @@ export default function Esfera_stack({ nome, cor, posicao }) {
         <RigidBody
             position={posicao}
             colliders="ball"
-            restitution={1}        // quique 100% (não perde energia)
-            friction={0}           // sem atrito
-            linearDamping={0}      // sem desaceleração linear
-            angularDamping={0}     // sem desaceleração rotacional
+            restitution={1}        
+            friction={0}           
+            linearDamping={0}      
+            angularDamping={0}    
             canSleep={false}
             linearVelocity={[
-                (Math.random() - 0.5) * 10,  // velocidade aleatória inicial
+                (Math.random() - 0.5) * 10,  // velocidade inicial
                 (Math.random() - 0.5) * 10,
                 0,
             ]}
