@@ -19,7 +19,7 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
 
           <h1>TESTE</h1>
 
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur unde ab porro placeat praesentium tempora nemo nostrum optio, veniam culpa officiis? Totam provident dolores deserunt modi qui, fugiat dolore earum a in quaerat, ad sint, hic dignissimos sed quisquam eum vel tempora architecto odio voluptatem tenetur! Sint, quidem! Iste, consectetur!</p>
+          <p>Desenvolvedor full-stack com foco em aplicacoes interativas, inovadoras e acessiveis</p>
 
           <br />
 

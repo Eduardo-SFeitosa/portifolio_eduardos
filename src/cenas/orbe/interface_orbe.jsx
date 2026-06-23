@@ -26,6 +26,8 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
     style={{ position: "block" }}    
     scale={0.5}>
 
+        <h1>STACKS</h1>
+
         <div className="stacks">
 
             <div className="stack" onClick={() => set_stack("python")} >Python</div>
