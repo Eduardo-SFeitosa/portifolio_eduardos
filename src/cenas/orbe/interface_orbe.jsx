@@ -56,28 +56,28 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
                 
                     {/* teto */}
                     <RigidBody type="fixed" friction={0} position={[0, 7, 0]}>
-                        <mesh visible={false}>
+                        <mesh >
                             <boxGeometry args={[38, .1, 9]} />
                         </mesh>
                     </RigidBody>
 
                     {/* chao */}
                     <RigidBody type="fixed" friction={0} position={[0, -7, 0]}>
-                        <mesh visible={false}>
+                        <mesh >
                             <boxGeometry args={[38, .1, 9]} />
                         </mesh>
                     </RigidBody>
 
                     {/* parede esquerda */}
                     <RigidBody type="fixed" friction={0} position={[19, 0, 0]}>
-                        <mesh visible={false}>
+                        <mesh >
                             <boxGeometry args={[.1, 15, 9]} />
                         </mesh>
                     </RigidBody>
 
                     {/* parede direita */}
                     <RigidBody type="fixed" friction={0} position={[-19, 0, 0]}>
-                        <mesh visible={false}>
+                        <mesh >
                             <boxGeometry args={[.1, 15, 9]} />
                         </mesh>
                     </RigidBody>

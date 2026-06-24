@@ -1,10 +1,18 @@
 import { useState } from "react"
-import { Html } from "@react-three/drei"
+import { Html, useTexture } from "@react-three/drei"
 import { RigidBody } from "@react-three/rapier";
+import * as THREE from "three"
 
 export default function Esfera_stack({ nome, cor, posicao }) {
 
     const [em_foco, set_em_foco] = useState(false)
+
+    const textura = useTexture("/stacks/react.png")
+
+    textura.wrapS = THREE.RepeatWrapping
+    textura.wrapT = THREE.ClampToEdgeWrapping
+
+    textura.repeat.set(2, 1)
 
     return (
 
@@ -27,7 +35,8 @@ export default function Esfera_stack({ nome, cor, posicao }) {
                 onPointerDown={() => set_em_foco(!em_foco)}
             >
                 <sphereGeometry args={[2.5, 32, 32]} />
-                <meshStandardMaterial color={cor} />
+                <meshStandardMaterial color={cor} 
+                map={textura}/>
             </mesh>
 
             {em_foco && (
