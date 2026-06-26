@@ -46,6 +46,14 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
                     </div>
 
+                    <div className="bloco">
+
+                        <img className="bloco-imagem" src="/projetos/diver.jpg" alt="" />
+                        
+                        <h2 className="bloco-nome">Shrimp Shack</h2>
+
+                    </div>
+
                 </div>
             }
 

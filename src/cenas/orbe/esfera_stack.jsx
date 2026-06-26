@@ -25,7 +25,7 @@ export default function Esfera_stack({ nome, cor, posicao }) {
             angularDamping={0}    
             canSleep={false}
             linearVelocity={[
-                (Math.random() - 0.5) * 10,  // velocidade inicial
+                (Math.random() - 0.5) * 10,  
                 (Math.random() - 0.5) * 10,
                 0,
             ]}
