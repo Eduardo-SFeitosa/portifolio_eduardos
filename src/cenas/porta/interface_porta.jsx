@@ -2,6 +2,7 @@ import "./interface_porta.css"
 import { Html } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import Texto_3d from "../../componentes_auxiliares/texto_3d"
+import { Text3D } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 import { useState, useEffect } from "react"
 
@@ -12,18 +13,18 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
   const script = `
   <h1>TESTE</h1>
 
-          <p>Desenvolvedor full-stack com foco em aplicacoes interativas, inovadoras e acessiveis</p>
+    <p>Desenvolvedor full-stack com foco em aplicacoes interativas, inovadoras e acessiveis</p>
 
-          <br />
+    <br />
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, esse. Ipsum aspernatur facere sunt dolore laborum molestiae cum nemo officia nulla corporis ab officiis possimus, rem sint tempore tenetur? Alias!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, esse. Ipsum aspernatur facere sunt dolore laborum molestiae cum nemo officia nulla corporis ab officiis possimus, rem sint tempore tenetur? Alias!</p>
 
-  `    
+  `
 
   useEffect(() => {
       const interval = setInterval(() => {
         setTexto(prev => prev + script[prev.length])
-      }, 100)
+      }, 50)
 
       return () => clearInterval(interval)
     }, [])
@@ -38,10 +39,12 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
 
         <ambientLight intensity={1} />
 
-        <Texto_3d
+        <Text3D
         size={10}
-        texto={texto}
-        />
+        font="font3d/gt.json"
+        >
+          {texto}
+        </Text3D>
 
       </Canvas>
 
