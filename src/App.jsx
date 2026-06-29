@@ -185,11 +185,21 @@ function App() {
           
           */}
 
-          < directionalLight position={[2, 5, 3]} intensity={1.2} />
+            < directionalLight position={[2, 5, 3]} intensity={1.2} />
 
-            < pointLight position={[0, 1, 0]} intensity={0.5} color={"#4466cc"} />
+            < pointLight position={[0, 10, 0]} intensity={700} color={"#2e4daa"} />
 
-            < ambientLight />
+            < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
+
+            < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+
+            < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+
+            < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
+
+            < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
+
+            < ambientLight intensity={0.3} />
 
             < ModeloBase />
 

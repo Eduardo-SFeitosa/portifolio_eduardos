@@ -58,6 +58,8 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
       
       </group>
 
+      < pointLight position={[0 ,.8, 1.3]} intensity={15} color={"#7c7c7c"} />
+
       {/* interface */}
       {ativado ?
 

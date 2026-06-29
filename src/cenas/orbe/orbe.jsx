@@ -78,6 +78,8 @@ export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...pro
 
       </mesh>
 
+      < pointLight position={[0, 1, 0]} intensity={10} color={"#6f0079"} />
+
       {ativado ? 
 
         <Interface_orbe position={[0,2.3,2.4]}

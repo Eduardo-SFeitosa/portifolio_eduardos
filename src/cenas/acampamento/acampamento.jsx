@@ -111,6 +111,8 @@ export default function Acampamento({proximo_caminho, voltar_caminho, ativado , 
 
       </group>
 
+      < pointLight position={[1, 1.5, -1]} intensity={15} color={"#be0000"} />
+
       {/*interface*/}
 
       {ativado ? 

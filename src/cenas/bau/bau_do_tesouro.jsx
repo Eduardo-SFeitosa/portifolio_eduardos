@@ -106,6 +106,8 @@ export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado 
 
       </animated.group>
 
+      < pointLight position={[0,.5,0]} intensity={15} color={"#be9200"} />
+
       {ativado ? 
       
         <Interface_bau position={[-1.5, 1.9, .5]}
