@@ -15,6 +15,8 @@ export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado 
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
+  const [interface_ativada, set_interface] = useState(false)
+
   const tampa = useRef(null)
 
   const abrir = () => {
@@ -47,8 +49,19 @@ export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado 
 
     bauPosicao : ativado ? [.1, .2, .3] : [0, 0, 0],
       
-    config: { tension: 120, friction: 14 }
+    config: { tension: 200, friction: 20 },
 
+    onStart: () => {
+      if (!ativado) {
+        set_interface(false)
+      }
+    },
+
+    onRest: () => {
+      if (ativado) {
+        set_interface(true)
+      }
+    }
   })
 
   return (
@@ -108,7 +121,7 @@ export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado 
 
       < pointLight position={[0,.5,0]} intensity={15} color={"#be9200"} />
 
-      {ativado ? 
+      {interface_ativada ? 
       
         <Interface_bau position={[-1.5, 1.9, .5]}
           proximo_caminho={proximo_caminho} 

@@ -27,9 +27,8 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
           <br />
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, esse. Ipsum aspernatur facere sunt dolore laborum molestiae cum nemo officia nulla corporis ab officiis possimus, rem sint tempore tenetur? Alias!</p>
-
     
-          <div className="curriculo" onClick={() => console.log("aaa")} >
+          <div className="curriculo">
 
             <a href="/curriculo/curriculo.pdf" download>Baixar curriculo</a>
 
@@ -37,7 +36,7 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
 
           <div className="controle-caminhos">
 
-              <h1 className="botao" onClick={() => proximo_caminho("porta")}>AVANCAR PARA JORNADA</h1>
+              <h1 className="botao" onClick={() => {proximo_caminho("porta") }}>AVANCAR PARA JORNADA</h1>
 
           </div>
 

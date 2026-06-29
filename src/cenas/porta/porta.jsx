@@ -19,6 +19,8 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
 
   const { nodes, materials } = useGLTF('/models/porta_2.glb')
 
+  const [interface_ativada, set_interface] = useState(false)
+
   const porta = useRef(null) 
 
   //animação da porta
@@ -30,8 +32,20 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
 
       position: ativado ? [ .45, 0, -.05 ] : [ .5, 0,0 ],
       
-      config: { tension: 40, friction: 20 }
-  
+      config: { tension: 80, friction: 20 },
+
+      onStart: () => {
+        if (!ativado) {
+          set_interface(false)
+        }
+      },
+
+      onRest: () => {
+        if (ativado) {
+          set_interface(true)
+        }
+      }
+    
     }
 
   )
@@ -74,7 +88,7 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
 
       </group>
 
-      {ativado && (
+      {interface_ativada && (
           <Interface_porta position={[0.5, 1.32, 0]}
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho}/>

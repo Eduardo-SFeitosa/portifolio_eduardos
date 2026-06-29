@@ -13,11 +13,25 @@ import Interface_mina from './interface_mina'
 
 export default function Mina({proximo_caminho, voltar_caminho , ativado , ...props}) {
 
+  const [interface_ativada, set_interface] = useState(false)
+
   const { posicao_carrinho } = useSpring({
 
-    posicao_carrinho : ativado ? [-0.026, 0.059, 0] : [-0.026, 0.059, 3],
+    posicao_carrinho : ativado ? [-0.026, 0.15, 0] : [-0.026, 0.15, 3],
 
-    config: { tension: 40, friction: 20 }
+    config: { tension: 50, friction: 10 },
+
+    onStart: () => {
+      if (!ativado) {
+        set_interface(false)
+      }
+    },
+
+    onRest: () => {
+      if (ativado) {
+        set_interface(true)
+      }
+    }
     
   })
 
@@ -61,7 +75,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
       < pointLight position={[0 ,.8, 1.3]} intensity={15} color={"#7c7c7c"} />
 
       {/* interface */}
-      {ativado ?
+      {interface_ativada ?
 
         <Interface_mina position={[7,2.7,1]}
           proximo_caminho={proximo_caminho} 
