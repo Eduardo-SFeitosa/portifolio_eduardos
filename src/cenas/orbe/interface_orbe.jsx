@@ -1,10 +1,17 @@
-import { Html } from "@react-three/drei";
+import { Html, useGLTF } from "@react-three/drei";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber"
 import { Physics, RigidBody } from "@react-three/rapier";
-import "./interface_orbe.css"
-import Esfera_stack from "./esfera_stack";
 import { randFloat } from "three/src/math/MathUtils.js";
+
+import { Modelo_css } from "./modelos_orbe/Css.jsx";
+import { Modelo_html } from "./modelos_orbe/Html.jsx";
+import { Modelo_javascript } from "./modelos_orbe/Javascript.jsx";
+import { Modelo_python } from "./modelos_orbe/Python.jsx";
+import { Modelo_csharp } from "./modelos_orbe/Csharp.jsx";
+
+import Estrela_stack from "./estrela_stack";
+import "./interface_orbe.css"
 
 export default function Interface_orbe({proximo_caminho, voltar_caminho , ...props}) {
 
@@ -30,15 +37,11 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
         <div className="stacks">
 
-            <div className="stack" onClick={() => set_stack("python")} >Python</div>
-            <div className="stack" onClick={() => set_stack("javascript")} >Javascript</div>
-            <div className="stack" onClick={() => set_stack("html/css")} >HTML/CSS</div>
-            <div className="stack" onClick={() => set_stack("sql")} >SQL</div>
-            <div className="stack" onClick={() => set_stack("c#")} >C#</div>
+            
 
         </div>
 
-        <Canvas className="canvas-orbe" camera={{ position: [0, 0, -13] }}>
+        <Canvas className="canvas-orbe" camera={{ position: [0, 0, -15] }}>
 
             <ambientLight intensity={.2} />
 
@@ -49,107 +52,71 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
                 decay={2}
             />
 
-            <Physics gravity={[0,0,0]}>
-
-                {/* paredes */}
+                {/* SELECAO */}
                 <group>
-                
-                    {/* teto */}
-                    <RigidBody type="fixed" friction={0} position={[0, 7, 0]}>
-                        <mesh >
-                            <boxGeometry args={[38, .1, 9]} />
-                        </mesh>
-                    </RigidBody>
 
-                    {/* chao */}
-                    <RigidBody type="fixed" friction={0} position={[0, -7, 0]}>
-                        <mesh >
-                            <boxGeometry args={[38, .1, 9]} />
-                        </mesh>
-                    </RigidBody>
-
-                    {/* parede esquerda */}
-                    <RigidBody type="fixed" friction={0} position={[19, 0, 0]}>
-                        <mesh >
-                            <boxGeometry args={[.1, 15, 9]} />
-                        </mesh>
-                    </RigidBody>
-
-                    {/* parede direita */}
-                    <RigidBody type="fixed" friction={0} position={[-19, 0, 0]}>
-                        <mesh >
-                            <boxGeometry args={[.1, 15, 9]} />
-                        </mesh>
-                    </RigidBody>
-
-                    {/* parede frente */}
-                    <RigidBody type="fixed" friction={0} position={[0, 0, 5]}>
-                        <mesh visible={false} >
-                            <boxGeometry args={[38, 15, .1]} />
-                        </mesh>
-                    </RigidBody>
-
-                    {/* parede tras */}
-                    <RigidBody type="fixed" friction={0} position={[0, 0, -5]}>
-                        <mesh visible={false} >
-                            <boxGeometry args={[38, 15, .1]} />
-                        </mesh>
-                    </RigidBody>
+                    <Modelo_css onPointerDown={() => set_stack("html/css")}/>
+                    <Modelo_html onPointerDown={() => set_stack("html/css")}/>
+                    <Modelo_javascript onPointerDown={() => set_stack("javascript")}/>
+                    <Modelo_python onPointerDown={() => set_stack("python")}/>
+                    <Modelo_csharp onPointerDown={() => set_stack("csharp")}/>
 
                 </group>
+
+                 {/* CONSTELACOES */}
 
                 {stack == "python" ?  
                 (<group className="conteudo-stack">
                     
-                    <Esfera_stack cor={"blue"} nome={"DJANGO e FASTAPI"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"PANDAS e NUMPY e MATPLOTLIB"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"REQUESTS / BEAULTIFULSOUP / SELENIUM"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"DJANGO e FASTAPI"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"PANDAS e NUMPY e MATPLOTLIB"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"REQUESTS / BEAULTIFULSOUP / SELENIUM"} posicao={posicao_aleatoria(17, 5 , 0)}/>
 
                 </group>)
                 : stack == "javascript" ? 
                 (<group>
 
-                        <Esfera_stack cor={"blue"} nome={"THREE.JS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"REACT"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"ROUTER"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"ANGULAR"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"NODE.JS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"TYPESCRIPT"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"ANGULAR"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        <Esfera_stack cor={"blue"} nome={"VITE"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"THREE.JS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"REACT"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"ROUTER"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"ANGULAR"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"NODE.JS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"TYPESCRIPT"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"ANGULAR"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"VITE"} posicao={posicao_aleatoria(17, 5 , 0)}/>
                         
                 </group>)
 
                 : stack == "html/css" ? 
                 (<group className="conteudo-stack">
                     
-                    <Esfera_stack cor={"blue"} nome={"FORMS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"ANIMACOES"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"SASS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"TAILWIND"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"FORMS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"ANIMACOES"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"SASS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"TAILWIND"} posicao={posicao_aleatoria(17, 5 , 0)}/>
 
                 </group>)
 
                 : stack == "sql" ? 
                 (<group className="conteudo-stack">
                     
-                    <Esfera_stack cor={"blue"} nome={"SQLITE"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"MODELAGEM"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"JOINS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"PROCEDURES"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"CONSULTAS OTIMIZADAS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"SQLITE"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"MODELAGEM"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"JOINS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"PROCEDURES"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"CONSULTAS OTIMIZADAS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
 
                 </group>)
 
                 :(<group className="conteudo-stack">
                     
-                    <Esfera_stack cor={"blue"} nome={"ASP.NET"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"WINDOWS FORMS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Esfera_stack cor={"blue"} nome={"API REST"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"ASP.NET"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"WINDOWS FORMS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                    <Estrela_stack cor={"blue"} nome={"API REST"} posicao={posicao_aleatoria(17, 5 , 0)}/>
 
                 </group>)}
 
-            </Physics>
+
 
         </Canvas>
 
@@ -164,5 +131,4 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
         </div>
     
     </Html>)
-
 }

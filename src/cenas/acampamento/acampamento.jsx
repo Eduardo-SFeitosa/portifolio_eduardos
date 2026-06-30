@@ -31,7 +31,6 @@ export default function Acampamento({proximo_caminho, voltar_caminho, ativado , 
 
   }
 
-
   return (
     
     <group {...props}>
@@ -48,8 +47,6 @@ export default function Acampamento({proximo_caminho, voltar_caminho, ativado , 
         <mesh geometry={nodes.Bench2.geometry} material={materials['props.006']} position={[1.467, 0.112, -0.43]} rotation={[Math.PI, -0.833, Math.PI]} />
 
         <mesh geometry={nodes.Bucket.geometry} material={materials['props.006']} position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]} />
-
-
 
         <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={fogueira_posicao} rotation={[Math.PI, -1.566, Math.PI]} />
 
