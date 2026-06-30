@@ -10,7 +10,7 @@ export function Modelo_javascript(props) {
   const { nodes, materials } = useGLTF('/modelos_cenas/orbe/javascript.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[0.139, 0, 0]}>
+      <group position={[0, 0, 0]}>
         <mesh geometry={nodes.Mesh001.geometry} material={materials.yellow} />
         <mesh geometry={nodes.Mesh001_1.geometry} material={materials.black} />
       </group>

@@ -10,7 +10,7 @@ export function Modelo_python(props) {
   const { nodes, materials } = useGLTF('/modelos_cenas/orbe/python.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[0, -0.111, 0]} rotation={[0, 0, Math.PI]}>
+      <group position={[0, 0, 0]} rotation={[0, 0, Math.PI]}>
         <mesh geometry={nodes['Python-Darksvg003'].geometry} material={materials['blue.002']} />
         <mesh geometry={nodes['Python-Darksvg003_1'].geometry} material={materials['yellow.001']} />
       </group>

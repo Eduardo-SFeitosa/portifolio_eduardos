@@ -10,7 +10,7 @@ export function Modelo_csharp(props) {
   const { nodes, materials } = useGLTF('/modelos_cenas/orbe/csharp.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes['C#'].geometry} material={materials.material} position={[-0.129, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={0.002} />
+      <mesh geometry={nodes['C#'].geometry} material={materials.material} position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={0.002} />
     </group>
   )
 }

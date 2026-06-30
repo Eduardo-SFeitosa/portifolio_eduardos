@@ -2,7 +2,8 @@ import { Html, useGLTF } from "@react-three/drei";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber"
 import { Physics, RigidBody } from "@react-three/rapier";
-import { randFloat } from "three/src/math/MathUtils.js";
+import { Line } from "@react-three/drei"
+import { OrbitControls } from "@react-three/drei";
 
 import { Modelo_css } from "./modelos_orbe/Css.jsx";
 import { Modelo_html } from "./modelos_orbe/Html.jsx";
@@ -17,11 +18,100 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
     const [stack, set_stack] = useState("python")
 
-    const posicao_aleatoria = (max_x, max_y, max_z) => {
+    const constelacoes = {
 
-        return [randFloat(-max_x, max_x), randFloat(-max_y, max_y), randFloat(-max_z, max_z)]
+        python: {
+            cor: "#4FC3F7",
+
+            estrelas: [
+                { nome: "DJANGO", posicao: [-0.35, 0.05, 0] },
+                { nome: "FASTAPI", posicao: [-0.15, 0.20, 0] },
+                { nome: "PANDAS", posicao: [0.05, 0.15, 0] },
+                { nome: "NUMPY", posicao: [0.20, 0.00, 0] },
+                { nome: "MATPLOTLIB", posicao: [0.05, -0.15, 0] },
+                { nome: "REQUESTS", posicao: [-0.10, -0.20, 0] },
+                { nome: "SELENIUM", posicao: [-0.30, -0.10, 0] },
+            ],
+
+            linhas: [
+                [-0.35, 0.05, 0],
+                [-0.15, 0.20, 0],
+                [0.05, 0.15, 0],
+                [0.20, 0.00, 0],
+                [0.05, -0.15, 0],
+                [-0.10, -0.20, 0],
+                [-0.30, -0.10, 0],
+                [-0.35, 0.05, 0],
+            ]
+        },
+
+        javascript: {
+            cor: "#FFD54F",
+
+            estrelas: [
+                { nome: "REACT", posicao: [0, 0.25, 0] },
+                { nome: "THREE.JS", posicao: [0.25, 0.10, 0] },
+                { nome: "VITE", posicao: [0.35, -0.15, 0] },
+                { nome: "NODE.JS", posicao: [0.05, -0.25, 0] },
+                { nome: "TYPESCRIPT", posicao: [-0.25, -0.15, 0] },
+                { nome: "ANGULAR", posicao: [-0.35, 0.05, 0] },
+                { nome: "ROUTER", posicao: [-0.15, 0.20, 0] },
+            ],
+
+            linhas: [
+                [0, 0.25, 0],
+                [0.25, 0.10, 0],
+                [0.35, -0.15, 0],
+                [0.05, -0.25, 0],
+                [-0.25, -0.15, 0],
+                [-0.35, 0.05, 0],
+                [-0.15, 0.20, 0],
+                [0, 0.25, 0],
+            ]
+        },
+
+        html_css: {
+            cor: "#FF8A65",
+
+            estrelas: [
+                { nome: "HTML", posicao: [-0.25, 0.15, 0] },
+                { nome: "CSS", posicao: [0.25, 0.15, 0] },
+                { nome: "SASS", posicao: [0.15, -0.05, 0] },
+                { nome: "TAILWIND", posicao: [-0.15, -0.05, 0] },
+                { nome: "ANIMACOES", posicao: [0, -0.25, 0] },
+                { nome: "FORMS", posicao: [0, 0.30, 0] },
+            ],
+
+            linhas: [
+                [0, 0.30, 0],
+                [0.25, 0.15, 0],
+                [0.15, -0.05, 0],
+                [0, -0.25, 0],
+                [-0.15, -0.05, 0],
+                [-0.25, 0.15, 0],
+                [0, 0.30, 0],
+            ]
+        },
+
+        csharp: {
+            cor: "#BA68C8",
+
+            estrelas: [
+                { nome: "ASP.NET", posicao: [0, 0.25, 0] },
+                { nome: "API REST", posicao: [0.25, 0.05, 0] },
+                { nome: "WINDOWS FORMS", posicao: [0, -0.25, 0] },
+            ],
+
+            linhas: [
+                [0, 0.25, 0],
+                [0.25, 0.05, 0],
+                [0, -0.25, 0],
+            ]
+        }
 
     }
+
+    const atual = constelacoes[stack]
 
     return (
     
@@ -35,86 +125,54 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
         <h1>STACKS</h1>
 
-        <div className="stacks">
+        <Canvas className="canvas-orbe" camera={{ position: [0, 0, .5] }}>
 
-            
-
-        </div>
-
-        <Canvas className="canvas-orbe" camera={{ position: [0, 0, -15] }}>
-
-            <ambientLight intensity={.2} />
+            <ambientLight intensity={1} />
 
             <pointLight 
-                position={[0, 0, -10]} 
-                intensity={Math.PI * 11} 
+                position={[0, 0, 2]} 
+                intensity={4} 
                 color="#ffffff" 
-                decay={2}
             />
 
                 {/* SELECAO */}
                 <group>
 
-                    <Modelo_css onPointerDown={() => set_stack("html/css")}/>
-                    <Modelo_html onPointerDown={() => set_stack("html/css")}/>
-                    <Modelo_javascript onPointerDown={() => set_stack("javascript")}/>
-                    <Modelo_python onPointerDown={() => set_stack("python")}/>
-                    <Modelo_csharp onPointerDown={() => set_stack("csharp")}/>
+                    <Modelo_css position={[ .2, .25 ,0]} onPointerDown={() => set_stack("html_css")}/>
+                    <Modelo_html position={[ .2, .15 ,0]} onPointerDown={() => set_stack("html_css")}/>
+                    <Modelo_javascript position={[ -.2, .2 ,0]} onPointerDown={() => {set_stack("javascript")}}/>
+                    <Modelo_python position={[ -.4, .2 ,0]} onPointerDown={() => {set_stack("python")}}/>
+                    <Modelo_csharp position={[ .6, .2 ,0]} onPointerDown={() => {set_stack("csharp")}}/>
 
                 </group>
 
-                 {/* CONSTELACOES */}
+                <group>
+                    {/* CONSTELACOES */}
 
-                {stack == "python" ?  
-                (<group className="conteudo-stack">
+                    {atual.estrelas.map((estrela) => (
+                        <Estrela_stack
+                            key={estrela.nome}
+                            nome={estrela.nome}
+                            posicao={estrela.posicao}
+                            cor={atual.cor}
+                        />
+                    ))}
                     
-                    <Estrela_stack cor={"blue"} nome={"DJANGO e FASTAPI"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"PANDAS e NUMPY e MATPLOTLIB"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"REQUESTS / BEAULTIFULSOUP / SELENIUM"} posicao={posicao_aleatoria(17, 5 , 0)}/>
+                </group>
 
-                </group>)
-                : stack == "javascript" ? 
-                (<group>
+                <Line
+                    points={atual.linhas}
+                    color={atual.cor}
+                    lineWidth={8}
+                    transparent
+                    opacity={0.15}
+                />
 
-                    <Estrela_stack cor={"blue"} nome={"THREE.JS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"REACT"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"ROUTER"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"ANGULAR"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"NODE.JS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"TYPESCRIPT"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"ANGULAR"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"VITE"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                        
-                </group>)
-
-                : stack == "html/css" ? 
-                (<group className="conteudo-stack">
-                    
-                    <Estrela_stack cor={"blue"} nome={"FORMS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"ANIMACOES"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"SASS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"TAILWIND"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-
-                </group>)
-
-                : stack == "sql" ? 
-                (<group className="conteudo-stack">
-                    
-                    <Estrela_stack cor={"blue"} nome={"SQLITE"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"MODELAGEM"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"JOINS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"PROCEDURES"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"CONSULTAS OTIMIZADAS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-
-                </group>)
-
-                :(<group className="conteudo-stack">
-                    
-                    <Estrela_stack cor={"blue"} nome={"ASP.NET"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"WINDOWS FORMS"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-                    <Estrela_stack cor={"blue"} nome={"API REST"} posicao={posicao_aleatoria(17, 5 , 0)}/>
-
-                </group>)}
+                <Line
+                    points={atual.linhas}
+                    color={atual.cor}
+                    lineWidth={2}
+                />
 
 
 

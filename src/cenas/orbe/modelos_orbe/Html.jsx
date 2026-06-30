@@ -10,7 +10,7 @@ export function Modelo_html(props) {
   const { nodes, materials } = useGLTF('/modelos_cenas/orbe/html.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[0.164, -0.089, -0.006]}>
+      <group position={[0, 0, 0]}>
         <mesh geometry={nodes.HTMLsvg001_1.geometry} material={materials.orange} />
         <mesh geometry={nodes.HTMLsvg001_2.geometry} material={materials['white.002']} />
         <mesh geometry={nodes.HTMLsvg001_3.geometry} material={materials['gray.001']} />
