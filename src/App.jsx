@@ -83,7 +83,7 @@ function App() {
 
     const cena_passada = (cenas_ordem.indexOf(caminho_atual) -1 == index_atual)
 
-    if ( caminho_atual == cena || cena_passada ) {
+    if ( caminho_atual == cena && controle_de_camera_ref.current.progresso_scroll() > .5 || cena_passada ) {
 
       set_cena_em_foco(cena)
 

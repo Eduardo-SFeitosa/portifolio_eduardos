@@ -16,7 +16,7 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
 
         <div className="topo">
 
-          <h1>SOBRE MIM</h1>
+          <h1 className="titulo">SOBRE MIM</h1>
 
         </div>
 

@@ -15,38 +15,36 @@ import Interface_porta from './interface_porta'
 
 import Texto_3d from '../../componentes_auxiliares/texto_3d'
 
-export default function Porta({proximo_caminho, voltar_caminho, ativado, ...props}) {
+export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...props }) {
 
   const { nodes, materials } = useGLTF('/models/porta_2.glb')
 
   const [interface_ativada, set_interface] = useState(false)
 
-  const porta = useRef(null) 
+  const porta = useRef(null)
 
   //animação da porta
-  const { rotation, position } = useSpring(
+  const { rotation, position } = useSpring({
 
-    {
+    rotation: ativado ? [-Math.PI, -1.5, -Math.PI] : [-Math.PI, 0, -Math.PI],
 
-      rotation: ativado ? [-Math.PI , -1.5 , -Math.PI] : [-Math.PI, 0, -Math.PI],
+    position: ativado ? [.45, 0, -.05] : [.5, 0, 0],
 
-      position: ativado ? [ .45, 0, -.05 ] : [ .5, 0,0 ],
-      
-      config: { tension: 80, friction: 20 },
+    config: { tension: 80, friction: 20 },
 
-      onStart: () => {
-        if (!ativado) {
-          set_interface(false)
-        }
-      },
-
-      onRest: () => {
-        if (ativado) {
-          set_interface(true)
-        }
+    onStart: () => {
+      if (!ativado) {
+        set_interface(false)
       }
-    
+    },
+
+    onRest: () => {
+      if (ativado) {
+        set_interface(true)
+      }
     }
+
+  }
 
   )
 
@@ -55,20 +53,20 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
     <group {...props} >
 
       {/* modelo 3d */}
-      <group 
-      
-      dispose={null}
+      <group
+
+        dispose={null}
 
       >
 
-        <mesh 
-          geometry={nodes.doorway.geometry} 
-          material={materials['Dungeon_passage.001']} 
-          position={[0.019, -0.084, 0.079]} 
-          rotation={[-Math.PI, 0, -Math.PI]} 
+        <mesh
+          geometry={nodes.doorway.geometry}
+          material={materials['Dungeon_passage.001']}
+          position={[0.019, -0.084, 0.079]}
+          rotation={[-Math.PI, 0, -Math.PI]}
         />
 
-        <mesh geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[0, 1, 1.134]} />
+        <mesh geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[0, .3, 1.15]} scale={[1, 1.5, .5]} />
 
         <animated.group
           ref={porta}
@@ -76,10 +74,10 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
           rotation={rotation}
         >
 
-          <mesh 
-            geometry={nodes.door.geometry} 
-            material={materials['Dungeon_passage.002']} 
-            position={[ .49, -.09 , -.08 ]}
+          <mesh
+            geometry={nodes.door.geometry}
+            material={materials['Dungeon_passage.002']}
+            position={[.49, -.09, -.08]}
           />
 
         </animated.group>
@@ -88,11 +86,11 @@ export default function Porta({proximo_caminho, voltar_caminho, ativado, ...prop
 
       </group>
 
-      {interface_ativada && (
-          <Interface_porta position={[0.5, 1.32, 0]}
-            proximo_caminho={proximo_caminho} 
-            voltar_caminho={voltar_caminho}/>
-        )}
+          {interface_ativada && (
+        <Interface_porta position={[0.5, 1.32, 0]}
+          proximo_caminho={proximo_caminho}
+          voltar_caminho={voltar_caminho} />
+      )}
 
     </group>
 
