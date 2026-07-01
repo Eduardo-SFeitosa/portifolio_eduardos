@@ -173,16 +173,16 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
                     <Line
                         points={atual.linhas}
-                        color={atual.cor}
-                        lineWidth={8}
+                        color={"wheat"}
+                        lineWidth={.9}
                         transparent
                         opacity={0.15}
                     />
 
                     <Line
                         points={atual.linhas}
-                        color={atual.cor}
-                        lineWidth={2}
+                        color={"wheat"}
+                        lineWidth={.2}
                     />
                     
                 </group>

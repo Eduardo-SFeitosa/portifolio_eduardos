@@ -60,3 +60,22 @@
     }
 
 }
+
+.estrela-texto {
+
+    pointer-events: "none";
+    width: fit-content;
+    height: fit-content; 
+    position: block;
+    background-color: white;
+
+    .estrela-nome {
+
+        padding: .5rem;
+        width: fit-content;
+        height: fit-content;
+        color: purple;
+
+    }
+
+}

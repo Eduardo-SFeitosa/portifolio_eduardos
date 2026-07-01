@@ -1,34 +1,48 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useMemo } from "react"
 import { Html } from "@react-three/drei"
 import * as THREE from "three"
 import { useFrame } from "@react-three/fiber"
+import "./interface_orbe.css"
+import { EffectComposer, Bloom } from "@react-three/postprocessing"
 
 export default function Estrela_stack({ nome, cor, posicao }) {
 
     const [em_foco, set_foco] = useState(false)
 
     const estrela = useRef(null)
+    const brilho = useRef(null)
 
-    const atraso_animacao = Math.random() * -.015
+    const movimento_vertical = Math.random() * -.010
 
-    const movimento_lateral = Math.random() * .03
+    const movimento_lateral = Math.random() * .02
 
-    const fase = useRef(Math.random() * Math.PI * 2)
+    const atraso = useRef(Math.random() * Math.PI * 2)
 
-    const cores = ["red", "blue", "purple", "white", "green"]
+    const cores = ["red", "blue", "purple", "green"]
 
+    const cor_escolhida = useMemo(() => {
+
+        return cores[Math.floor(Math.random() * cores.length)]
+
+    }, [])
+
+    {/* ANIMACAO */}
     useFrame(({clock}) => {
+
+        if (!estrela.current || !brilho.current) return
 
         const delta = clock.getElapsedTime()
 
-        if (estrela.current && !em_foco) {
+        if (!em_foco) {
 
-        estrela.current.position.y = Math.sin(delta + fase.current) * atraso_animacao
-        
-        estrela.current.position.x = Math.sin(delta + fase.current) * movimento_lateral
+            estrela.current.position.y = Math.sin(delta + atraso.current) * movimento_vertical
+            
+            estrela.current.position.x = Math.sin(delta + atraso.current) * movimento_lateral
 
         }
-        
+
+        brilho.current.emissiveIntensity = Math.sin(delta + atraso.current) * 20 + 30
+
     })
 
 
@@ -36,34 +50,46 @@ export default function Estrela_stack({ nome, cor, posicao }) {
 
         <group position={posicao}>
 
-            <mesh
+            <group
                 onPointerOver={() => set_foco(true)}
                 onPointerOut={() => set_foco(false)}
                 ref={estrela}
             >
-                <sphereGeometry args={[0.015, 16, 16]} />
 
-                <meshStandardMaterial
-                    color={cores[Math.floor(Math.random() * cores.length)]}
-                    emissive={cores[Math.floor(Math.random() * cores.length)]}
-                    emissiveIntensity={10}
-                />
+                <mesh>
+                    <sphereGeometry args={[0.015, 16, 16]} />
 
-            </mesh>
+                    <meshStandardMaterial
+                        emissive={cor_escolhida}
+                        color={cor_escolhida}
+                        emissiveIntensity={30}
+                        ref={brilho}
+                        opacity={0.05}
+                    />
+                </mesh>
+
+                <EffectComposer>
+
+                    <Bloom
+                        intensity={.3}
+                        luminanceThreshold={0}
+                        luminanceSmoothing={0}
+                    />
+
+                </EffectComposer>
+
+                
+            </group>
       
             {em_foco && <Html
-                position={[0,.1,0]}
-                style={{ pointerEvents: "none" }}
+                position={[0,.15,0]}
                 scale={0.5}
-                style={{
-                        pointerEvents: "none"
-                }}
-                width={"fit-content"} height={"fit-content"}
+                className="estrela-texto"
                 style={{ position: "block" }}>
 
-                <h1 className="esfera-nome" style={{color:"purple"}}>
-                    {nome}
-                </h1>
+                    <h1 className="estrela-nome">
+                        {nome}
+                    </h1>
             </Html>}
 
         </group>
