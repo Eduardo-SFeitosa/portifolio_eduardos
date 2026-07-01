@@ -159,15 +159,9 @@ function App() {
 
         <ScrollControls pages={cena_em_foco == null ? 4 : 0} damping={0.6} enabled={cena_em_foco == null}>
 
-          <Controle_de_camera
-            referencia_camera={referencia_camera}
-            ref={controle_de_camera_ref}
-            caminho_atual={caminho_atual}
-            camera_travada={cena_em_foco != null}
-            
-          >
+          <OrbitControls/>
 
-          </Controle_de_camera>
+          
 
           {/* 
 

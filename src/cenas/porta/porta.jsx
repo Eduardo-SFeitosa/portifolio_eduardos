@@ -4,18 +4,13 @@ Command: npx gltfjsx@6.5.3 porta.glb
 */
 
 import { useRef, useState } from 'react'
-
 import { Html } from '@react-three/drei'
-
 import { useSpring, animated } from '@react-spring/three'
-
 import { useGLTF } from '@react-three/drei'
-
 import Interface_porta from './interface_porta'
-
 import { VFXEmitter , VFXParticles } from "wawa-vfx"
-
 import { useFrame } from '@react-three/fiber'
+import Particula_portal from './Particula_portal'
 
 export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...props }) {
 
@@ -26,6 +21,13 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
   const porta = useRef(null)
 
   const material_portal = useRef(null)
+
+  const emissor_particulas_container = useRef(null)
+
+  const [particulas_ativas, set_particulas_ativas] = useState([])
+
+  // Variável para controlar o tempo de spawn
+  const tempo_ultimo_spawn = useRef(0)
 
   //animação da porta
   const { rotation, position } = useSpring({
@@ -53,11 +55,18 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
   )
 
   useFrame(({clock}) => {
-      if (!material_portal.current) return
 
-      material_portal.current.uniforms.time.value = clock.getElapsedTime()
+      if (!material_portal.current || !emissor_particulas_container.current ) return
 
-  })
+      const delta = clock.getElapsedTime()
+
+      material_portal.current.uniforms.time.value = delta
+
+      emissor_particulas_container.current.rotation.z = delta * 2
+
+  }) 
+
+
 
   return (
 
@@ -120,42 +129,18 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
           voltar_caminho={voltar_caminho} />
       )}
 
-      {interface_ativada && (<>
+      <group ref={emissor_particulas_container}>
 
-        <VFXParticles
-          name="particula_portal"
-          settings={{
-            nbParticles: 1000,
-            gravity: [0, 2, -2],
-            renderMode: 'billboard',
-          }
-          }
-        />
+        <mesh  position={[0,2,-1.5]}>
+            <sphereGeometry args={[.1]} />
+            <meshBasicMaterial color="hotpink" />
+        </mesh>
 
-        <VFXEmitter
-          emitter="particula_portal"
-          settings={{
-            loop: true,
-            velocity: {
-              direction: [0, 1, 0],
-              spread: 2,
-              speed: [1, 3]
-            },
-            size: [0.02, 0.05],
-            spawnMode: "continuous",
-            duration: 1,
-            position: [0, 0, 0],
-            nbParticles: 90,
-            lifetime: [0.5, 1.5],
-            colorStart: ['#f028f0', '#621469'],
-            colorEnd: ['#9900ff54', "#aa086c52"],
+      </group>
 
-          }}
-        />
+        
 
-      </>)}
-
-    </group>
+      </group>
 
   )
 
