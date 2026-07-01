@@ -13,22 +13,26 @@ import { useGLTF } from '@react-three/drei'
 
 import Interface_porta from './interface_porta'
 
-import Texto_3d from '../../componentes_auxiliares/texto_3d'
+import { VFXEmitter , VFXParticles } from "wawa-vfx"
+
+import { useFrame } from '@react-three/fiber'
 
 export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...props }) {
 
-  const { nodes, materials } = useGLTF('/models/porta_2.glb')
+  const { nodes, materials } = useGLTF('/models/porta.glb')
 
   const [interface_ativada, set_interface] = useState(false)
 
   const porta = useRef(null)
 
+  const material_portal = useRef(null)
+
   //animação da porta
   const { rotation, position } = useSpring({
 
-    rotation: ativado ? [-Math.PI, -1.5, -Math.PI] : [-Math.PI, 0, -Math.PI],
+    rotation: ativado ? [-Math.PI, 1.5, -Math.PI] : [-Math.PI, 0, -Math.PI],
 
-    position: ativado ? [.45, 0, -.05] : [.5, 0, 0],
+    position: ativado ? [.45, 0, .02] : [.5, 0, 0],
 
     config: { tension: 80, friction: 20 },
 
@@ -48,6 +52,13 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
 
   )
 
+  useFrame(({clock}) => {
+      if (!material_portal.current) return
+
+      material_portal.current.uniforms.time.value = clock.getElapsedTime()
+
+  })
+
   return (
 
     <group {...props} >
@@ -66,31 +77,83 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
           rotation={[-Math.PI, 0, -Math.PI]}
         />
 
-        <mesh geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[0, .3, 1.15]} scale={[1, 1.5, .5]} />
+          <mesh 
+          geometry={nodes.Plane.geometry} 
+          material={materials['Material.001']} 
+          position={[0, 0.69, 0.144]} 
+          rotation={[-Math.PI / 2, Math.PI / 2, 0]} 
+          scale={[0.751, 0.751, 0.575]}>
 
-        <animated.group
-          ref={porta}
-          position={position}
-          rotation={rotation}
-        >
+            <shaderMaterial
+              ref={material_portal}
+              transparent={false}
+              uniforms={{
+                time: { value: 0 }
+              }}
+              vertexShader={vertexShader}
+              fragmentShader={fragmentShader}
+            />
 
-          <mesh
-            geometry={nodes.door.geometry}
-            material={materials['Dungeon_passage.002']}
-            position={[.49, -.09, -.08]}
-          />
+          </mesh>
 
-        </animated.group>
+          <animated.group
+            ref={porta}
+            position={position}
+            rotation={rotation}
+          >
 
-        < pointLight position={[0, .5, -.8]} intensity={6} color={"#795800"} />
+            <mesh
+              geometry={nodes.door.geometry}
+              material={materials['Dungeon_passage.002']}
+              position={[.485, -.08, -.085]}
+            />
+
+          </animated.group>
+
+          < pointLight position={[0, .5, -.8]} intensity={6} color={"#795800"} />
 
       </group>
 
-          {interface_ativada && (
+      {interface_ativada && (
         <Interface_porta position={[0.5, 1.32, 0]}
           proximo_caminho={proximo_caminho}
           voltar_caminho={voltar_caminho} />
       )}
+
+      {interface_ativada && (<>
+
+        <VFXParticles
+          name="particula_portal"
+          settings={{
+            nbParticles: 1000,
+            gravity: [0, 2, -2],
+            renderMode: 'billboard',
+          }
+          }
+        />
+
+        <VFXEmitter
+          emitter="particula_portal"
+          settings={{
+            loop: true,
+            velocity: {
+              direction: [0, 1, 0],
+              spread: 2,
+              speed: [1, 3]
+            },
+            size: [0.02, 0.05],
+            spawnMode: "continuous",
+            duration: 1,
+            position: [0, 0, 0],
+            nbParticles: 90,
+            lifetime: [0.5, 1.5],
+            colorStart: ['#f028f0', '#621469'],
+            colorEnd: ['#9900ff54', "#aa086c52"],
+
+          }}
+        />
+
+      </>)}
 
     </group>
 
@@ -98,4 +161,60 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
 
 }
 
-useGLTF.preload('/models/porta_2.glb')
+useGLTF.preload('/models/porta.glb')
+
+const vertexShader = `
+varying vec2 vUv;
+
+void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`
+
+const fragmentShader = `
+uniform float time;
+varying vec2 vUv;
+
+void main() {
+    vec2 uv = vUv - 0.5;
+    float dist = length(uv);
+    float angle = atan(uv.y, uv.x);
+
+    // 1. Ruído de fundo para quebrar a rigidez das linhas (Efeito nebulosa)
+    float noise = sin(uv.x * 15.0 + uv.y * 20.0 + time * 0.5) * 0.5 + 0.5;
+    float distortedDist = dist + noise * 0.05;
+
+    // 2. Vórtice com menos linhas e movimento suave (Mais orgânico)
+    float vortex1 = sin(distortedDist * 12.0 - time * 1.2 + angle * 4.0);
+    float vortex2 = sin(distortedDist * 25.0 + time * 1.5 - angle * 2.0) * 0.4;
+    float swirl = clamp(vortex1 + vortex2, -1.0, 1.0);
+
+    // 3. Máscara circular com borda arredondada
+    float mask = 1.0 - smoothstep(0.2, 0.7, dist);
+
+    // 4. Paleta de cores baseada na referência (Branco -> Lilás -> Roxo Escuro)
+    vec3 coreColor = vec3(1.0, 0.9, 1.0);       // Núcleo branco/perolado
+    vec3 midColor1 = vec3(0.6, 0.15, 0.9);      // Lilás vibrante
+    vec3 midColor2 = vec3(0.2, 0.05, 0.5);      // Roxo profundo
+    vec3 edgeColor = vec3(0.05, 0.0, 0.1);      // Quase preto nas bordas
+
+    // 5. Composição das cores
+    vec3 color = mix(midColor1, midColor2, swirl * 0.5 + 0.5);
+    color = mix(color, edgeColor, smoothstep(0.1, 0.8, dist));
+
+    // 6. Adicionar o brilho intenso do núcleo
+    float coreGlow = 1.0 - smoothstep(0.0, 0.05, dist);
+    color = mix(color, coreColor, coreGlow);
+    color += coreColor * 0.1 * pow(coreGlow, 0.1); // Ponto central extremamente brilhante
+
+    // 7. Detalhes de poeira cósmica
+    float dust = pow(noise, 8.0) * 0.2;
+    color += dust * midColor2;
+
+    // Aplicar máscara final para as bordas escuras
+    color *= mask;
+
+    gl_FragColor = vec4(color, 1.0);
+}
+`

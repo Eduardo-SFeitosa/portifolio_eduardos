@@ -4,9 +4,11 @@ import { Canvas } from "@react-three/fiber"
 import Texto_3d from "../../componentes_auxiliares/texto_3d"
 import { Text3D } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export default function Interface_porta({proximo_caminho, voltar_caminho , ...props}) {
+
+  const escala = useRef(null)
 
   return (
 
@@ -43,6 +45,7 @@ export default function Interface_porta({proximo_caminho, voltar_caminho , ...pr
         </div>
 
       </div>
+
     </Html>
   )
 }

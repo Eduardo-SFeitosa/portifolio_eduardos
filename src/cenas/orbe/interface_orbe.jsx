@@ -187,10 +187,6 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
                     
                 </group>
 
-
-
-
-
         </Canvas>
 
 

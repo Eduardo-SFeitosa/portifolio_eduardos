@@ -1,11 +1,9 @@
 .interface-porta {
-  background-color: rgb(0, 0, 0);
   color: white;
   border-top-left-radius: 45%;
   border-top-right-radius: 45%;
   width: 30vw;
   height: 85vh;
-
 }
 
 .topo {
