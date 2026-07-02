@@ -35,7 +35,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
           new Vector3(-13, 1.4, -1.7),
           new Vector3(-11, 1.4, -1.6),
           new Vector3(-11, 1.4, 2),
-          new Vector3(-9, 0.77, 1.89),
+          new Vector3(-8.9, 0.77, 2.2),
         ]),
 
         direcao : new CatmullRomCurve3([
@@ -54,7 +54,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
         posicao : new CatmullRomCurve3([
 
-          new Vector3(-9, 0.77, 1.89),
+          new Vector3(-8.9, 0.77, 2.2),
           new Vector3(-7, 0.77, 1.89),
           new Vector3(-7, 1.3, 2.08),
           new Vector3(-6.87, 2.82, 5.25),

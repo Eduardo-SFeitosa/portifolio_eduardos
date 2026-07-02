@@ -173,7 +173,7 @@ function App() {
             ref={controle_de_camera_ref}
             caminho_atual={caminho_atual}
             camera_travada={cena_em_foco != null}
-            />
+          />
 
             <OrbitControls/>
           

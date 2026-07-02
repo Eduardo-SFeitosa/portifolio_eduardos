@@ -46,7 +46,7 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
 
           age: Math.random(),
 
-          lifetime: 2 + Math.random()
+          lifetime: 1.7 + Math.random()
 
       }))
 
@@ -183,7 +183,7 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
       </group>
 
       {interface_ativada && (
-        <Interface_porta position={[0.5, 1.32, 0]}
+        <Interface_porta position={[.335, 1.15, 0]}
           proximo_caminho={proximo_caminho}
           voltar_caminho={voltar_caminho} />
       )}
@@ -199,7 +199,7 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
 
           <meshBasicMaterial
 
-            color="#b94cff"
+            color="#8028b6"
 
             transparent
 
@@ -249,7 +249,7 @@ void main() {
     float mask = 1.0 - smoothstep(0.2, 0.7, dist);
 
     // 4. Paleta de cores baseada na referência (Branco -> Lilás -> Roxo Escuro)
-    vec3 coreColor = vec3(1.0, 0.9, 1.0);       // Núcleo branco/perolado
+    vec3 coreColor = vec3(1.0, 0.5, 1.0);       // Núcleo branco/perolado
     vec3 midColor1 = vec3(0.6, 0.15, 0.9);      // Lilás vibrante
     vec3 midColor2 = vec3(0.2, 0.05, 0.5);      // Roxo profundo
     vec3 edgeColor = vec3(0.05, 0.0, 0.1);      // Quase preto nas bordas
