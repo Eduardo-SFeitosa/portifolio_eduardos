@@ -29,6 +29,7 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
 
                 <Pocao
                 position={[posicao[0] + tamanho_x / 2 * escala_x, posicao[1] - .8 , posicao[2] + .5]}
+                cor={cor}
                 quantidade_liquido={escala_x}/>
 
             </group>
