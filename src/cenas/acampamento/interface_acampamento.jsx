@@ -17,9 +17,7 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
 
     const [progresso_atual, set_progresso] = useState(0)
 
-    useFrame((clock) => {
-
-        
+    useFrame((clock) => {    
 
         set_progresso(prev => prev += .01)
 
@@ -80,6 +78,7 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
                         tamanho={[mago.duracao_anos * escala_tempo_tamanho, 1, .5]}
                         progresso_total={progresso_atual}
                         progresso_minimo={mago.inicio - ano_inicio}
+                        progresso_maximo={mago.inicio - ano_inicio + mago.duracao_anos}
                         nome={mago.nome}
                         cor={mago.cor}
                         />

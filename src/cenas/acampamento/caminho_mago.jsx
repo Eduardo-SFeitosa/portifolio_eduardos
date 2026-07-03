@@ -1,15 +1,19 @@
 import { Text } from "@react-three/drei"
 import { useEffect, useState, useRef } from "react"
 
-export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_total, progresso_minimo}) {
+export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_total, progresso_minimo, progresso_maximo}) {
 
     const [escala_x, set_escala] = useState(0)
 
     useEffect(() => {
 
-        if (escala_x > 1 || progresso_total - progresso_minimo < 0) return
+        
 
-        set_escala(progresso_total - progresso_minimo)
+        if (progresso_maximo <= progresso_total || progresso_total <= progresso_minimo ) return
+
+        const progresso_normalizado = progresso_total - progresso_minimo
+
+        set_escala(progresso_normalizado / (progresso_maximo - progresso_minimo))
 
     },[progresso_total])
 
