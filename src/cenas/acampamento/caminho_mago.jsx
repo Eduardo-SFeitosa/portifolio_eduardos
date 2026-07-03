@@ -1,13 +1,13 @@
 import { Text } from "@react-three/drei"
 import { useEffect, useState, useRef } from "react"
+import { Pocao } from "./Pocao"
 
 export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_total, progresso_minimo, progresso_maximo}) {
 
     const [escala_x, set_escala] = useState(0)
+    const tamanho_x = tamanho[0]
 
     useEffect(() => {
-
-        
 
         if (progresso_maximo <= progresso_total || progresso_total <= progresso_minimo ) return
 
@@ -20,12 +20,16 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
     return <group>
 
             {/* PROGRESSO */}
-            <group position={[tamanho[0] / 2 * escala_x - tamanho[0] / 2, 0 , 0]}>
+            <group position={[tamanho_x / 2 * escala_x - tamanho_x / 2, 0 , 0]}>
 
                 <mesh position={posicao} key={nome} scale={[escala_x, 1, 1]}>
                     <boxGeometry args={tamanho} />
                     <meshStandardMaterial color={cor} />
                 </mesh>
+
+                <Pocao
+                position={[posicao[0] + tamanho_x / 2 * escala_x, posicao[1] - .8 , posicao[2] + .5]}
+                quantidade_liquido={escala_x}/>
 
             </group>
 
