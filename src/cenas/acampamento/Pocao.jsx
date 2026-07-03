@@ -29,7 +29,8 @@ export function Pocao({quantidade_liquido, ...props}) {
       
       {/* LIQUIDO */}
       <mesh geometry={nodes.liquid.geometry} material={materials.Material_0}
-        position={[0, 0.454 * quantidade_liquido + 0.35, 0]}
+        position={[0, 0.454 * quantidade_liquido + 0.355, 0]}
+        color="#00aaff"
         scale={[1, quantidade_liquido * 2, 1]} />
 
     </group>
