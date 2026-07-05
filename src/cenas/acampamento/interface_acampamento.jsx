@@ -57,12 +57,11 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
                     const pos_x = i * escala_tempo_tamanho
                     return (
                         <group key={i} position={[pos_x, 0, -1]}>
-
+                            <Text position={[0, magos.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
                             <mesh position={[0, -0.5, 0]}>
                                 <boxGeometry args={[0.05, magos.length * 3.5 + 1, 0.2]} />
                                 <meshBasicMaterial color={"#ffffff"} opacity={0.5} />
                             </mesh>
-                            <Text position={[0, -magos.length * 2.2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
                         </group>
                     )
             })}

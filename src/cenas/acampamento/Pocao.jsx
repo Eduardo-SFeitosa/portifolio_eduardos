@@ -11,6 +11,7 @@ export function Pocao({quantidade_liquido, cor , ...props}) {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/acampamento/pocao.glb')
   const pocao = useRef(null)
+  const atraso = Math.random()
 
   const liquido = useMemo(() => {
     
@@ -30,15 +31,16 @@ export function Pocao({quantidade_liquido, cor , ...props}) {
     if (!pocao.current) return
 
     const delta = clock.getElapsedTime()
+    console.log(delta)
 
     // Continuous spin
     pocao.current.rotation.y = delta * 0.6
 
     // Gentle shake
-    pocao.current.rotation.z = Math.sin(delta * 3) * 0.12
+    pocao.current.rotation.z = Math.sin((delta )  * 3) * 0.12
 
     // Optional secondary wobble
-    pocao.current.rotation.x = Math.cos(delta * 2.4) * 0.05
+    pocao.current.rotation.x = Math.cos((delta )  * 2.4) * 0.05
 
   })
 
