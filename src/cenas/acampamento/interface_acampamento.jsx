@@ -30,6 +30,8 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
 
+    
+
     return (
     
     <Html 
@@ -41,9 +43,9 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
 
         <h1 className="titulo">JORNADA</h1>
 
-        <Canvas className="canvas-acampamento" camera={{ position: [0, 0, 8] }}>
+        <Canvas className="canvas-acampamento" camera={{ position: [7, 0, 10] }}>
 
-            <OrbitControls/>
+            <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[7, 0, 0]} /> 
 
             < ambientLight intensity={5} />
 
