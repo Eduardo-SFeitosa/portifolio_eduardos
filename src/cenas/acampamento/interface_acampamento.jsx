@@ -1,9 +1,10 @@
 import { Html, Text  } from "@react-three/drei";
 import "./interface_acampamento.css"
 import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, ScrollControls } from "@react-three/drei";
+import { useScroll } from '@react-three/drei'
 import Caminho_mago from "./caminho_mago";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 
 export default function Interface_acampamento({proximo_caminho, voltar_caminho , ...props}) {
@@ -16,12 +17,6 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
     const escala_tempo_tamanho = 2
 
     const [progresso_atual, set_progresso] = useState(0)
-
-    useFrame((clock) => {    
-
-        set_progresso(prev => prev += .01)
-
-    })
     
     const magos = [
         { nome: "Game Dev", inicio: 2020, duracao_anos: ano_atual - 2021 + mes_atual, cor: "#ff5733" },
@@ -30,10 +25,11 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
 
-    
+    useFrame(() => {
+        console.log(progresso_atual)
+    })
 
     return (
-    
     <Html 
     {...props}
     className={"interface-acampamento"} 
@@ -45,46 +41,52 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
 
         <Canvas className="canvas-acampamento" camera={{ position: [7, 0, 10] }}>
 
-            <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[7, 0, 0]} /> 
+            <ScrollControls pages={5} damping={0}>
 
-            < ambientLight intensity={5} />
+                <Controle_scroll set_progresso={set_progresso}/>
 
-            <mesh position={[duracao_total_anos * escala_tempo_tamanho / 2, 0, -1.2]} >
-                    <boxGeometry args={[duracao_total_anos * escala_tempo_tamanho, magos.length * 3.5, 0.2]} /> 
-                    <meshStandardMaterial color={"#2d2d2d"} transparent opacity={0.5} />
-            </mesh>
+                <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[7, 0, 0]} /> 
 
-            {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
-                    const ano = ano_inicio + i
-                    const pos_x = i * escala_tempo_tamanho
-                    return (
-                        <group key={i} position={[pos_x, 0, -1]}>
-                            <Text position={[0, magos.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
-                            <mesh position={[0, -0.5, 0]}>
-                                <boxGeometry args={[0.05, magos.length * 3.5 + 1, 0.2]} />
-                                <meshBasicMaterial color={"#ffffff"} opacity={0.5} />
-                            </mesh>
-                        </group>
-                    )
-            })}
+                < ambientLight intensity={5} />
 
-            {magos.map((mago, i) => {
-                    // Calcula o centro do bloco na linha do tempo (anchor na esquerda)
-                    const pos_x_centro = (mago.inicio - ano_inicio) * escala_tempo_tamanho + (mago.duracao_anos * escala_tempo_tamanho / 2)
-                    const y_centro = i * 3 - (magos.length - 1) * 1.5 // Centraliza verticalmente
+                <mesh position={[duracao_total_anos * escala_tempo_tamanho / 2, 0, -1.2]} >
+                        <boxGeometry args={[duracao_total_anos * escala_tempo_tamanho, magos.length * 3.5, 0.2]} /> 
+                        <meshStandardMaterial color={"#2d2d2d"} transparent opacity={0.5} />
+                </mesh>
 
-                    return (
-                        <Caminho_mago
-                        posicao={[pos_x_centro, y_centro, 0]}
-                        tamanho={[mago.duracao_anos * escala_tempo_tamanho, 1, .5]}
-                        progresso_total={progresso_atual}
-                        progresso_minimo={mago.inicio - ano_inicio}
-                        progresso_maximo={mago.inicio - ano_inicio + mago.duracao_anos}
-                        nome={mago.nome}
-                        cor={mago.cor}
-                        />
-                    )
-            })}
+                {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
+                        const ano = ano_inicio + i
+                        const pos_x = i * escala_tempo_tamanho
+                        return (
+                            <group key={i} position={[pos_x, 0, -1]}>
+                                <Text position={[0, magos.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
+                                <mesh position={[0, -0.5, 0]}>
+                                    <boxGeometry args={[0.05, magos.length * 3.5 + 1, 0.2]} />
+                                    <meshBasicMaterial color={"#ffffff"} opacity={0.5} />
+                                </mesh>
+                            </group>
+                        )
+                })}
+
+                {magos.map((mago, i) => {
+                        const pos_x_centro = (mago.inicio - ano_inicio) * escala_tempo_tamanho + (mago.duracao_anos * escala_tempo_tamanho / 2)
+                        const y_centro = i * 3 - (magos.length - 1) * 1.5 // Centraliza verticalmente
+
+                        return (
+                            <Caminho_mago
+                            key={i}
+                            posicao={[pos_x_centro, y_centro, 0]}
+                            tamanho={[mago.duracao_anos * escala_tempo_tamanho, 1, .5]}
+                            progresso_total={progresso_atual * duracao_total_anos}
+                            progresso_minimo={mago.inicio - ano_inicio}
+                            progresso_maximo={mago.inicio - ano_inicio + mago.duracao_anos}
+                            nome={mago.nome}
+                            cor={mago.cor}
+                            />
+                        )
+                })}
+
+            </ScrollControls>
 
         </Canvas>
 
@@ -98,4 +100,17 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
     
     </Html>)
 
+}
+
+function Controle_scroll({set_progresso}){
+
+    const scroll = useScroll()
+
+    useFrame(() => {
+        set_progresso(prev =>
+            prev !== scroll.offset ? scroll.offset : prev
+        )
+    })
+
+    return null
 }

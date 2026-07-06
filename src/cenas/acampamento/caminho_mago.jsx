@@ -40,7 +40,7 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
                 <meshStandardMaterial color={cor} opacity={.2} transparent />
             </mesh>
 
-            <Text position={[posicao[0], posicao[1] + 1.2, posicao[2]]} color="white" fontSize={0.6} anchorX="center">{nome}</Text>
+            <Text position={[posicao[0], posicao[1] + 1.2, posicao[2]]} color="white" fontSize={0.6} backGroundColor={"white"} anchorX="center">{nome}</Text>
 
         </group>
 

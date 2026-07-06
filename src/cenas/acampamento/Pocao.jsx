@@ -31,15 +31,14 @@ export function Pocao({quantidade_liquido, cor , ...props}) {
     if (!pocao.current) return
 
     const delta = clock.getElapsedTime()
-    console.log(delta)
 
-    // Continuous spin
+    // GIRO
     pocao.current.rotation.y = delta * 0.6
 
-    // Gentle shake
+    // BALANCO PROFUNDIDADE
     pocao.current.rotation.z = Math.sin((delta )  * 3) * 0.12
 
-    // Optional secondary wobble
+    // BALANCO HORIZONTAL
     pocao.current.rotation.x = Math.cos((delta )  * 2.4) * 0.05
 
   })
