@@ -9,7 +9,9 @@ const Controle_de_camera = forwardRef((props, ref ) => {
   const referencia_camera = props.referencia_camera 
   const camera_travada_em = useRef(null)
   const progresso = useRef(0)
+  const controlando_camera = useRef(true)
   const caminho_invertido = useRef(false)
+
   const caminho_atual = props.caminho_atual
 
   useImperativeHandle( ref, () => ({
@@ -18,7 +20,9 @@ const Controle_de_camera = forwardRef((props, ref ) => {
       return progresso.current
     },
     travar_camera,
-    destravar_camera
+    destravar_camera,
+    desativar_controle,
+    ativar_controle
 
   }))
 
@@ -161,6 +165,18 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
   const scroll = useScroll()
 
+  const desativar_controle = () => {
+
+    controlando_camera.current = false
+
+  }
+
+  const ativar_controle = () => {
+
+    controlando_camera.current = true
+
+  }
+
   const travar_scroll = ( posicao ) => {
 
     ignorar_scroll.current = true;
@@ -213,6 +229,8 @@ const Controle_de_camera = forwardRef((props, ref ) => {
   }
 
   useFrame(() => {
+
+    if (!controlando_camera.current) return
 
     if ( camera_travada_em.current ) {
 

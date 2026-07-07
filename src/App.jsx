@@ -231,6 +231,7 @@ function App() {
             position={posicao_de_cenas["mina"]["posicao"]} 
             rotation={posicao_de_cenas["mina"]["rotacao"]} 
             ativado={ cena_em_foco == "mina" ? true : false}
+            controle_de_camera={controle_de_camera_ref}
             />
 
             <BauDoTesouro 

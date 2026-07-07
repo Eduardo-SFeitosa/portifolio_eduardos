@@ -4,16 +4,16 @@ Command: npx gltfjsx@6.5.3 mina.glb
 */
 
 import { useState, useRef } from 'react'
-
 import { useGLTF } from '@react-three/drei'
-
 import { useSpring, animated } from '@react-spring/three'
+import { CatmullRomCurve3, Vector3  } from 'three'
 
 import Interface_mina from './interface_mina'
 
-export default function Mina({proximo_caminho, voltar_caminho , ativado , ...props}) {
+export default function Mina({proximo_caminho, voltar_caminho , ativado, controle_de_camera , ...props}) {
 
   const [interface_ativada, set_interface] = useState(false)
+  const [animacao, set_animacao] = useState("idle")
 
   const { posicao_carrinho } = useSpring({
 
@@ -24,16 +24,27 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado , ...pro
     onStart: () => {
       if (!ativado) {
         set_interface(false)
+        controle_de_camera.current.ativar_controle()
       }
     },
 
     onRest: () => {
       if (ativado) {
+        controle_de_camera.current.desativar_controle()
         set_interface(true)
       }
     }
     
   })
+
+  const animacao_camera = { 
+    posicao : new CatmullRomCurve3(
+      new Vector3(8.30, 3.11, -3.98),
+    ),
+    direcao : new CatmullRomCurve3(
+      new Vector3(9.5, 2.4, -2),
+    ),
+  }
 
   const carrinho = useRef(null)
 
