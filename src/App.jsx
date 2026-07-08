@@ -226,6 +226,7 @@ function App() {
 
             <Mina 
             onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
+            referencia_camera={referencia_camera}
             proximo_caminho={proximo_caminho} 
             voltar_caminho={voltar_caminho} 
             position={posicao_de_cenas["mina"]["posicao"]} 
