@@ -166,6 +166,8 @@ function App() {
             camera_travada={cena_em_foco != null}
           />
 
+          
+
           {/* 
 
             <Controle_de_camera

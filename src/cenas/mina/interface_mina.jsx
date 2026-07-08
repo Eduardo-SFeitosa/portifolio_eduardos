@@ -1,6 +1,7 @@
 import { Html } from "@react-three/drei";
 import { useState } from "react";
 import "./interface_mina.css"
+import { Canvas } from "@react-three/fiber"
 
 export default function Interface_mina({proximo_caminho, voltar_caminho , ...props}) {
 
@@ -20,44 +21,9 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
             <h1 className="link-projetos" onClick={() => set_mostrar_sites(false)}>JOGOS</h1>
         </div>
 
-        <div className="mina-conteudo">
+        <Canvas className="canvas-mina">
 
-            {mostrar_sites ? 
-            
-                <div className="conteudo-sites">
-                    
-                    <div className="bloco">
-
-                        <img className="bloco-imagem" src="/projetos/cine_ja.jpg" alt="" />
-                        
-                        <h2 className="bloco-nome">Cine Já</h2>
-
-                    </div>
-
-                </div>:
-
-                <div className="conteudo-jogos">
-
-                    <div className="bloco">
-
-                        <img className="bloco-imagem" src="/projetos/diver.jpg" alt="" />
-                        
-                        <h2 className="bloco-nome">Mine diver</h2>
-
-                    </div>
-
-                    <div className="bloco">
-
-                        <img className="bloco-imagem" src="/projetos/diver.jpg" alt="" />
-                        
-                        <h2 className="bloco-nome">Shrimp Shack</h2>
-
-                    </div>
-
-                </div>
-            }
-
-        </div>
+        </Canvas>
 
         <div className="controle-caminhos">
 

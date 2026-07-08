@@ -8,6 +8,20 @@ import { useGLTF } from '@react-three/drei'
 
 export function Model({ ...props}) {
   const { nodes, materials } = useGLTF('/gemas.glb')
+
+  const cores = {
+
+    
+
+  }
+
+  const formato = {
+
+
+
+  }
+
+
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Gemstone_01.geometry} material={materials['V_05.001']}  rotation={[0.239, 0, 0]} />
