@@ -5,7 +5,6 @@ Command: npx gltfjsx@6.5.3 mina.glb
 
 import { useState, useRef, useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useSpring, animated } from '@react-spring/three'
 import { useFrame } from '@react-three/fiber'
 import { CatmullRomCurve3, Vector3  } from 'three'
 
@@ -24,19 +23,25 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
   useEffect(() => {
     
-    if (!ativado || !referencia_camera.current) return
+    if (!referencia_camera.current) return
 
     console.log(ativado)
 
-    controle_de_camera.current.desativar_controle()
-    set_interface(true)
+    if (ativado){
+      controle_de_camera.current.desativar_controle()
+      set_animacao("carrinho_chega")
+    }
+    else if (animacao_ativa != "idle") {
+      voltar_idle()
+    }
+    
 
   }, [ativado])
 
   const animacoes = {
 
     carrinho_chega : {
-        duracao : .6,
+        duracao : 2,
 
         carrinho : new CatmullRomCurve3([
           new Vector3(-0.026, 0.15, 3),
@@ -48,18 +53,18 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     camera_para_carrinho : {
 
-        duracao : .6,
+        duracao : 6,
 
         carrinho : null,
 
         camera : {
           posicao : new CatmullRomCurve3([
             new Vector3(8.30, 3.11, -3.98),
-            new Vector3(8.30, 3.11, -3.98),
+            new Vector3(7.30, 3, -3.5),
           ]),
           direcao : new CatmullRomCurve3([
             new Vector3(9.5, 2.4, -2),
-            new Vector3(9.5, 2.4, -2)
+            new Vector3(0, 0, -2)
           ])
         },
     },
@@ -85,27 +90,30 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
   }
 
-  useFrame(({clock}) => {
+  useFrame((state, delta) => {
 
     if (animacao_ativa == "idle" || !carrinho.current || !referencia_camera.current) return
 
-    const proximo_frame = animacao_inversa.current ? 1 - progresso.current : progresso.current 
+    progresso.current += delta
 
-    progresso.current += clock.getElapsedTime()
+    const inverter_animacao = animacao_inversa.current ? 1 : 0 
 
+    const tempo_atual = Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1) - inverter_animacao
+
+    console.log(tempo_atual)
     
     {/* ANIMACAO CAMERA */}
     if (animacao_ativa == "carrinho_chega"){
       const camera = referencia_camera.current
-      camera.position.lerp(new Vector3(8.30, 3.11, -3.98), 0.08)
+      camera.position.lerp(new Vector3(8.30, 3.11, -3.98), 0.1)
       camera.lookAt(new Vector3(9.5, 2.4, -2))
     }
 
-    else if (animacoes[animacao_ativa["camera"]]) {
+    else if (animacoes[animacao_ativa]["camera"]) {
 
-      const localizacao = animacoes[animacao_ativa]["posicao"].getPoint(proximo_frame)
+      const localizacao = animacoes[animacao_ativa]["camera"]["posicao"].getPoint(tempo_atual)
       
-      const direcao = animacoes[animacao_ativa]["direcao"].getPoint(proximo_frame)
+      const direcao = animacoes[animacao_ativa]["camera"]["direcao"].getPoint(tempo_atual)
       
       referencia_camera.current.lookAt(direcao)
 
@@ -113,11 +121,22 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
     }
 
     {/* ANIMACAO CARRINHO */}
-    if (animacoes[animacao_ativa["carrinho"]]) {
+    if (animacoes[animacao_ativa]["carrinho"]) {
       
-      const posicao = animacoes[animacao_ativa["carrinho"]].getPoint(proximo_frame)
+      const posicao = animacoes[animacao_ativa]["carrinho"].getPoint(tempo_atual)
 
-      carrinho.current.position = posicao
+      carrinho.current.position.copy(posicao)
+
+    }
+
+    if (tempo_atual >= 1){
+
+      if (animacao_ativa == "carrinho_chega"){
+
+        set_animacao("camera_para_carrinho")
+        progresso.current = 0
+
+      }
 
     }
 
@@ -126,19 +145,21 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
   const fechar_seguir_caminho = (cena) => {
 
-    set_animacao("idle")
-    set_interface(false)
+    voltar_idle()
     proximo_caminho(cena)
-    set_interface(false)
-    controle_de_camera.current.ativar_controle()
 
   }
 
-  const fechar_seguir_voltar = (cena) => {
+  const fechar_voltar_caminho = (cena) => {
+
+    voltar_idle()
+    voltar_caminho(cena)
+
+  }
+
+  const voltar_idle = () => {
 
     set_animacao("idle")
-    set_interface(false)
-    voltar_caminho(cena)
     set_interface(false)
     controle_de_camera.current.ativar_controle()
 
@@ -162,7 +183,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
         
         <mesh geometry={nodes['Mine_Box_(1)'].geometry} material={materials['Mine1.002']} position={[-0.707, 0.109, 0.441]} />
         
-        <animated.mesh geometry={nodes.Mine_Cart.geometry} ref={carrinho} material={materials['Mine1.002']} position={[-0.026, 0.15, 3]} rotation={[0, -1.571, 0]} />
+        <mesh geometry={nodes.Mine_Cart.geometry} ref={carrinho} material={materials['Mine1.002']} position={[-0.026, 0.15, 3]} rotation={[0, -1.571, 0]} />
         
         <mesh geometry={nodes.Mine_Ore.geometry} material={materials['Mine1.002']} position={[0.746, 0.109, 0.207]} />
         
@@ -185,7 +206,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
         <Interface_mina position={[7,2.7,1]}
           proximo_caminho={fechar_seguir_caminho} 
-          voltar_caminho={fechar_seguir_voltar} />
+          voltar_caminho={fechar_voltar_caminho} />
         
         :<></>
         
