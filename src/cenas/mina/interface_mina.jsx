@@ -2,6 +2,8 @@ import { Html } from "@react-three/drei";
 import { useState } from "react";
 import "./interface_mina.css"
 import { Canvas } from "@react-three/fiber"
+import { OrbitControls, ScrollControls } from "@react-three/drei"
+import Gemas from "./Gemas"
 
 export default function Interface_mina({proximo_caminho, voltar_caminho , ...props}) {
 
@@ -22,6 +24,14 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
         </div>
 
         <Canvas className="canvas-mina">
+
+            < ambientLight intensity={1} />
+
+            < directionalLight position={[2, 0, 3]} intensity={3} />
+
+            <OrbitControls/>
+
+            <Gemas/>
 
         </Canvas>
 

@@ -6,51 +6,97 @@ Command: npx gltfjsx@6.5.3 gemas.glb
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model({ ...props}) {
-  const { nodes, materials } = useGLTF('/gemas.glb')
+export default function Gemas({formato = null ,cor = null, ...props}) {
 
-  const cores = {
+  const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
 
-    
-
-  }
-
-  const formato = {
-
-
+  const material_cores = {
+    vermelho : materials['V_01.001'],
+    azul : materials['V_02.001'],
+    verde : materials['V_03.001'],
+    laranja : materials['V_04.001'],
+    roxo : materials['V_05.001']
 
   }
 
+  const formatos = {
+
+    brilhante : {
+      roxo : nodes.Gemstone_01.geometry,
+      laranja : nodes.Gemstone_01001.geometry,
+      verde : nodes.Gemstone_01002.geometry,
+      azul : nodes.Gemstone_01003.geometry,
+      vermelho : nodes.Gemstone_01004.geometry,      
+    },
+
+    gota : {
+      roxo : nodes.Gemstone_02.geometry,
+      laranja : nodes.Gemstone_02004.geometry,
+      verde : nodes.Gemstone_02003.geometry,
+      azul : nodes.Gemstone_02002.geometry,
+      vermelho : nodes.Gemstone_02001.geometry,
+    },
+
+    almofada : {
+      roxo : nodes.Gemstone_03.geometry,
+      laranja : nodes.Gemstone_03001.geometry,
+      verde : nodes.Gemstone_03002.geometry,
+      azul : nodes.Gemstone_03003.geometry,
+      vermelho : nodes.Gemstone_03004.geometry,
+    },
+
+    esmeralda : {
+      roxo : nodes.Gemstone_04.geometry,
+      laranja : nodes.Gemstone_04001.geometry,
+      verde : nodes.Gemstone_04002.geometry,
+      azul : nodes.Gemstone_04003.geometry,
+      vermelho : nodes.Gemstone_04004.geometry,
+    },
+
+    trapezio : {
+      roxo : nodes.Gemstone_05.geometry,
+      laranja : nodes.Gemstone_05001.geometry,
+      verde : nodes.Gemstone_05002.geometry,
+      azul : nodes.Gemstone_05003.geometry,
+      vermelho : nodes.Gemstone_05004.geometry,
+    }
+
+  }
+
+  const gerar_formato = (formato_base = null, cor = null) => {
+
+    if (!formato_base){
+
+      const formatos_disponiveis = Object.keys(formatos)
+
+      formato_base = formatos_disponiveis[Math.floor(Math.random() * formatos_disponiveis.length)]
+
+    }
+
+    if (!cor){
+
+      const cores_disponiveis = Object.keys(material_cores)
+
+      cor = cores_disponiveis[Math.floor(Math.random() * cores_disponiveis.length)]
+
+    }
+
+    console.log(formato_base, cor)   
+
+    const formatos_disponiveis = formatos[formato_base]
+
+    return [formatos_disponiveis[cor], cor]
+
+  }
+
+  const [formato_escolhido, cor_escolhida] = gerar_formato(formato, cor)
 
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Gemstone_01.geometry} material={materials['V_05.001']}  rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_01001.geometry} material={materials['V_04.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_01002.geometry} material={materials['V_03.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_01003.geometry} material={materials['V_02.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_01004.geometry} material={materials['V_01.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_02.geometry} material={materials['V_05.001']}  rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_02001.geometry} material={materials['V_04.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_02002.geometry} material={materials['V_03.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_02003.geometry} material={materials['V_02.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_02004.geometry} material={materials['V_01.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_03.geometry} material={materials['V_05.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_03001.geometry} material={materials['V_04.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_03002.geometry} material={materials['V_03.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_03003.geometry} material={materials['V_02.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_03004.geometry} material={materials['V_01.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_04.geometry} material={materials['V_05.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_04001.geometry} material={materials['V_04.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_04002.geometry} material={materials['V_03.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_04003.geometry} material={materials['V_02.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_04004.geometry} material={materials['V_01.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_05.geometry} material={materials['V_05.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_05001.geometry} material={materials['V_04.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_05002.geometry} material={materials['V_03.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_05003.geometry} material={materials['V_02.001']} rotation={[0.239, 0, 0]} />
-      <mesh geometry={nodes.Gemstone_05004.geometry} material={materials['V_01.001']} rotation={[0.239, 0, 0]} />
+      <mesh geometry={formato_escolhido} material={material_cores[cor_escolhida]}  rotation={[0.239, 0, 0]} />
+
     </group>
   )
 }
 
-useGLTF.preload('/gemas.glb')
+useGLTF.preload('/modelos_cenas/mina/gemas.glb')
