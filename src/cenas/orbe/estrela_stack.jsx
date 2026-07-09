@@ -45,7 +45,6 @@ export default function Estrela_stack({ nome, cor, posicao }) {
 
     })
 
-
     return (
 
         <group position={posicao}>
