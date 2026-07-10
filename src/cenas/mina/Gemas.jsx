@@ -5,7 +5,6 @@ Command: npx gltfjsx@6.5.3 gemas.glb
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 
@@ -14,6 +13,8 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
   const atraso = useRef(Math.random() * Math.PI * 2)
   const brilho = useRef(null)
+  const gema = useRef(null)
+  const hover = useRef(0)
 
   const material_cores = {
     vermelho : materials['V_01.001'],
@@ -98,26 +99,25 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   useFrame(({clock}) => {
 
-    if (!brilho.current || !gema.current) return
-
+    if (!gema.current) return
+    
     const delta = clock.getElapsedTime()
 
-    brilho.current.intensity = Math.sin(delta + atraso.current) * 1 + 1.5
+    gema.current.rotation.y += (.005 + hover.current * .008)
+
+    gema.current.emissiveIntensity = Math.sin(delta) * 50.5
 
   })
 
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={formato_escolhido} material={material_cores[cor_escolhida]}/>
-      <EffectComposer>
-        <Bloom
-          ref={brilho}
-          intensity={brilho.current}
-          luminanceThreshold={0}
-          luminanceSmoothing={0}
-        />
+      <mesh 
+      ref={gema}
+      geometry={formato_escolhido} 
+      material={material_cores[cor_escolhida]}
+      onPointerOver={() => {hover.current = 1}}
+      onPointerLeave={() => {hover.current = 0}}/>
 
-      </EffectComposer>
     </group>
   )
 }

@@ -75,6 +75,25 @@
 
 }
 
+.informacoes-projeto {
+
+    background-color: rgba(240, 255, 255, 0.692);
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    color: white;
+    align-self: center;
+    justify-self: center;
+    top: 10%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1;
+
+}
+
 .controle-caminhos {
 
     width: 100%;
