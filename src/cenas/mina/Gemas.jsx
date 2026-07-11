@@ -7,6 +7,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { useMemo } from 'react'
 
 export default function Gemas({formato = null ,cor = null, ...props}) {
 
@@ -97,6 +98,18 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   const [formato_escolhido, cor_escolhida] = gerar_formato(formato, cor)
 
+  const baseMaterial = material_cores[cor] || materials['V_01.001'];
+
+  const material = useMemo(() => {
+    const newMat = baseMaterial.clone();
+    // Make the glow color 1.8x brighter than the base color
+    const emissiveColor = baseMaterial.color.clone();
+    emissiveColor.multiplyScalar(1.8); 
+    newMat.emissive = emissiveColor;
+    newMat.emissiveIntensity = 0.4; // Start with a subtle glow
+    return newMat;
+  }, [baseMaterial])
+
   useFrame(({clock}) => {
 
     if (!gema.current) return
@@ -105,8 +118,6 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
     gema.current.rotation.y += (.005 + hover.current * .008)
 
-    gema.current.emissiveIntensity = Math.sin(delta) * 50.5
-
   })
 
   return (
@@ -114,7 +125,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
       <mesh 
       ref={gema}
       geometry={formato_escolhido} 
-      material={material_cores[cor_escolhida]}
+      material={material}
       onPointerOver={() => {hover.current = 1}}
       onPointerLeave={() => {hover.current = 0}}/>
 
