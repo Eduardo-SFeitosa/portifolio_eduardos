@@ -5,17 +5,25 @@ Command: npx gltfjsx@6.5.3 gemas.glb
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useMemo } from 'react'
+import Brilho from '../../componentes_auxiliares/brilho'
 
 export default function Gemas({formato = null ,cor = null, ...props}) {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
   const atraso = useRef(Math.random() * Math.PI * 2)
-  const brilho = useRef(null)
+  const brilho = useRef()
   const gema = useRef(null)
   const hover = useRef(0)
+
+  const cores_hex = {
+    vermelho: "#ff4444",
+    azul: "#4488ff",
+    verde: "#44ff88",
+    laranja: "#ff8844",
+    roxo: "#aa44ff"
+  }
 
   const material_cores = {
     vermelho : materials['V_01.001'],
@@ -98,17 +106,9 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   const [formato_escolhido, cor_escolhida] = gerar_formato(formato, cor)
 
-  const baseMaterial = material_cores[cor] || materials['V_01.001'];
-
   const material = useMemo(() => {
-    const newMat = baseMaterial.clone();
-    // Make the glow color 1.8x brighter than the base color
-    const emissiveColor = baseMaterial.color.clone();
-    emissiveColor.multiplyScalar(1.8); 
-    newMat.emissive = emissiveColor;
-    newMat.emissiveIntensity = 0.4; // Start with a subtle glow
-    return newMat;
-  }, [baseMaterial])
+  return material_cores[cor_escolhida].clone();
+  }, [cor_escolhida]);
 
   useFrame(({clock}) => {
 
@@ -116,7 +116,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
     
     const delta = clock.getElapsedTime()
 
-    gema.current.rotation.y += (.005 + hover.current * .008)
+    gema.current.rotation.y += (.005 * Math.random() + hover.current * .008 )
 
   })
 
@@ -127,7 +127,24 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
       geometry={formato_escolhido} 
       material={material}
       onPointerOver={() => {hover.current = 1}}
-      onPointerLeave={() => {hover.current = 0}}/>
+      onPointerLeave={() => { hover.current = 0 }}/>
+
+      <mesh 
+      
+      raycast={() => null}>
+
+        <sphereGeometry args={[3, 3, 3]} />
+
+        <Brilho
+        falloff={3.8}
+        glowInternalRadius={5.1}
+        glowColor={cores_hex[cor_escolhida]}
+        glowSharpness={2.3}
+        side={"THREE.FrontSide"}
+        opacity={.50}
+        depthTest={false}
+        />
+      </mesh>
 
     </group>
   )

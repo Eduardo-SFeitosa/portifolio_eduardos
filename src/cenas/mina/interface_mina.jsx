@@ -50,9 +50,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
         </div>:
         null}
         
-        <Canvas className="canvas-mina">
-
-            <EffectComposer>
+            <Canvas className="canvas-mina">
 
                 < ambientLight intensity={1} />
 
@@ -73,15 +71,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
                         onPointerDown={() => set_projeto(projeto.nome)}
                     />
                 })}
-
-                <Bloom
-                    intensity={3}
-                    luminanceThreshold={0}
-                    luminanceSmoothing={0}
-                />
-
-            </EffectComposer>
-        </Canvas>
+            </Canvas>
 
         <div className="controle-caminhos">
 
