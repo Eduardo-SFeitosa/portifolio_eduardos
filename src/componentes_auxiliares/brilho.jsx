@@ -4,7 +4,7 @@ import { extend } from '@react-three/fiber'
 import { Color, AdditiveBlending, FrontSide, BackSide, DoubleSide } from 'three'
 
 // Cria a classe UMA VEZ
-const BrilhoImpl = shaderMaterial(
+const FakeGlowMaterialImpl = shaderMaterial(
   {
     falloffAmount: 0.1,
     glowInternalRadius: 6.0,
@@ -66,9 +66,9 @@ const BrilhoImpl = shaderMaterial(
   `
 )
 
-extend({ BrilhoImpl })
+extend({ FakeGlowMaterialImpl })
 
-export default function Brilho({
+export default function FakeGlowMaterial({
   falloff = 0.1,
   glowInternalRadius = 6,
   glowColor = '#00ff00',
@@ -85,7 +85,7 @@ export default function Brilho({
   }
 
   return (
-    <BrilhoImpl
+    <fakeGlowMaterialImpl
       falloffAmount={falloff}
       glowInternalRadius={glowInternalRadius}
       glowColor={new Color(glowColor)}
@@ -99,7 +99,7 @@ export default function Brilho({
   )
 }
 
-Brilho.propTypes = {
+FakeGlowMaterial.propTypes = {
   falloff: PropTypes.number,
   glowInternalRadius: PropTypes.number,
   glowColor: PropTypes.string,

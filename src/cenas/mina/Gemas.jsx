@@ -13,7 +13,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
   const atraso = useRef(Math.random() * Math.PI * 2)
-  const brilho = useRef()
+  const brilho = useRef(null)
   const gema = useRef(null)
   const hover = useRef(0)
 
@@ -112,11 +112,15 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   useFrame(({clock}) => {
 
-    if (!gema.current) return
+    if (!gema.current || !brilho.current) return
     
     const delta = clock.getElapsedTime()
 
     gema.current.rotation.y += (.005 * Math.random() + hover.current * .008 )
+
+    const escala_brilho = Math.sin(delta + atraso.current) * .5 + 1.5
+
+    brilho.current.scale.set(escala_brilho, escala_brilho, escala_brilho)
 
   })
 
@@ -130,7 +134,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
       onPointerLeave={() => { hover.current = 0 }}/>
 
       <mesh 
-      
+      ref={brilho}
       raycast={() => null}>
 
         <sphereGeometry args={[3, 3, 3]} />
