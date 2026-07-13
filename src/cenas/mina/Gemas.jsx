@@ -12,9 +12,10 @@ import Brilho from '../../componentes_auxiliares/brilho'
 export default function Gemas({formato = null ,cor = null, ...props}) {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
+
   const atraso = useRef(Math.random() * Math.PI * 2)
-  const brilho = useRef(null)
-  const gema = useRef(null)
+  const glow = useRef(null)
+  const luz = useRef(null)
   const hover = useRef(0)
 
   const cores_hex = {
@@ -112,29 +113,29 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   useFrame(({clock}) => {
 
-    if (!gema.current || !brilho.current) return
+    if (!glow.current) return
     
     const delta = clock.getElapsedTime()
 
-    gema.current.rotation.y += (.005 * Math.random() + hover.current * .008 )
+    const escala_brilho = Math.sin(delta + atraso.current) * .5 + 1.5 + hover.current * 1
 
-    const escala_brilho = Math.sin(delta + atraso.current) * .5 + 1.5
+    glow.current.scale.set(escala_brilho, escala_brilho, escala_brilho)
 
-    brilho.current.scale.set(escala_brilho, escala_brilho, escala_brilho)
+    luz.current.intensity = Math.sin(delta + atraso.current) * .5 + 1.5 + hover.current * 1
 
   })
 
   return (
     <group {...props} dispose={null}>
+      
       <mesh 
-      ref={gema}
       geometry={formato_escolhido} 
       material={material}
       onPointerOver={() => {hover.current = 1}}
       onPointerLeave={() => { hover.current = 0 }}/>
 
       <mesh 
-      ref={brilho}
+      ref={glow}
       raycast={() => null}>
 
         <sphereGeometry args={[3, 3, 3]} />
@@ -149,6 +150,14 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
         depthTest={false}
         />
       </mesh>
+
+      <pointLight 
+        ref={luz}
+        color={cores_hex[cor_escolhida]}
+        intensity={10} 
+        decay={2} 
+        castShadow 
+      />
 
     </group>
   )

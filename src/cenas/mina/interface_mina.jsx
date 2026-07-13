@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import Gemas from "./Gemas"
+import { Parede } from "./Parede";
 
 export default function Interface_mina({proximo_caminho, voltar_caminho , ...props}) {
 
@@ -13,6 +14,8 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
     const projetos = [
         {  
             nome: "Mine Diver", 
+            posicao_gema : [-2,1.5,.1], 
+            rotacao_gema : [8.5,5,0],
             imagem: "/projetos/diver.jpg", 
             descricao: "Jogo 2D de exploração de cavernas",
             opiniao: "Foi onde aprendi a usar física no desenvolvimento de jogos.",
@@ -23,12 +26,14 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
         },
         {  
             nome: "Shrimp Shack", 
+            posicao_gema : [-.52,1.2,1.13],
+            rotacao_gema : [7,5.6,.5],
             imagem: "/projetos/shrimp.jpg", 
             descricao: "Simulador de gerenciamento de restaurante",
             opiniao: "Um projeto divertido para explorar sistemas de UI complexos.",
             critica: "A curva de aprendizado era muito alta no início.",
             melhoria: "Adicionei um mini-tutorial guiado e dicas de ferramentas.",
-            formato: "almofada", 
+            formato: "gota", 
             cor: "laranja" 
         }
     ]
@@ -60,17 +65,19 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
                 {projetos.map((projeto, index) => {
 
-                    const posicao_gema = [index * 3, 0, 0]
-
                     return <Gemas
+                        scale={.2}
                         key={projeto.nome}
-                        position={posicao_gema}
+                        position={projeto.posicao_gema}
+                        rotation={projeto.rotacao_gema}
                         selecionado={projeto_escolhido === projeto.nome}
                         formato={projeto.formato}
                         cor={projeto.cor}
                         onPointerDown={() => set_projeto(projeto.nome)}
                     />
                 })}
+
+                <Parede/>
             </Canvas>
 
         <div className="controle-caminhos">
