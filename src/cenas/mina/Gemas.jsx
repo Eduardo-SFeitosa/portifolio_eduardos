@@ -97,8 +97,6 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
     }
 
-    console.log(formato_base, cor)   
-
     const formatos_disponiveis = formatos[formato_base]
 
     return [formatos_disponiveis[cor], cor]
@@ -108,7 +106,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
   const [formato_escolhido, cor_escolhida] = gerar_formato(formato, cor)
 
   const material = useMemo(() => {
-  return material_cores[cor_escolhida].clone();
+    return material_cores[cor_escolhida].clone();
   }, [cor_escolhida]);
 
   useFrame(({clock}) => {

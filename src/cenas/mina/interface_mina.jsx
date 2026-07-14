@@ -1,7 +1,7 @@
 import { Html } from "@react-three/drei";
-import { useRef, useState, useEffect } from "react";
-import "./interface_mina.css"
-import { Canvas } from "@react-three/fiber"
+import { useState, useEffect } from "react";
+import "./interface_mina.scss"
+import { Canvas, useFrame } from "@react-three/fiber"
 import { View } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 import Gemas from "./Gemas"
@@ -15,10 +15,11 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
     const projetos = [
         {  
+            id : 1,
             nome: "Mine Diver", 
             posicao_gema : [-2,1.5,.1], 
             rotacao_gema : [8.5,5,0],
-            imagem: "/projetos/diver.jpg", 
+            imagem: "/imagens_cenas/mina/mina.png", 
             descricao: "Jogo 2D de exploração de cavernas",
             opiniao: "Foi onde aprendi a usar física no desenvolvimento de jogos.",
             critica: "O loop do jogo ficava muito repetitivo.",
@@ -27,10 +28,11 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
             cor: "azul" 
         },
         {  
+            id : 2,
             nome: "Shrimp Shack", 
-            posicao_gema : [-.52,1.2,1.15],
+            posicao_gema : [-.43,1.3,.8],
             rotacao_gema : [7,5.6,.5],
-            imagem: "/projetos/shrimp.jpg", 
+            imagem: "/imagens_cenas/mina/shrimp.png", 
             descricao: "Simulador de gerenciamento de restaurante",
             opiniao: "Um projeto divertido para explorar sistemas de UI complexos.",
             critica: "A curva de aprendizado era muito alta no início.",
@@ -42,14 +44,13 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
     useEffect(() => {
         
-        if (!referencia_camera ) return
+        if (!referencia_camera) return
 
-        referencia_camera.lookAt(new Vector3(1.5, -1.6, -0.6))
+        referencia_camera.lookAt(new Vector3(1.7, -1.6, -0.6))
 
-        referencia_camera.position.copy(new Vector3(-1.6, 1.9 ,2))
+        referencia_camera.position.copy(new Vector3(-1.5, 1.7 ,2))
 
     }, [referencia_camera])
-    
 
     return (
     
@@ -59,15 +60,17 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
     zIndexRange={[100, 0]} 
     style={{ position: "static" }}>
 
-        {projeto_escolhido ? 
+        {projeto_escolhido != null ? 
         <div className="informacoes-projeto" onClick={() => set_projeto(null)}>
 
-            <h1>AAAAAA</h1>
+            <h1 className="titulo">{projetos[projeto_escolhido].nome}</h1>
+
+            <img className="imagem" src={projetos[projeto_escolhido].imagem} alt="" />
 
         </div>:
         null}
         
-            <Canvas className="canvas-mina" onCreated={(state) => {
+        <Canvas className="canvas-mina" onCreated={(state) => {
             set_camera(state.camera)
             }}>
 
@@ -85,12 +88,14 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
                         selecionado={projeto_escolhido === projeto.nome}
                         formato={projeto.formato}
                         cor={projeto.cor}
-                        onPointerDown={() => set_projeto(projeto.nome)}
+                        onPointerDown={() => {
+                            set_projeto(index)
+                        }}
                     />
                 })}
 
                 <Parede/>
-            </Canvas>
+        </Canvas>
 
         <div className="controle-caminhos">
 

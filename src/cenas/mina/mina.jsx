@@ -93,6 +93,14 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
     }
   }
 
+  const animacoes_nome = [
+    "idle",
+    "carrinho_chega",
+    "camera_para_carrinho",
+    "entrando_mina",
+    "finalizado",
+  ]
+
   useFrame((state, delta) => {
 
     if (animacao_ativa == "idle" || animacao_ativa == "finalizado" || !carrinho.current || !referencia_camera.current) return
@@ -102,8 +110,6 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
     const inverter_animacao = animacao_inversa.current ? 1 : 0 
 
     const tempo_atual = Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1) - inverter_animacao
-
-    console.log(tempo_atual)
     
     {/* ANIMACAO CAMERA */}
     if (animacao_ativa == "carrinho_chega"){
@@ -134,25 +140,17 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     if (tempo_atual >= 1){
 
-      if (animacao_ativa == "carrinho_chega"){
-
-        set_animacao("camera_para_carrinho")
-        progresso.current = 0
-      }
-
-      else if (animacao_ativa == "camera_para_carrinho"){
-
-        set_animacao("entrando_mina")
-        progresso.current = 0
-      }
-
-      else if (animacao_ativa == "entrando_mina"){
-
-        set_animacao("finalizado")
+      if (animacao_ativa == "entrando_mina"){
         set_interface(true)
-        progresso.current = 0
         iluminacao.current = 0
       }
+
+
+      const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]
+
+      set_animacao(animacao_escolhida)
+
+      progresso.current = 0
 
     }
 
@@ -167,18 +165,17 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
   const fechar_voltar_caminho = (cena) => {
 
-    voltar_idle()
+    set_interface(false)
     voltar_caminho(cena)
 
   }
 
   const voltar_idle = () => {
-
     set_animacao("idle")
-    set_interface(false)
+    
     controle_de_camera.current.ativar_controle()
     progresso.current = 0
-    iluminacao.current
+    iluminacao.current = 1
 
   }
   
