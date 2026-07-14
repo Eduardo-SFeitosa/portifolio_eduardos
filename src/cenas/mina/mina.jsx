@@ -42,7 +42,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
   const animacoes = {
 
     carrinho_chega : {
-        duracao : 2,
+        duracao : .2,
 
         carrinho : new CatmullRomCurve3([
           new Vector3(-0.026, 0.15, 3),
@@ -54,7 +54,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     camera_para_carrinho : {
 
-        duracao : 3,
+        duracao : .3,
 
         carrinho : null,
 
@@ -72,7 +72,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     entrando_mina : {
 
-      duracao : 2,
+      duracao : .3,
 
       carrinho : new CatmullRomCurve3([
         new Vector3(-0.026, 0.15, 0),
@@ -221,9 +221,9 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
       {/* interface */}
       {interface_ativada ?
 
-        <Interface_mina position={[4.4,3,5]}
-          proximo_caminho={fechar_seguir_caminho} 
-          voltar_caminho={fechar_voltar_caminho} />
+        <Interface_mina position={[5,3.09,5]}
+        proximo_caminho={fechar_seguir_caminho} 
+        voltar_caminho={fechar_voltar_caminho} />
         
         :<></>
         

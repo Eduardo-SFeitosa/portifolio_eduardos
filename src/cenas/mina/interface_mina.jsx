@@ -1,14 +1,16 @@
 import { Html } from "@react-three/drei";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./interface_mina.css"
 import { Canvas } from "@react-three/fiber"
+import { View } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
-import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import Gemas from "./Gemas"
 import { Parede } from "./Parede";
+import { Vector3 } from "three";
 
 export default function Interface_mina({proximo_caminho, voltar_caminho , ...props}) {
 
+    const [referencia_camera, set_camera] = useState(null)
     const [projeto_escolhido, set_projeto] = useState(null)
 
     const projetos = [
@@ -26,7 +28,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
         },
         {  
             nome: "Shrimp Shack", 
-            posicao_gema : [-.52,1.2,1.13],
+            posicao_gema : [-.52,1.2,1.15],
             rotacao_gema : [7,5.6,.5],
             imagem: "/projetos/shrimp.jpg", 
             descricao: "Simulador de gerenciamento de restaurante",
@@ -38,14 +40,24 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
         }
     ]
 
+    useEffect(() => {
+        
+        if (!referencia_camera ) return
+
+        referencia_camera.lookAt(new Vector3(1.5, -1.6, -0.6))
+
+        referencia_camera.position.copy(new Vector3(-1.6, 1.9 ,2))
+
+    }, [referencia_camera])
+    
+
     return (
     
     <Html 
     {...props}
     className={"interface-mina"}  
     zIndexRange={[100, 0]} 
-    style={{ position: "static" }} 
-    scale={0.5}>
+    style={{ position: "static" }}>
 
         {projeto_escolhido ? 
         <div className="informacoes-projeto" onClick={() => set_projeto(null)}>
@@ -55,13 +67,13 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
         </div>:
         null}
         
-            <Canvas className="canvas-mina">
+            <Canvas className="canvas-mina" onCreated={(state) => {
+            set_camera(state.camera)
+            }}>
 
                 < ambientLight intensity={1} />
 
                 < directionalLight position={[2, 0, 3]} intensity={3} />
-
-                <OrbitControls />
 
                 {projetos.map((projeto, index) => {
 

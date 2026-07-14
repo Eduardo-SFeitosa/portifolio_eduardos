@@ -1,9 +1,7 @@
 import "./App.css"
 
 import { useState, useEffect, useRef } from "react"
-
 import { Canvas } from "@react-three/fiber"
-
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 
 import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
@@ -268,7 +266,7 @@ function App() {
           
       </Canvas>
 
-      <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0,}}>
+      <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0, zIndex:15}}>
 
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >SOBRE</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
