@@ -42,7 +42,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
   const animacoes = {
 
     carrinho_chega : {
-        duracao : 2,
+        duracao : 1,
 
         carrinho : new CatmullRomCurve3([
           new Vector3(-0.026, 0.15, 3),
@@ -54,7 +54,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     camera_para_carrinho : {
 
-        duracao : 3,
+        duracao : 1,
 
         carrinho : null,
 
@@ -72,7 +72,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     entrando_mina : {
 
-      duracao : 3,
+      duracao : 1,
 
       carrinho : new CatmullRomCurve3([
         new Vector3(-0.026, 0.15, 0),
@@ -111,8 +111,6 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     const tempo_atual = inverter_animacao ? 1 - Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1)
     : Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1)
-
-    console.log(tempo_atual)
     
     {/* ANIMACAO CAMERA */}
     if (animacao_ativa == "carrinho_chega"){
@@ -150,7 +148,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
       if (animacao_ativa == "carrinho_chega" && inverter_animacao){
 
-        if (proximo_caminho.current) proximo_caminho("mina") 
+        if (avancar_jornada.current) proximo_caminho("mina") 
         else voltar_caminho("mina")
         
         voltar_idle()

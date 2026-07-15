@@ -1,12 +1,13 @@
 import { Html } from "@react-three/drei";
-import { useState, useEffect } from "react";
-import "./interface_mina.scss"
+import { useState, useEffect, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber"
 import { View } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
-import Gemas from "./Gemas"
 import { Parede } from "./Parede";
 import { Vector3 } from "three";
+
+import "./interface_mina.scss"
+import Gemas from "./Gemas"
 
 export default function Interface_mina({proximo_caminho, voltar_caminho , ...props}) {
 
@@ -60,15 +61,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
     zIndexRange={[100, 0]} 
     style={{ position: "static" }}>
 
-        {projeto_escolhido != null ? 
-        <div className="informacoes-projeto" onClick={() => set_projeto(null)}>
-
-            <h1 className="titulo">{projetos[projeto_escolhido].nome}</h1>
-
-            <img className="imagem" src={projetos[projeto_escolhido].imagem} alt="" />
-
-        </div>:
-        null}
+        
         
         <Canvas className="canvas-mina" onCreated={(state) => {
             set_camera(state.camera)
@@ -76,14 +69,16 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
                 < ambientLight intensity={1} />
 
-                < directionalLight position={[2, 0, 3]} intensity={3} />
+                < directionalLight position={[2, 0, 3]} intensity={.2} />
 
                 {projetos.map((projeto, index) => {
 
                     return <Gemas
+                        projeto_escolhido={projeto_escolhido}
                         scale={.2}
                         key={projeto.nome}
-                        position={projeto.posicao_gema}
+                        posicao_inicial={projeto.posicao_gema}
+                        posicao_final={[-1.5, 1.7 ,2]}
                         rotation={projeto.rotacao_gema}
                         selecionado={projeto_escolhido === projeto.nome}
                         formato={projeto.formato}

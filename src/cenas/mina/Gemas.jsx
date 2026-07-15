@@ -5,18 +5,41 @@ Command: npx gltfjsx@6.5.3 gemas.glb
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import Brilho from '../../componentes_auxiliares/brilho'
+import { Vector3 } from 'three'
 
-export default function Gemas({formato = null ,cor = null, ...props}) {
+const Gemas = ({formato = null ,cor = null, projeto_escolhido , ...props}) => {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
 
   const atraso = useRef(Math.random() * Math.PI * 2)
+  const gema = useRef(null)
   const glow = useRef(null)
   const luz = useRef(null)
   const hover = useRef(0)
+  const posicao_alvo = useRef()
+  const em_animacao = useRef(false)
+
+  const posicao_final = new Vector3(...props.posicao_final)
+  const posicao_inicial = new Vector3(...props.posicao_inicial)
+
+  useEffect(() => {
+
+    console.log(posicao_alvo.current, posicao_final)
+
+    if (posicao_alvo.current && posicao_alvo.current.equals(posicao_final)) {
+      console.log("AAAA")
+
+      console.log(posicao_alvo.current, posicao_final, posicao_alvo.current.equals(posicao_final))
+
+      posicao_alvo.current = posicao_inicial
+      em_animacao.current = true
+
+    }
+
+  }, [projeto_escolhido])
 
   const cores_hex = {
     vermelho: "#ff4444",
@@ -107,7 +130,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
   const material = useMemo(() => {
     return material_cores[cor_escolhida].clone();
-  }, [cor_escolhida]);
+  }, [cor_escolhida])
 
   useFrame(({clock}) => {
 
@@ -121,16 +144,28 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
 
     luz.current.intensity = Math.sin(delta + atraso.current) * .5 + 1.5 + hover.current * 1
 
+    if (!em_animacao.current  || !gema.current) return
+
+    gema.current.position.lerp(posicao_alvo.current, .01) 
+
+    if (gema.current.position.distanceTo(posicao_alvo.current) < 0.01){
+
+      em_animacao.current = false
+
+    }
   })
 
   return (
-    <group {...props} dispose={null}>
+    <group ref={gema} position={props.posicao_inicial} {...props} dispose={null}>
       
       <mesh 
       geometry={formato_escolhido} 
       material={material}
       onPointerOver={() => {hover.current = 1}}
-      onPointerLeave={() => { hover.current = 0 }}/>
+      onPointerLeave={() => { hover.current = 0 }}
+      onPointerDown={() => 
+      {posicao_alvo.current = posicao_final 
+      em_animacao.current = true}}/>
 
       <mesh 
       ref={glow}
@@ -160,5 +195,7 @@ export default function Gemas({formato = null ,cor = null, ...props}) {
     </group>
   )
 }
+
+export default Gemas
 
 useGLTF.preload('/modelos_cenas/mina/gemas.glb')
