@@ -99,9 +99,9 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
         <div className="controle-caminhos">
 
-            <h1 className="botao" onClick={() => voltar_caminho("mina")}>VOLTAR PARA STACKS</h1>
+            <h1 className="botao" onClick={() => voltar_caminho()}>VOLTAR PARA STACKS</h1>
 
-            <h1 className="botao" onClick={() => proximo_caminho("mina")}>AVANCAR PARA CONTATO</h1>
+            <h1 className="botao" onClick={() => proximo_caminho()}>AVANCAR PARA CONTATO</h1>
 
         </div>
     

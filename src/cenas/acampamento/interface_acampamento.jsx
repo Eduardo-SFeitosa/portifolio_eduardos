@@ -25,10 +25,6 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
 
-    useFrame(() => {
-        console.log(progresso_atual)
-    })
-
     return (
     <Html 
     {...props}

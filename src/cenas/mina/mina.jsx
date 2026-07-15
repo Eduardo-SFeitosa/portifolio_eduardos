@@ -17,10 +17,10 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
   const [animacao_ativa, set_animacao] = useState("idle")
 
   const carrinho = useRef(null)
-
   const animacao_inversa = useRef(false)
   const iluminacao = useRef(15)
   const progresso = useRef(0)
+  const avancar_jornada = useRef(null)
 
   useEffect(() => {
     
@@ -42,7 +42,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
   const animacoes = {
 
     carrinho_chega : {
-        duracao : .2,
+        duracao : 2,
 
         carrinho : new CatmullRomCurve3([
           new Vector3(-0.026, 0.15, 3),
@@ -54,7 +54,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     camera_para_carrinho : {
 
-        duracao : .3,
+        duracao : 3,
 
         carrinho : null,
 
@@ -72,7 +72,7 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     entrando_mina : {
 
-      duracao : .3,
+      duracao : 3,
 
       carrinho : new CatmullRomCurve3([
         new Vector3(-0.026, 0.15, 0),
@@ -107,9 +107,12 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     progresso.current += delta
 
-    const inverter_animacao = animacao_inversa.current ? 1 : 0 
+    const inverter_animacao = animacao_inversa.current == 1 ? 1 : 0 
 
-    const tempo_atual = Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1) - inverter_animacao
+    const tempo_atual = inverter_animacao ? 1 - Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1)
+    : Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1)
+
+    console.log(tempo_atual)
     
     {/* ANIMACAO CAMERA */}
     if (animacao_ativa == "carrinho_chega"){
@@ -138,13 +141,23 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
     }
 
-    if (tempo_atual >= 1){
+    if (tempo_atual >= 1 || tempo_atual <= 0 && inverter_animacao){
 
-      if (animacao_ativa == "entrando_mina"){
+      if (animacao_ativa == "entrando_mina" && !inverter_animacao){
         set_interface(true)
         iluminacao.current = 0
       }
 
+      if (animacao_ativa == "carrinho_chega" && inverter_animacao){
+
+        if (proximo_caminho.current) proximo_caminho("mina") 
+        else voltar_caminho("mina")
+        
+        voltar_idle()
+
+        return
+
+      }
 
       const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]
 
@@ -156,26 +169,33 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
 
   })
 
-  const fechar_seguir_caminho = (cena) => {
+  const fechar_seguir_caminho = () => {
 
-    voltar_idle()
-    proximo_caminho(cena)
+    set_interface(false)
+    avancar_jornada.current = true
+    animacao_inversa.current = 1
+    progresso.current = 0
+    set_animacao(animacoes_nome[animacoes_nome.indexOf(animacao_ativa) - 1])
 
   }
 
-  const fechar_voltar_caminho = (cena) => {
+  const fechar_voltar_caminho = () => {
 
     set_interface(false)
-    voltar_caminho(cena)
+    avancar_jornada.current = false
+    animacao_inversa.current = 1
+    progresso.current = 0
+    set_animacao(animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + - 1])
 
   }
 
   const voltar_idle = () => {
     set_animacao("idle")
-    
+    set_interface(false)
     controle_de_camera.current.ativar_controle()
     progresso.current = 0
     iluminacao.current = 1
+    animacao_inversa.current = 0
 
   }
   
