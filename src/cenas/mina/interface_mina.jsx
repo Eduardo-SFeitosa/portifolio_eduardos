@@ -13,6 +13,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
     const [referencia_camera, set_camera] = useState(null)
     const [projeto_escolhido, set_projeto] = useState(null)
+    const [interface_visivel, set_interface] = useState(false)
 
     const projetos = [
         {  
@@ -21,10 +22,10 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
             posicao_gema : [-2,1.5,.1], 
             rotacao_gema : [8.5,5,0],
             imagem: "/imagens_cenas/mina/mina.png", 
+            link : "https://gem-sheep.itch.io/mine-diver",
+            funcao : "Programador, designer, compositor SFX",
+            grupo : "Projeto proprio",
             descricao: "Jogo 2D de exploração de cavernas",
-            opiniao: "Foi onde aprendi a usar física no desenvolvimento de jogos.",
-            critica: "O loop do jogo ficava muito repetitivo.",
-            melhoria: "Implementei um sistema de eventos aleatórios e power-ups.",
             formato: "esmeralda", 
             cor: "azul" 
         },
@@ -34,10 +35,10 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
             posicao_gema : [-.43,1.3,.8],
             rotacao_gema : [7,5.6,.5],
             imagem: "/imagens_cenas/mina/shrimp.png", 
+            link : "https://milqmochi.itch.io/shrimp-shack",
+            funcao : "Programador e deisgner",
+            grupo : "Moon Shrimp Studio",
             descricao: "Simulador de gerenciamento de restaurante",
-            opiniao: "Um projeto divertido para explorar sistemas de UI complexos.",
-            critica: "A curva de aprendizado era muito alta no início.",
-            melhoria: "Adicionei um mini-tutorial guiado e dicas de ferramentas.",
             formato: "gota", 
             cor: "laranja" 
         }
@@ -61,11 +62,15 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
     zIndexRange={[100, 0]} 
     style={{ position: "static" }}>
 
-        {projeto_escolhido != null ? <div className="informacoes-projeto" onClick={() => set_projeto(null)}> 
+        {interface_visivel && projeto_escolhido != null ? <div className="informacoes-projeto"> 
             
             <h1 className="titulo">{projetos[projeto_escolhido].nome}</h1> 
             
-            <img className="imagem" src={projetos[projeto_escolhido].imagem} alt="" /> 
+            <a href={projetos[projeto_escolhido].link} target="_blank">
+                <img className="imagem" src={projetos[projeto_escolhido].imagem} alt="" /> 
+            </a>
+
+            <h1 className="botao-fechar" onClick={() => set_projeto(null)} >FEHCAR PROJETO</h1>
             
         </div> 
         : null}
@@ -91,7 +96,9 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
                         selecionado={projeto_escolhido === projeto.nome}
                         formato={projeto.formato}
                         cor={projeto.cor}
+                        set_interface={set_interface}
                         onPointerDown={() => {
+                            console.log("ESCOLHIDO ",projetos[index])
                             set_projeto(index)
                         }}
                     />

@@ -11,7 +11,7 @@ import Brilho from '../../componentes_auxiliares/brilho'
 import { Vector3 } from 'three'
 import { MathUtils } from 'three'
 
-const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhido , ...props}) => {
+const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhido, set_interface , ...props}) => {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
 
@@ -105,6 +105,7 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
       posicao_alvo.current = posicao_inicial 
       rotacao_alvo.current = rotacao_inicial
       em_animacao.current = true
+      set_interface(false)
 
     }
   }, [projeto_escolhido])
@@ -165,9 +166,11 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
     gema_rotacao.y = MathUtils.lerp(gema_rotacao.y, rotacao_alvo.current.y, 0.025)
     gema_rotacao.z = MathUtils.lerp(gema_rotacao.z, rotacao_alvo.current.z, 0.025)
 
-    if (gema.current.position.distanceTo(posicao_alvo.current) < 0.01 && gema_rotacao.distanceTo(rotacao_alvo.current) < 0.01 ){
+    if (gema.current.position.distanceTo(posicao_alvo.current) < 0.01){
 
       em_animacao.current = false
+
+      if (posicao_final.equals(posicao_alvo.current)) set_interface(true)
 
     }
   })
