@@ -10,7 +10,7 @@ import { useFrame } from '@react-three/fiber'
 import Brilho from '../../componentes_auxiliares/brilho'
 import { Vector3 } from 'three'
 
-const Gemas = ({formato = null ,cor = null, projeto_escolhido , ...props}) => {
+const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...props}) => {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
 
@@ -19,26 +19,29 @@ const Gemas = ({formato = null ,cor = null, projeto_escolhido , ...props}) => {
   const glow = useRef(null)
   const luz = useRef(null)
   const hover = useRef(0)
-  const posicao_alvo = useRef()
   const em_animacao = useRef(false)
 
   const posicao_final = new Vector3(...props.posicao_final)
   const posicao_inicial = new Vector3(...props.posicao_inicial)
+  const posicao_alvo = useRef(posicao_inicial)
 
   useEffect(() => {
 
-    console.log(posicao_alvo.current, posicao_final)
+    console.log(posicao_final)
 
-    if (posicao_alvo.current && posicao_alvo.current.equals(posicao_final)) {
-      console.log("AAAA")
+    console.log(posicao_alvo.current)
 
-      console.log(posicao_alvo.current, posicao_final, posicao_alvo.current.equals(posicao_final))
+    if (projeto_escolhido == gema_index) {
 
-      posicao_alvo.current = posicao_inicial
+      posicao_alvo.current = posicao_final 
+      em_animacao.current = true
+
+    }else if (projeto_escolhido != gema_index && posicao_final.equals(posicao_alvo.current)) {
+
+      posicao_alvo.current = posicao_inicial 
       em_animacao.current = true
 
     }
-
   }, [projeto_escolhido])
 
   const cores_hex = {
@@ -146,7 +149,7 @@ const Gemas = ({formato = null ,cor = null, projeto_escolhido , ...props}) => {
 
     if (!em_animacao.current  || !gema.current) return
 
-    gema.current.position.lerp(posicao_alvo.current, .01) 
+    gema.current.position.lerp(posicao_alvo.current, .025) 
 
     if (gema.current.position.distanceTo(posicao_alvo.current) < 0.01){
 

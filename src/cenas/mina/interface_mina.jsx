@@ -61,7 +61,7 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
     zIndexRange={[100, 0]} 
     style={{ position: "static" }}>
 
-        
+
         
         <Canvas className="canvas-mina" onCreated={(state) => {
             set_camera(state.camera)
@@ -75,10 +75,11 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
 
                     return <Gemas
                         projeto_escolhido={projeto_escolhido}
+                        gema_index={index}
                         scale={.2}
                         key={projeto.nome}
                         posicao_inicial={projeto.posicao_gema}
-                        posicao_final={[-1.5, 1.7 ,2]}
+                        posicao_final={[-1.2, 1.7 ,.8]}
                         rotation={projeto.rotacao_gema}
                         selecionado={projeto_escolhido === projeto.nome}
                         formato={projeto.formato}
