@@ -9,40 +9,11 @@ import { useRef, useMemo, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import Brilho from '../../componentes_auxiliares/brilho'
 import { Vector3 } from 'three'
+import { MathUtils } from 'three'
 
-const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...props}) => {
+const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhido , ...props}) => {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/mina/gemas.glb')
-
-  const atraso = useRef(Math.random() * Math.PI * 2)
-  const gema = useRef(null)
-  const glow = useRef(null)
-  const luz = useRef(null)
-  const hover = useRef(0)
-  const em_animacao = useRef(false)
-
-  const posicao_final = new Vector3(...props.posicao_final)
-  const posicao_inicial = new Vector3(...props.posicao_inicial)
-  const posicao_alvo = useRef(posicao_inicial)
-
-  useEffect(() => {
-
-    console.log(posicao_final)
-
-    console.log(posicao_alvo.current)
-
-    if (projeto_escolhido == gema_index) {
-
-      posicao_alvo.current = posicao_final 
-      em_animacao.current = true
-
-    }else if (projeto_escolhido != gema_index && posicao_final.equals(posicao_alvo.current)) {
-
-      posicao_alvo.current = posicao_inicial 
-      em_animacao.current = true
-
-    }
-  }, [projeto_escolhido])
 
   const cores_hex = {
     vermelho: "#ff4444",
@@ -51,7 +22,6 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
     laranja: "#ff8844",
     roxo: "#aa44ff"
   }
-
   const material_cores = {
     vermelho : materials['V_01.001'],
     azul : materials['V_02.001'],
@@ -60,7 +30,6 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
     roxo : materials['V_05.001']
 
   }
-
   const formatos = {
 
     brilhante : {
@@ -69,6 +38,7 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
       verde : nodes.Gemstone_01002.geometry,
       azul : nodes.Gemstone_01003.geometry,
       vermelho : nodes.Gemstone_01004.geometry,      
+      rotacao : new Vector3(Math.PI / 90 , Math.PI / 3 , Math.PI / 90 )
     },
 
     gota : {
@@ -76,7 +46,8 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
       laranja : nodes.Gemstone_02004.geometry,
       verde : nodes.Gemstone_02003.geometry,
       azul : nodes.Gemstone_02002.geometry,
-      vermelho : nodes.Gemstone_02001.geometry,
+      vermelho : nodes.Gemstone_02001.geometry,      
+      rotacao : new Vector3(Math.PI / 2 ,0 , Math.PI / 15 )
     },
 
     almofada : {
@@ -84,7 +55,8 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
       laranja : nodes.Gemstone_03001.geometry,
       verde : nodes.Gemstone_03002.geometry,
       azul : nodes.Gemstone_03003.geometry,
-      vermelho : nodes.Gemstone_03004.geometry,
+      vermelho : nodes.Gemstone_03004.geometry,      
+      rotacao : new Vector3(4 ,5 ,2.5 )
     },
 
     esmeralda : {
@@ -92,7 +64,8 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
       laranja : nodes.Gemstone_04001.geometry,
       verde : nodes.Gemstone_04002.geometry,
       azul : nodes.Gemstone_04003.geometry,
-      vermelho : nodes.Gemstone_04004.geometry,
+      vermelho : nodes.Gemstone_04004.geometry,      
+      rotacao : new Vector3(0, Math.PI / 2.5 , Math.PI / 2 )
     },
 
     trapezio : {
@@ -100,10 +73,41 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
       laranja : nodes.Gemstone_05001.geometry,
       verde : nodes.Gemstone_05002.geometry,
       azul : nodes.Gemstone_05003.geometry,
-      vermelho : nodes.Gemstone_05004.geometry,
-    }
-
+      vermelho : nodes.Gemstone_05004.geometry,      
+      rotacao : new Vector3(Math.PI / -2 , Math.PI / -4 , Math.PI )
+    },
   }
+
+  const atraso = useRef(Math.random() * Math.PI * 2)
+  const gema = useRef(null)
+  const glow = useRef(null)
+  const luz = useRef(null)
+  const hover = useRef(0)
+  const em_animacao = useRef(false)
+
+  const rotacao_inicial = new Vector3(...props.rotation)
+  const rotacao_final = formatos[formato].rotacao
+  const rotacao_alvo = useRef(rotacao_inicial)
+  const posicao_final = new Vector3(...props.posicao_final)
+  const posicao_inicial = new Vector3(...props.posicao_inicial)
+  const posicao_alvo = useRef(posicao_inicial)
+
+  useEffect(() => {
+
+    if (projeto_escolhido == gema_index) {
+
+      posicao_alvo.current = posicao_final 
+      rotacao_alvo.current = rotacao_final
+      em_animacao.current = true
+
+    }else if (projeto_escolhido != gema_index && posicao_final.equals(posicao_alvo.current)) {
+
+      posicao_alvo.current = posicao_inicial 
+      rotacao_alvo.current = rotacao_inicial
+      em_animacao.current = true
+
+    }
+  }, [projeto_escolhido])
 
   const gerar_formato = (formato_base = null, cor = null) => {
 
@@ -137,21 +141,31 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
 
   useFrame(({clock}) => {
 
-    if (!glow.current) return
+    if (!glow.current || !luz.current) return
     
     const delta = clock.getElapsedTime()
 
-    const escala_brilho = Math.sin(delta + atraso.current) * .5 + 1.5 + hover.current * 1
+    const animacao_indo = posicao_final.equals(posicao_alvo.current) ? true : false
+
+    const hover_ativo = !em_animacao.current && hover.current == 1 && !animacao_indo? 1 : 0 
+
+    const escala_brilho = Math.sin(delta + atraso.current) * .5 + 1.5 + hover_ativo
 
     glow.current.scale.set(escala_brilho, escala_brilho, escala_brilho)
 
-    luz.current.intensity = Math.sin(delta + atraso.current) * .5 + 1.5 + hover.current * 1
+    luz.current.intensity = Math.sin(delta + atraso.current) * .5 + 1.5 + hover_ativo
 
     if (!em_animacao.current  || !gema.current) return
 
     gema.current.position.lerp(posicao_alvo.current, .025) 
 
-    if (gema.current.position.distanceTo(posicao_alvo.current) < 0.01){
+    const gema_rotacao = gema.current.rotation
+
+    gema_rotacao.x = MathUtils.lerp(gema_rotacao.x, rotacao_alvo.current.x, 0.025)
+    gema_rotacao.y = MathUtils.lerp(gema_rotacao.y, rotacao_alvo.current.y, 0.025)
+    gema_rotacao.z = MathUtils.lerp(gema_rotacao.z, rotacao_alvo.current.z, 0.025)
+
+    if (gema.current.position.distanceTo(posicao_alvo.current) < 0.01 && gema_rotacao.distanceTo(rotacao_alvo.current) < 0.01 ){
 
       em_animacao.current = false
 
@@ -159,7 +173,7 @@ const Gemas = ({formato = null ,cor = null, gema_index , projeto_escolhido , ...
   })
 
   return (
-    <group ref={gema} position={props.posicao_inicial} {...props} dispose={null}>
+    <group ref={gema} position={props.posicao_inicial} rotation={props.rotation} {...props} dispose={null}>
       
       <mesh 
       geometry={formato_escolhido} 

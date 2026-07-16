@@ -61,7 +61,14 @@ export default function Interface_mina({proximo_caminho, voltar_caminho , ...pro
     zIndexRange={[100, 0]} 
     style={{ position: "static" }}>
 
-
+        {projeto_escolhido != null ? <div className="informacoes-projeto" onClick={() => set_projeto(null)}> 
+            
+            <h1 className="titulo">{projetos[projeto_escolhido].nome}</h1> 
+            
+            <img className="imagem" src={projetos[projeto_escolhido].imagem} alt="" /> 
+            
+        </div> 
+        : null}
         
         <Canvas className="canvas-mina" onCreated={(state) => {
             set_camera(state.camera)
