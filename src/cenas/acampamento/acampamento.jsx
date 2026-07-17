@@ -9,7 +9,7 @@ import { useGLTF, Text3D  } from '@react-three/drei'
 
 import { VFXEmitter , VFXParticles } from "wawa-vfx"
 
-export default function Acampamento({ ativado , ...props}) {
+export default function Acampamento({ ativado, set_interface , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/acampamento.glb')
 

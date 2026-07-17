@@ -102,8 +102,6 @@ function App() {
 
     if (direcao == "avancar") {
 
-      console.log("avanco", cenas_ordem)
-
       if ( cenas_ordem.length > index_atual + 1){
         set_caminho(cenas_ordem[index_atual + 1])
       }
@@ -168,7 +166,7 @@ function App() {
             />
 
             <Acampamento 
-            onPointerDown={() => { if (cena_em_foco != "acampamento") {travar_camera("acampamento"); set_interface("acampamento"); }}} 
+            onPointerDown={() => { if (cena_em_foco != "acampamento") {travar_camera("acampamento")}}} 
             set_interface={set_interface}
             position={posicao_de_cenas["acampamento"]["posicao"]} 
             rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
@@ -253,8 +251,8 @@ function App() {
       <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0, zIndex:15}}>
 
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >SOBRE</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("orbe")} >STACKS</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("acampamento"); set_interface("acampamento")}} >JORNADA</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("orbe"); set_interface("orbe")}} >STACKS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >PROJETOS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("bau")} >CONTATO</button>
 

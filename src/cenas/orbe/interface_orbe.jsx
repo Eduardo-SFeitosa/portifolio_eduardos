@@ -126,7 +126,7 @@ export default function Interface_orbe({ mudar_caminho }) {
 
     return (
     
-    <div>
+    <div className="interface-orbe">
 
         <h1>STACKS</h1>
 

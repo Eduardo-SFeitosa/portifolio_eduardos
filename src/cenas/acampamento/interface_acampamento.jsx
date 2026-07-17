@@ -26,7 +26,7 @@ export default function Interface_acampamento({ mudar_caminho }) {
     ]
 
     return (
-    <div>
+    <div className="interface-acampamento">
 
         <h1 className="titulo">JORNADA</h1>
 

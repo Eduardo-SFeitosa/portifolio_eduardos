@@ -17,6 +17,7 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
   const animacao_inversa = useRef(false)
   const iluminacao = useRef(15)
   const progresso = useRef(0)
+  const ultima_interface = useRef(null)
 
   const animacoes = {
 
@@ -106,13 +107,17 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
   }, [ativado])
 
   useEffect(() => {
-    
-    if (animacao_ativa == animacoes_nome.at(-1) && ativado) {
+
+    if (animacao_ativa == animacoes_nome.at(-1) && ativado && ultima_interface.current == "mina" && interface_ativa == null) {
       set_interface(null)
       animacao_inversa.current = 1
       progresso.current = 0
       set_animacao(animacoes_nome.at(-2))
+      return
     }
+
+    ultima_interface.current = interface_ativa
+
   },[interface_ativa])
 
   useFrame((state, delta) => {
