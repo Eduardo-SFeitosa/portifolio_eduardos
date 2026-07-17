@@ -9,27 +9,11 @@ import { useGLTF } from '@react-three/drei'
 
 import { useSpring, animated } from '@react-spring/three'
 
-import Interface_bau from './interface_bau'
-
-export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado , ...props}) {
+export default function Bau({ set_interface , ativado , ...props }) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
-  const [interface_ativada, set_interface] = useState(false)
-
   const tampa = useRef(null)
-
-  const abrir = () => {
-
-    voltar_caminho("bau")
-
-  }
-
-  const fechar = () => {
-
-    voltar_caminho("bau")
-
-  }
 
   //animação da tampa do bau
   const { rotacaoTampa } = useSpring({
@@ -53,13 +37,13 @@ export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado 
 
     onStart: () => {
       if (!ativado) {
-        set_interface(false)
+        set_interface(null)
       }
     },
 
     onRest: () => {
       if (ativado) {
-        set_interface(true)
+        set_interface("bau")
       }
     }
   })
@@ -120,16 +104,6 @@ export default function BauDoTesouro({ proximo_caminho, voltar_caminho, ativado 
       </animated.group>
 
       < pointLight position={[0,.5,0]} intensity={15} color={"#be9200"} />
-
-      {interface_ativada ? 
-      
-        <Interface_bau position={[-1.5, 1.9, .5]}
-          proximo_caminho={proximo_caminho} 
-          voltar_caminho={voltar_caminho}/>
-        
-        : <></>
-      }
-      
 
     </group>
 

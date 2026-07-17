@@ -2,8 +2,9 @@ import { useState, useRef, useMemo } from "react"
 import { Html } from "@react-three/drei"
 import * as THREE from "three"
 import { useFrame } from "@react-three/fiber"
-import "./interface_orbe.css"
 import { EffectComposer, Bloom } from "@react-three/postprocessing"
+
+import "./interface_orbe.scss"
 
 export default function Estrela_stack({ nome, cor, posicao }) {
 

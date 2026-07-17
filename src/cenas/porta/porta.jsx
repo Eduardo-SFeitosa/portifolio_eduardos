@@ -7,16 +7,12 @@ import { useRef, useState, useMemo } from 'react'
 import { Html } from '@react-three/drei'
 import { useSpring, animated } from '@react-spring/three'
 import { useGLTF } from '@react-three/drei'
-import Interface_porta from './interface_porta'
 import { useFrame } from '@react-three/fiber'
-import Particula_portal from './Particula_portal'
 import * as THREE from "three"
 
-export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...props }) {
+export default function Porta({ set_interface , ativado, ...props }) {
 
   const { nodes, materials } = useGLTF('/models/porta.glb')
-
-  const [interface_ativada, set_interface] = useState(false)
 
   const porta = useRef(null)
 
@@ -63,7 +59,7 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
 
     onStart: () => {
       if (!ativado) {
-        set_interface(false)
+        set_interface(null)
       }else{
         console.log("ativar efeitos")
         set_efeitos(true)
@@ -72,7 +68,7 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
 
     onRest: () => {
       if (ativado) {
-        set_interface(true)
+        set_interface("porta")
       }else{
         set_efeitos(false)
       }
@@ -181,12 +177,6 @@ export default function Porta({ proximo_caminho, voltar_caminho, ativado, ...pro
           < pointLight position={[0, .5, -.8]} intensity={6} color={"#795800"} />
 
       </group>
-
-      {interface_ativada && (
-        <Interface_porta position={[.335, 1.15, 0]}
-          proximo_caminho={proximo_caminho}
-          voltar_caminho={voltar_caminho} />
-      )}
 
       {/* PARTICULAS */}
       {efeitos_ativados && <group rotation={[-Math.PI / 2, Math.PI / 2, 0]} position={[0,.7,-.2]}>

@@ -8,36 +8,15 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { CatmullRomCurve3, Vector3  } from 'three'
 
-import Interface_mina from './interface_mina'
-
-export default function Mina({proximo_caminho, voltar_caminho , ativado, controle_de_camera, referencia_camera , ...props}) {
+export default function Mina({ ativado, interface_ativa , set_interface, controle_de_camera, referencia_camera , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/mina.glb')
-  const [interface_ativada, set_interface] = useState(false)
   const [animacao_ativa, set_animacao] = useState("idle")
 
   const carrinho = useRef(null)
   const animacao_inversa = useRef(false)
   const iluminacao = useRef(15)
   const progresso = useRef(0)
-  const avancar_jornada = useRef(null)
-
-  useEffect(() => {
-    
-    if (!referencia_camera.current) return
-
-    console.log(ativado)
-
-    if (ativado){
-      controle_de_camera.current.desativar_controle()
-      set_animacao("carrinho_chega")
-    }
-    else if (animacao_ativa != "idle") {
-      voltar_idle()
-    }
-    
-
-  }, [ativado])
 
   const animacoes = {
 
@@ -101,6 +80,41 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
     "finalizado",
   ]
 
+  const voltar_idle = () => {
+    set_animacao(animacoes_nome[0])
+    set_interface(null)
+    controle_de_camera.current.ativar_controle()
+    progresso.current = 0
+    iluminacao.current = 1
+    animacao_inversa.current = 0
+
+  }
+
+  useEffect(() => {
+    
+    if (!referencia_camera.current) return
+
+    if (ativado){
+      controle_de_camera.current.desativar_controle()
+      set_animacao(animacoes_nome[1])
+    }
+    else if (animacao_ativa != "idle") {
+      voltar_idle()
+    }
+    
+
+  }, [ativado])
+
+  useEffect(() => {
+    
+    if (animacao_ativa == animacoes_nome[-1]) {
+      set_interface(null)
+      animacao_inversa.current = 1
+      progresso.current = 0
+      set_animacao(animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + - 1])
+    }
+  },[interface_ativa])
+
   useFrame((state, delta) => {
 
     if (animacao_ativa == "idle" || animacao_ativa == "finalizado" || !carrinho.current || !referencia_camera.current) return
@@ -142,14 +156,11 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
     if (tempo_atual >= 1 || tempo_atual <= 0 && inverter_animacao){
 
       if (animacao_ativa == "entrando_mina" && !inverter_animacao){
-        set_interface(true)
+        set_interface("mina")
         iluminacao.current = 0
       }
 
       if (animacao_ativa == "carrinho_chega" && inverter_animacao){
-
-        if (avancar_jornada.current) proximo_caminho("mina") 
-        else voltar_caminho("mina")
         
         voltar_idle()
 
@@ -166,37 +177,6 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
     }
 
   })
-
-  const fechar_seguir_caminho = () => {
-
-    set_interface(false)
-    avancar_jornada.current = true
-    animacao_inversa.current = 1
-    progresso.current = 0
-    set_animacao(animacoes_nome[animacoes_nome.indexOf(animacao_ativa) - 1])
-
-  }
-
-  const fechar_voltar_caminho = () => {
-
-    set_interface(false)
-    avancar_jornada.current = false
-    animacao_inversa.current = 1
-    progresso.current = 0
-    set_animacao(animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + - 1])
-
-  }
-
-  const voltar_idle = () => {
-    set_animacao("idle")
-    set_interface(false)
-    controle_de_camera.current.ativar_controle()
-    progresso.current = 0
-    iluminacao.current = 1
-    animacao_inversa.current = 0
-
-  }
-  
 
   return (
 
@@ -232,17 +212,6 @@ export default function Mina({proximo_caminho, voltar_caminho , ativado, control
       </group>
 
       < pointLight position={[0 ,.8, 1.3]} intensity={iluminacao.current} color={"#7c7c7c"} />
-
-      {/* interface */}
-      {interface_ativada ?
-
-        <Interface_mina position={[5,3.09,5]}
-        proximo_caminho={fechar_seguir_caminho} 
-        voltar_caminho={fechar_voltar_caminho} />
-        
-        :<></>
-        
-      }
 
     </group>
   

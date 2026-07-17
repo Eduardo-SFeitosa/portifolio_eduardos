@@ -6,9 +6,8 @@ Command: npx gltfjsx@6.5.3 orbe.glb
 import { useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import Interface_orbe from './interface_orbe'
 
-export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...props}) {
+export default function Orbe({ ativado , ...props}) {
 
   const referenciaOrbe = useRef(null)
 
@@ -31,18 +30,6 @@ export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...pro
     }
 
   )
-
-  const fechar = ( ) => {
-
-    proximo_caminho("orbe")
-
-  }
-
-  const abrir = ( ) => {
-
-    proximo_caminho("orbe")
-
-  }
 
   return (
 
@@ -79,16 +66,6 @@ export default function Orbe({proximo_caminho, voltar_caminho , ativado , ...pro
       </mesh>
 
       < pointLight position={[0, 1, 0]} intensity={10} color={"#6f0079"} />
-
-      {ativado ? 
-
-        <Interface_orbe position={[0,2.3,2.4]}
-          proximo_caminho={proximo_caminho} 
-          voltar_caminho={voltar_caminho}/>
-
-        :<></>
-        
-      }
 
     </group>
 

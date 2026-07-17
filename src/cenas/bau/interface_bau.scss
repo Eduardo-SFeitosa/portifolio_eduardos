@@ -1,0 +1,279 @@
+.interface-bau {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* permite interação apenas nos elementos internos */
+
+  .container-bau {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Painel principal (sobreposto ao canvas)
+  .painel-contato {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 1000px;
+    max-height: 85vh;
+    background: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(16px);
+    border-radius: 32px;
+    padding: 40px 48px;
+    color: #f0f0f0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+    overflow-y: auto;
+
+    .titulo-contato {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+      background: linear-gradient(135deg, #f0e6d0, #ffd9a0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitulo {
+      font-size: 1rem;
+      color: #aaa;
+      margin: 0 0 28px 0;
+    }
+
+    .conteudo-duas-colunas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    // Formulário
+    .coluna-formulario {
+      .formulario {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .campo {
+          display: flex;
+          flex-direction: column;
+
+          label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ccc;
+            margin-bottom: 4px;
+          }
+
+          input,
+          textarea {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s;
+            font-family: inherit;
+
+            &:focus {
+              outline: none;
+              border-color: #ffd9a0;
+              background: rgba(255, 255, 255, 0.08);
+              box-shadow: 0 0 0 3px rgba(255, 217, 160, 0.15);
+            }
+
+            &::placeholder {
+              color: #888;
+            }
+          }
+
+          textarea {
+            resize: vertical;
+            min-height: 80px;
+          }
+
+          &.checkbox {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+
+            label {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              cursor: pointer;
+              color: #ccc;
+            }
+
+            input[type="checkbox"] {
+              width: 18px;
+              height: 18px;
+              accent-color: #ffd9a0;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .linha-dupla {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+
+          @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .botao-enviar {
+          background: linear-gradient(135deg, #ffd9a0, #f0b87b);
+          border: none;
+          border-radius: 40px;
+          padding: 14px 28px;
+          font-weight: 700;
+          font-size: 1rem;
+          color: #1a1a2e;
+          cursor: pointer;
+          transition: all 0.25s;
+          margin-top: 8px;
+          align-self: flex-start;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 217, 160, 0.3);
+          }
+
+          &:active {
+            transform: scale(0.96);
+          }
+        }
+      }
+    }
+
+    // Moedas (links sociais)
+    .coluna-moedas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .moedas-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+
+        .moeda-link {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          text-decoration: none;
+          color: #f0f0f0;
+          transition: transform 0.2s;
+          padding: 12px 16px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid transparent;
+          min-width: 80px;
+
+          &:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--cor-moeda, #fff);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+          }
+
+          .moeda-icone {
+            font-size: 2.4rem;
+            line-height: 1;
+          }
+
+          .moeda-nome {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #ccc;
+          }
+        }
+      }
+    }
+  }
+
+  // Canvas 3D (plano de fundo interativo)
+  .canvas-bau {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: auto; /* permite orbitar as moedas */
+  }
+
+  // Navegação inferior
+  .controle-caminhos {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+
+    .botao {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border-radius: 40px;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: all 0.25s;
+      letter-spacing: 0.03em;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .interface-bau {
+    .painel-contato {
+      width: 92%;
+      padding: 24px 20px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      .titulo-contato {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}

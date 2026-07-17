@@ -13,9 +13,9 @@ import { Modelo_python } from "./modelos_orbe/Python.jsx";
 import { Modelo_csharp } from "./modelos_orbe/Csharp.jsx";
 
 import Estrela_stack from "./estrela_stack";
-import "./interface_orbe.css"
+import "./interface_orbe.scss"
 
-export default function Interface_orbe({proximo_caminho, voltar_caminho , ...props}) {
+export default function Interface_orbe({proximo_caminho, voltar_caminho }) {
 
     const [stack, set_stack] = useState("python")
 
@@ -126,13 +126,7 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
     return (
     
-    <Html 
-
-    {...props}
-    className={"interface-orbe"} 
-    occlude
-    style={{ position: "block" }}    
-    scale={0.5}>
+    <div>
 
         <h1>STACKS</h1>
 
@@ -199,5 +193,5 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho , ...pro
 
         </div>
     
-    </Html>)
+    </div>)
 }

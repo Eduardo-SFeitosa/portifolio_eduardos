@@ -10,23 +10,28 @@ import ModeloBase from "./modelos_auxiliares/modelo_base"
 
 import AguaAnimada from "./modelos_auxiliares/agua_animada"
 
-import BauDoTesouro from "./cenas/bau/bau_do_tesouro"
-
-import Acampamento from "./cenas/acampamento/acampamento"
-
 import Porta from "./cenas/porta/porta"
-
 import Interface_porta from "./cenas/porta/interface_porta"
 
+import Acampamento from "./cenas/acampamento/acampamento"
+import Interface_acampamento from "./cenas/acampamento/interface_acampamento"
+
 import Orbe from "./cenas/orbe/orbe"
+import Interface_orbe from "./cenas/orbe/interface_orbe"
 
 import Mina from "./cenas/mina/mina"
+import Interface_mina from "./cenas/mina/interface_mina"
+
+import Bau from "./cenas/bau/bau_do_tesouro"
+import Interface_bau from "./cenas/bau/interface_bau"
 
 import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
+
+  const [interface_ativa, set_interface] = useState(null)
 
   const [caminho_atual , set_caminho] = useState("porta")
 
@@ -92,6 +97,7 @@ function App() {
   const destravar_camera = ( voltar = false ) => {
 
     set_cena_em_foco(null)
+    set_interface(null)
 
     controle_de_camera_ref.current.destravar_camera(voltar)
 
@@ -164,61 +170,27 @@ function App() {
             camera_travada={cena_em_foco != null}
           />
 
-          
-
-          {/* 
-
-            <Controle_de_camera
-            referencia_camera={referencia_camera}
-            ref={controle_de_camera_ref}
-            caminho_atual={caminho_atual}
-            camera_travada={cena_em_foco != null}
-          />
-
-            <OrbitControls/>
-          
-          */}
-
-            < directionalLight position={[2, 5, 3]} intensity={1.2} />
-
-            < pointLight position={[0, 10, 0]} intensity={700} color={"#2e4daa"} />
-
-            < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
-
-            < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
-
-            < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
-
-            < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
-
-            < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
-
-            < ambientLight intensity={0.3} />
-
             < ModeloBase />
 
             <Porta 
             onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : null}} 
-            proximo_caminho={proximo_caminho} 
-            voltar_caminho={voltar_caminho} 
+            set_interface={set_interface}
             position={posicao_de_cenas["porta"]["posicao"]} 
             rotation={posicao_de_cenas["porta"]["rotacao"]} 
             ativado={ cena_em_foco == "porta" ? true : false}
             />
 
             <Acampamento 
-            onPointerDown={() => { cena_em_foco != "acampamento" ? travar_camera("acampamento") : null}} 
-            proximo_caminho={proximo_caminho} 
-            voltar_caminho={voltar_caminho} 
+            onPointerDown={() => { if (cena_em_foco != "acampamento") {travar_camera("acampamento"); set_interface("acampamento"); }}} 
+            set_interface={set_interface}
             position={posicao_de_cenas["acampamento"]["posicao"]} 
             rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
             ativado={ cena_em_foco == "acampamento" ? true : false}
             />
 
             <Orbe 
-            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : null}} 
-            proximo_caminho={proximo_caminho} 
-            voltar_caminho={voltar_caminho} 
+            onPointerDown={() => { if (cena_em_foco != "orbe") {travar_camera("orbe"); set_interface("orbe"); }}} 
+            set_interface={set_interface}
             position={posicao_de_cenas["orbe"]["posicao"]} 
             rotation={posicao_de_cenas["orbe"]["rotacao"]} 
             ativado={ cena_em_foco == "orbe" ? true : false}
@@ -227,22 +199,21 @@ function App() {
             <Mina 
             onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
             referencia_camera={referencia_camera}
-            proximo_caminho={proximo_caminho} 
-            voltar_caminho={voltar_caminho} 
+            set_interface={set_interface}
             position={posicao_de_cenas["mina"]["posicao"]} 
             rotation={posicao_de_cenas["mina"]["rotacao"]} 
             ativado={ cena_em_foco == "mina" ? true : false}
             controle_de_camera={controle_de_camera_ref}
+            interface_ativa={interface_ativa}
             />
 
-            <BauDoTesouro 
+            <Bau 
             onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : null }} 
-            proximo_caminho={proximo_caminho} 
-            voltar_caminho={voltar_caminho} 
+            set_interface={set_interface}
             position={posicao_de_cenas["bau"]["posicao"]} 
             rotation={posicao_de_cenas["bau"]["rotacao"]} 
             ativado={ cena_em_foco == "bau" ? true : false}
-            />            
+            />    
 
             < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
@@ -255,16 +226,38 @@ function App() {
             < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
 
             < AguaAnimada 
-            
               rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
               position={[ 0 , -2.5 , 0.05 ]} 
               size={[30, 20, 128, 128]}
-            
             />
 
         </ScrollControls>
+
+        < directionalLight position={[2, 5, 3]} intensity={.3} />
+        < pointLight position={[0, 10, 0]} intensity={700} color={"#2e4daa"} />
+        < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
+        < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+        < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+        < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
+        < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
+        < ambientLight intensity={0.3} />
           
       </Canvas>
+
+      {/* INTERFACES */}
+      {interface_ativa == null ? null
+
+      :interface_ativa == "porta" ? <Interface_porta proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+
+      :interface_ativa == "acampamento" ? <Interface_acampamento proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+
+      :interface_ativa == "orbe" ? <Interface_orbe proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+
+      :interface_ativa == "mina" ? <Interface_mina proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+
+      :interface_ativa == "bau" ? <Interface_bau proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+      
+      : null}
 
       <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0, zIndex:15}}>
 

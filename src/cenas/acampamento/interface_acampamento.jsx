@@ -1,5 +1,5 @@
 import { Html, Text  } from "@react-three/drei";
-import "./interface_acampamento.css"
+import "./interface_acampamento.scss"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei";
 import { useScroll } from '@react-three/drei'
@@ -7,7 +7,7 @@ import Caminho_mago from "./caminho_mago";
 import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 
-export default function Interface_acampamento({proximo_caminho, voltar_caminho , ...props}) {
+export default function Interface_acampamento({proximo_caminho, voltar_caminho }) {
 
     const ano_inicio = 2020
     const ano_atual = new Date().getFullYear() + 1
@@ -26,12 +26,7 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
     ]
 
     return (
-    <Html 
-    {...props}
-    className={"interface-acampamento"} 
-    zIndexRange={[100, 0]} 
-    style={{ position: "static" }} 
-    scale={0.5}>
+    <div>
 
         <h1 className="titulo">JORNADA</h1>
 
@@ -94,7 +89,7 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho ,
 
         </div>
     
-    </Html>)
+    </div>)
 
 }
 

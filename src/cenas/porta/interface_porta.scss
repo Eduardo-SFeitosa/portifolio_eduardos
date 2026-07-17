@@ -1,0 +1,291 @@
+// Cores temáticas mantidas
+$roxo-escuro: #1b0f2b;
+$roxo-profundo: #2c1a4a;
+$dourado: #d4af37;
+$dourado-suave: #f0d078;
+$glow-dourado: rgba(212, 175, 55, 0.4);
+$texto-claro: #eee7dd;
+$texto-secundario: #b8aec6;
+
+// Container principal
+.portal-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.portal-container {
+  position: relative;
+  width: 90%;
+  max-width: 440px;
+  pointer-events: auto;
+  opacity: 0;
+  transform: scale(0.9) rotateY(-10deg);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.aberto {
+    opacity: 1;
+    transform: scale(1) rotateY(0);
+  }
+}
+
+.portal-door {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4; // proporção de porta
+  background: radial-gradient(ellipse at center, $roxo-profundo 0%, $roxo-escuro 100%);
+  border-radius: 40% 40% 12px 12px / 20% 20% 12px 12px;
+  box-shadow: 
+    0 0 60px rgba(212, 175, 55, 0.15),
+    inset 0 0 80px rgba(0, 0, 0, 0.7),
+    0 20px 40px rgba(0, 0, 0, 0.6);
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  overflow: hidden;
+  padding: 20px 24px 28px;
+
+  // Moldura interna (relevo)
+  .door-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 30% 30% 8px 8px / 12% 12% 8px 8px;
+    padding: 16px 20px 20px;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+
+    .door-arch {
+      position: relative;
+      .ornament-top {
+        position: absolute;
+        top: -16px;
+        left: 30%;
+        width: 40%;
+        height: 24px;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+        border-radius: 50%;
+        filter: blur(6px);
+      }
+    }
+
+    .door-content {
+      position: relative;
+      z-index: 2;
+      color: $texto-claro;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      gap: 12px;
+
+      .cabecalho {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        .simbolo { font-size: 1.2rem; color: $dourado; opacity: 0.5; }
+        .titulo {
+          font-family: 'Cinzel', serif;
+          font-weight: 700;
+          font-size: 1.8rem;
+          letter-spacing: 0.1em;
+          background: linear-gradient(135deg, $dourado-suave, $dourado, #b8860b);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin: 0;
+        }
+      }
+
+      .linha-divisoria {
+        text-align: center;
+        .ornamento { color: $dourado; opacity: 0.3; font-size: 1rem; }
+      }
+
+      .destaque {
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+        color: $dourado-suave;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .descricao {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: $texto-secundario;
+        text-align: justify;
+        margin: 0;
+        .destaque-texto { color: $dourado; font-weight: 500; }
+        strong { color: #d4b8a0; font-weight: 600; }
+      }
+
+      .tecnologias {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+        margin: 0;
+        .tag {
+          background: rgba(212, 175, 55, 0.08);
+          border: 1px solid rgba(212, 175, 55, 0.15);
+          padding: 2px 14px;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #d4c8b0;
+          transition: all 0.3s;
+          &:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: $dourado;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+          }
+        }
+      }
+
+      .acoes {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 0;
+        .btn-curriculo {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          padding: 8px 18px;
+          border-radius: 40px;
+          color: $dourado-suave;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 0.85rem;
+          transition: all 0.3s;
+          &:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: $dourado;
+            transform: scale(1.03);
+          }
+        }
+        .redes-sociais {
+          display: flex;
+          gap: 12px;
+          a {
+            color: #8a7a9a;
+            font-size: 1.4rem;
+            transition: all 0.3s;
+            &:hover {
+              color: $dourado;
+              transform: translateY(-2px) scale(1.1);
+            }
+          }
+        }
+      }
+
+      .botoes-porta {
+        margin-top: 8px;
+        text-align: center;
+        .botao-passagem {
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          padding: 10px 24px;
+          border-radius: 60px;
+          color: $dourado-suave;
+          font-family: 'Cinzel', serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          letter-spacing: 0.08em;
+          cursor: pointer;
+          transition: all 0.4s;
+          backdrop-filter: blur(4px);
+          box-shadow: 0 0 30px rgba(212, 175, 55, 0.05);
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+
+          .icone-fechadura { font-size: 1rem; opacity: 0.7; }
+          .seta { display: inline-block; transition: transform 0.3s; }
+
+          &:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: $dourado;
+            transform: scale(1.04);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
+            .seta { transform: translateX(4px); }
+          }
+        }
+      }
+    }
+  }
+
+  // Dobradiças e fechadura (decorativos)
+  .hinge {
+    position: absolute;
+    width: 12px;
+    height: 40px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 4px;
+    top: 30%;
+    &.left { left: -8px; }
+    &.right { right: -8px; }
+  }
+
+  .keyhole {
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 24px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 50% 50% 20% 20% / 60% 60% 20% 20%;
+    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1);
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 14px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 640px) {
+  .portal-container {
+    max-width: 340px;
+  }
+  .portal-door {
+    padding: 12px 16px 20px;
+    .door-frame .door-content {
+      .cabecalho .titulo { font-size: 1.4rem; }
+      .destaque { font-size: 0.9rem; }
+      .descricao { font-size: 0.8rem; }
+      .acoes .btn-curriculo { font-size: 0.75rem; padding: 6px 14px; }
+      .botoes-porta .botao-passagem {
+        font-size: 0.75rem;
+        padding: 8px 16px;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    .hinge { display: none; }
+    .keyhole { bottom: 12%; width: 14px; height: 18px; }
+  }
+}
