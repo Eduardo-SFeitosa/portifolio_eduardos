@@ -1,6 +1,6 @@
 import { Html } from "@react-three/drei";
-import { useState, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber"
+import { useState, useEffect } from "react";
+import { Canvas } from "@react-three/fiber"
 import { View } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 import { Parede } from "./Parede";
@@ -9,11 +9,11 @@ import { Vector3 } from "three";
 import "./interface_mina.scss"
 import Gemas from "./Gemas"
 
-export default function Interface_mina({ proximo_caminho, voltar_caminho, ...props }) {
+export default function Interface_mina({ mudar_caminho, set_direcao , set_interface }) {
 
   const [referencia_camera, set_camera] = useState(null)
   const [projeto_escolhido, set_projeto] = useState(null)
-  const [interface_visivel, set_interface] = useState(false)
+  const [projeto_visivel, set_interface_projeto] = useState(false)
 
   const projetos = [
     {
@@ -56,9 +56,9 @@ export default function Interface_mina({ proximo_caminho, voltar_caminho, ...pro
 
   return (
 
-    <div>
+    <div className="interface-mina">
 
-      {interface_visivel && projeto_escolhido != null ? <div className="informacoes-projeto">
+      {projeto_visivel && projeto_escolhido != null ? <div className="informacoes-projeto">
         <div className="card-projeto">
           {/* Cabeçalho com título e botão fechar */}
           <div className="cabecalho">
@@ -120,9 +120,8 @@ export default function Interface_mina({ proximo_caminho, voltar_caminho, ...pro
             selecionado={projeto_escolhido === projeto.nome}
             formato={projeto.formato}
             cor={projeto.cor}
-            set_interface={set_interface}
+            set_interface={set_interface_projeto}
             onPointerDown={() => {
-              console.log("ESCOLHIDO ", projetos[index])
               set_projeto(index)
             }}
           />
@@ -133,9 +132,9 @@ export default function Interface_mina({ proximo_caminho, voltar_caminho, ...pro
 
       <div className="controle-caminhos">
 
-        <h1 className="botao" onClick={() => voltar_caminho()}>VOLTAR PARA STACKS</h1>
+        <h1 className="botao" onClick={() => {set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA STACKS</h1>
 
-        <h1 className="botao" onClick={() => proximo_caminho()}>AVANCAR PARA CONTATO</h1>
+        <h1 className="botao" onClick={() => {set_direcao("avancar"); set_interface(null) }}>AVANCAR PARA CONTATO</h1>
 
       </div>
 

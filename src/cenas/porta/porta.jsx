@@ -127,11 +127,7 @@ export default function Porta({ set_interface , ativado, ...props }) {
     <group {...props} >
 
       {/* modelo 3d */}
-      <group
-
-        dispose={null}
-
-      >
+      <group dispose={null}>
 
         <mesh
           geometry={nodes.doorway.geometry}
@@ -200,9 +196,7 @@ export default function Porta({ set_interface , ativado, ...props }) {
         </instancedMesh>
       </group>}
 
-      </group>
-
-  )
+  </group>)
 
 }
 

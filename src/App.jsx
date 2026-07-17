@@ -1,43 +1,34 @@
-import "./App.css"
-
 import { useState, useEffect, useRef } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 
-import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
-
 import ModeloBase from "./modelos_auxiliares/modelo_base"
-
 import AguaAnimada from "./modelos_auxiliares/agua_animada"
-
 import Porta from "./cenas/porta/porta"
 import Interface_porta from "./cenas/porta/interface_porta"
-
 import Acampamento from "./cenas/acampamento/acampamento"
 import Interface_acampamento from "./cenas/acampamento/interface_acampamento"
-
 import Orbe from "./cenas/orbe/orbe"
 import Interface_orbe from "./cenas/orbe/interface_orbe"
-
 import Mina from "./cenas/mina/mina"
 import Interface_mina from "./cenas/mina/interface_mina"
-
 import Bau from "./cenas/bau/bau_do_tesouro"
 import Interface_bau from "./cenas/bau/interface_bau"
 
+import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
 import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
+
+import "./app.scss"
 
 function App() {
 
   const [cena_em_foco , set_cena_em_foco] = useState(null)
-
   const [interface_ativa, set_interface] = useState(null)
-
   const [caminho_atual , set_caminho] = useState("porta")
 
   const referencia_camera = useRef(null)
-
   const controle_de_camera_ref = useRef(null)
+  const [direcao_caminho, set_direcao] = useState("avancar")
 
   const posicao_de_cenas = {
 
@@ -103,38 +94,34 @@ function App() {
 
   }
 
-  const proximo_caminho = ( cena ) => {
-
-    if ( cena != cena_em_foco ) return
+  const mudar_caminho = (direcao = "avancar") => {
 
     const cenas_ordem = Object.keys(posicao_de_cenas)
 
-    const index_atual = cenas_ordem.indexOf(cena)
+    const index_atual = cenas_ordem.indexOf(cena_em_foco)
 
-    if ( cenas_ordem.length > index_atual + 1){
+    if (direcao == "avancar") {
 
+      console.log("avanco", cenas_ordem)
+
+      if ( cenas_ordem.length > index_atual + 1){
         set_caminho(cenas_ordem[index_atual + 1])
+      }
+
+      destravar_camera()
 
     }
+    else{
 
-    destravar_camera()
-    
-  }
-
-  const voltar_caminho = ( cena ) => {
-
-    const cenas_ordem = Object.keys(posicao_de_cenas)
-
-    const index_atual = cenas_ordem.indexOf(cena)
-
-    if ( index_atual){
+      if ( index_atual){
 
       set_caminho(cenas_ordem[index_atual])
 
+      }
+
+      destravar_camera("voltar")
+
     }
-
-    destravar_camera("voltar")
-
   }
 
   useEffect(() => {
@@ -205,6 +192,8 @@ function App() {
             ativado={ cena_em_foco == "mina" ? true : false}
             controle_de_camera={controle_de_camera_ref}
             interface_ativa={interface_ativa}
+            direcao_caminho={direcao_caminho}
+            mudar_caminho={mudar_caminho}
             />
 
             <Bau 
@@ -245,19 +234,21 @@ function App() {
       </Canvas>
 
       {/* INTERFACES */}
-      {interface_ativa == null ? null
+      <div className="interfaces">
+        {interface_ativa == null ? null
 
-      :interface_ativa == "porta" ? <Interface_porta proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+        :interface_ativa == "porta" ? <Interface_porta mudar_caminho={mudar_caminho}/>
 
-      :interface_ativa == "acampamento" ? <Interface_acampamento proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+        :interface_ativa == "acampamento" ? <Interface_acampamento mudar_caminho={mudar_caminho}/>
 
-      :interface_ativa == "orbe" ? <Interface_orbe proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+        :interface_ativa == "orbe" ? <Interface_orbe mudar_caminho={mudar_caminho}/>
 
-      :interface_ativa == "mina" ? <Interface_mina proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
+        :interface_ativa == "mina" ? <Interface_mina mudar_caminho={mudar_caminho} set_direcao={set_direcao} set_interface={set_interface}/>
 
-      :interface_ativa == "bau" ? <Interface_bau proximo_caminho={proximo_caminho} voltar_caminho={voltar_caminho}/>
-      
-      : null}
+        :interface_ativa == "bau" ? <Interface_bau mudar_caminho={mudar_caminho}/>
+        
+        : null}
+      </div>
 
       <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0, zIndex:15}}>
 

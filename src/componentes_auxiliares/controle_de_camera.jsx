@@ -235,11 +235,8 @@ const Controle_de_camera = forwardRef((props, ref ) => {
     if ( camera_travada_em.current ) {
 
       const { posicao, direcao } = camera_travada_em.current
-
       const camera = referencia_camera.current
-
       referencia_camera.current.lookAt(direcao)
-
       camera.position.lerp(posicao, 0.1)
 
       return

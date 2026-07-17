@@ -15,7 +15,7 @@ import { Modelo_csharp } from "./modelos_orbe/Csharp.jsx";
 import Estrela_stack from "./estrela_stack";
 import "./interface_orbe.scss"
 
-export default function Interface_orbe({proximo_caminho, voltar_caminho }) {
+export default function Interface_orbe({ mudar_caminho }) {
 
     const [stack, set_stack] = useState("python")
 
@@ -187,9 +187,9 @@ export default function Interface_orbe({proximo_caminho, voltar_caminho }) {
 
         <div className="controle-caminhos">
 
-            <h1 className="botao" onClick={() => voltar_caminho("orbe")}>VOLTAR PARA JORNADA</h1>
+            <h1 className="botao" onClick={() => mudar_caminho("voltar")}>VOLTAR PARA JORNADA</h1>
 
-            <h1 className="botao" onClick={() => proximo_caminho("orbe")}>AVANCAR PARA PROJETOS</h1>
+            <h1 className="botao" onClick={() => mudar_caminho()}>AVANCAR PARA PROJETOS</h1>
 
         </div>
     

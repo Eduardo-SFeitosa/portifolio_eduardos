@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { CatmullRomCurve3, Vector3  } from 'three'
 
-export default function Mina({ ativado, interface_ativa , set_interface, controle_de_camera, referencia_camera , ...props}) {
+export default function Mina({ ativado, interface_ativa , set_interface, controle_de_camera, referencia_camera, direcao_caminho, mudar_caminho , ...props}) {
 
   const { nodes, materials } = useGLTF('/models/mina.glb')
   const [animacao_ativa, set_animacao] = useState("idle")
@@ -107,11 +107,11 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
 
   useEffect(() => {
     
-    if (animacao_ativa == animacoes_nome[-1]) {
+    if (animacao_ativa == animacoes_nome.at(-1) && ativado) {
       set_interface(null)
       animacao_inversa.current = 1
       progresso.current = 0
-      set_animacao(animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + - 1])
+      set_animacao(animacoes_nome.at(-2))
     }
   },[interface_ativa])
 
@@ -161,9 +161,9 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
       }
 
       if (animacao_ativa == "carrinho_chega" && inverter_animacao){
-        
+        console.log(direcao_caminho)
+        mudar_caminho(direcao_caminho)
         voltar_idle()
-
         return
 
       }

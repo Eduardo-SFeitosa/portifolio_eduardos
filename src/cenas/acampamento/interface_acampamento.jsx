@@ -7,7 +7,7 @@ import Caminho_mago from "./caminho_mago";
 import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 
-export default function Interface_acampamento({proximo_caminho, voltar_caminho }) {
+export default function Interface_acampamento({ mudar_caminho }) {
 
     const ano_inicio = 2020
     const ano_atual = new Date().getFullYear() + 1
@@ -83,9 +83,9 @@ export default function Interface_acampamento({proximo_caminho, voltar_caminho }
 
         <div className="controle-caminhos">
 
-            <h1 className="botao" onClick={() => voltar_caminho("acampamento")}>VOLTAR PARA SOBRE</h1>
+            <h1 className="botao" onClick={() => mudar_caminho("voltar")}>VOLTAR PARA SOBRE</h1>
 
-            <h1 className="botao" onClick={() => proximo_caminho("acampamento")}>AVANCAR PARA STACKS</h1>
+            <h1 className="botao" onClick={() => mudar_caminho()}>AVANCAR PARA STACKS</h1>
 
         </div>
     

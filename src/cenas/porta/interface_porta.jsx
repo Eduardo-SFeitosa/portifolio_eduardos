@@ -3,7 +3,7 @@ import { Html } from "@react-three/drei";
 import { FaGithub, FaLinkedin, FaDownload, FaLock } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-export default function Interface_porta({ proximo_caminho, voltar_caminho, ...props }) {
+export default function Interface_porta({ mudar_caminho , ...props }) {
   const [aberto, setAberto] = useState(false);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function Interface_porta({ proximo_caminho, voltar_caminho, ...pr
 
               {/* Botão agora dentro do conteúdo, como uma maçaneta/fechadura */}
               <div className="botoes-porta">
-                <button className="botao-passagem" onClick={() => proximo_caminho("porta")}>
+                <button className="botao-passagem" onClick={() => mudar_caminho()}>
                   <FaLock className="icone-fechadura" />
                   <span>AVANÇAR PARA JORNADA</span>
                   <span className="seta">→</span>
