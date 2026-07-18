@@ -232,7 +232,7 @@ function App() {
       </Canvas>
 
       {/* INTERFACES */}
-      <div className="interfaces">
+      <div className="interfaces" width={interface_ativa == null ? null : "100%%"} height={interface_ativa == null ? null : "100%%"}>
         {interface_ativa == null ? null
 
         :interface_ativa == "porta" ? <Interface_porta mudar_caminho={mudar_caminho}/>

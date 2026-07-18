@@ -9,8 +9,8 @@ $texto-secundario: #b8aec6;
 
 // Container principal
 .portal-wrapper {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,12 +18,13 @@ $texto-secundario: #b8aec6;
 }
 
 .portal-container {
-  position: relative;
-  width: 90%;
-  max-width: 440px;
+  width: 100%;
+  height: 100%;
   pointer-events: auto;
   opacity: 0;
-  transform: scale(0.9) rotateY(-10deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &.aberto {
@@ -35,6 +36,7 @@ $texto-secundario: #b8aec6;
 .portal-door {
   position: relative;
   width: 100%;
+  max-width: 500px;
   aspect-ratio: 3 / 4; // proporção de porta
   background: radial-gradient(ellipse at center, $roxo-profundo 0%, $roxo-escuro 100%);
   border-radius: 40% 40% 12px 12px / 20% 20% 12px 12px;
