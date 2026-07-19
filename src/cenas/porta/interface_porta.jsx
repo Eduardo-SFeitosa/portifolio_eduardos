@@ -77,7 +77,6 @@ export default function Interface_porta({ mudar_caminho , ...props }) {
           {/* Elementos decorativos da porta (dobradiças) */}
           <div className="hinge left"></div>
           <div className="hinge right"></div>
-          <div className="keyhole"></div>
         </div>
       </div>
   );

@@ -30,7 +30,7 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
   };
 
   return (
-    <div className="container-bau">
+    <div className="interface-bau">
       {/* Painel principal com formulário e moedas */}
       <div className="painel-contato">
         <h1 className="titulo-contato">📬 Entre em contato</h1>
