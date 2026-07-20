@@ -158,7 +158,7 @@ function App() {
             < ModeloBase />
 
             <Porta 
-            onPointerDown={() => { cena_em_foco != "porta" ? travar_camera("porta") : null}} 
+            onPointerDown={() => { if (cena_em_foco != "porta") { travar_camera("porta"); } }} 
             set_interface={set_interface}
             position={posicao_de_cenas["porta"]["posicao"]} 
             rotation={posicao_de_cenas["porta"]["rotacao"]} 
@@ -166,7 +166,7 @@ function App() {
             />
 
             <Acampamento 
-            onPointerDown={() => { if (cena_em_foco != "acampamento") {travar_camera("acampamento")}}} 
+            onPointerDown={() => { if (cena_em_foco != "acampamento") {travar_camera("acampamento"); set_interface("acampamento"); }}} 
             set_interface={set_interface}
             position={posicao_de_cenas["acampamento"]["posicao"]} 
             rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
@@ -174,7 +174,7 @@ function App() {
             />
 
             <Orbe 
-            onPointerDown={() => { if (cena_em_foco != "orbe") {travar_camera("orbe"); set_interface("orbe"); }}} 
+            onPointerDown={() => { if (cena_em_foco != "orbe") {travar_camera("orbe"); set_interface("orbe"); set_interface("orbe"); }}} 
             set_interface={set_interface}
             position={posicao_de_cenas["orbe"]["posicao"]} 
             rotation={posicao_de_cenas["orbe"]["rotacao"]} 

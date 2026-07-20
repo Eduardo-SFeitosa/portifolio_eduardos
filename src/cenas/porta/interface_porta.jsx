@@ -3,7 +3,7 @@ import { Html } from "@react-three/drei";
 import { FaGithub, FaLinkedin, FaDownload, FaLock } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-export default function Interface_porta({ mudar_caminho , ...props }) {
+export default function Interface_porta({ mudar_caminho }) {
   const [aberto, setAberto] = useState(false);
 
   useEffect(() => {
@@ -12,14 +12,11 @@ export default function Interface_porta({ mudar_caminho , ...props }) {
 
   return (
     
-      <div className={`portal-container ${aberto ? "aberto" : ""}`}>
-        <div className="portal-door">
+      <div className={`container-porta ${aberto ? "aberto" : ""}`}>
+        <div className="porta">
 
           {/* Moldura da porta */}
           <div className="door-frame">
-            <div className="door-arch">
-              <div className="ornament-top"></div>
-            </div>
             <div className="door-content">
               <div className="cabecalho">
                 <span className="simbolo">✦</span>
@@ -75,8 +72,8 @@ export default function Interface_porta({ mudar_caminho , ...props }) {
           </div>
 
           {/* Elementos decorativos da porta (dobradiças) */}
-          <div className="hinge left"></div>
-          <div className="hinge right"></div>
+          <div className="dobradica cima"></div>
+          <div className="dobradica baixo"></div>
         </div>
       </div>
   );

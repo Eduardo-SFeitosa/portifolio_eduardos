@@ -1,21 +1,17 @@
 // Cores temáticas mantidas
-$roxo-escuro: #1b0f2b;
-$roxo-profundo: #2c1a4a;
+$roxo-escuro: #1b0f2b98;
+$roxo-profundo: #2c1a4aef;
 $dourado: #d4af37;
 $dourado-suave: #f0d078;
 $glow-dourado: rgba(212, 175, 55, 0.4);
 $texto-claro: #eee7dd;
 $texto-secundario: #b8aec6;
 
-// Container principal
-.portal-wrapper {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  pointer-events: none;
+*{
+  overflow: visible;
 }
 
-.portal-container {
+.container-porta {
   width: 100vw;
   height: 100vh;
   pointer-events: auto;
@@ -31,30 +27,32 @@ $texto-secundario: #b8aec6;
   }
 }
 
-.portal-door {
+.porta {
   position: relative;
   width: 100%;
-  height: 80%;
-  max-width: 500px;
+  height: 90%;
+  max-width: 550px;
   aspect-ratio: 3 / 4; // proporção de porta
   background: radial-gradient(ellipse at center, $roxo-profundo 0%, $roxo-escuro 100%);
-  border-radius: 40% 40% 12px 12px / 20% 20% 12px 12px;
+  border-radius: 50% 50% 12px 12px / 20% 20% 12px 12px;
+  
   box-shadow: 
     0 0 60px rgba(212, 175, 55, 0.15),
     inset 0 0 80px rgba(0, 0, 0, 0.7),
     0 20px 40px rgba(0, 0, 0, 0.6);
   border: 3px solid rgba(212, 175, 55, 0.3);
   overflow: hidden;
-  padding: 20px 24px 28px;
-
-  // Moldura interna (relevo)
+  padding: 25px 24px 28px;
+  margin-bottom: 4vh;
+  margin-right: 3vw;
+  
   .door-frame {
     position: relative;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    border-radius: 30% 30% 8px 8px / 12% 12% 8px 8px;
-    padding: 16px 20px 20px;
+    border-radius: 50% 50% 8px 8px / 20% 20% 8px 8px;
+    padding: 50px 20px 20px;
     box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
     z-index: 1;
 
@@ -79,9 +77,9 @@ $texto-secundario: #b8aec6;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
+      justify-content: center;
       height: 100%;
-      justify-content: space-between;
-      gap: 12px;
+      gap: 7%;
 
       .cabecalho {
         display: flex;
@@ -227,17 +225,16 @@ $texto-secundario: #b8aec6;
     }
   }
 
-  // Dobradiças e fechadura (decorativos)
-  .hinge {
+  .dobradica {
     position: absolute;
     width: 12px;
     height: 40px;
     background: rgba(212, 175, 55, 0.2);
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 4px;
-    top: 30%;
-    &.left { left: -8px; }
-    &.right { right: -8px; }
+    left: -8px;
+    &.cima { top: 30%; }
+    &.baixo { top: 80%; }
   }
 
 }
