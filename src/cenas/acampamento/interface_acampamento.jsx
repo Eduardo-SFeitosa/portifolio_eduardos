@@ -26,7 +26,9 @@ export default function Interface_acampamento({ mudar_caminho }) {
     ]
 
     return (
-    <div className="interface-acampamento">
+    <div className="container-acampamento">
+
+        <div className="interface-acampamento">
 
         <h1 className="titulo">JORNADA</h1>
 
@@ -40,11 +42,13 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
                 < ambientLight intensity={5} />
 
+
                 <mesh position={[duracao_total_anos * escala_tempo_tamanho / 2, 0, -1.2]} >
                         <boxGeometry args={[duracao_total_anos * escala_tempo_tamanho, magos.length * 3.5, 0.2]} /> 
-                        <meshStandardMaterial color={"#2d2d2d"} transparent opacity={0.5} />
+                        <meshStandardMaterial color={"#2d2d2d"} transparent opacity={0.3} />
                 </mesh>
 
+                {/* ANOS E BARRAS */}
                 {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
                         const ano = ano_inicio + i
                         const pos_x = i * escala_tempo_tamanho
@@ -52,8 +56,8 @@ export default function Interface_acampamento({ mudar_caminho }) {
                             <group key={i} position={[pos_x, 0, -1]}>
                                 <Text position={[0, magos.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
                                 <mesh position={[0, -0.5, 0]}>
-                                    <boxGeometry args={[0.05, magos.length * 3.5 + 1, 0.2]} />
-                                    <meshBasicMaterial color={"#ffffff"} opacity={0.5} />
+                                    <boxGeometry args={[0.05, magos.length * 3.5 + 1, 0.01]} />
+                                    <meshBasicMaterial color={"#ffffff"} opacity={0.1} />
                                 </mesh>
                             </group>
                         )
@@ -89,6 +93,8 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
         </div>
     
+    </div>
+
     </div>)
 
 }

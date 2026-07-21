@@ -17,7 +17,7 @@ export default function Interface_porta({ mudar_caminho }) {
 
           {/* Moldura da porta */}
           <div className="door-frame">
-            <div className="door-content">
+            <div className="conteudo">
               <div className="cabecalho">
                 <span className="simbolo">✦</span>
                 <h1 className="titulo">SOBRE MIM</h1>

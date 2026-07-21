@@ -166,7 +166,7 @@ function App() {
             />
 
             <Acampamento 
-            onPointerDown={() => { if (cena_em_foco != "acampamento") {travar_camera("acampamento"); set_interface("acampamento"); }}} 
+            onPointerDown={() => { if (cena_em_foco != "acampamento") { travar_camera("acampamento"); } }} 
             set_interface={set_interface}
             position={posicao_de_cenas["acampamento"]["posicao"]} 
             rotation={posicao_de_cenas["acampamento"]["rotacao"]} 

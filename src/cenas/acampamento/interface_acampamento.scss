@@ -1,7 +1,23 @@
+
+*{
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;  
+}
+
+.container-acampamento{
+
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .interface-acampamento{
 
-    width: 75vw;
-    height: 80vh;
+    width: 85%;
+    height: 80%;
     background-color: rgba(220, 20, 60, 0.596);
     padding: 2%;
     text-align: center;

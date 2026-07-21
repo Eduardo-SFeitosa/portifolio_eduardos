@@ -1,6 +1,7 @@
 import { Text } from "@react-three/drei"
 import { useEffect, useState, useRef } from "react"
 import { Pocao } from "./Pocao"
+import Texto_3d from "../../componentes_auxiliares/texto_3d"
 
 export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_total, progresso_minimo, progresso_maximo}) {
 
@@ -17,12 +18,12 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
 
     },[progresso_total])
 
-    return <group>
+    return <group key={nome}>
 
             {/* PROGRESSO */}
             <group position={[tamanho_x / 2 * escala_x - tamanho_x / 2, 0 , 0]}>
 
-                <mesh position={posicao} key={nome} scale={[escala_x, 1, .1]}>
+                <mesh position={posicao} scale={[escala_x, .2, .1]}>
                     <boxGeometry args={tamanho} />
                     <meshStandardMaterial color={cor} />
                 </mesh>
@@ -35,12 +36,12 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
             </group>
 
             {/* PROGRESSO OPACO */}
-            <mesh position={posicao} key={nome} scale={[1,1,.1]} >
+            <mesh position={posicao} scale={[1,.1,.1]} >
                 <boxGeometry args={tamanho} />
                 <meshStandardMaterial color={cor} opacity={.2} transparent />
             </mesh>
 
-            <Text position={[posicao[0], posicao[1] + 1.2, posicao[2]]} color="white" fontSize={0.6} backGroundColor={"white"} anchorX="center">{nome}</Text>
+            <Text position={[posicao[0], posicao[1] + 1.2, posicao[2]]} color={cor} fontSize={0.6} anchorX="center">{nome}</Text>
 
         </group>
 

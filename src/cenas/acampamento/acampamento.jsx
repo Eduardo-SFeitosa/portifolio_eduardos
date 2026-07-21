@@ -5,11 +5,17 @@ Command: npx gltfjsx@6.5.3 acampamento.glb
 
 import { useRef } from 'react'
 
-import { useGLTF, Text3D  } from '@react-three/drei'
+import { useGLTF, Text3D } from '@react-three/drei'
 
-import { VFXEmitter , VFXParticles } from "wawa-vfx"
+import { VFXEmitter, VFXParticles } from "wawa-vfx"
 
-export default function Acampamento({ ativado, set_interface , ...props}) {
+import { Livro } from './livro'
+
+import { useSpring, animated } from '@react-spring/three'
+
+import { PivotControls } from '@react-three/drei'
+
+export default function Acampamento({ ativado, set_interface, ...props }) {
 
   const { nodes, materials } = useGLTF('/models/acampamento.glb')
 
@@ -17,82 +23,91 @@ export default function Acampamento({ ativado, set_interface , ...props}) {
 
   const emissor_particulas = useRef(null)
 
-  return (
+  const livro = useSpring({
+
+    escala : ativado ? [.4 , .4 , .43] : [.15, .15 ,.15],
     
+    posicao : ativado ? [.9, .95, -.4] : [-.9, .48, -.5] ,
+
+    rotacao : ativado ? [1, -1, 0] : [Math.PI, -.1, Math.PI]
+    
+  })
+
+  return (
+
     <group {...props}>
 
       {/*modelo 3d*/}
       <group dispose={null} onPointerDown={() => {
-
-          if (!ativado) return
-          
-        }}
-        
-      >
+        if (!ativado) return
+      }}>
 
         <mesh geometry={nodes.Bench2.geometry} material={materials['props.006']} position={[1.467, 0.112, -0.43]} rotation={[Math.PI, -0.833, Math.PI]} />
-
-        <mesh geometry={nodes.Bucket.geometry} material={materials['props.006']} position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]} />
-
-        <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={fogueira_posicao} rotation={[Math.PI, -1.566, Math.PI]} />
-
+        <group position={[1.161, 0.112, 0.747]} rotation={[Math.PI, -1.566, Math.PI]}>
+          <mesh geometry={nodes.polySurface2065002.geometry} material={materials['props.006']} />
+          <mesh geometry={nodes.polySurface2065002_1.geometry} material={materials['chests.001']} />
+          <mesh geometry={nodes.polySurface2065002_2.geometry} material={materials['chests.004']} />
+        </group>
+        <mesh geometry={nodes.Camp2_Fierplace1.geometry} material={materials['camp_02.002']} position={[-0.179, 0.112, -1.14]} rotation={[Math.PI, -1.566, Math.PI]} />
         <mesh geometry={nodes.Camp2_tent.geometry} material={materials['camp_02.002']} position={[-0.158, 0.112, 0.48]} rotation={[Math.PI, -0.781, Math.PI]} scale={[1, 1, 1.279]} />
-        
-        <mesh geometry={nodes.Chest1B.geometry} material={materials['chests.004']} position={[1.817, 0.112, 1.119]} rotation={[Math.PI, -0.14, Math.PI]} />
+        <mesh geometry={nodes.Chest1B003.geometry} material={materials['chests.003']} position={[-1.23, 0.112, -0.539]} rotation={[0, 1.291, 0]} />
+        <mesh geometry={nodes.Chest1B003.geometry} material={materials['chests.003']} position={[-1.25, 0.45, -0.47]} rotation={[0, 2, 0]} scale={[0.678341, 0.678341, 0.678341]} />
 
-        <mesh geometry={nodes.Chest1B001.geometry} material={materials['chests.001']} position={[1.817, 0.461, 1.119]} rotation={[Math.PI, -0.675, Math.PI]} />
+        <VFXParticles
+          name="fire"
 
-        <VFXParticles 
-              name="fire"
-              
-              settings={{
-                nbParticles: 1000,
-                gravity: [0, 2, -2],
-                renderMode: 'billboard',
-                }
-              }
+          settings={{
+            nbParticles: 1000,
+            gravity: [0, 2, -2],
+            renderMode: 'billboard',
+          }
+          }
         />
-            
-        <VFXEmitter 
 
-              ref={emissor_particulas}
+        <VFXEmitter
 
-              emitter="fire"
+          ref={emissor_particulas}
 
-              settings={{
-                
-                loop:true,
+          emitter="fire"
 
-                velocity: {
-                  direction: [0, 1, 0],
-                  spread: 0.5,
-                  speed: [1, 3]
-                },
+          settings={{
 
-                size: [0.02, 0.1],
+            loop: true,
 
-                spawnMode: "continuous",
+            velocity: {
+              direction: [0, 1, 0],
+              spread: 0.5,
+              speed: [1, 3]
+            },
 
-                duration: 2,
+            size: [0.02, 0.1],
 
-                position : {fogueira_posicao},
+            spawnMode: "continuous",
 
-                startPositionMin: fogueira_posicao.map((valor) => valor - .4),
+            duration: 2,
 
-                startPositionMax: fogueira_posicao.map((valor) => valor + .4),
+            position: { fogueira_posicao },
 
-                nbParticles: 90,
+            startPositionMin: fogueira_posicao.map((valor) => valor - .4),
 
-                lifetime: [0.5, 1.5],
+            startPositionMax: fogueira_posicao.map((valor) => valor + .4),
 
-                colorStart: ['#ff6b35', '#f7931e'],
+            nbParticles: 90,
 
-                colorEnd: ['#ff0000', '#8b0000'],
+            lifetime: [0.5, 1.5],
 
-            }}
+            colorStart: ['#ff6b35', '#f7931e'],
+
+            colorEnd: ['#ff0000', '#8b0000'],
+
+          }}
         />
 
       </group>
+
+      <Livro ativado={ativado} set_interface={set_interface} position={livro.posicao} rotation={livro.rotacao} scale={livro.escala} />
+
+      
 
       < pointLight position={[1, 1.5, -1]} intensity={15} color={"#be0000"} />
 
