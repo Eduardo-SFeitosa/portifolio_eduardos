@@ -251,7 +251,7 @@ function App() {
       <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0, zIndex:15}}>
 
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >SOBRE</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("acampamento"); set_interface("acampamento")}} >JORNADA</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("orbe"); set_interface("orbe")}} >STACKS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >PROJETOS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("bau")} >CONTATO</button>

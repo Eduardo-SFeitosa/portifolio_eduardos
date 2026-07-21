@@ -7,68 +7,54 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useSpring, animated } from '@react-spring/three'
 
-export function Livro({ ativado, set_interface ,...props }) {
+export function Livro({ ativado, set_interface, ...props }) {
 
   const { nodes, materials } = useGLTF('/modelos_cenas/acampamento/livro.glb')
 
   const pagina_1 = useSpring({
-    rotation: ativado ? [0, 0, -2.789] : [0, 0, 2.789],
+    rotation: ativado ? [0, 0, -.35] : [0, 0, 1.225],
     config: { mass: 1, tension: 180, friction: 20 },
-
-    onStart : () => {
-
-      if (!ativado) {
-        set_interface(null)
-      }
-    },
-
   })
 
   const pagina_2 = useSpring({
-    rotation: ativado ? [0, 0, 0.002] : [0, 0, -0.002],
+    rotation: ativado ? [0, 0, -1.55] : [0, 0, -0.03],
     delay: 60,
     config: { mass: 1, tension: 180, friction: 20 }
   })
 
   const pagina_3 = useSpring({
-    rotation: ativado ? [0, 0, -1.546] : [0, 0, 1.546],
+    rotation: ativado ? [0, 0, -2.85] : [0, 0, -1.266],
     delay: 120,
     config: { mass: 1, tension: 180, friction: 20 }
   })
 
   const pagina_4 = useSpring({
-    rotation: ativado ? [0, 0, -0.301] : [0, 0, 0.301],
+    rotation: ativado ? [0, 0, -3.15] : [0, 0, -1.57],
     delay: 180,
     config: { mass: 1, tension: 180, friction: 20 },
-
-    onRest : () => {
-      if (ativado) {
-        set_interface("acampamento")
-      }
-    },
-
   })
 
   const capa = useSpring({
-    rotation: ativado ? [0, 0, 0] : [0, 0, 1.591],
-    delay: 240,
+    rotation: ativado ? [0, 0, 0] : [0, 0, -1.554],
+    delay: 60,
     config: { mass: 1.3, tension: 160, friction: 18 }
   })
 
   return (
 
     <animated.group {...props} dispose={null}>
-      
-      <animated.mesh geometry={nodes.pagina_1.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_1.rotation} />
-      <animated.mesh geometry={nodes.pagina_4.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_2.rotation} />
-      <animated.mesh geometry={nodes.pagina_2.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_3.rotation} />
-      <animated.mesh geometry={nodes.pagina_3.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_4.rotation} />
-      
-      <animated.mesh geometry={nodes.Object_9010.geometry} material={materials['Material.003']} position={[.1, 0, 0]} rotation={capa.rotation} />
-      <mesh geometry={nodes.Object_9029.geometry} material={materials['Material.003']} position={[.1, 0, 0]} />
+
+      <animated.mesh geometry={nodes.pagina_1.geometry} material={materials['Material.002']} position={[0.002, 0.013, 0]} rotation={pagina_1.rotation} />
+      <animated.mesh geometry={nodes.pagina_2.geometry} material={materials['Material.002']} position={[-0.002, 0.013, 0]} rotation={pagina_2.rotation} />
+      <animated.mesh geometry={nodes.pagina_3.geometry} material={materials['Material.002']} position={[0.002, 0.013, 0]} rotation={pagina_3.rotation} />
+      <animated.mesh geometry={nodes.pagina_4.geometry} material={materials['Material.002']} position={[0.002, 0.055, 0]} rotation={pagina_4.rotation} />
+
+      <mesh geometry={nodes.Object_9010.geometry} material={materials['Material.003']} rotation={[0, 0, 0]} />
+
+      <animated.mesh geometry={nodes.Object_9029.geometry} material={materials['Material.003']} rotation={capa.rotation}/>
 
     </animated.group>
-    
+
   )
 }
 

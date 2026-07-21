@@ -27,9 +27,9 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
 
     escala : ativado ? [.4 , .4 , .43] : [.15, .15 ,.15],
     
-    posicao : ativado ? [.9, .95, -.4] : [-.9, .48, -.5] ,
+    posicao : ativado ? [.2, .95, -.4] : [-.9, .48, -.5] ,
 
-    rotacao : ativado ? [1, -1, 0] : [Math.PI, -.1, Math.PI]
+    rotacao : ativado ? [0 , Math.PI / 2, 0] : [0, 0, 0]
     
   })
 
@@ -106,8 +106,6 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
       </group>
 
       <Livro ativado={ativado} set_interface={set_interface} position={livro.posicao} rotation={livro.rotacao} scale={livro.escala} />
-
-      
 
       < pointLight position={[1, 1.5, -1]} intensity={15} color={"#be0000"} />
 
