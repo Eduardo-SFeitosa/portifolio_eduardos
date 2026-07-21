@@ -26,11 +26,10 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
   const livro = useSpring({
 
     escala : ativado ? [.4 , .4 , .43] : [.15, .15 ,.15],
-    
-    posicao : ativado ? [.2, .95, -.4] : [-.9, .48, -.5] ,
 
-    rotacao : ativado ? [0 , Math.PI / 2, 0] : [0, 0, 0]
-    
+    posicao : ativado ? [.9, 1.02, -.4] : [-.95, .45, -.7] ,
+
+    rotacao : ativado ? [-1.4777548484911467 ,-0.48 ,-1.38] : [0, -.8, 0]
   })
 
   return (
@@ -105,7 +104,10 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
 
       </group>
 
-      <Livro ativado={ativado} set_interface={set_interface} position={livro.posicao} rotation={livro.rotacao} scale={livro.escala} />
+      <animated.group>
+        <Livro  ativado={ativado} set_interface={set_interface} position={livro.posicao} rotation={livro.rotacao} scale={livro.escala}/>
+      </animated.group>
+      
 
       < pointLight position={[1, 1.5, -1]} intensity={15} color={"#be0000"} />
 
