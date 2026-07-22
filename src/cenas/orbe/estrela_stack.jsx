@@ -47,8 +47,7 @@ export default function Estrela_stack({ nome, cor, posicao }) {
 
         }
 
-        const brilho_tamanho = Math.sin((delta + atraso.current) / 1.5) * 0.2 + 1.0
-
+        const brilho_tamanho = Math.sin((delta + atraso.current) / 1.5) * 0.1 + .7
         brilho.current.scale.set(brilho_tamanho, brilho_tamanho, brilho_tamanho)
 
     })
@@ -64,7 +63,7 @@ export default function Estrela_stack({ nome, cor, posicao }) {
             >
 
                 <mesh>
-                    <sphereGeometry args={[0.5, 16, 16]} />
+                    <sphereGeometry args={[0.045, 16, 16]} />
 
                     <meshStandardMaterial
                         emissive={cor_escolhida}
@@ -80,15 +79,15 @@ export default function Estrela_stack({ nome, cor, posicao }) {
                     ref={brilho}
                 >
                     {/* Aumentado para 0.5 para ter espaço para o bloom acontecer */}
-                    <sphereGeometry args={[0.5, 24, 24]} /> 
+                    <sphereGeometry args={[1, 8, 8]} /> 
                     
                     <Brilho
-                        falloff={0.2}         
-                        glowInternalRadius={1.8} 
+                        falloff={4.2}
+                        glowInternalRadius={4.1}
                         glowColor={cor_escolhida}
-                        glowSharpness={1.5}
-                        side={"THREE.DoubleSide"} 
-                        opacity={0.7}
+                        glowSharpness={1.3}
+                        side={"THREE.DoubleSide"}
+                        opacity={.30}
                         depthTest={false}
                     />
                 </mesh>

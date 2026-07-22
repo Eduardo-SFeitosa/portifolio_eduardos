@@ -194,7 +194,7 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
         <sphereGeometry args={[3, 3, 3]} />
 
         <Brilho
-        falloff={3.8}
+        falloff={.8}
         glowInternalRadius={5.1}
         glowColor={cores_hex[cor_escolhida]}
         glowSharpness={2.3}

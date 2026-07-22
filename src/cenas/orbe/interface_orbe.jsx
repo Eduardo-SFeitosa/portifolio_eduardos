@@ -6,11 +6,11 @@ import { Line } from "@react-three/drei"
 import { OrbitControls } from "@react-three/drei";
 import { useFrame } from '@react-three/fiber'
 
-import { Modelo_css } from "./modelos_orbe/Css.jsx";
-import { Modelo_html } from "./modelos_orbe/Html.jsx";
-import { Modelo_javascript } from "./modelos_orbe/Javascript.jsx";
-import { Modelo_python } from "./modelos_orbe/Python.jsx";
-import { Modelo_csharp } from "./modelos_orbe/Csharp.jsx";
+import { Css_icon } from "./modelos_orbe/css_icon.jsx";
+import { Html5_icon } from "./modelos_orbe/html5_icon.jsx";
+import { Javascript_icon } from "./modelos_orbe/Javascript_icon.jsx";
+import { Python_icon } from "./modelos_orbe/python_icon.jsx";
+import { Csharp_icon } from "./modelos_orbe/csharp_icon.jsx";
 
 import Estrela_stack from "./estrela_stack";
 import "./interface_orbe.scss"
@@ -124,21 +124,23 @@ export default function Interface_orbe({ mudar_caminho }) {
 
     const atual = constelacoes[stack]
 
+
+    const CONSTELACAO_ESCALA = 4.5
+
+    const estrelas = atual.estrelas.map(estrela => ({
+    ...estrela,
+    posicao: estrela.posicao.map(v => v * CONSTELACAO_ESCALA)
+    }))
+
+    const linhas = atual.linhas.map(ponto =>
+        ponto.map(v => v * CONSTELACAO_ESCALA)
+    )
+
     return (
     
     <div className="interface-orbe">
 
         <h1>STACKS</h1>
-
-        <div className="selecao">
-
-            <img className="stack" onClick={() => set_stack("html_css")} ></img>
-            <img className="stack" onClick={() => set_stack("html_css")} ></img>
-            <img className="stack" onClick={() => {set_stack("javascript")}} ></img>
-            <img className="stack" onClick={() => {set_stack("python")}} ></img>
-            <img className="stack" onClick={() => {set_stack("csharp")}} ></img>
-
-        </div>
 
         <Canvas className="canvas-orbe" camera={{ position: [0, 0, 2.4] }}>
 
@@ -150,11 +152,22 @@ export default function Interface_orbe({ mudar_caminho }) {
                 color="#ffffff" 
             />
 
+                {/* SELECAO */}
+                <group position={[0,.2,0]}>
+
+                    <Python_icon position={[ -2, 1.2 ,0]} scale={0.005} onPointerDown={() => {set_stack("python")}}/>
+                    <Css_icon position={[ -1, 1.2 ,0]} scale={0.005} onPointerDown={() => set_stack("html_css")}/>
+                    <Javascript_icon position={[ 0, 1.2 ,0]} scale={0.005} onPointerDown={() => {set_stack("javascript")}}/>
+                    <Html5_icon position={[ 1, 1.2 ,0]} scale={0.005} onPointerDown={() => set_stack("html_css")}/>
+                    <Csharp_icon position={[ 2, 1.2 ,0]} scale={0.005} onPointerDown={() => {set_stack("csharp")}}/>
+
+                </group>
+
                 <group position={[0,-.1,0]}>
                     
                     {/* CONSTELACOES */}
 
-                    {atual.estrelas.map((estrela, i) => (
+                    {estrelas.map((estrela, i) => (
                         <Estrela_stack
                             key={estrela.nome}
                             nome={estrela.nome}
@@ -165,7 +178,7 @@ export default function Interface_orbe({ mudar_caminho }) {
                     ))}
 
                     <Line
-                        points={atual.linhas}
+                        points={linhas}
                         color={"wheat"}
                         lineWidth={.9}
                         transparent
@@ -173,7 +186,7 @@ export default function Interface_orbe({ mudar_caminho }) {
                     />
 
                     <Line
-                        points={atual.linhas}
+                        points={linhas}
                         color={"wheat"}
                         lineWidth={.2}
                     />
