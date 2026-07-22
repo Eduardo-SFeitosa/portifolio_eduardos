@@ -5,6 +5,7 @@ Command: npx gltfjsx@6.5.3 python-icon.glb
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
+import Brilho from "../../../componentes_auxiliares/brilho.jsx"
 
 export function Python_icon(props) {
   const { nodes, materials } = useGLTF('/modelos_cenas/orbe/python-icon.glb')

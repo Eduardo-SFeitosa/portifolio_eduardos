@@ -13,6 +13,7 @@ import { Python_icon } from "./modelos_orbe/python_icon.jsx";
 import { Csharp_icon } from "./modelos_orbe/csharp_icon.jsx";
 
 import Estrela_stack from "./estrela_stack";
+import Brilho from "../../componentes_auxiliares/brilho.jsx"
 import "./interface_orbe.scss"
 
 export default function Interface_orbe({ mudar_caminho }) {
@@ -136,6 +137,34 @@ export default function Interface_orbe({ mudar_caminho }) {
         ponto.map(v => v * CONSTELACAO_ESCALA)
     )
 
+    const icones = [
+        {
+            nome : "python",
+            componente : Python_icon,
+            cor : "yellow",
+        },
+        {
+            nome : "html_css",
+            componente : Css_icon,
+            cor : "blue",
+        },
+        {
+            nome : "javascript",
+            componente : Javascript_icon,
+            cor : "yellow",
+        },
+        {
+            nome : "html_css",
+            componente : Html5_icon,
+            cor : "orange",
+        },
+        {
+            nome : "csharp",
+            componente : Csharp_icon,
+            cor : "purple",
+        },
+    ]
+
     return (
     
     <div className="interface-orbe">
@@ -153,15 +182,44 @@ export default function Interface_orbe({ mudar_caminho }) {
             />
 
                 {/* SELECAO */}
-                <group position={[0,.2,0]}>
+                <group >
 
-                    <Python_icon position={[ -2, 1.2 ,0]} scale={0.005} onPointerDown={() => {set_stack("python")}}/>
-                    <Css_icon position={[ -1, 1.2 ,0]} scale={0.005} onPointerDown={() => set_stack("html_css")}/>
-                    <Javascript_icon position={[ 0, 1.2 ,0]} scale={0.005} onPointerDown={() => {set_stack("javascript")}}/>
-                    <Html5_icon position={[ 1, 1.2 ,0]} scale={0.005} onPointerDown={() => set_stack("html_css")}/>
-                    <Csharp_icon position={[ 2, 1.2 ,0]} scale={0.005} onPointerDown={() => {set_stack("csharp")}}/>
+                    {icones.map((icone, i) => {
+
+                        const Icone_componente = icone.componente
+                        const posicao_x = Math.floor(icones.length / 2) + i - icones.length + 1
+
+                        return <>
+
+                            <mesh
+                            raycast={() => null}
+                            position={[ posicao_x, 1.4 ,0]} 
+                            >
+                                <sphereGeometry args={[.5, 8, 8]} /> 
+                                
+                                <Brilho
+                                    falloff={4.2}
+                                    glowInternalRadius={4.1}
+                                    glowSharpness={1.3}
+                                    glowColor={icone.cor}
+                                    side={"THREE.DoubleSide"}
+                                    opacity={.30}
+                                    depthTest={false}
+                                />
+
+                                <Icone_componente
+                                onPointerDown={() => {set_stack(icone.nome)}}
+                                scale={0.005}
+                                />
+                        </mesh>
+                        </>
+                    })}
 
                 </group>
+
+                      
+
+                
 
                 <group position={[0,-.1,0]}>
                     
