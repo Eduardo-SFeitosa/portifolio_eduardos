@@ -36,7 +36,7 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
             </group>
 
             {/* PROGRESSO OPACO */}
-            <mesh position={posicao} scale={[1,.1,.1]} >
+            <mesh position={posicao} scale={[1,.05,.05]} >
                 <boxGeometry args={tamanho} />
                 <meshStandardMaterial color={cor} opacity={.2} transparent />
             </mesh>

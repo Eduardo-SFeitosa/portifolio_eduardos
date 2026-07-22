@@ -29,7 +29,9 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
 
     posicao : ativado ? [.9, 1.02, -.4] : [-.95, .45, -.7] ,
 
-    rotacao : ativado ? [-1.4777548484911467 ,-0.48 ,-1.38] : [0, -.8, 0]
+    rotacao : ativado ? [-1.4777548484911467 ,-0.48 ,-1.38] : [0, -.8, 0],
+
+    config: { mass: 2, tension: 80, friction: 30 }
   })
 
   return (

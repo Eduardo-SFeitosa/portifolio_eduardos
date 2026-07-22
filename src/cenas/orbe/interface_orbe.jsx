@@ -130,7 +130,17 @@ export default function Interface_orbe({ mudar_caminho }) {
 
         <h1>STACKS</h1>
 
-        <Canvas className="canvas-orbe" camera={{ position: [0, 0, .8] }}>
+        <div className="selecao">
+
+            <img className="stack" onClick={() => set_stack("html_css")} ></img>
+            <img className="stack" onClick={() => set_stack("html_css")} ></img>
+            <img className="stack" onClick={() => {set_stack("javascript")}} ></img>
+            <img className="stack" onClick={() => {set_stack("python")}} ></img>
+            <img className="stack" onClick={() => {set_stack("csharp")}} ></img>
+
+        </div>
+
+        <Canvas className="canvas-orbe" camera={{ position: [0, 0, 2.4] }}>
 
             <ambientLight intensity={1} />
 
@@ -139,17 +149,6 @@ export default function Interface_orbe({ mudar_caminho }) {
                 intensity={4} 
                 color="#ffffff" 
             />
-
-                {/* SELECAO */}
-                <group position={[0,.2,0]}>
-
-                    <Modelo_css position={[ .25, .2 ,0]} onPointerDown={() => set_stack("html_css")}/>
-                    <Modelo_html position={[ .15, .2 ,0]} onPointerDown={() => set_stack("html_css")}/>
-                    <Modelo_javascript position={[ -.2, .2 ,0]} onPointerDown={() => {set_stack("javascript")}}/>
-                    <Modelo_python position={[ -.4, .2 ,0]} onPointerDown={() => {set_stack("python")}}/>
-                    <Modelo_csharp position={[ .6, .2 ,0]} onPointerDown={() => {set_stack("csharp")}}/>
-
-                </group>
 
                 <group position={[0,-.1,0]}>
                     

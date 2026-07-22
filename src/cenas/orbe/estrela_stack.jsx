@@ -3,6 +3,7 @@ import { Html } from "@react-three/drei"
 import * as THREE from "three"
 import { useFrame } from "@react-three/fiber"
 import { EffectComposer, Bloom } from "@react-three/postprocessing"
+import Brilho from '../../componentes_auxiliares/brilho'
 
 import "./interface_orbe.scss"
 
@@ -11,7 +12,7 @@ export default function Estrela_stack({ nome, cor, posicao }) {
     const [em_foco, set_foco] = useState(false)
 
     const estrela = useRef(null)
-    const brilho = useRef(null)
+    const brilho = useRef(1)
 
     const movimento_vertical = Math.random() * -.010
 
@@ -21,16 +22,20 @@ export default function Estrela_stack({ nome, cor, posicao }) {
 
     const cores = ["red", "blue", "purple", "green"]
 
+    function cor_para_hex(cor){
+        var canvas_colorido = document.createElement('canvas').getContext('2d');
+        canvas_colorido.fillStyle = cor;
+        return canvas_colorido.fillStyle;
+    }
+
     const cor_escolhida = useMemo(() => {
-
         return cores[Math.floor(Math.random() * cores.length)]
-
     }, [])
 
     {/* ANIMACAO */}
     useFrame(({clock}) => {
 
-        if (!estrela.current || !brilho.current) return
+        if (!estrela.current) return
 
         const delta = clock.getElapsedTime()
 
@@ -42,7 +47,9 @@ export default function Estrela_stack({ nome, cor, posicao }) {
 
         }
 
-        brilho.current.emissiveIntensity = Math.sin(delta + atraso.current) * 20 + 30
+        const brilho_tamanho = Math.sin((delta + atraso.current) / 1.5) * 0.2 + 1.0
+
+        brilho.current.scale.set(brilho_tamanho, brilho_tamanho, brilho_tamanho)
 
     })
 
@@ -57,26 +64,34 @@ export default function Estrela_stack({ nome, cor, posicao }) {
             >
 
                 <mesh>
-                    <sphereGeometry args={[0.015, 16, 16]} />
+                    <sphereGeometry args={[0.5, 16, 16]} />
 
                     <meshStandardMaterial
                         emissive={cor_escolhida}
                         color={cor_escolhida}
-                        emissiveIntensity={30}
-                        ref={brilho}
+                        emissiveIntensity={5}
                         opacity={0.05}
                     />
                 </mesh>
 
-                <EffectComposer>
-
-                    <Bloom
-                        intensity={.3}
-                        luminanceThreshold={0}
-                        luminanceSmoothing={0}
+                <mesh
+                    raycast={() => null}
+                    position={[0, 0, 0]} 
+                    ref={brilho}
+                >
+                    {/* Aumentado para 0.5 para ter espaço para o bloom acontecer */}
+                    <sphereGeometry args={[0.5, 24, 24]} /> 
+                    
+                    <Brilho
+                        falloff={0.2}         
+                        glowInternalRadius={1.8} 
+                        glowColor={cor_escolhida}
+                        glowSharpness={1.5}
+                        side={"THREE.DoubleSide"} 
+                        opacity={0.7}
+                        depthTest={false}
                     />
-
-                </EffectComposer>
+                </mesh>
 
                 
             </group>
@@ -93,7 +108,5 @@ export default function Estrela_stack({ nome, cor, posicao }) {
             </Html>}
 
         </group>
-
     )
-
 }

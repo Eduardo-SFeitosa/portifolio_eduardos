@@ -188,8 +188,8 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
       em_animacao.current = true}}/>
 
       <mesh 
-      ref={glow}
-      raycast={() => null}>
+        ref={glow}
+        raycast={() => null}>
 
         <sphereGeometry args={[3, 3, 3]} />
 

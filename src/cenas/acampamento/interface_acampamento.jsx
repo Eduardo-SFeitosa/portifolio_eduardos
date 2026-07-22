@@ -14,11 +14,11 @@ export default function Interface_acampamento({ mudar_caminho }) {
     const mes_atual = new Date().getMonth() / 12
 
     const duracao_total_anos = ano_atual - ano_inicio
-    const escala_tempo_tamanho = 2
+    const escala_tempo_tamanho = 2.5
 
     const [progresso_atual, set_progresso] = useState(0)
     
-    const magos = [
+    const pocoes = [
         { nome: "Game Dev", inicio: 2020, duracao_anos: ano_atual - 2021 + mes_atual, cor: "#ff5733" },
         { nome: "Faculdade", inicio: 2024, duracao_anos: 2.5, cor: "#33c1ff" },
         { nome: "Técnico", inicio: 2024, duracao_anos: 2, cor: "#8e44ad" },
@@ -42,30 +42,24 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
                 < ambientLight intensity={5} />
 
-
-                <mesh position={[duracao_total_anos * escala_tempo_tamanho / 2, 0, -1.2]} >
-                        <boxGeometry args={[duracao_total_anos * escala_tempo_tamanho, magos.length * 3.5, 0.2]} /> 
-                        <meshStandardMaterial color={"#2d2d2d"} transparent opacity={0.3} />
-                </mesh>
-
                 {/* ANOS E BARRAS */}
                 {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
                         const ano = ano_inicio + i
                         const pos_x = i * escala_tempo_tamanho
                         return (
                             <group key={i} position={[pos_x, 0, -1]}>
-                                <Text position={[0, magos.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
+                                <Text position={[0, pocoes.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
                                 <mesh position={[0, -0.5, 0]}>
-                                    <boxGeometry args={[0.05, magos.length * 3.5 + 1, 0.01]} />
+                                    <boxGeometry args={[0.05, pocoes.length * 3.5 + 1, 0.01]} />
                                     <meshBasicMaterial color={"#ffffff"} opacity={0.1} />
                                 </mesh>
                             </group>
                         )
                 })}
 
-                {magos.map((mago, i) => {
+                {pocoes.map((mago, i) => {
                         const pos_x_centro = (mago.inicio - ano_inicio) * escala_tempo_tamanho + (mago.duracao_anos * escala_tempo_tamanho / 2)
-                        const y_centro = i * 3 - (magos.length - 1) * 1.5 // Centraliza verticalmente
+                        const y_centro = i * 3 - (pocoes.length - 1) * 1.5
 
                         return (
                             <Caminho_mago
