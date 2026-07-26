@@ -42,16 +42,21 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
                 < ambientLight intensity={5} />
 
+                <mesh position={[progresso_atual * duracao_total_anos * escala_tempo_tamanho , -0.5, 0]}>
+                    <boxGeometry args={[0.05, pocoes.length * 3.5 , 0.01]} />
+                    <meshBasicMaterial color={"black"} opacity={0.3} />
+                </mesh>
+
                 {/* ANOS E BARRAS */}
                 {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
                         const ano = ano_inicio + i
                         const pos_x = i * escala_tempo_tamanho
                         return (
                             <group key={i} position={[pos_x, 0, -1]}>
-                                <Text position={[0, pocoes.length * 2, 0]} color="white" fontSize={0.6} anchorX="center">{ano}</Text>
+                                <Text position={[0, pocoes.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
                                 <mesh position={[0, -0.5, 0]}>
                                     <boxGeometry args={[0.05, pocoes.length * 3.5 + 1, 0.01]} />
-                                    <meshBasicMaterial color={"#ffffff"} opacity={0.1} />
+                                    <meshBasicMaterial color={"#0000000c"} opacity={0.1} />
                                 </mesh>
                             </group>
                         )

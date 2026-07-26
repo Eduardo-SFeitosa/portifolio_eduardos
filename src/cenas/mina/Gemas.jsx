@@ -150,7 +150,7 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
 
     const hover_ativo = !em_animacao.current && hover.current == 1 && !animacao_indo? 1 : 0 
 
-    const escala_brilho = Math.sin(delta + atraso.current) * .5 + 1.5 + hover_ativo
+    const escala_brilho = Math.sin(delta + atraso.current) * .5 + .9 + hover_ativo
 
     glow.current.scale.set(escala_brilho, escala_brilho, escala_brilho)
 

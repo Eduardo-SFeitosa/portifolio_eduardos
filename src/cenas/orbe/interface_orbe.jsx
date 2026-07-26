@@ -23,7 +23,6 @@ export default function Interface_orbe({ mudar_caminho }) {
     const constelacoes = {
 
         python: {
-            cor: "#4FC3F7",
 
             estrelas: [
                 { nome: "DJANGO", posicao: [-0.35, 0.05, 0] },
@@ -48,7 +47,6 @@ export default function Interface_orbe({ mudar_caminho }) {
         },
 
         javascript: {
-            cor: "#FFD54F",
 
             estrelas: [
                 { nome: "REACT", posicao: [-0.35, 0.35, 0] },
@@ -81,7 +79,6 @@ export default function Interface_orbe({ mudar_caminho }) {
         },
 
         html_css: {
-            cor: "#FF8A65",
 
             estrelas: [
                 { nome: "HTML", posicao: [-0.25, 0.15, 0] },
@@ -104,7 +101,6 @@ export default function Interface_orbe({ mudar_caminho }) {
         },
 
         csharp: {
-            cor: "#BA68C8",
 
             estrelas: [
                 { nome: "ASP.NET", posicao: [0, 0.25, 0] },
@@ -175,12 +171,6 @@ export default function Interface_orbe({ mudar_caminho }) {
 
             <ambientLight intensity={1} />
 
-            <pointLight 
-                position={[0, 0, 2]} 
-                intensity={4} 
-                color="#ffffff" 
-            />
-
                 {/* SELECAO */}
                 <group >
 
@@ -217,10 +207,6 @@ export default function Interface_orbe({ mudar_caminho }) {
 
                 </group>
 
-                      
-
-                
-
                 <group position={[0,-.1,0]}>
                     
                     {/* CONSTELACOES */}
@@ -250,7 +236,6 @@ export default function Interface_orbe({ mudar_caminho }) {
                     />
                     
                 </group>
-
         </Canvas>
 
 

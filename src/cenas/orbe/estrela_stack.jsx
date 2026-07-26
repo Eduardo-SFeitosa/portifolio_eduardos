@@ -96,7 +96,7 @@ export default function Estrela_stack({ nome, cor, posicao }) {
             </group>
       
             {em_foco && <Html
-                position={[0,.15,0]}
+                position={[.1,.4,0]}
                 scale={0.5}
                 className="estrela-texto"
                 style={{ position: "block" }}>

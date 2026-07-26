@@ -118,19 +118,13 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
             <div className="moedas-container">
               <Moeda
                 nome="GitHub"
-                link="https://github.com/seu-usuario"
+                link="https://github.com/Eduardo-SFeitosa"
                 cor="#f0f0f0"
                 icone="🐙"
               />
               <Moeda
-                nome="itch.io"
-                link="https://seu-usuario.itch.io"
-                cor="#fa5c5c"
-                icone="🎮"
-              />
-              <Moeda
                 nome="LinkedIn"
-                link="https://linkedin.com/in/seu-perfil"
+                link="https://www.linkedin.com/in/eduardo-santos-846970232/"
                 cor="#0a66c2"
                 icone="🔗"
               />

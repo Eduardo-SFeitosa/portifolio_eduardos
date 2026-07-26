@@ -1,23 +1,17 @@
 .interface-orbe{
 
-    width: 75vw;
-    height: 80vh;
-    border-radius: 10PX;
-
-    background-color: rgba(173, 216, 230, 0.747);
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-
-    
+    padding: 5%;
 
     .canvas-orbe {
-
         width: 80%;
         height: 80%;
         background-color: black;
-
     }
 
     .stacks{
