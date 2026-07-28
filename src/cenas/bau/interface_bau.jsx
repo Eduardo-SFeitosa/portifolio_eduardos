@@ -5,6 +5,7 @@ import { CameraControls } from "@react-three/drei";
 import { useRef, useState } from "react";
 
 export default function Interface_bau({ mudar_caminho , ...props }) {
+
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -31,7 +32,10 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
 
   return (
     <div className="interface-bau">
-      {/* Painel principal com formulário e moedas */}
+
+      <div className="container-principal">
+
+        {/* Painel principal com formulário e moedas */}
       <div className="painel-contato">
         <h1 className="titulo-contato">📬 Entre em contato</h1>
         <p className="subtitulo">
@@ -112,34 +116,17 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
               </button>
             </form>
           </div>
-
-          {/* Coluna das moedas (links sociais + currículo) */}
-          <div className="coluna-moedas">
-            <div className="moedas-container">
-              <Moeda
-                nome="GitHub"
-                link="https://github.com/Eduardo-SFeitosa"
-                cor="#f0f0f0"
-                icone="🐙"
-              />
-              <Moeda
-                nome="LinkedIn"
-                link="https://www.linkedin.com/in/eduardo-santos-846970232/"
-                cor="#0a66c2"
-                icone="🔗"
-              />
-              <Moeda
-                nome="Currículo"
-                link="/curriculo/curriculo.pdf"
-                cor="#ffd966"
-                icone="📄"
-                download
-              />
-            </div>
-          </div>
+          
         </div>
       </div>
 
+      <div className="icones">
+
+        <a target="_blank" href="https://github.com/Eduardo-SFeitosa"><img className="icone" src="/icones/github.png" alt="" /></a>
+
+        <a target="_blank" href="https://www.linkedin.com/in/eduardo-santos-846970232/"><img className="icone" src="/icones/linkedin.png" alt="" /></a>
+
+      </div>
 
       {/* Navegação inferior */}
       <div className="controle-caminhos">
@@ -147,6 +134,11 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
           ← VOLTAR PARA STACKS
         </button>
       </div>
+
+        
+      </div>
+
+      
     </div>
   );
 }

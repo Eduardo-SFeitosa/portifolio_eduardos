@@ -51,11 +51,9 @@ export default function Interface_orbe({ mudar_caminho }) {
             estrelas: [
                 { nome: "REACT", posicao: [-0.35, 0.35, 0] },
                 { nome: "ANGULAR", posicao: [0.35, 0.35, 0] },
-
                 { nome: "THREE.JS", posicao: [-0.15, 0.10, 0] },
                 { nome: "NODE.JS", posicao: [0, 0, 0] },
                 { nome: "TYPESCRIPT", posicao: [0.15, -0.10, 0] },
-
                 { nome: "ROUTER", posicao: [-0.30, -0.35, 0] },
                 { nome: "VITE", posicao: [0.30, -0.35, 0] },
             ],
@@ -66,13 +64,10 @@ export default function Interface_orbe({ mudar_caminho }) {
                 [0, 0, 0],
                 [0.15, -0.10, 0],
                 [0.30, -0.35, 0],
-
                 [0.35, 0.35, 0],
                 [0.15, -0.10, 0],
-
                 [-0.15, 0.10, 0],
                 [0.15, -0.10, 0],
-
                 [-0.30, -0.35, 0],
                 [0, 0, 0]
             ]
@@ -122,7 +117,7 @@ export default function Interface_orbe({ mudar_caminho }) {
     const atual = constelacoes[stack]
 
 
-    const CONSTELACAO_ESCALA = 4.5
+    const CONSTELACAO_ESCALA = 4
 
     const estrelas = atual.estrelas.map(estrela => ({
     ...estrela,
@@ -167,12 +162,12 @@ export default function Interface_orbe({ mudar_caminho }) {
 
         <h1>STACKS</h1>
 
-        <Canvas className="canvas-orbe" camera={{ position: [0, 0, 2.4] }}>
+        <Canvas className="canvas-orbe" camera={{ position: [0, 0, 4] }}>
 
             <ambientLight intensity={1} />
 
                 {/* SELECAO */}
-                <group >
+                <group position={[0 , 2 , 0]} >
 
                     {icones.map((icone, i) => {
 
@@ -183,7 +178,7 @@ export default function Interface_orbe({ mudar_caminho }) {
 
                             <mesh
                             raycast={() => null}
-                            position={[ posicao_x, 1.4 ,0]} 
+                            position={[ posicao_x, 0 ,0]} 
                             >
                                 <sphereGeometry args={[.5, 8, 8]} /> 
                                 
@@ -193,7 +188,7 @@ export default function Interface_orbe({ mudar_caminho }) {
                                     glowSharpness={1.3}
                                     glowColor={icone.cor}
                                     side={"THREE.DoubleSide"}
-                                    opacity={.30}
+                                    opacity={.20}
                                     depthTest={false}
                                 />
 
@@ -207,7 +202,7 @@ export default function Interface_orbe({ mudar_caminho }) {
 
                 </group>
 
-                <group position={[0,-.1,0]}>
+                <group position={[0,-1,0]}>
                     
                     {/* CONSTELACOES */}
 

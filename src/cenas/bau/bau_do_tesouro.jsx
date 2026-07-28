@@ -27,11 +27,11 @@ export default function Bau({ set_interface , ativado , ...props }) {
   //animação do bau
   const { bauEscala , bauRotacao , bauPosicao } = useSpring({
 
-    bauRotacao: ativado ? [0.8, 0, 0] : [0, .1, 0],
+    bauRotacao: ativado ? [0.9, 0, -.05] : [0, .1, 0],
 
-    bauEscala : ativado ? [1.8, 1.8, 1.8] : [1, 1, 1],
+    bauEscala : ativado ? [2, 2, 2] : [1, 1, 1],
 
-    bauPosicao : ativado ? [.1, .2, .3] : [0, 0, 0],
+    bauPosicao : ativado ? [.1, .35, .4] : [0, 0, 0],
       
     config: { tension: 200, friction: 20 },
 

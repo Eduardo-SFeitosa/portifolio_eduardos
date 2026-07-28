@@ -90,7 +90,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
           new Vector3(-0.73, 4.15, 10),
           new Vector3(3.25, 4.15, 10),
           new Vector3(3.25, 4.15, 4.35),
-          new Vector3(3.25, 4.15, 2.13),
+          new Vector3(3.25, 4.15, 1.99),
   
         ]),
         
@@ -101,7 +101,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
           new Vector3(20, 2, 6.5),
           new Vector3(-0.52, 2, -0.52),
           new Vector3(0, 4, 0),
-          new Vector3(-3.14, 4, 2.3),
+          new Vector3(-3.14, 4, 2),
   
         ])
       },
@@ -110,7 +110,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
         posicao : new CatmullRomCurve3([
 
-          new Vector3(3.25, 4.15, 2.13),
+          new Vector3(3.25, 4.15, 1.99),
           new Vector3(4.75, 4.15, 2.13),
           new Vector3(7, 4.15, 2.13),
           new Vector3(7, 4.15, 0.16),
@@ -120,7 +120,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
         ]),
         direcao : new CatmullRomCurve3([
 
-          new Vector3(-3.14, 4, 2.3),
+          new Vector3(-3.14, 4, 2),
           new Vector3(10, 3, -4),
           new Vector3(7, 3, -4),
           new Vector3(7.5, 1, -6),
@@ -156,7 +156,7 @@ const Controle_de_camera = forwardRef((props, ref ) => {
           new Vector3(3, -.5, -16),
           new Vector3(-8, 0, -15),
           new Vector3(1, 1, -18),
-          new Vector3(-.5, .5, -18.5),
+          new Vector3(-.3, .4, -18.5),
   
         ])
       },

@@ -61,7 +61,6 @@ export default function Porta({ set_interface , ativado, ...props }) {
       if (!ativado) {
         set_interface(null)
       }else{
-        console.log("ativar efeitos")
         set_efeitos(true)
       }
     },
@@ -74,9 +73,7 @@ export default function Porta({ set_interface , ativado, ...props }) {
       }
     }
 
-  }
-
-  )
+  })
 
   //ANIMACAO PARTICULAS
   useFrame((state, delta) => {

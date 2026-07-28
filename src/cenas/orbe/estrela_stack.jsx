@@ -29,7 +29,10 @@ export default function Estrela_stack({ nome, cor, posicao }) {
     }
 
     const cor_escolhida = useMemo(() => {
-        return cores[Math.floor(Math.random() * cores.length)]
+        if (!cor){
+            return cores[Math.floor(Math.random() * cores.length)]
+        }
+        return cor
     }, [])
 
     {/* ANIMACAO */}
