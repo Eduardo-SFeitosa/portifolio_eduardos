@@ -16,7 +16,7 @@ import Estrela_stack from "./estrela_stack";
 import Brilho from "../../componentes_auxiliares/brilho.jsx"
 import "./interface_orbe.scss"
 
-export default function Interface_orbe({ mudar_caminho }) {
+export default function Interface_orbe({ mudar_caminho, set_interface, set_direcao }) {
 
     const [stack, set_stack] = useState("python")
 
@@ -233,13 +233,11 @@ export default function Interface_orbe({ mudar_caminho }) {
                 </group>
         </Canvas>
 
-
-
         <div className="controle-caminhos">
 
-            <h1 className="botao" onClick={() => mudar_caminho("voltar")}>VOLTAR PARA JORNADA</h1>
+            <h1 className="botao" onClick={() => {set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA JORNADA</h1>
 
-            <h1 className="botao" onClick={() => mudar_caminho()}>AVANCAR PARA PROJETOS</h1>
+            <h1 className="botao" onClick={() => {set_direcao(); set_interface(null) }}>AVANCAR PARA PROJETOS</h1>
 
         </div>
     

@@ -134,7 +134,7 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
         <h1 className="botao" onClick={() => {set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA STACKS</h1>
 
-        <h1 className="botao" onClick={() => {set_direcao("avancar"); set_interface(null) }}>AVANCAR PARA CONTATO</h1>
+        <h1 className="botao" onClick={() => {set_direcao(); set_interface(null) }}>AVANCAR PARA CONTATO</h1>
 
       </div>
 

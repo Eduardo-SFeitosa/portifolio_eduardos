@@ -170,7 +170,6 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
         mudar_caminho(direcao_caminho)
         voltar_idle()
         return
-
       }
 
       const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]

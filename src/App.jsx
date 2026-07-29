@@ -174,11 +174,16 @@ function App() {
             />
 
             <Orbe 
-            onPointerDown={() => { if (cena_em_foco != "orbe") {travar_camera("orbe"); set_interface("orbe"); set_interface("orbe"); }}} 
+            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : null}} 
+            referencia_camera={referencia_camera}
             set_interface={set_interface}
             position={posicao_de_cenas["orbe"]["posicao"]} 
             rotation={posicao_de_cenas["orbe"]["rotacao"]} 
             ativado={ cena_em_foco == "orbe" ? true : false}
+            controle_de_camera={controle_de_camera_ref}
+            interface_ativa={interface_ativa}
+            direcao_caminho={direcao_caminho}
+            mudar_caminho={mudar_caminho}
             />
 
             <Mina 
@@ -239,7 +244,7 @@ function App() {
 
         :interface_ativa == "acampamento" ? <Interface_acampamento mudar_caminho={mudar_caminho}/>
 
-        :interface_ativa == "orbe" ? <Interface_orbe mudar_caminho={mudar_caminho}/>
+        :interface_ativa == "orbe" ? <Interface_orbe mudar_caminho={mudar_caminho} set_direcao={set_direcao} set_interface={set_interface}/>
 
         :interface_ativa == "mina" ? <Interface_mina mudar_caminho={mudar_caminho} set_direcao={set_direcao} set_interface={set_interface}/>
 
@@ -252,7 +257,7 @@ function App() {
 
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >SOBRE</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("orbe"); set_interface("orbe")}} >STACKS</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("orbe")}} >STACKS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >PROJETOS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("bau")} >CONTATO</button>
 

@@ -7,90 +7,186 @@ import { useRef, useState, useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from "three";
-import { useSpring, animated } from '@react-spring/three'
-import { Effect } from 'postprocessing';
+import { CatmullRomCurve3, Vector3  } from 'three'
+import { MathUtils } from 'three'
 
-export default function Orbe({ ativado, set_interface , ...props}) {
+export default function Orbe({ ativado, interface_ativa, set_interface, controle_de_camera, referencia_camera, direcao_caminho, mudar_caminho, ...props }) {
 
-  const referenciaOrbe = useRef(null)
+  const referencia_orbe = useRef(null)
   const [orbe_ativa, set_ativa] = useState(false)
+  const [animacao_ativa, set_animacao] = useState("idle")
+
+  const animacao_inversa = useRef(false)
+  const progresso = useRef(0)
+  const ultima_interface = useRef(null)
 
   const { nodes, materials } = useGLTF('/models/orbe.glb')
 
-  const {esfera_tamanho} = useSpring({
+  const animacoes = {
 
-    esfera_tamanho : orbe_ativa ? [1 ,1 ,1] : [0 ,0 ,0],
+    esfera_subir: {
+      duracao: 1,
 
-    config: { tension: 80, friction: 20 },
+      orbe_posicao: new CatmullRomCurve3([
+        new Vector3(-0.026, 0.15, 3),
+        new Vector3(-0.026, 0.15, 0)
+      ]),
 
-  })
+      camera_direcao : new CatmullRomCurve3([
 
-  useFrame( ({clock}) => {
+      ]),
+    },
+
+    esfera_crescer: {
+
+      duracao: 1,
+
+      carrinho: null,
+
+      camera: {
+        posicao: new CatmullRomCurve3([
+          new Vector3(8.30, 3.11, -3.98),
+          new Vector3(9.2, 2.8, -3.4),
+        ]),
+        direcao: new CatmullRomCurve3([
+          new Vector3(9.5, 2.4, -2),
+          new Vector3(9.2, 2.4, 5)
+        ])
+      },
+    },
+  }
+
+  const animacoes_nome = [
+    "idle",
+    "set_up",
+    "esfera_subir",
+    "esfera_crescer",
+    "finalizado",
+  ]
+
+  useFrame(({ clock }) => {
 
     const delta = clock.getElapsedTime()
 
-    if (referenciaOrbe.current && !orbe_ativa) {
+    if (!referencia_orbe.current) return
 
-      referenciaOrbe.current.rotation.z = delta * 2
+    if (referencia_orbe.current && !orbe_ativa) {
 
-      referenciaOrbe.current.rotation.y = delta * 2
-
-      referenciaOrbe.current.position.y = Math.sin(delta) * 0.15 + 1.4
-
-    }
+      referencia_orbe.current.rotation.z = delta * 2
+      referencia_orbe.current.rotation.y = delta * 2
+      referencia_orbe.current.position.y = Math.sin(delta) * 0.15 + 1.4
 
     }
+  })
 
-  )
+  useFrame((state, delta) => {
+
+    if (animacao_ativa == "idle" || animacao_ativa == "finalizado" || !referencia_camera.current) return
+
+    progresso.current += delta
+
+    const inverter_animacao = animacao_inversa.current == 1 ? 1 : 0 
+
+    let tempo_atual 
+
+    if (animacao_ativa in animacoes){
+      tempo_atual = inverter_animacao ? 1 - Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1)
+      : Math.min(progresso.current / animacoes[animacao_ativa].duracao, 1)
+    }
+
+    {/* SETUP PARA ANIMACAO PRINCIPAL */}
+    const camera = referencia_camera.current
+    const orbe = referencia_orbe.current
+    if (camera.position.distanceTo(new Vector3(3.25, 4.15, 1.99)) > 0.01 && animacao_ativa == "set_up" || orbe.position.y != 1.37 && animacao_ativa == "set_up"){
+
+      set_ativa(false)
+
+      camera.position.lerp(new Vector3(3.25, 4.15, 1.99), 0.1)
+      camera.lookAt(new Vector3(-3.14, 4, 2))
+      orbe.position.y = MathUtils.lerp(orbe.position.y, 1.37, 0.025)
+
+      return
+    }
+
+    else if (animacao_ativa == "set_up") {
+      const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]
+      set_animacao(animacao_escolhida)
+      progresso.current = 0
+    }
+
+    if (animacoes[animacao_ativa]["camera"]) {
+      
+      const direcao = animacoes[animacao_ativa]["camera_direcao"].getPoint(tempo_atual)
+      
+      referencia_camera.current.lookAt(direcao)
+    }
+
+  })
+
+  const voltar_idle = () => {
+    set_animacao(animacoes_nome[0])
+    set_interface(null)
+    controle_de_camera.current.ativar_controle()
+    progresso.current = 0
+    animacao_inversa.current = 0
+  }
 
   useEffect(() => {
 
-    set_ativa(ativado)
+    if (!referencia_camera.current) return
 
-  },[ativado])
+    if (ativado) {
+      controle_de_camera.current.desativar_controle()
+      set_animacao(animacoes_nome[1])
+    }
+    else if (animacao_ativa != "idle") {
+      voltar_idle()
+    }
+
+
+  }, [ativado])
+
+  useEffect(() => {
+
+    if (animacao_ativa == animacoes_nome.at(-1) && ativado && ultima_interface.current == "orbe" && interface_ativa == null) {
+      set_interface(null)
+      animacao_inversa.current = 1
+      progresso.current = 0
+      set_animacao(animacoes_nome.at(-2))
+      return
+    }
+
+    ultima_interface.current = interface_ativa
+
+  }, [interface_ativa])
 
   return (
 
     <group {...props} dispose={null}>
 
-      <mesh 
+      <mesh
 
-        onPointerDown={ () => {
+        onPointerDown={() => {
 
           if (!ativado) return
-        
+
         }}
 
-        geometry={nodes.Magic_Shrine1.geometry} 
-      
-        material={materials['Magic_Pillars.002']} 
-        
+        geometry={nodes.Magic_Shrine1.geometry}
+
+        material={materials['Magic_Pillars.002']}
+
         position={[-0.025, 0.024, -0.005]}>
 
-        <mesh 
-
-          ref={referenciaOrbe}
-        
-          geometry={nodes.Magic_Orb002.geometry} 
-          
-          material={materials['Magic_Orb 1.002']} 
-          
-          position={[0, 1.37, 0]} 
-
-          rotation={[-1.685, -0.078, -1.964]} 
-          
+        <mesh
+          ref={referencia_orbe}
+          geometry={nodes.Magic_Orb002.geometry}
+          material={materials['Magic_Orb 1.002']}
+          position={[0, 1.37, 0]}
+          rotation={[-1.685, -0.078, -1.964]}
         />
 
       </mesh>
-
-      <animated.mesh scale={esfera_tamanho} position={[ 0, 1.37, 0]}>
-        <sphereGeometry args={[ 1.88 , 8, 8]} />
-
-        <meshBasicMaterial 
-            color={"black"}
-            side={THREE.DoubleSide}
-        />
-      </animated.mesh>
 
       < pointLight position={[0, 1, 0]} intensity={10} color={"#6f0079"} />
 
