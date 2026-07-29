@@ -13,7 +13,7 @@ import { MathUtils } from 'three'
 export default function Orbe({ ativado, interface_ativa, set_interface, controle_de_camera, referencia_camera, direcao_caminho, mudar_caminho, ...props }) {
 
   const referencia_orbe = useRef(null)
-  const [orbe_ativa, set_ativa] = useState(false)
+  const [orbe_ativa, set_orbe] = useState(true)
   const [animacao_ativa, set_animacao] = useState("idle")
 
   const animacao_inversa = useRef(false)
@@ -25,15 +25,21 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
   const animacoes = {
 
     esfera_subir: {
-      duracao: 1,
+      duracao: 2,
 
       orbe_posicao: new CatmullRomCurve3([
-        new Vector3(-0.026, 0.15, 3),
-        new Vector3(-0.026, 0.15, 0)
+        new Vector3(0, 1.37, 0),
+        new Vector3(1, 2.37, 0),
+        new Vector3(2, 3, 0)
       ]),
 
       camera_direcao : new CatmullRomCurve3([
-
+        new Vector3(-3.14, 4, 2),
+        new Vector3(-3.14, 12, 2),
+        new Vector3(-3.14, 20, 2),
+        new Vector3(-3.14, 30, 2),
+        new Vector3(-3.14, 50, 2),
+        new Vector3(-3.14, 90, 2),
       ]),
     },
 
@@ -41,18 +47,9 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
       duracao: 1,
 
-      carrinho: null,
+      orbe_posicao: null,
 
-      camera: {
-        posicao: new CatmullRomCurve3([
-          new Vector3(8.30, 3.11, -3.98),
-          new Vector3(9.2, 2.8, -3.4),
-        ]),
-        direcao: new CatmullRomCurve3([
-          new Vector3(9.5, 2.4, -2),
-          new Vector3(9.2, 2.4, 5)
-        ])
-      },
+      camera_direcao: null,
     },
   }
 
@@ -68,13 +65,11 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
     const delta = clock.getElapsedTime()
 
-    if (!referencia_orbe.current) return
-
-    if (referencia_orbe.current && !orbe_ativa) {
+    if (referencia_orbe.current) {
 
       referencia_orbe.current.rotation.z = delta * 2
       referencia_orbe.current.rotation.y = delta * 2
-      referencia_orbe.current.position.y = Math.sin(delta) * 0.15 + 1.4
+      referencia_orbe.current.position.y = orbe_ativa ? Math.sin(delta) * 0.15 + 1.4  : referencia_orbe.current.position.y
 
     }
   })
@@ -97,14 +92,14 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
     {/* SETUP PARA ANIMACAO PRINCIPAL */}
     const camera = referencia_camera.current
     const orbe = referencia_orbe.current
-    if (camera.position.distanceTo(new Vector3(3.25, 4.15, 1.99)) > 0.01 && animacao_ativa == "set_up" || orbe.position.y != 1.37 && animacao_ativa == "set_up"){
+    if (camera.position.distanceTo(new Vector3(3.25, 4.15, 1.99)) > 0.01 && animacao_ativa == "set_up" || orbe.position.distanceTo(new Vector3(0, 1.37,0)) > .01 && animacao_ativa == "set_up"){
 
-      set_ativa(false)
+      set_orbe(false)
 
       camera.position.lerp(new Vector3(3.25, 4.15, 1.99), 0.1)
       camera.lookAt(new Vector3(-3.14, 4, 2))
       orbe.position.y = MathUtils.lerp(orbe.position.y, 1.37, 0.025)
-
+      
       return
     }
 
@@ -114,11 +109,39 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
       progresso.current = 0
     }
 
-    if (animacoes[animacao_ativa]["camera"]) {
+    if (animacoes[animacao_ativa]["camera_direcao"]) {
       
       const direcao = animacoes[animacao_ativa]["camera_direcao"].getPoint(tempo_atual)
       
       referencia_camera.current.lookAt(direcao)
+    }
+
+    if (animacoes[animacao_ativa]["orbe_posicao"]){
+
+      const posicao = animacoes[animacao_ativa]["orbe_posicao"].getPoint(tempo_atual)
+
+      orbe.position.copy(posicao)
+
+    }
+
+    if (tempo_atual >= 1 || tempo_atual <= 0 && inverter_animacao){
+
+      if (animacao_ativa == "esfera_crescer" && !inverter_animacao){
+        set_interface("orbe")
+      }
+
+      if (animacao_ativa == "set_up" && inverter_animacao){
+        console.log(direcao_caminho)
+        mudar_caminho(direcao_caminho)
+        return
+      }
+
+      const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]
+
+      set_animacao(animacao_escolhida)
+
+      progresso.current = 0
+
     }
 
   })
