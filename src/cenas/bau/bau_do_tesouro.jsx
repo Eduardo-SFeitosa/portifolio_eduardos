@@ -54,52 +54,39 @@ export default function Bau({ set_interface , ativado , ...props }) {
       
       {/* bau */}
       <animated.group
-
         rotation={bauRotacao}
-      
         position={bauPosicao} 
-
         scale={bauEscala}
-      
         dispose={null}
       
         onPointerDown={ () => {
 
           if (!ativado) return       
         
-        } }
+        } }>
 
-      >
+        <animated.group
+        ref={tampa}
+        rotation = { rotacaoTampa }
+        position={[-0.172, 0.429, -0.285]} >
 
-        <mesh 
-        
-          geometry={nodes.Box.geometry} 
-          
-          material={materials.chests} 
-          
-        />
+          <mesh 
+            geometry={nodes.Lid.geometry} 
+            material={materials.chests} 
+          />
 
-        <mesh 
-        
-          geometry={nodes.Gold.geometry} 
-          
-          material={materials.chests} position={[0, 0.379, 0]} 
-        
-        />       
+          <animated.group position={[ .17, .63 ,-.05 ]} rotation={[-Math.PI / 2, -Math.PI / 1 , 0]} >
+            <mesh geometry={nodes.Object_4.geometry} material={materials['Material.010']} rotation={[0, -1.565, 0]} scale={[0.061, 0.064, 0.08]} />
+            <mesh geometry={nodes.Object_10.geometry} material={materials['Material.012']} position={[-.0, .0, -.06]} rotation={[0, -1.565, 0.369]} scale={[0.006, 0.02, 0.018]} />
+            <mesh geometry={nodes.Object_6.geometry} material={materials['Material.011']} rotation={[1.206, -1.535, 1.3]} scale={[0.104, 0.104, 0.085]} />
+            <mesh geometry={nodes.Object_8.geometry} material={materials['Material.011']} scale={[0.104, 0.104, 0.085]} rotation={[-2.686, -1.524, 0.5]} />
+          </animated.group>
 
-        <animated.mesh 
+        </animated.group>
 
-          ref={tampa}
+        <mesh geometry={nodes.Box.geometry} material={materials.chests} />
 
-          geometry={nodes.Lid.geometry} 
-
-          material={materials.chests} 
-
-          rotation = { rotacaoTampa }
-          
-          position={[-0.172, 0.429, -0.285]} 
-
-        />
+        <mesh geometry={nodes.Gold.geometry}  material={materials.chests} position={[0, 0.379, 0]}  />       
 
       </animated.group>
 
