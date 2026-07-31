@@ -26,6 +26,10 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
   const animacoes = {
 
+    set_up : {
+      duracao : 0.1
+    },
+
     esfera_subir: {
       duracao: 2,
 
@@ -80,6 +84,7 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
   const voltar_idle = () => {
     set_animacao(animacoes_nome[0])
+    set_orbe(true)
     set_interface(null)
     controle_de_camera.current.ativar_controle()
     progresso.current = 0
@@ -127,7 +132,7 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
       return
     }
 
-    else if (animacao_ativa == "set_up") {
+    else if (animacao_ativa == "set_up" && !animacao_inversa.current) {
       const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]
       set_animacao(animacao_escolhida)
       set_orbe(false)
@@ -156,8 +161,11 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
       const escala = animacoes[animacao_ativa]["escala_esfera_negra"].getPoint(tempo_atual)
 
-      refererencia_orbe_negra.current.scale.lerp(escala, .1)
+      const orbe_negra_escala = refererencia_orbe_negra.current.scale
 
+      orbe_negra_escala.x = escala
+      orbe_negra_escala.y = escala
+      orbe_negra_escala.z = escala
     }
 
     if (tempo_atual >= 1 || tempo_atual <= 0 && inverter_animacao){
