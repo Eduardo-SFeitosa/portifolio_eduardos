@@ -31,32 +31,17 @@
     width: 80%;
     max-width: 800px;
     height: 65vh;
-    border-radius: 24px;
-    // Fundo semi-transparente com blur (efeito vidro)
-    background: rgba(0, 0, 0, 0.712);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 0 60px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255, 217, 160, 0.08);
     pointer-events: auto;
-    // Permite que o canvas 3D tenha fundo transparente
-    canvas {
-      display: block;
-      width: 100% !important;
-      height: 100% !important;
-    }
   }
 
   .controle-caminhos {
     display: flex;
     gap: 30px;
-    margin-top: 20px;
+    margin-bottom: 1%;
     pointer-events: auto;
 
     .botao {
       background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 217, 160, 0.2);
       color: #f0e6d0;
       padding: 12px 28px;

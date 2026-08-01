@@ -208,7 +208,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                     {estrelas.map((estrela, i) => (
                         <Estrela_stack
-                            key={estrela.nome}
+                            key={`${estrela.posicao} index:${i}`}
                             nome={estrela.nome}
                             posicao={estrela.posicao}
                             cor={atual.cor}
