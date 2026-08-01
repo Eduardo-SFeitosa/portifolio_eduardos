@@ -31,7 +31,7 @@ export default function Estrela_stack({ nome, cor, posicao, delay }) {
 
         config: { tension: 80, friction: 20 },
 
-        delay: delay * 1000,
+        delay: delay,
 
     })
 

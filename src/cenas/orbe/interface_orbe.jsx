@@ -4,7 +4,6 @@ import { Canvas } from "@react-three/fiber"
 import { Physics, RigidBody } from "@react-three/rapier";
 import { Line } from "@react-three/drei"
 import { OrbitControls } from "@react-three/drei";
-import { useFrame } from '@react-three/fiber'
 
 import { Css_icon } from "./modelos_orbe/css_icon.jsx";
 import { Html5_icon } from "./modelos_orbe/html5_icon.jsx";
@@ -15,6 +14,7 @@ import { Csharp_icon } from "./modelos_orbe/csharp_icon.jsx";
 import Estrela_stack from "./estrela_stack";
 import Brilho from "../../componentes_auxiliares/brilho.jsx"
 import "./interface_orbe.scss"
+import Linha from "./linha.jsx";
 
 export default function Interface_orbe({ mudar_caminho, set_interface, set_direcao }) {
 
@@ -112,21 +112,21 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
     }
 
-    const [linePoints, setLinePoints] = useState([])
-
     const atual = constelacoes[stack]
 
-
-    const CONSTELACAO_ESCALA = 4
+    const atraso_estrelas = .3 * 1000
+    const escala_constelacoes = 4
 
     const estrelas = atual.estrelas.map(estrela => ({
     ...estrela,
-    posicao: estrela.posicao.map(v => v * CONSTELACAO_ESCALA)
+    posicao: estrela.posicao.map(v => v * escala_constelacoes)
     }))
 
     const linhas = atual.linhas.map(ponto =>
-        ponto.map(v => v * CONSTELACAO_ESCALA)
+        ponto.map(v => v * escala_constelacoes)
     )
+
+    console.log(linhas)
 
     const icones = [
         {
@@ -212,23 +212,22 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                             nome={estrela.nome}
                             posicao={estrela.posicao}
                             cor={atual.cor}
-                            delay={i * 0.15}
+                            delay={i * atraso_estrelas}
                         />
                     ))}
 
-                    <Line
-                        points={linhas}
-                        color={"wheat"}
-                        lineWidth={.9}
-                        transparent
-                        opacity={0.15}
-                    />
+                    {linhas.map((linha, i) => {
 
-                    <Line
-                        points={linhas}
-                        color={"wheat"}
-                        lineWidth={.2}
-                    />
+                        const promixo_ponto = linhas.length - 1 == i ? linhas[0] : linhas[i + 1] 
+
+                        return <Linha
+                            key={`${linha} index:${i}`}
+                            atraso={i * atraso_estrelas}
+                            ponto_1={linha}
+                            ponto_2={promixo_ponto}
+                            />
+
+                    })}
                     
                 </group>
         </Canvas>
