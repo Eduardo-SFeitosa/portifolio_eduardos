@@ -9,7 +9,6 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from "three";
 import { CatmullRomCurve3, Vector3  } from 'three'
 import { MathUtils } from 'three'
-import { easing } from 'maath'
 
 export default function Orbe({ ativado, interface_ativa, set_interface, controle_de_camera, referencia_camera, direcao_caminho, mudar_caminho, ...props }) {
 
@@ -91,6 +90,15 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
     animacao_inversa.current = 0
   }
 
+  const posicao_inicial = () => {
+
+    referencia_orbe.current.position.copy(new Vector3(0, 1.37, 0))
+
+    const orbe_negra_escala = refererencia_orbe_negra.current
+
+    orbe_negra_escala.scale.copy(new Vector3(0,0,0))
+  }
+
   useFrame(({ clock }) => {
 
     const delta = clock.getElapsedTime()
@@ -127,20 +135,18 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
       camera.position.lerp(new Vector3(3.25, 4.15, 1.99), 0.1)
       camera.lookAt(new Vector3(-3.14, 4, 2))
-      orbe.position.y = MathUtils.lerp(orbe.position.y, 1.37, 0.025)
+      orbe.position.lerp(new Vector3(0, 1.37,0), .1)
       
       return
     }
 
-    else if (animacao_ativa == "set_up" && !animacao_inversa.current) {
+    else if (animacao_ativa == "set_up" && animacao_inversa.current == 0) {
       const animacao_escolhida = animacoes_nome[animacoes_nome.indexOf(animacao_ativa) + 1 - animacao_inversa.current * 2]
       set_animacao(animacao_escolhida)
       set_orbe(false)
       progresso.current = 0
       return
     }
-
-    console.log(animacao_ativa)
 
     if ("camera_direcao" in animacoes[animacao_ativa]) {
       
@@ -161,16 +167,11 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
       const escala = animacoes[animacao_ativa]["escala_esfera_negra"].getPoint(tempo_atual)
 
-      const orbe_negra_escala = refererencia_orbe_negra.current.scale
-
-      orbe_negra_escala.x = escala
-      orbe_negra_escala.y = escala
-      orbe_negra_escala.z = escala
+      refererencia_orbe_negra.current.scale.copy(escala)
+      
     }
 
     if (tempo_atual >= 1 || tempo_atual <= 0 && inverter_animacao){
-
-      console.log(animacao_ativa ,animacoes_nome.at(-2))
 
       if (animacao_ativa == animacoes_nome.at(-2) && !inverter_animacao){
         set_interface("orbe")
@@ -201,10 +202,10 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
     if (ativado) {
       controle_de_camera.current.desativar_controle()
       set_animacao(animacoes_nome[1])
-      set_orbe(false)
     }
     else if (animacao_ativa != "idle") {
       voltar_idle()
+      posicao_inicial()
     }
 
   }, [ativado])
@@ -250,7 +251,7 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
         />
 
         <mesh scale={[0,0,0]} ref={refererencia_orbe_negra}>
-          <sphereGeometry args={[ 25, 20, 20 ]}/>
+          <sphereGeometry args={[ 22, 20, 20 ]}/>
           <meshBasicMaterial color={"black"}/>
         </mesh>
 
