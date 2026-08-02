@@ -38,7 +38,7 @@ export default function Linha({ponto_1, ponto_2, atraso}) {
     return <Line
             points={[ponto_1, ponto_final]}
             color={"white"}
-            lineWidth={3}
+            lineWidth={.5}
             />
 
 }

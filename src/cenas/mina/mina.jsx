@@ -91,6 +91,12 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
 
   }
 
+  const posicao_inicial = () => {
+
+    carrinho.current.position.copy(new Vector3(-0.026, 0.15, 3))
+
+  }
+
   useEffect(() => {
     
     if (!referencia_camera.current) return
@@ -100,6 +106,7 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
       set_animacao(animacoes_nome[1])
     }
     else if (animacao_ativa != "idle") {
+      posicao_inicial()
       voltar_idle()
     }
     
@@ -166,7 +173,6 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
       }
 
       if (animacao_ativa == "carrinho_chega" && inverter_animacao){
-        console.log(direcao_caminho)
         mudar_caminho(direcao_caminho)
         voltar_idle()
         return

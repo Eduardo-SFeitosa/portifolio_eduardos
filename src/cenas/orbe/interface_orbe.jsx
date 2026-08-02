@@ -50,8 +50,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
             estrelas: [
                 { nome: "REACT", posicao: [-0.35, 0.35, 0] },
-                { nome: "ANGULAR", posicao: [0.35, 0.35, 0] },
                 { nome: "THREE.JS", posicao: [-0.15, 0.10, 0] },
+                { nome: "ANGULAR", posicao: [0.35, 0.35, 0] },
+                
                 { nome: "NODE.JS", posicao: [0, 0, 0] },
                 { nome: "TYPESCRIPT", posicao: [0.15, -0.10, 0] },
                 { nome: "ROUTER", posicao: [-0.30, -0.35, 0] },
@@ -69,7 +70,6 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 [-0.15, 0.10, 0],
                 [0.15, -0.10, 0],
                 [-0.30, -0.35, 0],
-                [0, 0, 0]
             ]
         },
 
@@ -125,8 +125,6 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     const linhas = atual.linhas.map(ponto =>
         ponto.map(v => v * escala_constelacoes)
     )
-
-    console.log(linhas)
 
     const icones = [
         {
@@ -218,7 +216,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                     {linhas.map((linha, i) => {
 
-                        const promixo_ponto = linhas.length - 1 == i ? linhas[0] : linhas[i + 1] 
+                        const promixo_ponto = linhas.length - 1 == i ? linhas[i] : linhas[i + 1] 
 
                         return <Linha
                             key={`${linha} index:${i}`}
