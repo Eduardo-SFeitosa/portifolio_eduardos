@@ -16,32 +16,32 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
     const estrela = useRef(null)
     const brilho = useRef(1)
 
-    const movimento_vertical = Math.random() * -.010
+    const movimento_vertical = Math.random() * -.05
 
-    const movimento_lateral = Math.random() * .02
+    const movimento_lateral = Math.random() * .05
 
     const atraso = useRef(Math.random() * Math.PI * 2)
 
     const cores = ["red", "blue", "purple", "green"]
 
     const posicoes_verticais = {
-        0 : .4,
+        0 : .5,
         1 : .1,
-        2 : -.1,
+        2 : -.2,
     }
 
     const posicoes_horizontais = {
-        0 : -.165,
+        0 : -.21,
         1 : -.08,
-        2 : .1,
+        2 : .5,
     }
 
     const posicao_texto = [margem_esquerda < 2 ? posicoes_horizontais[margem_esquerda] * nome.length : posicoes_horizontais[margem_esquerda], 
     posicoes_verticais[margem_cima] ,0]
 
     const linha_texto = [
-        margem_esquerda == 0 ? posicao_texto[0] / 2 : margem_esquerda == 1 ? 0 : posicao_texto[0] * nome.length,
-        margem_cima == 0 ? posicao_texto[1] / 2 : margem_esquerda == 1 ? 0 : posicao_texto[1],
+        margem_esquerda == 0 ? posicao_texto[0] / 2 : margem_esquerda == 1 ? 0 : posicao_texto[0] * nome.length / 4,
+        margem_cima == 0 ? posicao_texto[1] / 2 : margem_cima == 1 ? 0 : posicao_texto[1],
         posicao_texto[2]
     ]
 
@@ -72,6 +72,8 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
         }
         return cor
     }, [])
+
+    console.log(cor_escolhida)
 
     {/* ANIMACAO */}
     useFrame(({clock}) => {
@@ -137,10 +139,13 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
                     posicoes_verticais[margem_cima] 
                     ,0]}
                 scale={0.5}
-                className="estrela-texto"
-                style={{ position: "block", color : "white" }}>
+                className="estrela-texto">
 
-                    <h1 className="estrela-nome">
+                    <h1 className="estrela-nome"
+                    style={{ 
+                        position: "block", 
+                        textShadow: `0 0 4px rgba(255,255,255,.8),  0 0 6px ${cor_escolhida}`,
+                        }}>
                         {nome}
                     </h1>
             </Html>}
@@ -149,6 +154,7 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
             key={nome}
             ponto_1={[0,0,0]}
             ponto_2={linha_texto}
+            cor={cor_escolhida}
             />}
 
         </animated.group>

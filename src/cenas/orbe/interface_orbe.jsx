@@ -22,90 +22,92 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
     const constelacoes = {
 
-        python: {
+    python: {
 
-            estrelas: [
-                { nome: "DJANGO",      posicao: [-0.55,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "FASTAPI",     posicao: [-0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "PANDAS",      posicao: [-0.50, -0.05, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "NUMPY",       posicao: [-0.10, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "MATPLOTLIB",  posicao: [ 0.25, -0.10, 0], margem_esquerda: 2, margem_cima: 2 },
-                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "SELENIUM",    posicao: [ 0.20,  0.40, 0], margem_esquerda: 0, margem_cima: 0 },
-            ],
+        estrelas: [
+            { nome: "DJANGO",      cor: "#0DB14B", posicao: [-0.55,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
+            { nome: "FASTAPI",     cor: "#00C58E", posicao: [-0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
+            { nome: "PANDAS",      cor: "#6A5CFF", posicao: [-0.50, -0.05, 0], margem_esquerda: 0, margem_cima: 2 },
+            { nome: "NUMPY",       cor: "#4DABF7", posicao: [-0.10, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
+            { nome: "MATPLOTLIB",  cor: "#FFB347", posicao: [ 0.25, -0.10, 0], margem_esquerda: 2, margem_cima: 2 },
+            { nome: "REQUESTS",    cor: "#B388FF", posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+            { nome: "SELENIUM",    cor: "#43D854", posicao: [ 0.20,  0.40, 0], margem_esquerda: 0, margem_cima: 0 },
+        ],
 
-            linhas: [
-                [-0.55, 0.35, 0],
-                [-0.25, 0.15, 0],
-                [-0.50, -0.05, 0],
-                [-0.10, -0.25, 0],
-                [0.25, -0.10, 0],
-                [0.50, 0.15, 0],
-                [0.20, 0.40, 0],
-            ]
-        },
+        linhas: [
+            [-0.55, 0.35, 0],
+            [-0.25, 0.15, 0],
+            [-0.50, -0.05, 0],
+            [-0.10, -0.25, 0],
+            [0.25, -0.10, 0],
+            [0.50, 0.15, 0],
+            [0.20, 0.40, 0],
+        ]
+    },
 
-        javascript: {
+    javascript: {
 
-            estrelas: [
-                { nome: "REACT",       posicao: [-0.45,  0.45, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "THREE.JS",    posicao: [-0.10,  0.15, 0], margem_esquerda: 0, margem_cima: 1 },
-                { nome: "ANGULAR",     posicao: [ 0.35,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "NODE.JS",     posicao: [ 0.05, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "TYPESCRIPT",  posicao: [ 0.45, -0.35, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "ROUTER",      posicao: [ 0.00, -0.20, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "VITE",        posicao: [-0.30, -0.45, 0], margem_esquerda: 0, margem_cima: 0 },
-            ],
+        estrelas: [
+            { nome: "REACT",       cor: "#61DAFB", posicao: [-0.45,  0.45, 0], margem_esquerda: 0, margem_cima: 0 },
+            { nome: "THREE.JS",    cor: "#D9D9D9", posicao: [-0.10,  0.15, 0], margem_esquerda: 0, margem_cima: 1 },
+            { nome: "ANGULAR",     cor: "#DD0031", posicao: [ 0.35,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
+            { nome: "NODE.JS",     cor: "#68A063", posicao: [ 0.05, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
+            { nome: "TYPESCRIPT",  cor: "#3178C6", posicao: [ 0.45, -0.35, 0], margem_esquerda: 0, margem_cima: 2 },
+            { nome: "ROUTER",      cor: "#F44250", posicao: [ 0.00, -0.20, 0], margem_esquerda: 0, margem_cima: 0 },
+            { nome: "VITE",        cor: "#9C6BFF", posicao: [-0.30, -0.45, 0], margem_esquerda: 0, margem_cima: 0 },
+        ],
 
-            linhas: [
-                [-0.45, 0.45, 0],
-                [-0.10, 0.15, 0],
-                [0.35, 0.35, 0],
-                [0.05, -0.05, 0],
-                [0.45, -0.35, 0],
-                [0.00, -0.20, 0],
-                [-0.30, -0.45, 0],
-            ]
-        },
+        linhas: [
+            [-0.45, 0.45, 0],
+            [-0.10, 0.15, 0],
+            [0.35, 0.35, 0],
+            [0.05, -0.05, 0],
+            [0.45, -0.35, 0],
+            [0.00, -0.20, 0],
+            [-0.30, -0.45, 0],
+        ]
+    },
 
-        html_css: {
+    html_css: {
 
-            estrelas: [
-                { nome: "FORMS",       posicao: [ 0.00,  0.30, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "CSS",         posicao: [ 0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "SASS",        posicao: [ 0.15, -0.05, 0], margem_esquerda: 2, margem_cima: 2 },
-                { nome: "ANIMACOES",   posicao: [ 0.00, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "TAILWIND",    posicao: [-0.15, -0.05, 0], margem_esquerda: 0, margem_cima: 1 },
-                { nome: "HTML",        posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 0 },
-            ],
-            linhas: [
-                [0, 0.30, 0],
-                [0.25, 0.15, 0],
-                [0.15, -0.05, 0],
-                [0, -0.25, 0],
-                [-0.15, -0.05, 0],
-                [-0.25, 0.15, 0],
-                [0, 0.30, 0],
-            ]
-        },
+        estrelas: [
+            { nome: "FORMS",       cor: "#FFD166", posicao: [ 0.00,  0.30, 0], margem_esquerda: 1, margem_cima: 0 },
+            { nome: "CSS",         cor: "#2965F1", posicao: [ 0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+            { nome: "SASS",        cor: "#CF649A", posicao: [ 0.15, -0.05, 0], margem_esquerda: 2, margem_cima: 2 },
+            { nome: "ANIMACOES",   cor: "#7AE582", posicao: [ 0.00, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
+            { nome: "TAILWIND",    cor: "#38BDF8", posicao: [-0.15, -0.05, 0], margem_esquerda: 0, margem_cima: 1 },
+            { nome: "HTML",        cor: "#E34F26", posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 0 },
+        ],
 
-        csharp: {
+        linhas: [
+            [0, 0.30, 0],
+            [0.25, 0.15, 0],
+            [0.15, -0.05, 0],
+            [0, -0.25, 0],
+            [-0.15, -0.05, 0],
+            [-0.25, 0.15, 0],
+            [0, 0.30, 0],
+        ]
+    },
 
-            estrelas: [
-                { nome: "ASP.NET",        posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "API REST",       posicao: [-0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "WINDOWS FORMS",  posicao: [ 0.45, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: ".NET",           posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
-            ],
+    csharp: {
 
-            linhas: [
-                [0.00, 0.50, 0],
-                [-0.45, -0.30, 0],
-                [0.45, -0.30, 0],
-                [0.00, 0.00, 0],
-            ]
-        }
+        estrelas: [
+            { nome: "ASP.NET",         cor: "#7C4DFF", posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
+            { nome: "API REST",        cor: "#26C6DA", posicao: [-0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
+            { nome: "WINDOWS FORMS",   cor: "#FFCA28", posicao: [ 0.45, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
+            { nome: ".NET",            cor: "#A855F7", posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
+        ],
+
+        linhas: [
+            [0.00, 0.50, 0],
+            [-0.45, -0.30, 0],
+            [0.45, -0.30, 0],
+            [0.00, 0.00, 0],
+        ]
     }
+
+}
 
     const atual = constelacoes[stack]
 
