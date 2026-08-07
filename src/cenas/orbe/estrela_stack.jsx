@@ -9,7 +9,7 @@ import { Vector3 } from "three"
 
 import "./interface_orbe.scss"
 
-export default function Estrela_stack({ nome, cor, posicao, delay }) {
+export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda, posicao, delay }) {
 
     const [em_foco, set_foco] = useState(false)
 
@@ -24,12 +24,28 @@ export default function Estrela_stack({ nome, cor, posicao, delay }) {
 
     const cores = ["red", "blue", "purple", "green"]
 
+    const posicoes_verticais = {
+        0 : .4,
+        1 : .1,
+        2 : -.1,
+    }
+
+    const posicoes_horizontais = {
+        0 : -.17,
+        1 : -.08,
+        2 : .1,
+    }
+
     const {escala_estrela} = useSpring({
 
         from: { escala_estrela: [0, 0, 0] },
         to: { escala_estrela: [1, 1, 1] },
 
         config: { tension: 80, friction: 20 },
+
+        onRest : () => {
+            set_foco(true)
+        },
 
         delay: delay,
 
@@ -70,8 +86,6 @@ export default function Estrela_stack({ nome, cor, posicao, delay }) {
         <animated.group position={posicao} scale={escala_estrela} >
 
             <group
-                onPointerOver={() => set_foco(true)}
-                onPointerOut={() => set_foco(false)}
                 ref={estrela}
             >
 
@@ -109,7 +123,10 @@ export default function Estrela_stack({ nome, cor, posicao, delay }) {
             </group>
       
             {em_foco && <Html
-                position={[.1,.4,0]}
+                position={ 
+                    [margem_esquerda < 2 ? posicoes_horizontais[margem_esquerda] * nome.length : posicoes_horizontais[margem_esquerda], 
+                    posicoes_verticais[margem_cima] 
+                    ,0]}
                 scale={0.5}
                 className="estrela-texto"
                 style={{ position: "block", color : "white" }}>

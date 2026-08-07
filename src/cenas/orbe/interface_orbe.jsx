@@ -25,63 +25,58 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         python: {
 
             estrelas: [
-                { nome: "DJANGO", posicao: [-0.35, 0.05, 0] },
-                { nome: "FASTAPI", posicao: [-0.15, 0.20, 0] },
-                { nome: "PANDAS", posicao: [0.05, 0.15, 0] },
-                { nome: "NUMPY", posicao: [0.20, 0.00, 0] },
-                { nome: "MATPLOTLIB", posicao: [0.05, -0.15, 0] },
-                { nome: "REQUESTS", posicao: [-0.10, -0.20, 0] },
-                { nome: "SELENIUM", posicao: [-0.30, -0.10, 0] },
+                { nome: "DJANGO", posicao: [-0.55, 0.35, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "FASTAPI", posicao: [-0.25, 0.15, 0], margem_esquerda: 1, margem_cima : 0, },
+                { nome: "PANDAS", posicao: [-0.50, -0.05, 0], margem_esquerda: 2, margem_cima : 0, },
+                { nome: "NUMPY", posicao: [-0.10, -0.25, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "MATPLOTLIB", posicao: [0.25, -0.10, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "REQUESTS", posicao: [0.50, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "SELENIUM", posicao: [0.20, 0.40, 0], margem_esquerda: 0, margem_cima : 0, },
             ],
 
             linhas: [
-                [-0.35, 0.05, 0],
-                [-0.15, 0.20, 0],
-                [0.05, 0.15, 0],
-                [0.20, 0.00, 0],
-                [0.05, -0.15, 0],
-                [-0.10, -0.20, 0],
-                [-0.30, -0.10, 0],
-                [-0.35, 0.05, 0],
+                [-0.55, 0.35, 0],
+                [-0.25, 0.15, 0],
+                [-0.50, -0.05, 0],
+                [-0.10, -0.25, 0],
+                [0.25, -0.10, 0],
+                [0.50, 0.15, 0],
+                [0.20, 0.40, 0],
             ]
         },
 
         javascript: {
 
             estrelas: [
-                { nome: "REACT", posicao: [-0.35, 0.35, 0] },
-                { nome: "THREE.JS", posicao: [-0.15, 0.10, 0] },
-                { nome: "ANGULAR", posicao: [0.35, 0.35, 0] },
-                
-                { nome: "NODE.JS", posicao: [0, 0, 0] },
-                { nome: "TYPESCRIPT", posicao: [0.15, -0.10, 0] },
-                { nome: "ROUTER", posicao: [-0.30, -0.35, 0] },
-                { nome: "VITE", posicao: [0.30, -0.35, 0] },
+                { nome: "REACT", posicao: [-0.45, 0.45, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "THREE.JS", posicao: [-0.10, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "ANGULAR", posicao: [0.35, 0.35, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "NODE.JS", posicao: [0.05, -0.05, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "TYPESCRIPT", posicao: [0.45, -0.35, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "ROUTER", posicao: [0.00, -0.20, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "VITE", posicao: [-0.30, -0.45, 0], margem_esquerda: 0, margem_cima : 0, },
             ],
 
             linhas: [
-                [-0.35, 0.35, 0],
-                [-0.15, 0.10, 0],
-                [0, 0, 0],
-                [0.15, -0.10, 0],
-                [0.30, -0.35, 0],
+                [-0.45, 0.45, 0],
+                [-0.10, 0.15, 0],
                 [0.35, 0.35, 0],
-                [0.15, -0.10, 0],
-                [-0.15, 0.10, 0],
-                [0.15, -0.10, 0],
-                [-0.30, -0.35, 0],
+                [0.05, -0.05, 0],
+                [0.45, -0.35, 0],
+                [0.00, -0.20, 0],
+                [-0.30, -0.45, 0],
             ]
         },
 
         html_css: {
 
             estrelas: [
-                { nome: "HTML", posicao: [-0.25, 0.15, 0] },
-                { nome: "CSS", posicao: [0.25, 0.15, 0] },
-                { nome: "SASS", posicao: [0.15, -0.05, 0] },
-                { nome: "TAILWIND", posicao: [-0.15, -0.05, 0] },
-                { nome: "ANIMACOES", posicao: [0, -0.25, 0] },
-                { nome: "FORMS", posicao: [0, 0.30, 0] },
+                { nome: "FORMS", posicao: [0, 0.30, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "CSS", posicao: [0.25, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "SASS", posicao: [0.15, -0.05, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "ANIMACOES", posicao: [0, -0.25, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "TAILWIND", posicao: [-0.15, -0.05, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "HTML", posicao: [-0.25, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
             ],
 
             linhas: [
@@ -98,18 +93,19 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         csharp: {
 
             estrelas: [
-                { nome: "ASP.NET", posicao: [0, 0.25, 0] },
-                { nome: "API REST", posicao: [0.25, 0.05, 0] },
-                { nome: "WINDOWS FORMS", posicao: [0, -0.25, 0] },
+                { nome: "ASP.NET", posicao: [0.00, 0.50, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "API REST", posicao: [-0.45, -0.30, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "WINDOWS FORMS", posicao: [0.45, -0.30, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: ".NET", posicao: [0.00, 0.00, 0], margem_esquerda: 0, margem_cima : 0, },
             ],
 
             linhas: [
-                [0, 0.25, 0],
-                [0.25, 0.05, 0],
-                [0, -0.25, 0],
+                [0.00, 0.50, 0],
+                [-0.45, -0.30, 0],
+                [0.45, -0.30, 0],
+                [0.00, 0.00, 0],
             ]
         }
-
     }
 
     const atual = constelacoes[stack]
@@ -118,8 +114,8 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     const escala_constelacoes = 4
 
     const estrelas = atual.estrelas.map(estrela => ({
-    ...estrela,
-    posicao: estrela.posicao.map(v => v * escala_constelacoes)
+        ...estrela,
+        posicao: estrela.posicao.map(v => v * escala_constelacoes)
     }))
 
     const linhas = atual.linhas.map(ponto =>
@@ -128,44 +124,44 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
     const icones = [
         {
-            nome : "python",
-            componente : Python_icon,
-            cor : "yellow",
+            nome: "python",
+            componente: Python_icon,
+            cor: "yellow",
         },
         {
-            nome : "html_css",
-            componente : Css_icon,
-            cor : "blue",
+            nome: "html_css",
+            componente: Css_icon,
+            cor: "blue",
         },
         {
-            nome : "javascript",
-            componente : Javascript_icon,
-            cor : "yellow",
+            nome: "javascript",
+            componente: Javascript_icon,
+            cor: "yellow",
         },
         {
-            nome : "html_css",
-            componente : Html5_icon,
-            cor : "orange",
+            nome: "html_css",
+            componente: Html5_icon,
+            cor: "orange",
         },
         {
-            nome : "csharp",
-            componente : Csharp_icon,
-            cor : "purple",
+            nome: "csharp",
+            componente: Csharp_icon,
+            cor: "purple",
         },
     ]
 
     return (
-    
-    <div className="interface-orbe">
 
-        <h1>STACKS</h1>
+        <div className="interface-orbe">
 
-        <Canvas className="canvas-orbe" camera={{ position: [0, 0, 4] }}>
+            <h1>STACKS</h1>
 
-            <ambientLight intensity={1} />
+            <Canvas className="canvas-orbe" camera={{ position: [0, 0, 4] }}>
+
+                <ambientLight intensity={1} />
 
                 {/* SELECAO */}
-                <group position={[0 , 2 , 0]} >
+                <group position={[0, 2, 0]} >
 
                     {icones.map((icone, i) => {
 
@@ -175,11 +171,11 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                         return <>
 
                             <mesh
-                            raycast={() => null}
-                            position={[ posicao_x, 0 ,0]} 
+                                raycast={() => null}
+                                position={[posicao_x, 0, 0]}
                             >
-                                <sphereGeometry args={[.5, 8, 8]} /> 
-                                
+                                <sphereGeometry args={[.5, 8, 8]} />
+
                                 <Brilho
                                     falloff={4.2}
                                     glowInternalRadius={4.1}
@@ -191,17 +187,17 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                                 />
 
                                 <Icone_componente
-                                onPointerDown={() => {set_stack(icone.nome)}}
-                                scale={0.005}
+                                    onPointerDown={() => { set_stack(icone.nome) }}
+                                    scale={0.005}
                                 />
-                        </mesh>
+                            </mesh>
                         </>
                     })}
 
                 </group>
 
-                <group position={[0,-1,0]}>
-                    
+                <group position={[0, -1, 0]}>
+
                     {/* CONSTELACOES */}
 
                     {estrelas.map((estrela, i) => (
@@ -209,6 +205,8 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                             key={`${estrela.posicao} index:${i}`}
                             nome={estrela.nome}
                             posicao={estrela.posicao}
+                            margem_cima={estrela.margem_cima}
+                            margem_esquerda={estrela.margem_esquerda}
                             cor={atual.cor}
                             delay={i * atraso_estrelas}
                         />
@@ -216,27 +214,27 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                     {linhas.map((linha, i) => {
 
-                        const promixo_ponto = linhas.length - 1 == i ? linhas[i] : linhas[i + 1] 
+                        const promixo_ponto = linhas.length - 1 == i ? linhas[i] : linhas[i + 1]
 
                         return <Linha
                             key={`${linha} index:${i}`}
                             atraso={i * atraso_estrelas}
                             ponto_1={linha}
                             ponto_2={promixo_ponto}
-                            />
+                        />
 
                     })}
-                    
+
                 </group>
-        </Canvas>
+            </Canvas>
 
-        <div className="controle-caminhos">
+            <div className="controle-caminhos">
 
-            <h1 className="botao" onClick={() => {set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA JORNADA</h1>
+                <h1 className="botao" onClick={() => { set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA JORNADA</h1>
 
-            <h1 className="botao" onClick={() => {set_direcao(); set_interface(null) }}>AVANCAR PARA PROJETOS</h1>
+                <h1 className="botao" onClick={() => { set_direcao(); set_interface(null) }}>AVANCAR PARA PROJETOS</h1>
 
-        </div>
-    
-    </div>)
+            </div>
+
+        </div>)
 }
