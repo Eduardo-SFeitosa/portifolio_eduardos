@@ -25,13 +25,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         python: {
 
             estrelas: [
-                { nome: "DJANGO", posicao: [-0.55, 0.35, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "FASTAPI", posicao: [-0.25, 0.15, 0], margem_esquerda: 1, margem_cima : 0, },
-                { nome: "PANDAS", posicao: [-0.50, -0.05, 0], margem_esquerda: 2, margem_cima : 0, },
-                { nome: "NUMPY", posicao: [-0.10, -0.25, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "MATPLOTLIB", posicao: [0.25, -0.10, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "REQUESTS", posicao: [0.50, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "SELENIUM", posicao: [0.20, 0.40, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "DJANGO",      posicao: [-0.55,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "FASTAPI",     posicao: [-0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "PANDAS",      posicao: [-0.50, -0.05, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "NUMPY",       posicao: [-0.10, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "MATPLOTLIB",  posicao: [ 0.25, -0.10, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "SELENIUM",    posicao: [ 0.20,  0.40, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
             linhas: [
@@ -48,13 +48,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         javascript: {
 
             estrelas: [
-                { nome: "REACT", posicao: [-0.45, 0.45, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "THREE.JS", posicao: [-0.10, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "ANGULAR", posicao: [0.35, 0.35, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "NODE.JS", posicao: [0.05, -0.05, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "TYPESCRIPT", posicao: [0.45, -0.35, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "ROUTER", posicao: [0.00, -0.20, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "VITE", posicao: [-0.30, -0.45, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "REACT",       posicao: [-0.45,  0.45, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "THREE.JS",    posicao: [-0.10,  0.15, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "ANGULAR",     posicao: [ 0.35,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "NODE.JS",     posicao: [ 0.05, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "TYPESCRIPT",  posicao: [ 0.45, -0.35, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "ROUTER",      posicao: [ 0.00, -0.20, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "VITE",        posicao: [-0.30, -0.45, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
             linhas: [
@@ -71,14 +71,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         html_css: {
 
             estrelas: [
-                { nome: "FORMS", posicao: [0, 0.30, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "CSS", posicao: [0.25, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "SASS", posicao: [0.15, -0.05, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "ANIMACOES", posicao: [0, -0.25, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "TAILWIND", posicao: [-0.15, -0.05, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "HTML", posicao: [-0.25, 0.15, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "FORMS",       posicao: [ 0.00,  0.30, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "CSS",         posicao: [ 0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "SASS",        posicao: [ 0.15, -0.05, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "ANIMACOES",   posicao: [ 0.00, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "TAILWIND",    posicao: [-0.15, -0.05, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "HTML",        posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
-
             linhas: [
                 [0, 0.30, 0],
                 [0.25, 0.15, 0],
@@ -93,10 +92,10 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         csharp: {
 
             estrelas: [
-                { nome: "ASP.NET", posicao: [0.00, 0.50, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "API REST", posicao: [-0.45, -0.30, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: "WINDOWS FORMS", posicao: [0.45, -0.30, 0], margem_esquerda: 0, margem_cima : 0, },
-                { nome: ".NET", posicao: [0.00, 0.00, 0], margem_esquerda: 0, margem_cima : 0, },
+                { nome: "ASP.NET",        posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "API REST",       posicao: [-0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "WINDOWS FORMS",  posicao: [ 0.45, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: ".NET",           posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
             ],
 
             linhas: [
@@ -161,7 +160,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 <ambientLight intensity={1} />
 
                 {/* SELECAO */}
-                <group position={[0, 2, 0]} >
+                <group position={[0, 2.5, 0]} >
 
                     {icones.map((icone, i) => {
 

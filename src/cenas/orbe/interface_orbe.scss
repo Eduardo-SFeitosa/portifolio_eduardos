@@ -1,7 +1,4 @@
 .interface-orbe {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -9,23 +6,6 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  z-index: 20;
-
-  .titulo-orbe {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 2.8rem;
-    letter-spacing: 0.15em;
-    margin: 0 0 10px 0;
-    background: linear-gradient(135deg, #f0e6d0, #ffd9a0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 40px rgba(255, 217, 160, 0.2);
-    pointer-events: none;
-    // Sombra para legibilidade sobre fundo 3D
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
-  }
 
   .canvas-orbe {
     width: 100%;
@@ -64,17 +44,34 @@
       }
     }
   }
-}
 
-// Responsividade
-@media (max-width: 768px) {
-  .interface-orbe {
-    .titulo-orbe { font-size: 2rem; }
-    .canvas-orbe { width: 92%; height: 55vh; }
-    .controle-caminhos {
-      flex-direction: column;
-      gap: 12px;
-      .botao { width: 100%; text-align: center; }
-    }
-  }
+  .estrela-nome {
+
+    pointer-events: none;
+    cursor: pointer;
+
+    margin: 0;
+
+    color: #f8f4df;
+
+    font-family: "Cinzel", serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 4px rgba(255,255,255,.8),
+        0 0 12px rgba(255,230,150,.35),
+        0 0 24px rgba(255,210,100,.2);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        text-shadow .25s ease;
+
+        
+}
 }

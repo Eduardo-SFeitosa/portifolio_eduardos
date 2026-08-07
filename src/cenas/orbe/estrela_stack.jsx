@@ -2,10 +2,10 @@ import { useState, useRef, useMemo } from "react"
 import { Html } from "@react-three/drei"
 import * as THREE from "three"
 import { useFrame } from "@react-three/fiber"
-import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import Brilho from '../../componentes_auxiliares/brilho'
 import { Spring, animated, useSpring } from "@react-spring/three"
 import { Vector3 } from "three"
+import Linha from "./linha.jsx"
 
 import "./interface_orbe.scss"
 
@@ -31,10 +31,19 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
     }
 
     const posicoes_horizontais = {
-        0 : -.17,
+        0 : -.165,
         1 : -.08,
         2 : .1,
     }
+
+    const posicao_texto = [margem_esquerda < 2 ? posicoes_horizontais[margem_esquerda] * nome.length : posicoes_horizontais[margem_esquerda], 
+    posicoes_verticais[margem_cima] ,0]
+
+    const linha_texto = [
+        margem_esquerda == 0 ? posicao_texto[0] / 2 : margem_esquerda == 1 ? 0 : posicao_texto[0] * nome.length,
+        margem_cima == 0 ? posicao_texto[1] / 2 : margem_esquerda == 1 ? 0 : posicao_texto[1],
+        posicao_texto[2]
+    ]
 
     const {escala_estrela} = useSpring({
 
@@ -135,6 +144,12 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
                         {nome}
                     </h1>
             </Html>}
+
+            {em_foco && <Linha
+            key={nome}
+            ponto_1={[0,0,0]}
+            ponto_2={linha_texto}
+            />}
 
         </animated.group>
     )
