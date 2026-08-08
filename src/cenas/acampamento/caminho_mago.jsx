@@ -43,6 +43,6 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
 
             <Text position={[posicao[0], posicao[1] + 1.2, posicao[2]]} color={cor} fontSize={0.6} anchorX="center">{nome}</Text>
 
-        </group>
+    </group>
 
 }

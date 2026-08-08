@@ -4,8 +4,9 @@ import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei";
 import { useScroll } from '@react-three/drei'
 import Caminho_mago from "./caminho_mago";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
+import { Vector3 } from "three";
 
 export default function Interface_acampamento({ mudar_caminho }) {
 
@@ -17,13 +18,28 @@ export default function Interface_acampamento({ mudar_caminho }) {
     const escala_tempo_tamanho = 2.5
 
     const [progresso_atual, set_progresso] = useState(0)
+
+    const linha_guia = useRef(null)
     
     const pocoes = [
         { nome: "Game Dev", inicio: 2020, duracao_anos: ano_atual - 2021 + mes_atual, cor: "#ff5733" },
-        { nome: "Faculdade", inicio: 2024, duracao_anos: 2.5, cor: "#33c1ff" },
-        { nome: "Técnico", inicio: 2024, duracao_anos: 2, cor: "#8e44ad" },
+        { nome: "Faculdade", inicio: 2024, duracao_anos: 2.5, duracao_meses : 6, cor: "#33c1ff" },
+        { nome: "Técnico", inicio: 2024, duracao_anos: 2, duracao_meses : 0, cor: "#8e44ad" },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
+
+    useEffect(() => {
+
+        if (!linha_guia.current) return
+
+        console.log(progresso_atual * duracao_total_anos, ano_atual - 2021 + mes_atual )
+
+        var posicao_x = progresso_atual * duracao_total_anos * escala_tempo_tamanho 
+        const posicao_passada = linha_guia.current.position
+
+        linha_guia.current.position.copy( new Vector3(posicao_x, posicao_passada.y, posicao_passada.z))
+
+    }, [progresso_atual])
 
     return (
     <div className="container-acampamento">
@@ -32,7 +48,7 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
         <h1 className="titulo">JORNADA</h1>
 
-        <Canvas className="canvas-acampamento" camera={{ position: [7, 0, 10] }}>
+        <Canvas className="canvas-acampamento" camera={{ position: [7, 0, 12] }}>
 
             <ScrollControls pages={5} damping={0}>
 
@@ -42,17 +58,19 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
                 < ambientLight intensity={5} />
 
-                <mesh position={[progresso_atual * duracao_total_anos * escala_tempo_tamanho , -0.5, 0]}>
+                <mesh ref={linha_guia}>
                     <boxGeometry args={[0.05, pocoes.length * 3.5 , 0.01]} />
-                    <meshBasicMaterial color={"black"} opacity={0.3} />
+                    <meshBasicMaterial color={"black"} />
                 </mesh>
 
                 {/* ANOS E BARRAS */}
                 {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
                         const ano = ano_inicio + i
                         const pos_x = i * escala_tempo_tamanho
+
+                        console.log(pos_x)
                         return (
-                            <group key={i} position={[pos_x, 0, -1]}>
+                            <group key={i} position={[pos_x, 0, 0]}>
                                 <Text position={[0, pocoes.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
                                 <mesh position={[0, -0.5, 0]}>
                                     <boxGeometry args={[0.05, pocoes.length * 3.5 + 1, 0.01]} />
