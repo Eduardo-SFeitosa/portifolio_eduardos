@@ -3,8 +3,12 @@ import { Html } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 import { useRef, useState } from "react";
+import { Moedas } from "./Moeda";
+import { Moedas_caveira } from "./Moeda_caveira";
 
-export default function Interface_bau({ mudar_caminho , ...props }) {
+import { OrbitControls } from "@react-three/drei";
+
+export default function Interface_bau({ mudar_caminho, ...props }) {
 
   const [formData, setFormData] = useState({
     nome: "",
@@ -31,11 +35,27 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
   };
 
   return (
+
     <div className="interface-bau">
 
-      <div className="container-principal">
+      <Canvas className="canvas-bau" camera={{position: [0,0,8], rotation:[0,0,Math.PI]}}>
 
-        {/* Painel principal com formulário e moedas */}
+        <Moedas_caveira quantidade={500} espacamento={15} />
+
+        < ambientLight intensity={1} />
+
+        < pointLight position={[0, 1, 4]} intensity={15} color={"#ffffff"} />
+
+        <OrbitControls></OrbitControls>
+
+
+      </Canvas>
+
+      {
+      /*
+        <div className="container-principal">
+
+        {/ Painel principal com formulário e moedas /}
       <div className="painel-contato">
         <h1 className="titulo-contato">📬 Entre em contato</h1>
         <p className="subtitulo">
@@ -43,7 +63,7 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
         </p>
 
         <div className="conteudo-duas-colunas">
-          {/* Coluna do formulário */}
+           Coluna do formulário 
           <div className="coluna-formulario">
             <form onSubmit={handleSubmit} className="formulario">
               <div className="campo">
@@ -128,7 +148,7 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
 
       </div>
 
-      {/* Navegação inferior */}
+      {/ Navegação inferior /}
       <div className="controle-caminhos">
         <button className="botao" onClick={() => mudar_caminho("voltar")}>
           ← VOLTAR PARA STACKS
@@ -137,8 +157,10 @@ export default function Interface_bau({ mudar_caminho , ...props }) {
 
         
       </div>
+      */}
 
-      
+
+
     </div>
   );
 }

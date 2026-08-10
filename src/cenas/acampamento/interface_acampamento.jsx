@@ -37,7 +37,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
         var posicao_x = progresso_atual * duracao_total_anos * escala_tempo_tamanho 
         const posicao_passada = linha_guia.current.position
 
-        linha_guia.current.position.copy( new Vector3(posicao_x, posicao_passada.y, posicao_passada.z))
+        linha_guia.current.position.copy( new Vector3(posicao_x, 0, .1))
 
     }, [progresso_atual])
 
@@ -58,6 +58,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                 < ambientLight intensity={5} />
 
+                {/* LINHA DE REFERENCIA */}
                 <mesh ref={linha_guia}>
                     <boxGeometry args={[0.05, pocoes.length * 3.5 , 0.01]} />
                     <meshBasicMaterial color={"black"} />
@@ -80,6 +81,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
                         )
                 })}
 
+                {/* POCOES */}
                 {pocoes.map((mago, i) => {
                         const pos_x_centro = (mago.inicio - ano_inicio) * escala_tempo_tamanho + (mago.duracao_anos * escala_tempo_tamanho / 2)
                         const y_centro = i * 3 - (pocoes.length - 1) * 1.5
