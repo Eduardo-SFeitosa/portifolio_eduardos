@@ -12,19 +12,9 @@ export function Livro({ ativado, set_interface, ...props }) {
   const { nodes, materials } = useGLTF('/modelos_cenas/acampamento/livro.glb')
 
   const pagina_1 = useSpring({
-    rotation: ativado ? [0, 0, -.35] : [0, 0, 2.8],
+    rotation: ativado ? [0, 0, -.34] : [0, 0, 2.8],
     config: { mass: 1, tension: 200, friction: 20 },
     delay : ativado ? 0 : 600,
-
-    onStart : () => {
-
-      if (!ativado){
-
-        set_interface(null)
-
-      }
-      
-    }
   })
 
   const pagina_2 = useSpring({
@@ -40,7 +30,7 @@ export function Livro({ ativado, set_interface, ...props }) {
   })
 
   const pagina_4 = useSpring({
-    rotation: ativado ? [0, 0, -3.15] : [0, 0, 0],
+    rotation: ativado ? [0, 0, -3.11] : [0, 0, 0],
     delay : ativado ? 600 : 0,
     config: { mass: 1, tension: 180, friction: 35 },
 
@@ -55,15 +45,14 @@ export function Livro({ ativado, set_interface, ...props }) {
 
     <animated.group {...props} dispose={null}>
 
-      
-      <animated.mesh geometry={nodes.pagina_1.geometry} material={materials['Material.002']} position={[0.002, 0.013, 0]} rotation={pagina_1.rotation} />
-      <animated.mesh geometry={nodes.pagina_2.geometry} material={materials['Material.002']} position={[-0.002, 0.013, 0]} rotation={pagina_2.rotation} />
-      <animated.mesh geometry={nodes.pagina_3.geometry} material={materials['Material.002']} position={[0.002, 0.013, 0]} rotation={pagina_3.rotation} />
-      <animated.mesh geometry={nodes.pagina_4.geometry} material={materials['Material.002']} position={[0.002, 0.035, 0]} rotation={pagina_4.rotation} />
+      <animated.mesh geometry={nodes.pagina_1.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_1.rotation} />
+      <animated.mesh geometry={nodes.pagina_2.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_2.rotation} />
+      <animated.mesh geometry={nodes.pagina_3.geometry} material={materials['Material.002']} position={[0, 0.013, 0]} rotation={pagina_3.rotation} />
+      <animated.mesh geometry={nodes.pagina_4.geometry} material={materials['Material.002']} position={[0, 0.035, 0]} rotation={pagina_4.rotation} />
 
       <mesh geometry={nodes.Object_9010.geometry} material={materials['Material.003']} rotation={[0, 0, 0]} />
 
-      <animated.mesh geometry={nodes.Object_9029.geometry} material={materials['Material.003']} rotation={[0, 0, 0]}/>
+      <animated.mesh geometry={nodes.Object_9029.geometry} material={materials['Material.003']} position={[0.05,0,0]} rotation={[0, 0, 0]}/>
 
     </animated.group>
 

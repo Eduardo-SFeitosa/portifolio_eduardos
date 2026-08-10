@@ -84,7 +84,6 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
   const voltar_idle = () => {
     set_animacao(animacoes_nome[0])
     set_orbe(true)
-    set_interface(null)
     controle_de_camera.current.ativar_controle()
     progresso.current = 0
     animacao_inversa.current = 0

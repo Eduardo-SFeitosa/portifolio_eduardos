@@ -8,7 +8,7 @@ import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 
-export default function Interface_acampamento({ mudar_caminho }) {
+export default function Interface_acampamento({ mudar_caminho, set_interface }) {
 
     const ano_inicio = 2020
     const ano_atual = new Date().getFullYear() + 1
@@ -104,9 +104,9 @@ export default function Interface_acampamento({ mudar_caminho }) {
 
         <div className="controle-caminhos">
 
-            <h1 className="botao" onClick={() => mudar_caminho("voltar")}>VOLTAR PARA SOBRE</h1>
+            <h1 className="botao" onClick={() => {mudar_caminho("voltar"); set_interface(null)}}>VOLTAR PARA SOBRE</h1>
 
-            <h1 className="botao" onClick={() => mudar_caminho()}>AVANCAR PARA STACKS</h1>
+            <h1 className="botao" onClick={() => {mudar_caminho(); set_interface(null)}}>AVANCAR PARA STACKS</h1>
 
         </div>
     

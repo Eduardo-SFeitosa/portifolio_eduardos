@@ -111,7 +111,7 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
       </animated.group>
       
 
-      < pointLight position={[1, 1.5, -1]} intensity={15} color={"#be0000"} />
+      < pointLight position={[0, 1, -.3]} intensity={15} color={"#be0000"} />
 
     </group>
 

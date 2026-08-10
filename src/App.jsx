@@ -61,8 +61,8 @@ function App() {
 
   const teleportar = ( cena ) =>  {
 
+    set_interface(null)
     set_caminho(cena)
-
     set_cena_em_foco(cena)
 
   }
@@ -242,7 +242,7 @@ function App() {
 
         :interface_ativa == "porta" ? <Interface_porta mudar_caminho={mudar_caminho}/>
 
-        :interface_ativa == "acampamento" ? <Interface_acampamento mudar_caminho={mudar_caminho}/>
+        :interface_ativa == "acampamento" ? <Interface_acampamento mudar_caminho={mudar_caminho} set_interface={set_interface}/>
 
         :interface_ativa == "orbe" ? <Interface_orbe mudar_caminho={mudar_caminho} set_direcao={set_direcao} set_interface={set_interface}/>
 
@@ -257,7 +257,7 @@ function App() {
 
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >SOBRE</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => {teleportar("orbe")}} >STACKS</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("orbe")} >STACKS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >PROJETOS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("bau")} >CONTATO</button>
 
