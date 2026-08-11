@@ -42,9 +42,9 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
       <Canvas className="canvas-bau" camera={{
         position: [
-            2.3488672833402706,
-            -1.8133511646369407,
-            15.866868682884245
+            2.2,
+            -.7,
+            15
         ],
         fov: 45,
         zoom: 1}}>
@@ -53,17 +53,14 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
         < ambientLight intensity={1} />
 
-        <OrbitControls ref={controls} enableZoom={false} enableRotate={false} enablePan={false} target={[1,.1,-0.018]}
-        /> 
-
+        <OrbitControls ref={controls} enableZoom={false} enableRotate={false} enablePan={false} target={[.5,1,-0.018]} /> 
 
       </Canvas>
 
-      {
-      /*
+      
         <div className="container-principal">
 
-        {/ Painel principal com formulário e moedas /}
+        {/* Painel principal com formulário e moedas */}
       <div className="painel-contato">
         <h1 className="titulo-contato">📬 Entre em contato</h1>
         <p className="subtitulo">
@@ -156,7 +153,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
       </div>
 
-      {/ Navegação inferior /}
+      {/* Navegação inferior */}
       <div className="controle-caminhos">
         <button className="botao" onClick={() => mudar_caminho("voltar")}>
           ← VOLTAR PARA STACKS
@@ -165,9 +162,6 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
         
       </div>
-      */}
-
-
 
     </div>
   );
