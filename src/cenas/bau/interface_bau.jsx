@@ -38,13 +38,11 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
     <div className="interface-bau">
 
-      <Canvas className="canvas-bau" camera={{position: [0,0,8], rotation:[0,0,Math.PI]}}>
+      <Canvas className="canvas-bau" camera={{position: [0,0,11], rotation:[0,0,Math.PI]}}>
 
-        <Moedas_caveira quantidade={500} espacamento={15} />
+        <Moedas_caveira quantidade={1000} espacamento={20} />
 
         < ambientLight intensity={1} />
-
-        < pointLight position={[0, 1, 4]} intensity={15} color={"#ffffff"} />
 
         <OrbitControls></OrbitControls>
 
