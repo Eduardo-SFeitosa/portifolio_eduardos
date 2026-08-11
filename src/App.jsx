@@ -64,6 +64,7 @@ function App() {
     set_interface(null)
     set_caminho(cena)
     set_cena_em_foco(cena)
+    controle_de_camera_ref.current.ativar_controle()
 
   }
 

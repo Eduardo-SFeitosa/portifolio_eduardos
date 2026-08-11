@@ -84,7 +84,6 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
   const voltar_idle = () => {
     set_animacao(animacoes_nome[0])
     set_orbe(true)
-    controle_de_camera.current.ativar_controle()
     progresso.current = 0
     animacao_inversa.current = 0
   }
@@ -178,6 +177,7 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
       if (animacao_ativa == "set_up" && inverter_animacao){
         mudar_caminho(direcao_caminho)
+        controle_de_camera.current.ativar_controle()
         voltar_idle()
         return
       }

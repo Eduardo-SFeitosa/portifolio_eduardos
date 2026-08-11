@@ -23,7 +23,10 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
   const [animacao_atual , set_animacao] = useState("idle")
 
-  const duracao_animacao = .4
+  const duracao_animacoes = {
+    abrir : .8,
+    comer : .4
+  }
   
   const animacao_rotacao_tampa = {
     abrir : new CatmullRomCurve3([
@@ -67,8 +70,8 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
     const inverter_animacao = animacao_inversa.current == 1 ? 1 : 0 
 
-    const tempo_atual = inverter_animacao ? 1 - Math.min(progresso.current / duracao_animacao, 1)
-    : Math.min(progresso.current / duracao_animacao, 1)
+    const tempo_atual = inverter_animacao ? 1 - Math.min(progresso.current / duracao_animacoes[animacao_atual], 1)
+    : Math.min(progresso.current / duracao_animacoes[animacao_atual], 1)
 
     const tampa_rotacao = animacao_rotacao_tampa[animacao_atual].getPoint(tempo_atual)
 

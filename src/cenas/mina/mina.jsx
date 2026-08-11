@@ -84,7 +84,6 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
   const voltar_idle = () => {
     set_animacao(animacoes_nome[0])
     set_interface(null)
-    controle_de_camera.current.ativar_controle()
     progresso.current = 0
     iluminacao.current = 1
     animacao_inversa.current = 0
@@ -175,6 +174,7 @@ export default function Mina({ ativado, interface_ativa , set_interface, control
       if (animacao_ativa == "carrinho_chega" && inverter_animacao){
         mudar_caminho(direcao_caminho)
         voltar_idle()
+        controle_de_camera.current.ativar_controle()
         return
       }
 
