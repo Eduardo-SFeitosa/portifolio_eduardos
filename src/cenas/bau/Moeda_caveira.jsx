@@ -14,6 +14,8 @@ export function Moedas_caveira() {
     'modelos_cenas/bau/moeda_caveira.glb'
   )
 
+  const moedas = useRef(null)
+
   const geometria = useMemo(() => {
 
     let geo = nodes.bitcoin_Material_0?.geometry
@@ -40,8 +42,6 @@ export function Moedas_caveira() {
   }, [nodes, scene])
 
   const material = materials['Material.001']
-
-  const moedas = useRef(null)
 
   useLayoutEffect(() => {
 

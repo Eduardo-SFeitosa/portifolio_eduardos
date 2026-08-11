@@ -10,6 +10,8 @@ import { OrbitControls } from "@react-three/drei";
 
 export default function Interface_bau({ mudar_caminho, ...props }) {
 
+  const controls = useRef(null)
+
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -38,13 +40,21 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
     <div className="interface-bau">
 
-      <Canvas className="canvas-bau" camera={{position: [0,0,11], rotation:[0,0,Math.PI]}}>
+      <Canvas className="canvas-bau" camera={{
+        position: [
+            2.3488672833402706,
+            -1.8133511646369407,
+            15.866868682884245
+        ],
+        fov: 45,
+        zoom: 1}}>
 
-        <Moedas_caveira quantidade={1000} espacamento={20} />
+        <Moedas_caveira/>
 
         < ambientLight intensity={1} />
 
-        <OrbitControls></OrbitControls>
+        <OrbitControls ref={controls} enableZoom={false} enableRotate={false} enablePan={false} target={[1,.1,-0.018]}
+        /> 
 
 
       </Canvas>
