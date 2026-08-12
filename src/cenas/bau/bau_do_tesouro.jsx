@@ -108,8 +108,6 @@ export default function Bau({ set_interface , ativado , ...props }) {
       set_animacao("comer")
     }
 
-    console.log(!inverter_animacao)
-
     if (!inverter_animacao) return
 
     if (animacao_atual == "comer"){
@@ -126,7 +124,7 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
   useEffect(() => {
 
-    if (animacao_atual == "finalizada") {
+    if (!ativado) {
 
       set_animacao("comer")
       progresso.current = 0
@@ -134,13 +132,14 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
     }
     
-    else if (ativado){
+    else{
 
       progresso.current = 0
       animacao_inversa.current = false
       set_animacao("abrir")
 
     }
+
   }, [ativado])
   
   return (

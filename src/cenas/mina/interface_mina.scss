@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     pointer-events: none; /* permite cliques no canvas atrás, exceto no cartão */
-    animation: fadeIn 0.3s ease;
+    animation: aparecer 0.3s ease;
     z-index: 10;
 
     .card-projeto {
@@ -178,10 +178,25 @@
     }
   }
 
+  ::before{
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    animation: desaparecer .5s ease-in forwards;
+
+  }
+
   // Animações
-  @keyframes fadeIn {
+  @keyframes aparecer {
     from { opacity: 0; }
     to { opacity: 1; }
+  }
+
+  @keyframes desaparecer {
+    from { opacity: 1; }
+    to { opacity: 0; }
   }
 
   @keyframes slideUp {

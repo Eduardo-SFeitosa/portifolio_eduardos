@@ -2,10 +2,11 @@ import "./interface_bau.scss";
 import { Html } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Moedas } from "./Moeda";
 import { Moedas_caveira } from "./Moeda_caveira";
 import { useSpring, animated } from "@react-spring/three";
+import emailjs from '@emailjs/browser';
 
 import { OrbitControls } from "@react-three/drei";
 
@@ -13,7 +14,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
   const [interface_ativa, set_interface] = useState(false)
 
-  const [formData, setFormData] = useState({
+  const [dados_formulario, set_dados] = useState({
     nome: "",
     email: "",
     mensagem: "",
@@ -21,20 +22,46 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
     whatsapp: false,
   });
 
+  const referencia_formulario = useRef(null)
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    set_dados((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    // Aqui você pode integrar com um serviço de email (ex: EmailJS)
-    console.log("Formulário enviado:", formData);
-    alert("Mensagem enviada! (simulação)");
-    // Resetar formulário se desejar
+
+    console.log("Formulário enviado:", dados_formulario);
+
+    //enviar email
+    emailjs
+      .sendForm(
+        'service_28tiwcs',   // ID de servico
+        'template_pnztxqe',  // ID de template
+        referencia_formulario.current,
+        { publicKey: 'hoK4pJ4kAjJ_nR588' }
+      )
+      
+      .then(
+        () => {
+          alert('Email enviado!');
+          set_dados({
+            nome: "",
+            email: "",
+            mensagem: "",
+            telefone: "",
+            whatsapp: false,
+          })
+        },
+        (error) => {
+          alert('Falha ao mandar email: ' + error.text);
+        }
+    );
   };
 
   const {luz} = useSpring({
@@ -44,7 +71,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
     },
 
     to : {
-      luz : .4
+      luz : .35
     },
 
     onRest : () => {
@@ -53,7 +80,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
     },
 
-    config: { tension: 80, friction: 20 },
+    config: { tension: 50, friction: 70, precision:.1 },
 
     delay : 1000
     
@@ -80,143 +107,245 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
       </Canvas>
       
-      { interface_ativa && <div className="container-principal">
+      {interface_ativa && (
 
-        {/* Painel principal com formulário e moedas */}
-        <div className="painel-contato">
-          <h1 className="titulo-contato">📬 Entre em contato</h1>
-          <p className="subtitulo">
-            Vamos conversar! Preencha o formulário ou me encontre nas redes abaixo.
-          </p>
+        <div className="interface-overlay">
 
-          <div className="conteudo-duas-colunas">
-            Coluna do formulário 
-            <div className="coluna-formulario">
-              <form onSubmit={handleSubmit} className="formulario">
-                <div className="campo">
-                  <label htmlFor="nome">Nome *</label>
-                  <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    value={formData.nome}
-                    onChange={handleChange}
-                    required
-                    placeholder="Seu nome"
-                  />
-                </div>
+          {/* Decorative glow behind the card */}
 
-                <div className="campo">
-                  <label htmlFor="email">Email *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="seu@email.com"
-                  />
-                </div>
+          <div className="card-glow" />
 
-                <div className="campo">
-                  <label htmlFor="mensagem">Mensagem *</label>
-                  <textarea
-                    id="mensagem"
-                    name="mensagem"
-                    rows="4"
-                    value={formData.mensagem}
-                    onChange={handleChange}
-                    required
-                    placeholder="Escreva sua mensagem aqui..."
-                  />
-                </div>
 
-                <div className="linha-dupla">
-                  <div className="campo">
-                    <label htmlFor="telefone">Telefone</label>
-                    <input
-                      type="tel"
-                      id="telefone"
-                      name="telefone"
-                      value={formData.telefone}
-                      onChange={handleChange}
-                      placeholder="(00) 00000-0000"
-                    />
-                  </div>
-                  <div className="campo checkbox">
-                    <label htmlFor="whatsapp">
-                      <input
-                        type="checkbox"
-                        id="whatsapp"
-                        name="whatsapp"
-                        checked={formData.whatsapp}
-                        onChange={handleChange}
-                      />
-                      Resposta via WhatsApp
-                    </label>
-                  </div>
-                </div>
+          {/* MAIN CARD */}
 
-                <button type="submit" className="botao-enviar">
-                  Enviar mensagem →
-                </button>
-              </form>
+          <section className="container-principal">
+
+
+            {/* Header */}
+
+            <header className="cabecalho-contato">
+
+              <h1 className="titulo-contato">
+                Entre em contato
+              </h1>
+
+              <p className="subtitulo">
+                Mande uma mensagem e vamos conversar.
+              </p>
+
+            </header>
+
+
+            {/* Divider */}
+
+            <div className="divisor">
+              <span />
+              <span className="diamante" />
+              <span />
             </div>
-            
-          </div>
+
+
+            {/* FORM */}
+
+            <form
+              onSubmit={handleSubmit}
+              className="formulario"
+              ref={referencia_formulario}
+            >
+
+              <div className="campo">
+
+                <label htmlFor="nome">Nome</label>
+
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  value={dados_formulario.nome}
+                  onChange={handleChange}
+                  required
+                  placeholder="Seu nome"
+                />
+
+              </div>
+
+
+              <div className="campo">
+
+                <label htmlFor="email">
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={dados_formulario.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="seu@email.com"
+                />
+
+              </div>
+
+
+              <div className="campo">
+
+                <label htmlFor="mensagem">
+                  Mensagem
+                </label>
+
+                <textarea
+                  id="mensagem"
+                  name="mensagem"
+                  rows="4"
+                  value={dados_formulario.mensagem}
+                  onChange={handleChange}
+                  required
+                  placeholder="Escreva sua mensagem..."
+                />
+              </div>
+
+              <div className="linha-dupla">
+
+                <div className="campo">
+
+                  <label htmlFor="telefone">
+                    Telefone
+                  </label>
+
+                  <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    value={dados_formulario.telefone}
+                    onChange={handleChange}
+                    placeholder="(00) 00000-0000"
+                  />
+
+                </div>
+
+
+                <label
+                  htmlFor="whatsapp"
+                  className="checkbox"
+                >
+
+                  <input
+                    type="checkbox"
+                    id="whatsapp"
+                    name="whatsapp"
+                    checked={dados_formulario.whatsapp}
+                    onChange={handleChange}
+                  />
+
+                  <span className="checkbox-custom" />
+
+                  <span>
+                    Responder via WhatsApp
+                  </span>
+
+                </label>
+
+              </div>
+
+
+              <button
+                type="submit"
+                className="botao-enviar"
+              >
+
+                <span>
+                  ENVIAR MENSAGEM
+                </span>
+
+                <span className="seta">
+                  →
+                </span>
+
+              </button>
+
+            </form>
+
+
+            {/* SOCIAL */}
+
+            <div className="social-section">
+
+              <span className="social-label">
+                OU ME ENCONTRE AQUI
+              </span>
+
+              <div className="social-links">
+
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://github.com/Eduardo-SFeitosa"
+                  className="social-link"
+                >
+
+                  <img
+                    src="/icones/github.png"
+                    alt="GitHub"
+                  />
+
+                  <div>
+                    <strong>GitHub</strong>
+                    <span>Projetos e código</span>
+                  </div>
+
+                </a>
+
+
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/in/eduardo-santos-846970232/"
+                  className="social-link"
+                >
+
+                  <img
+                    src="/icones/linkedin.png"
+                    alt="LinkedIn"
+                  />
+
+                  <div>
+                    <strong>LinkedIn</strong>
+                    <span>Perfil profissional</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className="controle-caminhos">
+
+              <button
+                  className="botao-voltar"
+                  onClick={() => mudar_caminho("voltar")}
+                >
+
+                  <span>
+                    ←
+                  </span>
+
+                  VOLTAR PARA STACKS
+
+              </button>
+
+            </div>
+
+
+          </section>
+
+
+          {/* BACK BUTTON */}
+
+          
+
         </div>
 
-        <div className="icones">
-
-          <a target="_blank" href="https://github.com/Eduardo-SFeitosa"><img className="icone" src="/icones/github.png" alt="" /></a>
-
-          <a target="_blank" href="https://www.linkedin.com/in/eduardo-santos-846970232/"><img className="icone" src="/icones/linkedin.png" alt="" /></a>
-
-        </div>
-
-        {/* Navegação inferior */}
-        <div className="controle-caminhos">
-          <button className="botao" onClick={() => mudar_caminho("voltar")}>
-            ← VOLTAR PARA STACKS
-          </button>
-        </div>
-
-      </div>}
+      )}
 
     </div>
-  );
-}
-
-// Componente Moeda (HTML) - ícone com link
-function Moeda({ nome, link, cor, icone, download = false }) {
-  return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      download={download}
-      className="moeda-link"
-      style={{ "--cor-moeda": cor }}
-    >
-      <div className="moeda-icone">{icone}</div>
-      <span className="moeda-nome">{nome}</span>
-    </a>
-  );
-}
-
-// Componente Moeda3D (cena Three.js)
-function Moeda3D({ position, cor, escala = 1 }) {
-  return (
-    <mesh position={position} scale={[escala, escala, escala]}>
-      <cylinderGeometry args={[1, 1, 0.3, 32]} />
-      <meshStandardMaterial
-        color={cor}
-        metalness={0.7}
-        roughness={0.3}
-        emissive={cor}
-        emissiveIntensity={0.1}
-      />
-    </mesh>
   );
 }
