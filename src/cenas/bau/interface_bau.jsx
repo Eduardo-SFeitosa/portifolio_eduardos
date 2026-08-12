@@ -24,12 +24,39 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
   const referencia_formulario = useRef(null)
 
-  const handleChange = (e) => {
+  const atualizar_dados = (e) => {
     const { name, value, type, checked } = e.target;
     set_dados((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type == "checkbox" ? checked : type == "tel" ? formatar_numero(value) : value,
     }));
+  };
+
+  const formatar_numero = (numero) => {
+      // Remove tudo que não for número
+      const numeros = numero.replace(/\D/g, "").slice(0, 11);
+
+      if (numeros.length == 0) {
+
+        return ""
+
+      }
+
+      if (numeros.length <= 2) {
+        return `(${numeros}`;
+      }
+
+      if (numeros.length <= 6) {
+        return `(${numeros.slice(0, 2)}) ${numeros.slice(2)}`;
+      }
+
+      // Celular: (11) 98765-4321
+      if (numeros.length === 11) {
+        return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
+      }
+
+      // Fixo: (11) 3456-7890
+      return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
   };
 
   const handleSubmit = (e) => {
@@ -46,7 +73,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
         referencia_formulario.current,
         { publicKey: 'hoK4pJ4kAjJ_nR588' }
       )
-      
+
       .then(
         () => {
           alert('Email enviado!');
@@ -59,7 +86,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
           })
         },
         (error) => {
-          alert('Falha ao mandar email: ' + error.text);
+          alert('Falha ao mandar email, verifique as informacoes passadas' );
         }
     );
   };
@@ -111,17 +138,9 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
         <div className="interface-overlay">
 
-          {/* Decorative glow behind the card */}
-
           <div className="card-glow" />
 
-
-          {/* MAIN CARD */}
-
           <section className="container-principal">
-
-
-            {/* Header */}
 
             <header className="cabecalho-contato">
 
@@ -129,23 +148,13 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
                 Entre em contato
               </h1>
 
-              <p className="subtitulo">
-                Mande uma mensagem e vamos conversar.
-              </p>
-
             </header>
-
-
-            {/* Divider */}
 
             <div className="divisor">
               <span />
               <span className="diamante" />
               <span />
             </div>
-
-
-            {/* FORM */}
 
             <form
               onSubmit={handleSubmit}
@@ -155,14 +164,14 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
               <div className="campo">
 
-                <label htmlFor="nome">Nome</label>
+                <label htmlFor="nome"> Nome *</label>
 
                 <input
                   type="text"
                   id="nome"
                   name="nome"
                   value={dados_formulario.nome}
-                  onChange={handleChange}
+                  onChange={atualizar_dados}
                   required
                   placeholder="Seu nome"
                 />
@@ -172,16 +181,14 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
               <div className="campo">
 
-                <label htmlFor="email">
-                  Email
-                </label>
+                <label htmlFor="email"> Email * </label>
 
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={dados_formulario.email}
-                  onChange={handleChange}
+                  onChange={atualizar_dados}
                   required
                   placeholder="seu@email.com"
                 />
@@ -191,22 +198,20 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
               <div className="campo">
 
-                <label htmlFor="mensagem">
-                  Mensagem
-                </label>
+                <label htmlFor="mensagem"> Mensagem * </label>
 
                 <textarea
                   id="mensagem"
                   name="mensagem"
                   rows="4"
                   value={dados_formulario.mensagem}
-                  onChange={handleChange}
+                  onChange={atualizar_dados}
                   required
                   placeholder="Escreva sua mensagem..."
                 />
               </div>
 
-              <div className="linha-dupla">
+              <div className="coluna-dupla">
 
                 <div className="campo">
 
@@ -218,97 +223,71 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
                     type="tel"
                     id="telefone"
                     name="telefone"
+                    min={10}
                     value={dados_formulario.telefone}
-                    onChange={handleChange}
+                    onChange={atualizar_dados}
                     placeholder="(00) 00000-0000"
                   />
 
                 </div>
 
-
                 <label
                   htmlFor="whatsapp"
                   className="checkbox"
                 >
-
                   <input
                     type="checkbox"
                     id="whatsapp"
                     name="whatsapp"
                     checked={dados_formulario.whatsapp}
-                    onChange={handleChange}
+                    onChange={atualizar_dados}
                   />
 
                   <span className="checkbox-custom" />
-
-                  <span>
-                    Responder via WhatsApp
-                  </span>
+                  <span> Responder via WhatsApp </span>
 
                 </label>
-
-              </div>
-
+              </div> 
 
               <button
                 type="submit"
                 className="botao-enviar"
               >
-
-                <span>
-                  ENVIAR MENSAGEM
-                </span>
-
-                <span className="seta">
-                  →
-                </span>
-
+                <span> ENVIAR MENSAGEM </span>
+                <span className="seta">  → </span> 
               </button>
 
             </form>
 
+            <div className="redes-sociais">
 
-            {/* SOCIAL */}
-
-            <div className="social-section">
-
-              <span className="social-label">
-                OU ME ENCONTRE AQUI
-              </span>
-
-              <div className="social-links">
+              <div className="links">
 
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://github.com/Eduardo-SFeitosa"
-                  className="social-link"
+                  className="link"
                 >
-
                   <img
                     src="/icones/github.png"
                     alt="GitHub"
                   />
-
                   <div>
                     <strong>GitHub</strong>
                     <span>Projetos e código</span>
                   </div>
-
                 </a>
-
 
                 <a
                   target="_blank"
                   href="https://www.linkedin.com/in/eduardo-santos-846970232/"
-                  className="social-link"
+                  className="link"
                 >
-
                   <img
                     src="/icones/linkedin.png"
                     alt="LinkedIn"
                   />
-
                   <div>
                     <strong>LinkedIn</strong>
                     <span>Perfil profissional</span>
@@ -334,16 +313,8 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
             </div>
 
-
           </section>
-
-
-          {/* BACK BUTTON */}
-
-          
-
         </div>
-
       )}
 
     </div>
