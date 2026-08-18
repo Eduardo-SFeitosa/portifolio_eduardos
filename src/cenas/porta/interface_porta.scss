@@ -32,7 +32,6 @@ $texto-secundario: #b8aec6;
   width: 100%;
   height: 90%;
   max-width: 550px;
-  aspect-ratio: 3 / 4; // proporção de porta
   background: radial-gradient(ellipse at center, $roxo-profundo 0%, $roxo-escuro 100%);
   border-radius: 50% 50% 12px 12px / 20% 20% 12px 12px;
   
@@ -92,8 +91,9 @@ $texto-secundario: #b8aec6;
       }
 
       .destaque {
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 500;
+        text-align: center;
         text-align: center;
         color: $dourado-suave;
         margin: 0;
@@ -101,10 +101,10 @@ $texto-secundario: #b8aec6;
       }
 
       .descricao {
-        font-size: 0.85rem;
+        font-size: 1.2rem;
         line-height: 1.7;
         color: $texto-secundario;
-        text-align: justify;
+        text-align: center;
         margin: 0;
         .destaque-texto { color: $dourado; font-weight: 500; }
         strong { color: #d4b8a0; font-weight: 600; }
@@ -117,6 +117,7 @@ $texto-secundario: #b8aec6;
         justify-content: center;
         margin: 0;
         .tag {
+          cursor: default;
           background: rgba(212, 175, 55, 0.08);
           border: 1px solid rgba(212, 175, 55, 0.15);
           padding: 2px 14px;
@@ -196,7 +197,6 @@ $texto-secundario: #b8aec6;
           align-items: center;
           gap: 10px;
 
-          .icone-fechadura { font-size: 1rem; opacity: 0.7; }
           .seta { display: inline-block; transition: transform 0.3s; }
 
           &:hover {
@@ -225,8 +225,11 @@ $texto-secundario: #b8aec6;
 
 }
 
-// Responsividade
+
 @media (max-width: 640px) {
+  .linha-divisoria{
+    display: none;
+  }
   .portal-container {
     max-width: 340px;
   }
@@ -235,7 +238,7 @@ $texto-secundario: #b8aec6;
     .door-frame .door-content {
       .cabecalho .titulo { font-size: 1.4rem; }
       .destaque { font-size: 0.9rem; }
-      .descricao { font-size: 0.8rem; }
+      .descricao { font-size: 0.85rem; }
       .acoes .btn-curriculo { font-size: 0.75rem; padding: 6px 14px; }
       .botoes-porta .botao-passagem {
         font-size: 0.75rem;
@@ -244,7 +247,5 @@ $texto-secundario: #b8aec6;
         justify-content: center;
       }
     }
-    .hinge { display: none; }
-    .keyhole { bottom: 12%; width: 14px; height: 18px; }
   }
 }

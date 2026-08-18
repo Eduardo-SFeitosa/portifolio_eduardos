@@ -10,7 +10,7 @@ import { Vector3 } from "three";
 
 export default function Interface_acampamento({ mudar_caminho, set_interface }) {
 
-    const ano_inicio = 2020
+    const ano_inicio = 2023
     const ano_atual = new Date().getFullYear() + 1
     const mes_atual = new Date().getMonth() / 12
 
@@ -22,7 +22,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const linha_guia = useRef(null)
     
     const pocoes = [
-        { nome: "Game Dev", inicio: 2020, duracao_anos: ano_atual - 2021 + mes_atual, cor: "#ff5733" },
+        { nome: "Game Dev", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
         { nome: "Faculdade", inicio: 2024, duracao_anos: 2.5, duracao_meses : 6, cor: "#33c1ff" },
         { nome: "Técnico", inicio: 2024, duracao_anos: 2, duracao_meses : 0, cor: "#8e44ad" },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
@@ -48,13 +48,14 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
         <h1 className="titulo">JORNADA</h1>
 
-        <Canvas className="canvas-acampamento" camera={{ position: [7, 0, 12] }}>
+        <Canvas className="canvas-acampamento" camera={{ position: [5, 0, 12] }}>
 
-            <ScrollControls pages={5} damping={0}>
+
+            <ScrollControls pages={3} damping={0}>
 
                 <Controle_scroll set_progresso={set_progresso}/>
 
-                <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[7, 0, 0]} /> 
+                <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[5, 0, 0]} /> 
 
                 < ambientLight intensity={5} />
 
@@ -72,7 +73,9 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
                         console.log(pos_x)
                         return (
                             <group key={i} position={[pos_x, 0, 0]}>
+
                                 <Text position={[0, pocoes.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
+
                                 <mesh position={[0, -0.5, 0]}>
                                     <boxGeometry args={[0.05, pocoes.length * 3.5 + 1, 0.01]} />
                                     <meshBasicMaterial color={"#0000000c"} opacity={0.1} />
@@ -112,7 +115,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
         </div>
     
-    </div>
+        </div>
 
     </div>)
 

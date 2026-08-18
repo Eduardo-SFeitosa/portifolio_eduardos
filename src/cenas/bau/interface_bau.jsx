@@ -265,7 +265,6 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
                 <a
                   target="_blank"
-                  rel="noopener noreferrer"
                   href="https://github.com/Eduardo-SFeitosa"
                   className="link"
                 >

@@ -4,16 +4,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  pointer-events: none; /* permite cliques através do Html, exceto nos elementos interativos */
+  pointer-events: none;
 
   .canvas-mina {
     width: 100%;
     height: 100%;
     display: block;
-    pointer-events: auto; /* o canvas captura eventos 3D */
+    pointer-events: auto;
+    /* o canvas captura eventos 3D */
   }
 
-  // Painel de informações (overlay)
   .informacoes-projeto {
     position: absolute;
     top: 0;
@@ -23,7 +23,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none; /* permite cliques no canvas atrás, exceto no cartão */
+    pointer-events: none;
+    /* permite cliques no canvas atrás, exceto no cartão */
     animation: aparecer 0.3s ease;
     z-index: 10;
 
@@ -37,7 +38,8 @@
       color: #f0f0f0;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      pointer-events: auto; /* interação apenas no cartão */
+      pointer-events: auto;
+      /* interação apenas no cartão */
       max-height: 90vh;
       overflow-y: auto;
       animation: slideUp 0.4s ease;
@@ -123,6 +125,7 @@
             &.link {
               color: #88ccff;
               text-decoration: none;
+
               &:hover {
                 text-decoration: underline;
               }
@@ -138,7 +141,6 @@
     }
   }
 
-  // Botões de navegação inferiores
   .controle-caminhos {
     position: fixed;
     bottom: 30px;
@@ -151,63 +153,78 @@
     pointer-events: none;
 
     .botao {
-    padding: 3%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    padding: 12px 28px;
-    border-radius: 40px;
-    cursor: pointer;
-    pointer-events: auto;
-    transition: all 0.25s;
-    letter-spacing: 0.03em;
+      padding: 3%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border-radius: 40px;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: all 0.25s;
+      letter-spacing: 0.03em;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: scale(1.1);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
 
-    &:active {
-      transform: scale(0.96);
-    }
+      &:active {
+        transform: scale(0.96);
+      }
     }
   }
 
-  ::before{
+  .canvas-mina::before {
     content: "";
     position: fixed;
     width: 100%;
     height: 100%;
     background-color: black;
     animation: desaparecer .5s ease-in forwards;
+  }
+}
 
+.interface-mina.animacao_desaparecer{
+
+  animation: desaparecer .5s forwards;
+
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
   }
 
-  // Animações
-  @keyframes aparecer {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes desaparecer {
+  from {
+    opacity: 1;
   }
 
-  @keyframes desaparecer {
-    from { opacity: 1; }
-    to { opacity: 0; }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
   }
 
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -216,17 +233,21 @@
   .interface-mina {
     .informacoes-projeto .card-projeto {
       padding: 20px;
+
       .cabecalho .titulo {
         font-size: 1.6rem;
       }
+
       .detalhes {
         grid-template-columns: 1fr;
         gap: 12px;
       }
     }
+
     .controle-caminhos {
       bottom: 16px;
       gap: 10px;
+
       .botao {
         font-size: 0.75rem;
         padding: 10px 18px;

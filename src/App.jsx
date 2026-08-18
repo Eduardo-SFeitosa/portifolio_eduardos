@@ -155,7 +155,7 @@ function App() {
             caminho_atual={caminho_atual}
             camera_travada={cena_em_foco != null}
           />
-
+          
             < ModeloBase />
 
             <Porta 
@@ -208,16 +208,21 @@ function App() {
             ativado={ cena_em_foco == "bau" ? true : false}
             />    
 
-            < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
+            {/* ESTRELAS */}
+            <group>
 
-            < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800}/>
+              < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
 
-            < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
+              < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800}/>
 
-            < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
+              < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
 
-            < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
+              < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
 
+              < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
+
+            </group>
+            
             < AguaAnimada 
               rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
               position={[ 0 , -2.5 , 0.05 ]} 
@@ -226,14 +231,21 @@ function App() {
 
         </ScrollControls>
 
-        < directionalLight position={[2, 5, 3]} intensity={.3} />
-        < pointLight position={[0, 10, 0]} intensity={700} color={"#2e4daa"} />
-        < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
-        < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
-        < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
-        < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
-        < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
-        < ambientLight intensity={0.3} />
+        {/* ILUMINACAO */}
+        <group>
+
+          < directionalLight position={[2, 5, 3]} intensity={.3} />
+          < pointLight position={[0, 10, 0]} intensity={700} color={"#2e4daa"} />
+          < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
+          < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+          < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+          < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
+          < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
+          < ambientLight intensity={0.3} />
+
+        </group>
+
+        
           
       </Canvas>
 

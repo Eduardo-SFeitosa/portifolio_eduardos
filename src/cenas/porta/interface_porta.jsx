@@ -29,12 +29,11 @@ export default function Interface_porta({ mudar_caminho }) {
               </div>
 
               <p className="destaque">
-                Desenvolvedor full-stack com foco em aplicações interativas, inovadoras e acessíveis.
+                Desenvolvedor com foco em aplicações interativas.
               </p>
 
               <p className="descricao">
-                Através da <span className="destaque-texto">criação de experiências digitais</span>, 
-                unindo design e tecnologia. Especializado em <strong>React, Three.js, Node.js</strong> 
+                Especializado em <strong>React, Three.js, Node.js </strong> 
                 e arquiteturas escaláveis. Cada projeto é uma <strong>porta</strong> para novas possibilidades.
               </p>
 
@@ -51,19 +50,18 @@ export default function Interface_porta({ mudar_caminho }) {
                   <FaDownload /> Baixar currículo
                 </a>
                 <div className="redes-sociais">
-                  <a href="https://github.com/seuuser" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/Eduardo-SFeitosa" target="_blank">
                     <FaGithub />
                   </a>
-                  <a href="https://linkedin.com/in/seuuser" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/eduardo-santos-846970232/" target="_blank">
                     <FaLinkedin />
                   </a>
                 </div>
               </div>
 
-              {/* Botão agora dentro do conteúdo, como uma maçaneta/fechadura */}
+              {/* Botão agora dentro do conteúdo */}
               <div className="botoes-porta">
                 <button className="botao-passagem" onClick={() => mudar_caminho()}>
-                  <FaLock className="icone-fechadura" />
                   <span>AVANÇAR PARA JORNADA</span>
                   <span className="seta">→</span>
                 </button>
@@ -71,7 +69,6 @@ export default function Interface_porta({ mudar_caminho }) {
             </div>
           </div>
 
-          {/* Elementos decorativos da porta (dobradiças) */}
           <div className="dobradica cima"></div>
           <div className="dobradica baixo"></div>
         </div>

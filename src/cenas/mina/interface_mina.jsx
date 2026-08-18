@@ -14,6 +14,7 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
   const [referencia_camera, set_camera] = useState(null)
   const [projeto_escolhido, set_projeto] = useState(null)
   const [projeto_visivel, set_interface_projeto] = useState(false)
+  const [animacao_sair, set_animacao] = useState(false)
 
   const projetos = [
     {
@@ -54,9 +55,21 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
   }, [referencia_camera])
 
+  const mudar_animacao = (voltar = false) => {
+
+    set_animacao(true)
+
+    //espera .5s para animacao rodas
+    setTimeout(() => {
+      set_direcao(voltar); 
+      set_interface(null)
+    }, 500); 
+
+  }
+
   return (
 
-    <div className="interface-mina">
+    <div className={`interface-mina ${animacao_sair ? "animacao_desaparecer" : ""}`}>
 
       {projeto_visivel && projeto_escolhido != null ? <div className="informacoes-projeto">
         <div className="card-projeto">
@@ -132,9 +145,9 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
       <div className="controle-caminhos">
 
-        <h1 className="botao" onClick={() => {set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA STACKS</h1>
+        <h1 className="botao" onClick={() => {mudar_animacao("voltar")}}>VOLTAR PARA STACKS</h1>
 
-        <h1 className="botao" onClick={() => {set_direcao(); set_interface(null) }}>AVANCAR PARA CONTATO</h1>
+        <h1 className="botao" onClick={() => {mudar_animacao()}}>AVANCAR PARA CONTATO</h1>
 
       </div>
 
