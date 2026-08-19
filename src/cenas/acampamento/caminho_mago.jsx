@@ -21,8 +21,8 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
     return <group key={nome}>
 
             {/* PROGRESSO */}
-            <group position={[
-                tamanho_x / 2 * escala_x - tamanho_x / 2 
+            <group 
+                position={[tamanho_x / 2 * escala_x - tamanho_x / 2 
                 , 0 , 0]}>
 
                 <mesh position={posicao} scale={[escala_x, .4, .1]}>
@@ -47,7 +47,7 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
             <group position={[posicao[0], posicao[1] + 1.2, posicao[2] + .2]}>
 
                 <mesh position={[0,0,-.005]}>
-                    <boxGeometry args={[0.38 * nome.length + 0.34, 1, 0.01]} />
+                    <boxGeometry args={[0.38 * nome.length + 0.5, 1, 0.01]} />
                     <meshStandardMaterial 
                         color={"#2c1a0c"} 
                         transparent={true} 
@@ -57,9 +57,11 @@ export default function Caminho_mago({tamanho, cor, posicao, nome, progresso_tot
 
                 <Text  
                     color={cor} 
-                    fontSize={0.6} 
+                    fontSize={0.7} 
                     anchorX="center" 
-                    anchorY="middle">{nome}</Text>
+                    anchorY="middle"
+                    font="/fontes/Athena-Ruby.ttf.woff"
+                    >{nome}</Text>
             </group>
 
     </group>

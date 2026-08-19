@@ -4,6 +4,8 @@ $cor-pergaminho-escuro: #a6845a;
 $cor-texto-escuro: #2c1a0c;
 $cor-texto-claro: #f0e6d2;
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
 * {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -32,6 +34,12 @@ $cor-texto-claro: #f0e6d2;
     flex-direction: column;
     gap: 2%;
 
+    animation: aparecer .3s forwards;
+
+    &.animacao_desaparecer {
+        animation: desaparecer 0.3s ease forwards;
+    }
+
     //MOLDURA EXTERNA
     background: radial-gradient(ellipse at center, rgba(212, 184, 150, 0.85), rgba(166, 132, 90, 0.85));
     box-shadow:
@@ -44,7 +52,7 @@ $cor-texto-claro: #f0e6d2;
 
     .titulo {
         text-align: center;
-        font-family: 'Times New Roman', serif;
+        font-family: "cinzel";
         font-weight: 700;
         font-size: 2.2rem;
         letter-spacing: 0.1em;
@@ -80,11 +88,11 @@ $cor-texto-claro: #f0e6d2;
             border-radius: 8px;
 
             color: $cor-texto-claro;
-            font-family: 'Courier New', monospace;
+            font-family: 'Playfair Display', serif;
 
             text-align: center;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
             letter-spacing: 0.05em;
             cursor: pointer;
 

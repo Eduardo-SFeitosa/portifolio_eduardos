@@ -11,6 +11,7 @@ import { Vector3 } from "three";
 export default function Interface_acampamento({ mudar_caminho, set_interface }) {
 
     const [progresso_atual, set_progresso] = useState(0)
+    const [animacao_sair, set_animacao] = useState(false)
 
     const linha_guia = useRef(null)
     const versao_mobile = window.innerHeight > window.innerWidth ? true : false
@@ -25,8 +26,8 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
     const pocoes = [
         { nome: "Game Dev", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
-        { nome: "Faculdade", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#33c1ff" },
-        { nome: "Técnico", inicio: 2024, duracao_anos: 2, duracao_meses: 0, cor: "#8e44ad" },
+        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#33c1ff" },
+        { nome: "TÉcnico em ADM", inicio: 2024, duracao_anos: 2, duracao_meses: 0, cor: "#8e44ad" },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
 
@@ -40,15 +41,30 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
     }, [progresso_atual])
 
+    const mudar_animacao = (voltar = false) => {
+
+        set_animacao(true)
+
+        //espera .3s para animacao rodas
+        setTimeout(() => {
+            if (voltar) {
+                mudar_caminho(voltar); 
+            }else {
+                mudar_caminho()
+            }
+            
+        }, 300); 
+
+    }
+
     return (
         <div className="container-acampamento">
 
-            <div className="interface-acampamento">
+            <div className={`interface-acampamento ${animacao_sair ? "animacao_desaparecer" : ""}`}>
 
                 <h1 className="titulo">JORNADA</h1>
 
                 <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, 1, 11.5] }}>
-
 
                     <ScrollControls pages={3} damping={0}>
 
@@ -114,9 +130,9 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                 <div className="controle-caminhos">
 
-                    <h1 className="botao" onClick={() => { mudar_caminho("voltar"); set_interface(null) }}>VOLTAR PARA SOBRE</h1>
+                    <h1 className="botao" onClick={() => { mudar_animacao("voltar") }}>VOLTAR PARA SOBRE</h1>
 
-                    <h1 className="botao" onClick={() => { mudar_caminho(); set_interface(null) }}>AVANCAR PARA STACKS</h1>
+                    <h1 className="botao" onClick={() => { mudar_animacao() }}>AVANCAR PARA STACKS</h1>
 
                 </div>
 
