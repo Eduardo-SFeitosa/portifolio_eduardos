@@ -23,11 +23,12 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
 
   const emissor_particulas = useRef(null)
 
+  //animacao livro
   const livro = useSpring({
 
     escala : ativado ? [.4 , .4 , .43] : [.15, .15 ,.15],
 
-    posicao : ativado ? [.87, 1., -.41] : [-.95, .45, -.7] ,
+    posicao : ativado ? [1.1 , 1.1 , -.47] : [-.95, .45, -.7] ,
 
     rotacao : ativado ? [-1.4777548484911467 ,-0.48 ,-1.38] : [0, -.8, 0],
 
@@ -111,7 +112,7 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
       </animated.group>
       
 
-      < pointLight position={[0, 1, -.3]} intensity={15} color={"#be0000"} />
+      < pointLight position={[ .5, .8, -.6]} intensity={3} color={"#be0000"} />
 
     </group>
 

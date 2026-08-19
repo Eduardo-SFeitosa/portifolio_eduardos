@@ -39,10 +39,10 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       pointer-events: auto;
-      /* interação apenas no cartão */
+      
       max-height: 90vh;
       overflow-y: auto;
-      animation: slideUp 0.4s ease;
+      animation: aparecer 0.4s ease;
 
       .cabecalho {
         display: flex;
@@ -213,18 +213,6 @@
 
   to {
     opacity: 0;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 

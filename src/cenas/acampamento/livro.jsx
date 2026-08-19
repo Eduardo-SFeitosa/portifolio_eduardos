@@ -54,6 +54,8 @@ export function Livro({ ativado, set_interface, ...props }) {
 
       <animated.mesh geometry={nodes.Object_9029.geometry} material={materials['Material.003']} position={[0.05,0,0]} rotation={[0, 0, 0]}/>
 
+      < pointLight position={[0, 1.2, -.3]} intensity={1.3} color={"#B8AE8D"} />
+
     </animated.group>
 
   )

@@ -234,19 +234,26 @@ function App() {
         {/* ILUMINACAO */}
         <group>
 
+          {/* GLOBAL */}
           < directionalLight position={[2, 5, 3]} intensity={.3} />
+          < ambientLight intensity={0.3} />
+
+          {/* ENTRADA */}
+          < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
+          
+          {/* PORTA / ACAMPAMENTO / ORBE */}
           < pointLight position={[0, 10, 0]} intensity={700} color={"#2e4daa"} />
           < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
+
+          {/* BAU / MINA */}
           < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
           < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+
+          {/* ENTRADA */}
           < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
-          < pointLight position={[-17.2, 5, -8]} intensity={400} color={"#2e4daa"} />
-          < ambientLight intensity={0.3} />
 
         </group>
 
-        
-          
       </Canvas>
 
       {/* INTERFACES */}

@@ -4,15 +4,23 @@ import { FaGithub, FaLinkedin, FaDownload, FaLock } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
 export default function Interface_porta({ mudar_caminho }) {
-  const [aberto, setAberto] = useState(false);
 
-  useEffect(() => {
-    setAberto(true);
-  }, []);
+  const [animacao_sair, set_animacao] = useState(false)
+
+  const mudar_animacao = (voltar = false) => {
+
+    set_animacao(true)
+
+    //espera .3s para animacao rodas
+    setTimeout(() => {
+      mudar_caminho(); 
+    }, 300); 
+
+  }
 
   return (
     
-      <div className={`container-porta ${aberto ? "aberto" : ""}`}>
+      <div className={`container-porta ${animacao_sair ? "animacao_desaparecer" : ""}`}>
         <div className="porta">
 
           {/* Moldura da porta */}
@@ -61,7 +69,7 @@ export default function Interface_porta({ mudar_caminho }) {
 
               {/* Botão agora dentro do conteúdo */}
               <div className="botoes-porta">
-                <button className="botao-passagem" onClick={() => mudar_caminho()}>
+                <button className="botao-passagem" onClick={() => mudar_animacao()}>
                   <span>AVANÇAR PARA JORNADA</span>
                   <span className="seta">→</span>
                 </button>

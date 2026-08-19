@@ -91,13 +91,13 @@ export default function Porta({ set_interface , ativado, ...props }) {
         p.height = (Math.random() - 0.5) * .5
       }
 
-      // Spiral
+      // ESPIRAL
       p.angle += delta * p.speed
 
-      // Move toward center
+      // CENTRO
       p.radius -= delta * 0.4
 
-      // Position
+      // POSICAO
       const x = Math.cos(p.angle) * p.radius
       const y = p.height
       const z = Math.sin(p.angle) * p.radius 
@@ -199,6 +199,8 @@ export default function Porta({ set_interface , ativado, ...props }) {
 
 useGLTF.preload('/models/porta.glb')
 
+
+//Shaders para animacao de portal
 const vertexShader = `
 varying vec2 vUv;
 
