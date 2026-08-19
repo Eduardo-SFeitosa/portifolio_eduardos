@@ -1,5 +1,5 @@
 import { Html, useGLTF } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber"
 import { Physics, RigidBody } from "@react-three/rapier";
 import { Line } from "@react-three/drei"
@@ -19,6 +19,13 @@ import Linha from "./linha.jsx";
 export default function Interface_orbe({ mudar_caminho, set_interface, set_direcao }) {
 
     const [stack, set_stack] = useState("python")
+    const [animacao_sair, set_animacao] = useState(false)
+    const versao_mobile = window.innerHeight > window.innerWidth ? true : false
+
+    const zoom_camera = versao_mobile ? 7 : 4
+    const icones_tamanho = versao_mobile ? .008 : .005
+    const escala_constelacoes = 4
+    const atraso_estrelas = .3 * 1000
 
     const constelacoes = {
 
@@ -106,13 +113,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             [0.00, 0.00, 0],
         ]
     }
-
-}
+    }
 
     const atual = constelacoes[stack]
-
-    const atraso_estrelas = .3 * 1000
-    const escala_constelacoes = 4
 
     const estrelas = atual.estrelas.map(estrela => ({
         ...estrela,
@@ -151,13 +154,28 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         },
     ]
 
+    const mudar_animacao = (voltar = false) => {
+
+        //espera .3s para animacao rodas
+        setTimeout(() => {
+            if (voltar) {
+                set_direcao(voltar); 
+            }else {
+                set_direcao()
+            }
+            set_interface(null)
+            
+        }, 300); 
+
+    }
+
     return (
 
-        <div className="interface-orbe">
+        <div className={`interface-orbe ${animacao_sair ? "animacao-sair" : ""}`}>
 
             <h1>STACKS</h1>
 
-            <Canvas className="canvas-orbe" camera={{ position: [0, 0, 4] }}>
+            <Canvas className="canvas-orbe" camera={{ position: [0, 0, zoom_camera] }}>
 
                 <ambientLight intensity={1} />
 
@@ -189,7 +207,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                                 <Icone_componente
                                     onPointerDown={() => { set_stack(icone.nome) }}
-                                    scale={0.005}
+                                    scale={icones_tamanho}
                                 />
                             </mesh>
                         </>
@@ -197,7 +215,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                 </group>
 
-                <group position={[0, -1, 0]}>
+                <group position={[0, -.6, 0]}>
 
                     {/* CONSTELACOES */}
 
@@ -210,6 +228,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                             margem_esquerda={estrela.margem_esquerda}
                             cor={atual.cor}
                             delay={i * atraso_estrelas}
+                            delay_texto={estrelas.length * atraso_estrelas}
                         />
                     ))}
 
@@ -231,9 +250,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
             <div className="controle-caminhos">
 
-                <h1 className="botao" onClick={() => { set_direcao("voltar"); set_interface(null) }}>VOLTAR PARA JORNADA</h1>
+                <h1 className="botao" onClick={() => { mudar_animacao("voltar") }}>VOLTAR PARA JORNADA</h1>
 
-                <h1 className="botao" onClick={() => { set_direcao(); set_interface(null) }}>AVANCAR PARA PROJETOS</h1>
+                <h1 className="botao" onClick={() => { mudar_animacao() }}>AVANCAR PARA PROJETOS</h1>
 
             </div>
 

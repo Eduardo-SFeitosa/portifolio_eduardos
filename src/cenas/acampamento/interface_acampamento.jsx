@@ -47,6 +47,8 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
         //espera .3s para animacao rodas
         setTimeout(() => {
+
+            set_interface(null)
             if (voltar) {
                 mudar_caminho(voltar); 
             }else {

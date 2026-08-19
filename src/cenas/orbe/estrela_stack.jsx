@@ -9,7 +9,7 @@ import Linha from "./linha.jsx"
 
 import "./interface_orbe.scss"
 
-export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda, posicao, delay }) {
+export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda, posicao, delay, delay_texto }) {
 
     const [em_foco, set_foco] = useState(false)
 
@@ -53,7 +53,11 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
         config: { tension: 80, friction: 20 },
 
         onRest : () => {
-            set_foco(true)
+
+            //espera ate todas as estrelas estarem visiveis
+            setTimeout(() => {
+                set_foco(true)
+            }, delay_texto ); 
         },
 
         delay: delay,
@@ -72,8 +76,6 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
         }
         return cor
     }, [])
-
-    console.log(cor_escolhida)
 
     {/* ANIMACAO */}
     useFrame(({clock}) => {
