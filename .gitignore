@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Modelos
+
+public/texturas 
+public/modelos_cenas
+public/models
