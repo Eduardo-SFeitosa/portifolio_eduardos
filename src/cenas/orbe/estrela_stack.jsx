@@ -89,7 +89,7 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
             estrela.current.position.x = Math.sin(delta + atraso.current) * movimento_lateral
         }
 
-        const brilho_tamanho = Math.sin((delta + atraso.current) / 1.5) * 0.2 + .5
+        const brilho_tamanho = Math.sin((delta + atraso.current) / 2) * 0.1 + .35
         brilho.current.scale.set(brilho_tamanho, brilho_tamanho, brilho_tamanho)
 
     })

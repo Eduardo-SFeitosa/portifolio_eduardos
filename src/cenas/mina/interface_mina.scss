@@ -59,6 +59,7 @@
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          text-align: center;
         }
 
         .botao-fechar {
@@ -166,6 +167,7 @@
       pointer-events: auto;
       transition: all 0.25s;
       letter-spacing: 0.03em;
+      text-align: center;
 
       &:hover {
         background: rgba(255, 255, 255, 0.15);

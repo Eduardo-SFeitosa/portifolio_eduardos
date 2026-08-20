@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber"
 import { View } from "@react-three/drei"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
@@ -16,6 +16,10 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
   const [projeto_visivel, set_interface_projeto] = useState(false)
   const [animacao_sair, set_animacao] = useState(false)
 
+  const versao_mobile = window.innerHeight > window.innerWidth ? true : false
+
+  const posicao_camera = versao_mobile ? new Vector3(-2, 1.7, 3.2) : new Vector3(-1.5, 1.7, 2)
+
   const projetos = [
     {
       id: 1,
@@ -26,7 +30,6 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
       link: "https://gem-sheep.itch.io/mine-diver",
       funcao: "Programador, designer, compositor SFX",
       empresa: null,
-      descricao: "Jogo 2D de exploração de cavernas",
       formato: "esmeralda",
       cor: "azul"
     },
@@ -39,7 +42,6 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
       link: "https://milqmochi.itch.io/shrimp-shack",
       funcao: "Programador e deisgner",
       empresa: "Moon Shrimp Studio",
-      descricao: "Simulador de gerenciamento de restaurante",
       formato: "gota",
       cor: "laranja"
     }
@@ -51,7 +53,7 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
     referencia_camera.lookAt(new Vector3(1.7, -1.6, -0.6))
 
-    referencia_camera.position.copy(new Vector3(-1.5, 1.7, 2))
+    referencia_camera.position.copy(posicao_camera)
 
   }, [referencia_camera])
 
@@ -61,7 +63,13 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
     //espera .5s para animacao rodas
     setTimeout(() => {
-      set_direcao(voltar); 
+      
+      if (voltar){
+        set_direcao(voltar)
+      }else{
+        set_direcao()
+      }
+  
       set_interface(null)
     }, 500); 
 
@@ -73,7 +81,8 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
       {projeto_visivel && projeto_escolhido != null ? <div className="informacoes-projeto">
         <div className="card-projeto">
-          {/* Cabeçalho com título e botão fechar */}
+          
+          
           <div className="cabecalho">
             <h1 className="titulo">{projetos[projeto_escolhido].nome}</h1>
             <button className="botao-fechar" onClick={() => set_projeto(null)}>
@@ -81,17 +90,11 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
             </button>
           </div>
 
-          {/* Imagem (link para o projeto) */}
           <a href={projetos[projeto_escolhido].link} target="_blank" rel="noopener noreferrer" className="link-imagem">
             <img className="imagem" src={projetos[projeto_escolhido].imagem} alt={projetos[projeto_escolhido].nome} />
           </a>
 
-          {/* Detalhes em grid */}
           <div className="detalhes">
-            <div className="detalhe-item">
-              <span className="rotulo">Descrição</span>
-              <p className="valor">{projetos[projeto_escolhido].descricao}</p>
-            </div>
             <div className="detalhe-item">
               <span className="rotulo">Função</span>
               <p className="valor">{projetos[projeto_escolhido].funcao}</p>
@@ -141,6 +144,7 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
         })}
 
         <Parede />
+
       </Canvas>
 
       <div className="controle-caminhos">

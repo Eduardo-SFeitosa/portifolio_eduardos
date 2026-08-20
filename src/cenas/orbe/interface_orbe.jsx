@@ -33,90 +33,110 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
     const constelacoes = {
 
-    python: {
-        estrelas: [
-            { nome: "DJANGO",      cor: "#0DB14B", posicao: [-0.55,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "FASTAPI",     cor: "#00C58E", posicao: [-0.25,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "PANDAS",      cor: "#6A5CFF", posicao: [-0.50, -0.05, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "NUMPY",       cor: "#4DABF7", posicao: [-0.10, -0.25, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "MATPLOTLIB",  cor: "#FFB347", posicao: [ 0.25, -0.10, 0], margem_esquerda: 2, margem_cima: 2 },
-            { nome: "REQUESTS",    cor: "#B388FF", posicao: [ 0.50,  0.15, 0], margem_esquerda: 1, margem_cima: 0 },
-            { nome: "SELENIUM",    cor: "#43D854", posicao: [ 0.20,  0.40, 0], margem_esquerda: 0, margem_cima: 0 },
-        ],
-        estrelas_mobile: [
-            { nome: "DJANGO",      cor: "#0DB14B", posicao: [-0.55,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
-            { nome: "FASTAPI",     cor: "#00C58E", posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "PANDAS",      cor: "#6A5CFF", posicao: [-0.70, -0.7, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "NUMPY",       cor: "#4DABF7", posicao: [-0.00, -.95, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "MATPLOTLIB",  cor: "#FFB347", posicao: [ 0.5, -0.50, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "REQUESTS",    cor: "#B388FF", posicao: [ 0.50,  0.15, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "SELENIUM",    cor: "#43D854", posicao: [ 0.40,  0.60, 0], margem_esquerda: 0, margem_cima: 0 },
-        ]
-    },
+        python: {
+            estrelas: [
+                { nome: "DJANGO",      posicao: [-0.75,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "FASTAPI",     posicao: [-0.35,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "PANDAS",      posicao: [-0.60, -0.05, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "NUMPY",       posicao: [-0.10, -0.35, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "MATPLOTLIB",  posicao: [ 0.45, -0.10, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "SELENIUM",    posicao: [ 0.20,  0.40, 0], margem_esquerda: 1, margem_cima: 0 },
+            ],
 
-    javascript: {
+            estrelas_mobile: [
+                { nome: "DJANGO",      posicao: [-0.55,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "FASTAPI",     posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "PANDAS",      posicao: [-0.70, -0.7, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "NUMPY",       posicao: [-0.00, -.95, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "MATPLOTLIB",  posicao: [ 0.5, -0.50, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "SELENIUM",    posicao: [ 0.40,  0.60, 0], margem_esquerda: 0, margem_cima: 0 },
+            ],
 
-        estrelas: [
-            { nome: "REACT",       cor: "#61DAFB", posicao: [-0.45,  0.45, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "THREE.JS",    cor: "#D9D9D9", posicao: [-0.10,  0.15, 0], margem_esquerda: 0, margem_cima: 1 },
-            { nome: "ANGULAR",     cor: "#DD0031", posicao: [ 0.35,  0.35, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "NODE.JS",     cor: "#68A063", posicao: [ 0.05, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
-            { nome: "TYPESCRIPT",  cor: "#3178C6", posicao: [ 0.45, -0.35, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "ROUTER",      cor: "#F44250", posicao: [ 0.00, -0.20, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "VITE",        cor: "#9C6BFF", posicao: [-0.30, -0.45, 0], margem_esquerda: 0, margem_cima: 0 },
-        ],
+            conectar_final : false
 
-        estrelas_mobile : [
-            { nome: "REACT",       cor: "#61DAFB", posicao: [-0.45,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "THREE.JS",    cor: "#D9D9D9", posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "ANGULAR",     cor: "#DD0031", posicao: [ 0.25,  0.45, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "NODE.JS",     cor: "#68A063", posicao: [ 0.1, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
-            { nome: "TYPESCRIPT",  cor: "#3178C6", posicao: [ 0.25, -0.45, 0], margem_esquerda: 1, margem_cima: 2 },
-            { nome: "ROUTER",      cor: "#F44250", posicao: [ -0.20, -0.40, 0], margem_esquerda: 0, margem_cima: 0 },
-            { nome: "VITE",        cor: "#9C6BFF", posicao: [-0.40, -0.85, 0], margem_esquerda: 2, margem_cima: 1 },
-        ]
-    },
+        },
 
-    html_css: {
+        javascript: {
 
-        estrelas: [
-            { nome: "FORMS",       cor: "#FFD166", posicao: [ 0.00,  0.40, 0], margem_esquerda: 1, margem_cima: 0 },
-            { nome: "CSS",         cor: "#2965F1", posicao: [ 0.1,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
-            { nome: "SASS",        cor: "#CF649A", posicao: [ 0.2, -0.05, 0], margem_esquerda: 2, margem_cima: 2 },
-            { nome: "ANIMACOES",   cor: "#7AE582", posicao: [ 0.00, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "TAILWIND",    cor: "#38BDF8", posicao: [-0.25, -0.05, 0], margem_esquerda: 0, margem_cima: 1 },
-            { nome: "HTML",        cor: "#E34F26", posicao: [-0.25,  0.20, 0], margem_esquerda: 0, margem_cima: 0 },
-        ],
+            estrelas: [
+                { nome: "REACT",       posicao: [-0.65,  0.45, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "THREE.JS",    posicao: [-0.10,  0.25, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "ANGULAR",     posicao: [ 0.55,  0.35, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "NODE.JS",     posicao: [ 0.1, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "TYPESCRIPT",  posicao: [ 0.45, -0.35, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "ROUTER",      posicao: [ -0.10, -0.25, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "VITE",        posicao: [-0.50, -0.45, 0], margem_esquerda: 0, margem_cima: 0 },
+            ],
 
-        estrelas_mobile : [
-            { nome: "FORMS",       cor: "#FFD166", posicao: [ 0.00,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
-            { nome: "CSS",         cor: "#2965F1", posicao: [ 0.2,  0.25, 0], margem_esquerda: 2, margem_cima: 1 },
-            { nome: "SASS",        cor: "#CF649A", posicao: [ 0.4, -0.1, 0], margem_esquerda: 2, margem_cima: 2 },
-            { nome: "ANIMACOES",   cor: "#7AE582", posicao: [ 0.00, -0.60, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: "TAILWIND",    cor: "#38BDF8", posicao: [-0.45, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
-            { nome: "HTML",        cor: "#E34F26", posicao: [-0.20,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
-        ]
+            estrelas_mobile : [
+                { nome: "REACT",       posicao: [-0.45,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "THREE.JS",    posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "ANGULAR",     posicao: [ 0.25,  0.45, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "NODE.JS",     posicao: [ 0.1, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "TYPESCRIPT",  posicao: [ 0.4, -0.45, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "ROUTER",      posicao: [ -0.20, -0.40, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "VITE",        posicao: [-0.50, -0.9, 0], margem_esquerda: 2, margem_cima: 1 },
+            ],
 
-    },
+            conectar_final : false,
 
-    csharp: {
-        estrelas: [
-            { nome: "ASP.NET",         cor: "#7C4DFF", posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
-            { nome: "API REST",        cor: "#26C6DA", posicao: [-0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "WINDOWS FORMS",   cor: "#FFCA28", posicao: [ 0.45, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: ".NET",            cor: "#A855F7", posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
-        ],
+        },
 
-        estrelas_mobile : [
-            { nome: "ASP.NET",         cor: "#7C4DFF", posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
-            { nome: "API REST",        cor: "#26C6DA", posicao: [-0.55, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
-            { nome: "WINDOWS FORMS",   cor: "#FFCA28", posicao: [ 0.5, -0.40, 0], margem_esquerda: 0, margem_cima: 2 },
-            { nome: ".NET",            cor: "#A855F7", posicao: [ 0.15,  0.10, 0], margem_esquerda: 2, margem_cima: 0 },
-        ]
-    }
+        html_css: {
+
+            estrelas: [
+                { nome: "FORMS",       posicao: [ 0.00,  0.40, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "CSS",         posicao: [ 0.7,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "SASS",        posicao: [ 0.2, -0.05, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "ANIMACOES",   posicao: [ 0.00, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "TAILWIND",    posicao: [-0.55, -0.05, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "HTML",        posicao: [-0.55,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
+            ],
+
+            estrelas_mobile : [
+                { nome: "FORMS",       posicao: [ 0.00,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "CSS",         posicao: [ 0.3,  0.25, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "SASS",        posicao: [ 0.5, -0.4, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "ANIMACOES",   posicao: [ 0.00, -0.90, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "TAILWIND",    posicao: [-0.55, -0.20, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "HTML",        posicao: [-0.30,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
+            ],
+
+            conectar_final : true
+
+        },
+
+        csharp: {
+            estrelas: [
+                { nome: "ASP.NET",         posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "API REST",        posicao: [-0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "WINDOWS FORMS",   posicao: [ 0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: ".NET",            posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
+            ],
+
+            estrelas_mobile : [
+                { nome: "ASP.NET",         posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "API REST",        posicao: [-0.55, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "WINDOWS FORMS",   posicao: [ 0.5, -0.40, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: ".NET",            posicao: [ 0.15,  0.10, 0], margem_esquerda: 2, margem_cima: 0 },
+            ],
+
+            conectar_final : false 
+        }
+
     }
 
     const atual = constelacoes[stack]
+
+    const cores_estrelas = [
+        "#ff0000", 
+        "#FF2BD6", 
+        "#8A5CFF", 
+        "#00c711", 
+        "#FF6A00", 
+    ]
 
     //aplica escala das constelacoes
     const estrelas = versao_mobile ? atual.estrelas_mobile.map(estrela => ({
@@ -132,27 +152,27 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         {
             nome: "python",
             componente: Python_icon,
-            cor: "yellow",
+            cor: "#00E5FF",
         },
         {
-            nome: "html_css",
+            nome: "css",
             componente: Css_icon,
-            cor: "blue",
+            cor: "#FF2BD6",
         },
         {
             nome: "javascript",
             componente: Javascript_icon,
-            cor: "yellow",
+            cor: "#fffc5c",
         },
         {
-            nome: "html_css",
+            nome: "html",
             componente: Html5_icon,
-            cor: "orange",
+            cor: "#FF6A00",
         },
         {
             nome: "csharp",
             componente: Csharp_icon,
-            cor: "purple",
+            cor: "#cc00ff",
         },
     ]
 
@@ -190,59 +210,81 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                         const posicao_x = Math.floor(icones.length / 2) + i - icones.length + .5 + icones_espacamento * i
 
                         return <>
+                            
+                            { stack == icone.nome ? 
+                                <mesh
+                                    raycast={() => null}
+                                    position={[posicao_x, 0, 0]}
+                                >
 
-                            <mesh
-                                raycast={() => null}
-                                position={[posicao_x, 0, 0]}
-                            >
-                                <sphereGeometry args={[.5, 8, 8]} />
+                                    <sphereGeometry args={[1.5, 8, 8]} />
+                                        
+                                    <Brilho
+                                        falloff={4.2}
+                                        glowInternalRadius={4.1}
+                                        glowSharpness={1.3}
+                                        glowColor={icone.cor}
+                                        side={"THREE.DoubleSide"}
+                                        opacity={.20}
+                                        depthTest={false}
+                                    />    
 
-                                <Brilho
-                                    falloff={4.2}
-                                    glowInternalRadius={4.1}
-                                    glowSharpness={1.3}
-                                    glowColor={icone.cor}
-                                    side={"THREE.DoubleSide"}
-                                    opacity={.20}
-                                    depthTest={false}
-                                />
+                                    <Icone_componente
+                                        onPointerDown={() => { set_stack(icone.nome) }}
+                                        scale={icones_tamanho}
+                                    />
 
-                                <Icone_componente
-                                    onPointerDown={() => { set_stack(icone.nome) }}
-                                    scale={icones_tamanho}
-                                />
-                            </mesh>
+                                </mesh> : 
+                                
+                                <mesh
+                                    raycast={() => null}
+                                    position={[posicao_x, 0, 0]}
+                                >
+                                    <Icone_componente
+                                        onPointerDown={() => { set_stack(icone.nome) }}
+                                        scale={icones_tamanho}
+                                    />
+                                </mesh>}
+
                         </>
                     })}
 
                 </group>
 
+                {/* CONSTELACAO */}
                 <group position={[0, -.6, 0]}>
 
-                    {/* CONSTELACOES */}
-
+                    {/* ESTRELAS */}
                     {estrelas.map((estrela, i) => (
                         <Estrela_stack
-                            key={`${estrela.posicao} index:${i}`}
+                            key={`constelacao ${estrela.nome}`}
                             nome={estrela.nome}
                             posicao={estrela.posicao}
                             margem_cima={estrela.margem_cima}
                             margem_esquerda={estrela.margem_esquerda}
-                            cor={atual.cor}
+                            cor={cores_estrelas[i % cores_estrelas.length]}
                             delay={i * atraso_estrelas}
                             delay_texto={estrelas.length * atraso_estrelas}
                         />
                     ))}
 
+                    {/* LINHAS */}
                     {estrelas.map((estrela, i) => {
 
-                        const promixa_estrela = estrelas.length - 1 == i ? estrelas[i] : estrelas[i + 1]
+                        let promixa_estrela = estrelas.length - 1 == i ? estrelas[i] : estrelas[i + 1]
+
+                        if ( atual.conectar_final && estrelas.length - 1 == i) {
+
+                            promixa_estrela = estrelas[0]
+
+                        }
 
                         return <Linha
                             key={`linha: ${estrela.nome}`}
                             atraso={i * atraso_estrelas}
                             ponto_1={estrela.posicao}
                             ponto_2={promixa_estrela.posicao}
+                            tamanho={.7}
                         />
 
                     })}

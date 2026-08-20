@@ -191,7 +191,7 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
         ref={glow}
         raycast={() => null}>
 
-        <sphereGeometry args={[3, 3, 3]} />
+        <sphereGeometry args={[2, 9, 9]} />
 
         <Brilho
         falloff={.8}
