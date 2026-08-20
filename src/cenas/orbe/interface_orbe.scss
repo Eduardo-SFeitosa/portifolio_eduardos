@@ -67,6 +67,8 @@
       cursor: pointer;
       pointer-events: auto;
       transition: all 0.25s;
+
+      text-align: center;
       letter-spacing: 0.03em;
 
       &:hover {
@@ -99,7 +101,7 @@
     .interface-orbe{
 
       .estrela-nome {
-        font-size: .8rem;
+        font-size: 1rem;
         font-weight: 500;
         letter-spacing: .18em;
         text-transform: uppercase;

@@ -61,6 +61,8 @@ function App() {
 
   const teleportar = ( cena ) =>  {
 
+    if (cena_em_foco == cena) return
+
     set_interface(null)
     set_caminho(cena)
     set_cena_em_foco(cena)
@@ -158,55 +160,61 @@ function App() {
           
             < ModeloBase />
 
-            <Porta 
-            onPointerDown={() => { if (cena_em_foco != "porta") { travar_camera("porta"); } }} 
-            set_interface={set_interface}
-            position={posicao_de_cenas["porta"]["posicao"]} 
-            rotation={posicao_de_cenas["porta"]["rotacao"]} 
-            ativado={ cena_em_foco == "porta" ? true : false}
-            />
+            { /* MODELOS INTERATIVOS */}
+            <group>
 
-            <Acampamento 
-            onPointerDown={() => { if (cena_em_foco != "acampamento") { travar_camera("acampamento"); } }} 
-            set_interface={set_interface}
-            position={posicao_de_cenas["acampamento"]["posicao"]} 
-            rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
-            ativado={ cena_em_foco == "acampamento" ? true : false}
-            />
+              <Porta 
+              onPointerDown={() => { if (cena_em_foco != "porta") { travar_camera("porta"); } }} 
+              set_interface={set_interface}
+              position={posicao_de_cenas["porta"]["posicao"]} 
+              rotation={posicao_de_cenas["porta"]["rotacao"]} 
+              ativado={ cena_em_foco == "porta" ? true : false}
+              />
 
-            <Orbe 
-            onPointerDown={() => { cena_em_foco != "orbe" ? travar_camera("orbe") : null}} 
-            referencia_camera={referencia_camera}
-            set_interface={set_interface}
-            position={posicao_de_cenas["orbe"]["posicao"]} 
-            rotation={posicao_de_cenas["orbe"]["rotacao"]} 
-            ativado={ cena_em_foco == "orbe" ? true : false}
-            controle_de_camera={controle_de_camera_ref}
-            interface_ativa={interface_ativa}
-            direcao_caminho={direcao_caminho}
-            mudar_caminho={mudar_caminho}
-            />
+              <Acampamento 
+              onPointerDown={() => { if (cena_em_foco != "acampamento") { travar_camera("acampamento"); } }} 
+              set_interface={set_interface}
+              position={posicao_de_cenas["acampamento"]["posicao"]} 
+              rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
+              ativado={ cena_em_foco == "acampamento" ? true : false}
+              />
 
-            <Mina 
-            onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
-            referencia_camera={referencia_camera}
-            set_interface={set_interface}
-            position={posicao_de_cenas["mina"]["posicao"]} 
-            rotation={posicao_de_cenas["mina"]["rotacao"]} 
-            ativado={ cena_em_foco == "mina" ? true : false}
-            controle_de_camera={controle_de_camera_ref}
-            interface_ativa={interface_ativa}
-            direcao_caminho={direcao_caminho}
-            mudar_caminho={mudar_caminho}
-            />
+              <Orbe 
+              onPointerDown={() => { if (cena_em_foco != "orbe") { travar_camera("orbe"); } }} 
+              referencia_camera={referencia_camera}
+              set_interface={set_interface}
+              position={posicao_de_cenas["orbe"]["posicao"]} 
+              rotation={posicao_de_cenas["orbe"]["rotacao"]} 
+              ativado={ cena_em_foco == "orbe" ? true : false}
+              controle_de_camera={controle_de_camera_ref}
+              interface_ativa={interface_ativa}
+              direcao_caminho={direcao_caminho}
+              mudar_caminho={mudar_caminho}
+              />
 
-            <Bau 
-            onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : null }} 
-            set_interface={set_interface}
-            position={posicao_de_cenas["bau"]["posicao"]} 
-            rotation={posicao_de_cenas["bau"]["rotacao"]} 
-            ativado={ cena_em_foco == "bau" ? true : false}
-            />    
+              <Mina 
+              onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
+              referencia_camera={referencia_camera}
+              set_interface={set_interface}
+              position={posicao_de_cenas["mina"]["posicao"]} 
+              rotation={posicao_de_cenas["mina"]["rotacao"]} 
+              ativado={ cena_em_foco == "mina" ? true : false}
+              controle_de_camera={controle_de_camera_ref}
+              interface_ativa={interface_ativa}
+              direcao_caminho={direcao_caminho}
+              mudar_caminho={mudar_caminho}
+              />
+
+              <Bau 
+              onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : null }} 
+              set_interface={set_interface}
+              position={posicao_de_cenas["bau"]["posicao"]} 
+              rotation={posicao_de_cenas["bau"]["rotacao"]} 
+              ativado={ cena_em_foco == "bau" ? true : false}
+              />    
+
+            </group>
+
 
             {/* ESTRELAS */}
             <group>

@@ -157,6 +157,7 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
             ponto_1={[0,0,0]}
             ponto_2={linha_texto}
             cor={cor_escolhida}
+            tamanho={1.8}
             />}
 
         </animated.group>

@@ -2,7 +2,7 @@ import { Line } from "@react-three/drei"
 import { useEffect, useState } from "react"
 import { animated, useSpring } from "@react-spring/three"
 
-export default function Linha({ponto_1, ponto_2, atraso, cor="white"}) {
+export default function Linha({ponto_1, ponto_2, atraso, cor="white", tamanho=.5}) {
 
     const [ponto_final, set_ponto_final] = useState(ponto_1)
 
@@ -38,7 +38,7 @@ export default function Linha({ponto_1, ponto_2, atraso, cor="white"}) {
     return <Line
             points={[ponto_1, ponto_final]}
             color={cor}
-            lineWidth={.5}
+            lineWidth={tamanho}
             />
 
 }
