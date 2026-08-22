@@ -30,6 +30,8 @@ function App() {
   const controle_de_camera_ref = useRef(null)
   const [direcao_caminho, set_direcao] = useState("avancar")
 
+  const versao_mobile = window.innerHeight > window.innerWidth ? true : false
+
   const posicao_de_cenas = {
 
     porta : {
@@ -141,6 +143,17 @@ function App() {
 
   }, [cena_em_foco])
 
+  const controlar_clique = ( cena , acao="clique" ) => {
+
+    //se estiver em desktop ignora necessidade de onPointerUp
+    if (!versao_mobile && acao == "clique" && cena) travar_camera(cena)
+
+    else if (versao_mobile && cena && acao != "clique") {
+      travar_camera(cena)
+    }
+
+  }
+
   return (
 
     <>
@@ -164,7 +177,8 @@ function App() {
             <group>
 
               <Porta 
-              onPointerDown={() => { if (cena_em_foco != "porta") { travar_camera("porta"); } }} 
+              onPointerDown={() => { if (cena_em_foco != "porta") { controlar_clique("porta"); } }} 
+              onPointerUp={() => { cena_em_foco != "porta" ? controlar_clique("porta", "soltar") : null}}
               set_interface={set_interface}
               position={posicao_de_cenas["porta"]["posicao"]} 
               rotation={posicao_de_cenas["porta"]["rotacao"]} 
@@ -172,7 +186,8 @@ function App() {
               />
 
               <Acampamento 
-              onPointerDown={() => { if (cena_em_foco != "acampamento") { travar_camera("acampamento"); } }} 
+              onPointerDown={() => { if (cena_em_foco != "acampamento") { controlar_clique("acampamento"); } }} 
+              onPointerUp={() => { cena_em_foco != "acampamento" ? controlar_clique("acampamento", "soltar") : null}}
               set_interface={set_interface}
               position={posicao_de_cenas["acampamento"]["posicao"]} 
               rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
@@ -180,7 +195,8 @@ function App() {
               />
 
               <Orbe 
-              onPointerDown={() => { if (cena_em_foco != "orbe") { travar_camera("orbe"); } }} 
+              onPointerDown={() => { if (cena_em_foco != "orbe") { controlar_clique("orbe"); } }} 
+              onPointerUp={() => { cena_em_foco != "orbe" ? controlar_clique("orbe", "soltar") : null}}
               referencia_camera={referencia_camera}
               set_interface={set_interface}
               position={posicao_de_cenas["orbe"]["posicao"]} 
@@ -193,7 +209,8 @@ function App() {
               />
 
               <Mina 
-              onPointerDown={() => { cena_em_foco != "mina" ? travar_camera("mina") : null}} 
+              onPointerDown={() => { cena_em_foco != "mina" ? controlar_clique("mina") : null}} 
+              onPointerUp={() => { cena_em_foco != "mina" ? controlar_clique("mina", "soltar") : null}}
               referencia_camera={referencia_camera}
               set_interface={set_interface}
               position={posicao_de_cenas["mina"]["posicao"]} 
@@ -206,7 +223,8 @@ function App() {
               />
 
               <Bau 
-              onPointerDown={() => { cena_em_foco != "bau" ? travar_camera("bau") : null }} 
+              onPointerDown={() => { cena_em_foco != "bau" ? controlar_clique("bau") : null }} 
+              onPointerUp={() => { cena_em_foco != "bau" ? controlar_clique("bau", "soltar") : null}}
               set_interface={set_interface}
               position={posicao_de_cenas["bau"]["posicao"]} 
               rotation={posicao_de_cenas["bau"]["rotacao"]} 

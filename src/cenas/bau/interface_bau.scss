@@ -140,9 +140,6 @@
       pointer-events: none;
     }
 
-
-    // scrollbar
-
     &::-webkit-scrollbar {
       width: 5px;
     }
@@ -158,11 +155,6 @@
       border-radius: 10px;
     }
   }
-
-
-  // =========================================================
-  // HEADER
-  // =========================================================
 
   .cabecalho-contato {
 
@@ -221,11 +213,6 @@
 
     line-height: 1.6;
   }
-
-
-  // =========================================================
-  // DIVIDER
-  // =========================================================
 
   .divisor {
 
@@ -525,32 +512,32 @@
     display: flex;
     justify-content: center;
     pointer-events: none;
-  }
 
-  .botao-voltar {
+    .botao-voltar {
 
-    pointer-events: auto;
-    padding: 9px 18px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, .12);
-    background: rgba(12, 8, 5, 0.932);
+      pointer-events: auto;
+      padding: 9px 18px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(12, 8, 5, 0.932);
 
-    color: #cec5b0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: .08em;
-    cursor: pointer;
-    transition: .2s;
+      color: #cec5b0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: .2s;
 
-    span {
-      margin-right: 6px;
-    }
+      span {
+        margin-right: 6px;
+      }
 
-    &:hover {
-      color: #e6d3a7;
-      border-color: rgba(211, 168, 76, .35);
-      background: rgba(20, 13, 8, .85);
-      transform: translateY(-2px);
+      &:hover {
+        color: #e6d3a7;
+        border-color: rgba(211, 168, 76, .35);
+        background: rgba(20, 13, 8, .85);
+        transform: translateY(-2px);
+      }
     }
   }
 }
@@ -640,6 +627,14 @@
 @media (max-width: 420px) {
 
   .interface-bau {
+
+
+
+    .divisor{
+
+      display: none;
+
+    }
 
     .container-principal {
 
