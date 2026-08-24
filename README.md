@@ -8,7 +8,7 @@ O projeto foi desenvolvido principalmente para explorar o uso de **React com Thr
 
 ## Uma demonstração pode ser encontrada aqui:
 
-**Prévia:** [[adicione aqui o link do deploy]](https://www.linkedin.com/feed/update/urn:li:activity:7497713401968689152/)
+**Prévia:** [[Prévia em vídeo]](https://www.linkedin.com/feed/update/urn:li:activity:7497713401968689152/)
 
 ---
 
