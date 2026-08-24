@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 
+import { FaUser } from "react-icons/fa"
 import ModeloBase from "./modelos_auxiliares/modelo_base"
 import AguaAnimada from "./modelos_auxiliares/agua_animada"
 import Porta from "./cenas/porta/porta"
@@ -178,7 +179,7 @@ function App() {
 
               <Porta 
               onPointerDown={() => { if (cena_em_foco != "porta") { controlar_clique("porta"); } }} 
-              onPointerUp={() => { cena_em_foco != "porta" ? controlar_clique("porta", "soltar") : null}}
+              onPointerUp={() => { cena_em_foco != "porta" && versao_mobile ? controlar_clique("porta", "soltar") : null}}
               set_interface={set_interface}
               position={posicao_de_cenas["porta"]["posicao"]} 
               rotation={posicao_de_cenas["porta"]["rotacao"]} 
@@ -187,7 +188,7 @@ function App() {
 
               <Acampamento 
               onPointerDown={() => { if (cena_em_foco != "acampamento") { controlar_clique("acampamento"); } }} 
-              onPointerUp={() => { cena_em_foco != "acampamento" ? controlar_clique("acampamento", "soltar") : null}}
+              onPointerUp={() => { cena_em_foco != "acampamento" && versao_mobile ? controlar_clique("acampamento", "soltar") : null}}
               set_interface={set_interface}
               position={posicao_de_cenas["acampamento"]["posicao"]} 
               rotation={posicao_de_cenas["acampamento"]["rotacao"]} 
@@ -196,7 +197,7 @@ function App() {
 
               <Orbe 
               onPointerDown={() => { if (cena_em_foco != "orbe") { controlar_clique("orbe"); } }} 
-              onPointerUp={() => { cena_em_foco != "orbe" ? controlar_clique("orbe", "soltar") : null}}
+              onPointerUp={() => { cena_em_foco != "orbe" && versao_mobile ? controlar_clique("orbe", "soltar") : null}}
               referencia_camera={referencia_camera}
               set_interface={set_interface}
               position={posicao_de_cenas["orbe"]["posicao"]} 
@@ -210,7 +211,7 @@ function App() {
 
               <Mina 
               onPointerDown={() => { cena_em_foco != "mina" ? controlar_clique("mina") : null}} 
-              onPointerUp={() => { cena_em_foco != "mina" ? controlar_clique("mina", "soltar") : null}}
+              onPointerUp={() => { cena_em_foco != "mina" && versao_mobile ? controlar_clique("mina", "soltar") : null}}
               referencia_camera={referencia_camera}
               set_interface={set_interface}
               position={posicao_de_cenas["mina"]["posicao"]} 
@@ -224,7 +225,7 @@ function App() {
 
               <Bau 
               onPointerDown={() => { cena_em_foco != "bau" ? controlar_clique("bau") : null }} 
-              onPointerUp={() => { cena_em_foco != "bau" ? controlar_clique("bau", "soltar") : null}}
+              onPointerUp={() => { cena_em_foco != "bau" && versao_mobile ? controlar_clique("bau", "soltar") : null}}
               set_interface={set_interface}
               position={posicao_de_cenas["bau"]["posicao"]} 
               rotation={posicao_de_cenas["bau"]["rotacao"]} 
@@ -232,7 +233,6 @@ function App() {
               />    
 
             </group>
-
 
             {/* ESTRELAS */}
             <group>
@@ -299,9 +299,9 @@ function App() {
         : null}
       </div>
 
-      <div className="navegacao" style={{width:"200px", display:"flex", position:"fixed", top:0, zIndex:15}}>
+      <div className="navegacao">
 
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} >SOBRE</button>
+            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} > <FaUser /> SOBRE</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("orbe")} >STACKS</button>
             <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >PROJETOS</button>

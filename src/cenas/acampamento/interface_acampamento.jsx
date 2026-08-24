@@ -25,7 +25,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const posicao_x_camera = versao_mobile ? 5 : 9
 
     const pocoes = [
-        { nome: "Game Dev", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
+        { nome: "Desenvolvimento de jogos", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
         { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#33c1ff" },
         { nome: "TÉcnico em ADM", inicio: 2024, duracao_anos: 2, duracao_meses: 0, cor: "#8e44ad" },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },

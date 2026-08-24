@@ -155,9 +155,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             cor: "#00E5FF",
         },
         {
-            nome: "css",
+            nome: "html_css",
             componente: Css_icon,
-            cor: "#FF2BD6",
+            cor: "#2f2bff",
         },
         {
             nome: "javascript",
@@ -165,7 +165,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             cor: "#fffc5c",
         },
         {
-            nome: "html",
+            nome: "html_css",
             componente: Html5_icon,
             cor: "#FF6A00",
         },
@@ -177,6 +177,8 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     ]
 
     const mudar_animacao = (voltar = false) => {
+
+        set_animacao(true)
 
         //espera .3s para animacao rodas
         setTimeout(() => {
@@ -208,6 +210,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                         const Icone_componente = icone.componente
                         const posicao_x = Math.floor(icones.length / 2) + i - icones.length + .5 + icones_espacamento * i
+                        const brilho_tamanho = versao_mobile ? 1.5 : .8
 
                         return <>
                             
@@ -217,7 +220,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                                     position={[posicao_x, 0, 0]}
                                 >
 
-                                    <sphereGeometry args={[1.5, 8, 8]} />
+                                    <sphereGeometry args={[brilho_tamanho, 8, 8]} />
                                         
                                     <Brilho
                                         falloff={4.2}

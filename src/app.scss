@@ -31,3 +31,17 @@ html, body, #root {
   position: relative;
 
 }
+
+.navegacao {
+
+  width: 100%;
+  height: fit-content; 
+  display : flex; 
+  position: fixed; 
+  justify-content: center;
+  align-items: center;
+  top:0; 
+  left: 0;
+  z-index:15;
+
+}
