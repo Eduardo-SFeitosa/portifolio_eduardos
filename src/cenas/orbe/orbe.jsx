@@ -188,8 +188,6 @@ export default function Orbe({ ativado, interface_ativa, set_interface, controle
 
       progresso.current = 0
 
-      console.log(animacao_ativa)
-
     }
 
   })

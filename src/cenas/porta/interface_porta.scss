@@ -6,7 +6,7 @@ $glow-dourado: rgba(212, 175, 55, 0.4);
 $texto-claro: #eee7dd;
 $texto-secundario: #b8aec6;
 
-*{
+* {
   overflow: visible;
 }
 
@@ -32,8 +32,8 @@ $texto-secundario: #b8aec6;
   max-width: 550px;
   background: radial-gradient(ellipse at center, $roxo-profundo 0%, $roxo-escuro 100%);
   border-radius: 50% 50% 12px 12px / 20% 20% 12px 12px;
-  
-  box-shadow: 
+
+  box-shadow:
     0 0 60px rgba(212, 175, 55, 0.15),
     inset 0 0 80px rgba(0, 0, 0, 0.7),
     0 20px 40px rgba(0, 0, 0, 0.6);
@@ -42,7 +42,7 @@ $texto-secundario: #b8aec6;
   padding: 25px 24px 28px;
   margin-bottom: 4vh;
   margin-right: 3vw;
-  
+
   .door-frame {
     position: relative;
     width: 100%;
@@ -69,11 +69,18 @@ $texto-secundario: #b8aec6;
         align-items: center;
         justify-content: center;
         gap: 12px;
-        .simbolo { font-size: 1.2rem; color: $dourado; opacity: 0.5; }
+
+        .simbolo {
+          font-size: 1.2rem;
+          color: $dourado;
+          opacity: 0.5;
+        }
+
         .titulo {
+          text-align: center;
           font-family: 'Cinzel', serif;
           font-weight: 700;
-          font-size: 1.8rem;
+          font-size: 2rem;
           letter-spacing: 0.1em;
           background: linear-gradient(135deg, $dourado-suave, $dourado, #b8860b);
           -webkit-background-clip: text;
@@ -85,27 +92,43 @@ $texto-secundario: #b8aec6;
 
       .linha-divisoria {
         text-align: center;
-        .ornamento { color: $dourado; opacity: 0.3; font-size: 1rem; }
+
+        .ornamento {
+          color: $dourado;
+          opacity: 0.3;
+          font-size: 1rem;
+        }
       }
 
       .destaque {
+        font-family: 'Cinzel', serif;
         font-size: 1.1rem;
         font-weight: 500;
         text-align: center;
         text-align: center;
         color: $dourado-suave;
-        margin: 0;
         line-height: 1.5;
       }
 
       .descricao {
+
+        font-family: 'Spectral', serif;
         font-size: 1.2rem;
         line-height: 1.7;
         color: $texto-secundario;
         text-align: center;
         margin: 0;
-        .destaque-texto { color: $dourado; font-weight: 500; }
-        strong { color: #d4b8a0; font-weight: 600; }
+
+
+        .destaque-texto {
+          color: $dourado;
+          font-weight: 500;
+        }
+
+        strong {
+          color: #d4b8a0;
+          font-weight: 600;
+        }
       }
 
       .tecnologias {
@@ -114,8 +137,10 @@ $texto-secundario: #b8aec6;
         gap: 6px;
         justify-content: center;
         margin: 0;
+
         .tag {
           cursor: default;
+          font-family: 'Inter', sans-serif;
           background: rgba(212, 175, 55, 0.08);
           border: 1px solid rgba(212, 175, 55, 0.15);
           padding: 2px 14px;
@@ -124,6 +149,7 @@ $texto-secundario: #b8aec6;
           font-weight: 500;
           color: #d4c8b0;
           transition: all 0.3s;
+
           &:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: $dourado;
@@ -140,32 +166,37 @@ $texto-secundario: #b8aec6;
         justify-content: center;
         gap: 16px;
         margin: 0;
+
         .btn-curriculo {
           display: inline-flex;
           align-items: center;
           gap: 8px;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(212, 175, 55, 0.3);
-          padding: 8px 18px;
+          padding: 10px 18px;
           border-radius: 40px;
           color: $dourado-suave;
           text-decoration: none;
           font-weight: 500;
-          font-size: 0.85rem;
+          font-size: 1rem;
           transition: all 0.3s;
+
           &:hover {
             background: rgba(212, 175, 55, 0.15);
             border-color: $dourado;
             transform: scale(1.03);
           }
         }
+
         .redes-sociais {
           display: flex;
           gap: 12px;
+
           a {
             color: #8a7a9a;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             transition: all 0.3s;
+
             &:hover {
               color: $dourado;
               transform: translateY(-2px) scale(1.1);
@@ -177,6 +208,7 @@ $texto-secundario: #b8aec6;
       .botoes-porta {
         margin-top: 8px;
         text-align: center;
+
         .botao-passagem {
           background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
           border: 1px solid rgba(212, 175, 55, 0.4);
@@ -185,7 +217,7 @@ $texto-secundario: #b8aec6;
           color: $dourado-suave;
           font-family: 'Cinzel', serif;
           font-weight: 600;
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           letter-spacing: 0.08em;
           cursor: pointer;
           transition: all 0.4s;
@@ -195,14 +227,20 @@ $texto-secundario: #b8aec6;
           align-items: center;
           gap: 10px;
 
-          .seta { display: inline-block; transition: transform 0.3s; }
+          .seta {
+            display: inline-block;
+            transition: transform 0.3s;
+          }
 
           &:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: $dourado;
             transform: scale(1.04);
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
-            .seta { transform: translateX(4px); }
+
+            .seta {
+              transform: translateX(4px);
+            }
           }
         }
       }
@@ -217,8 +255,14 @@ $texto-secundario: #b8aec6;
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 4px;
     left: -8px;
-    &.cima { top: 30%; }
-    &.baixo { top: 80%; }
+
+    &.cima {
+      top: 30%;
+    }
+
+    &.baixo {
+      top: 80%;
+    }
   }
 
 }
@@ -248,24 +292,95 @@ $texto-secundario: #b8aec6;
 }
 
 @media (max-width: 640px) {
-  .linha-divisoria{
-    display: none;
+
+  .container-porta {
+    width: 100vw;
+    height: 100vh;
+    align-items: end;
+    justify-content: center;
   }
-  .portal-container {
-    max-width: 340px;
-  }
-  .portal-door {
-    padding: 12px 16px 20px;
-    .door-frame .door-content {
-      .cabecalho .titulo { font-size: 1.4rem; }
-      .destaque { font-size: 0.9rem; }
-      .descricao { font-size: 0.85rem; }
-      .acoes .btn-curriculo { font-size: 0.75rem; padding: 6px 14px; }
-      .botoes-porta .botao-passagem {
-        font-size: 0.75rem;
-        padding: 8px 16px;
-        width: 100%;
-        justify-content: center;
+
+  .porta {
+    width: 95%;
+    max-width: 360px;
+    height: 90%;
+
+    padding: 16px 14px 18px;
+    margin-bottom: 2vh;
+    margin-right: 0;
+
+    box-sizing: border-box;
+
+    .door-frame {
+      padding: 35px 14px 16px;
+      box-sizing: border-box;
+
+      .conteudo {
+
+        gap: 8%;
+
+        .cabecalho {
+
+          gap: 6px;
+
+          .simbolo {
+            font-size: 1.8rem;
+          }
+
+          .titulo {
+            font-size: 1.8rem;
+            letter-spacing: 0.06em;
+          }
+        }
+
+        .linha-divisoria {
+          display: none;
+        }
+
+        .destaque {
+          font-size: 1.25rem;
+          line-height: 1.4;
+        }
+
+        .descricao {
+          font-size: 1.1rem;
+          line-height: 1.55;
+        }
+
+        .tecnologias {
+
+          display: none;
+        }
+
+        .acoes {
+          gap: 10px;
+
+          .btn-curriculo {
+            font-size: 1.1rem;
+            padding: 6px 12px;
+          }
+
+          .redes-sociais {
+            gap: 9px;
+
+            a {
+              font-size: 1.6rem;
+            }
+          }
+        }
+
+        .botoes-porta {
+
+          .botao-passagem {
+            width: 100%;
+            justify-content: center;
+
+            padding: 8px 12px;
+
+            font-size: 1.0rem;
+            letter-spacing: 0.04em;
+          }
+        }
       }
     }
   }
