@@ -1,9 +1,8 @@
 import { Html, useGLTF } from "@react-three/drei";
 import { useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber"
-import { Physics, RigidBody } from "@react-three/rapier";
-import { Line } from "@react-three/drei"
 import { OrbitControls } from "@react-three/drei";
+import EstrelaEstatica from "../../modelos_auxiliares/estrela_estatica_circulo.jsx";
 
 import { Css_icon } from "./modelos_orbe/css_icon.jsx";
 import { Html5_icon } from "./modelos_orbe/html5_icon.jsx";
@@ -11,12 +10,12 @@ import { Javascript_icon } from "./modelos_orbe/Javascript_icon.jsx";
 import { Python_icon } from "./modelos_orbe/python_icon.jsx";
 import { Csharp_icon } from "./modelos_orbe/csharp_icon.jsx";
 
-import EstrelaEstatica from "../../modelos_auxiliares/estrela_estatica_circulo.jsx";
 
 import Estrela_stack from "./estrela_stack";
 import Brilho from "../../componentes_auxiliares/brilho.jsx"
-import "./interface_orbe.scss"
 import Linha from "./linha.jsx";
+
+import "./interface_orbe.scss"
 
 export default function Interface_orbe({ mudar_caminho, set_interface, set_direcao }) {
 
@@ -112,17 +111,17 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         csharp: {
             estrelas: [
-                { nome: "ASP.NET",         posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "API REST",        posicao: [-0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "WINDOWS FORMS",   posicao: [ 0.45, -0.30, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "ASP.NET",         posicao: [ 0.00,  -0.30, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "API REST",        posicao: [-0.45, 0.50, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "WINDOWS FORMS",   posicao: [ 0.45, 0.50, 0], margem_esquerda: 2, margem_cima: 2 },
                 { nome: ".NET",            posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
             ],
 
             estrelas_mobile : [
-                { nome: "ASP.NET",         posicao: [ 0.00,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "API REST",        posicao: [-0.55, -0.30, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "WINDOWS FORMS",   posicao: [ 0.5, -0.40, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: ".NET",            posicao: [ 0.15,  0.10, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "ASP.NET",         posicao: [ 0.00,  -0.65, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "API REST",        posicao: [-0.55, 0.40, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "WINDOWS FORMS",   posicao: [ 0.5, 0.40, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: ".NET",            posicao: [ 0.0,  -0.10, 0], margem_esquerda: 2, margem_cima: 1 },
             ],
 
             conectar_final : false 
@@ -199,14 +198,18 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         mobile : {
 
-            python : "/imagens_cenas/orbe/hat.svg"
+            python : "/imagens_cenas/orbe/hat.svg",
+
+            csharp : "/imagens_cenas/orbe/candelabro.svg"
 
         },
 
 
         desktop : {
 
-            python : "/imagens_cenas/orbe/hat.svg"
+            python : "/imagens_cenas/orbe/hat.svg",
+
+            csharp : "/imagens_cenas/orbe/candelabro.svg"
 
         }
 
@@ -315,16 +318,27 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
                 {/* ESTRELAS DO FUNDO */}
 
+                {versao_mobile ? 
                 <EstrelaEstatica
                 position={[0,0,-10]}
                 cor={"white"}
                 largura={10}
                 altura={10}
-                profundidade={5}
-                particulas={200}
+                profundidade={3}
+                particulas={1000}
                 tamanho={2.5}
                 velocidade={0}
-                />
+                />:
+                <EstrelaEstatica
+                position={[0,0,-7]}
+                cor={"white"}
+                largura={20}
+                altura={11}
+                profundidade={3}
+                particulas={1000}
+                tamanho={2.5}
+                velocidade={0}
+                />}
 
             </Canvas>
 

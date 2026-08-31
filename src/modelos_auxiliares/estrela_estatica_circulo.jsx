@@ -19,7 +19,7 @@ export default function EstrelaEstatica({profundidade, largura, altura, particul
                     speed={velocidade}
                 />
                 :
-            cores.map((cor) => {
+            cores.map((cor_escolhida) => {
 
                 return <Sparkles
                     count={particulas / cores.length}
@@ -27,7 +27,7 @@ export default function EstrelaEstatica({profundidade, largura, altura, particul
                     size={10}
                     speed={1}
                     opacity={1}
-                    color={cor}
+                    color={cor_escolhida}
                     size={tamanho}
                     speed={velocidade}
                 />
