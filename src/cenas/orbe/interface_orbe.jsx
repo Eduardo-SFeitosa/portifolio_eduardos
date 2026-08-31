@@ -11,6 +11,8 @@ import { Javascript_icon } from "./modelos_orbe/Javascript_icon.jsx";
 import { Python_icon } from "./modelos_orbe/python_icon.jsx";
 import { Csharp_icon } from "./modelos_orbe/csharp_icon.jsx";
 
+import EstrelaEstatica from "../../modelos_auxiliares/estrela_estatica_circulo.jsx";
+
 import Estrela_stack from "./estrela_stack";
 import Brilho from "../../componentes_auxiliares/brilho.jsx"
 import "./interface_orbe.scss"
@@ -26,7 +28,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
     const icones_tamanho = versao_mobile ? .008 : .005
     const icones_espacamento = versao_mobile ? .3 : .2
-    const icones_padding_bottom = versao_mobile ? 3.5 : 2.5
+    const icones_padding_bottom = versao_mobile ? 4.3 : 2.5
 
     const escala_constelacoes = 4
     const atraso_estrelas = .3 * 1000
@@ -193,6 +195,23 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
     }
 
+    const imagens_src = {
+
+        mobile : {
+
+            python : "/imagens_cenas/orbe/hat.svg"
+
+        },
+
+
+        desktop : {
+
+            python : "/imagens_cenas/orbe/hat.svg"
+
+        }
+
+    }
+
     return (
 
         <div className={`interface-orbe ${animacao_sair ? "animacao-sair" : ""}`}>
@@ -293,7 +312,25 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                     })}
 
                 </group>
+
+                {/* ESTRELAS DO FUNDO */}
+
+                <EstrelaEstatica
+                position={[0,0,-10]}
+                cor={"white"}
+                largura={10}
+                altura={10}
+                profundidade={5}
+                particulas={200}
+                tamanho={2.5}
+                velocidade={0}
+                />
+
             </Canvas>
+
+            {versao_mobile ? <img className="imagem-constelacao" src={imagens_src["mobile"][stack]} alt="" />:
+            <img className="imagem-constelacao" src={imagens_src["desktop"][stack]} alt="" />}
+            
 
             <div className="controle-caminhos">
 
