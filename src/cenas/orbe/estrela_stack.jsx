@@ -16,7 +16,7 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
     const estrela = useRef(null)
     const brilho = useRef(1)
 
-    const movimento_vertical = Math.random() * -.05
+    const movimento_vertical = Math.random() * -.06
 
     const movimento_lateral = Math.random() * .05
 
@@ -84,13 +84,11 @@ export default function Estrela_stack({ nome, cor, margem_cima, margem_esquerda,
 
         const delta = clock.getElapsedTime()
 
-        if (!em_foco) {
-            estrela.current.position.y = Math.sin(delta + atraso.current) * movimento_vertical
-            estrela.current.position.x = Math.sin(delta + atraso.current) * movimento_lateral
-        }
-
         const brilho_tamanho = Math.sin((delta + atraso.current) / 2) * 0.1 + .35
         brilho.current.scale.set(brilho_tamanho, brilho_tamanho, brilho_tamanho)
+
+        estrela.current.position.y = Math.sin(delta + atraso.current) * movimento_vertical
+        estrela.current.position.x = Math.sin(delta + atraso.current) * movimento_lateral
 
     })
 

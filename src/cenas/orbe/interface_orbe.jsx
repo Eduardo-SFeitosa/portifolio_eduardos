@@ -36,13 +36,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         python: {
             estrelas: [
-                { nome: "DJANGO",      posicao: [-0.75,  0.35, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "FASTAPI",     posicao: [-0.35,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "PANDAS",      posicao: [-0.60, -0.05, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "NUMPY",       posicao: [-0.10, -0.35, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "MATPLOTLIB",  posicao: [ 0.45, -0.10, 0], margem_esquerda: 2, margem_cima: 2 },
-                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "SELENIUM",    posicao: [ 0.20,  0.40, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "DJANGO",      posicao: [-0.7,  0.55, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "FASTAPI",     posicao: [-0.55,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "PANDAS",      posicao: [-0.10, 0.10, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "NUMPY",       posicao: [ 0.15, -0.35, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "MATPLOTLIB",  posicao: [ 0.05, 0.45, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "SELENIUM",    posicao: [ 0.80,  0.50, 0], margem_esquerda: 2, margem_cima: 2 },
             ],
 
             estrelas_mobile: [
@@ -62,13 +62,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         javascript: {
 
             estrelas: [
-                { nome: "REACT",       posicao: [-0.65,  0.45, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "THREE.JS",    posicao: [-0.10,  0.25, 0], margem_esquerda: 0, margem_cima: 1 },
-                { nome: "ANGULAR",     posicao: [ 0.55,  0.35, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "NODE.JS",     posicao: [ 0.1, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "TYPESCRIPT",  posicao: [ 0.45, -0.35, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "ROUTER",      posicao: [ -0.10, -0.25, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "VITE",        posicao: [-0.50, -0.45, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "REACT",       posicao: [-0.75,  0.50, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "THREE.JS",    posicao: [-0.60,  0.00, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "ANGULAR",     posicao: [-0.20,  0.40, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "NODE.JS",     posicao: [-0.10, -0.15, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "TYPESCRIPT",  posicao: [ 0.55,  0.35, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "ROUTER",      posicao: [ 0.45, -0.20, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "VITE",        posicao: [0.8, -0.10, 0], margem_esquerda: 2, margem_cima: 0 },
             ],
 
             estrelas_mobile : [
@@ -88,40 +88,40 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         html_css: {
 
             estrelas: [
-                { nome: "FORMS",       posicao: [ 0.00,  0.40, 0], margem_esquerda: 1, margem_cima: 2 },
-                { nome: "CSS",         posicao: [ 0.7,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "SASS",        posicao: [ 0.2, -0.05, 0], margem_esquerda: 2, margem_cima: 2 },
-                { nome: "ANIMACOES",   posicao: [ 0.00, -0.30, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "TAILWIND",    posicao: [-0.55, -0.05, 0], margem_esquerda: 0, margem_cima: 1 },
-                { nome: "HTML",        posicao: [-0.55,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "FORMS",       posicao: [ 0.30,  0.50, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "RESPONSIVO",         posicao: [ 0.7,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "SASS",        posicao: [ 0.2, -0.05, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "ANIMACOES",   posicao: [ -0.30, -0.30, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "TAILWIND",    posicao: [-0.55, 0.1, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "TAGS",        posicao: [-0.40,  0.4, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
             estrelas_mobile : [
                 { nome: "FORMS",       posicao: [ 0.00,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "CSS",         posicao: [ 0.3,  0.25, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "RESPONSIVO",         posicao: [ 0.3,  0.25, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: "SASS",        posicao: [ 0.5, -0.4, 0], margem_esquerda: 0, margem_cima: 0 },
                 { nome: "ANIMACOES",   posicao: [ 0.00, -0.90, 0], margem_esquerda: 0, margem_cima: 2 },
                 { nome: "TAILWIND",    posicao: [-0.55, -0.20, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "HTML",        posicao: [-0.30,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "TAGS",        posicao: [-0.30,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
-            conectar_final : true
+            conectar_final : false
 
         },
 
         csharp: {
             estrelas: [
-                { nome: "ASP.NET",         posicao: [ 0.00,  -0.30, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "API REST",        posicao: [-0.45, 0.50, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "WINDOWS FORMS",   posicao: [ 0.45, 0.50, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "ASP.NET",         posicao: [ 0.00,  -0.30, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: ".NET",            posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "API REST",        posicao: [-0.25, 0.50, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "WINDOWS FORMS",   posicao: [ 0.25, 0.50, 0], margem_esquerda: 2, margem_cima: 2 },
             ],
 
             estrelas_mobile : [
                 { nome: "ASP.NET",         posicao: [ 0.00,  -0.65, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: ".NET",            posicao: [ 0.0,  -0.10, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: "API REST",        posicao: [-0.55, 0.40, 0], margem_esquerda: 1, margem_cima: 2 },
                 { nome: "WINDOWS FORMS",   posicao: [ 0.5, 0.40, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: ".NET",            posicao: [ 0.0,  -0.10, 0], margem_esquerda: 2, margem_cima: 1 },
             ],
 
             conectar_final : false 
@@ -198,7 +198,11 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         mobile : {
 
-            python : "/imagens_cenas/orbe/hat.svg",
+            python : "/imagens_cenas/orbe/grifo.svg",
+
+            html_css : "/imagens_cenas/orbe/grifo.svg",
+
+            javascript : "/imagens_cenas/orbe/lagarto.svg",
 
             csharp : "/imagens_cenas/orbe/candelabro.svg"
 
@@ -207,7 +211,11 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         desktop : {
 
-            python : "/imagens_cenas/orbe/hat.svg",
+            python : "/imagens_cenas/orbe/dragao.svg",
+
+            html_css : "/imagens_cenas/orbe/grifo.svg",
+
+            javascript : "/imagens_cenas/orbe/lagarto.svg",
 
             csharp : "/imagens_cenas/orbe/candelabro.svg"
 
