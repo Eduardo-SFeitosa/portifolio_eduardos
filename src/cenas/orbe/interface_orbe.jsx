@@ -26,8 +26,10 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     const zoom_camera = versao_mobile ? 7 : 4
 
     const icones_tamanho = versao_mobile ? .008 : .005
-    const icones_espacamento = versao_mobile ? .3 : .2
+    const icones_espacamento = versao_mobile ? .25 : .2
     const icones_padding_bottom = versao_mobile ? 4.3 : 2.5
+
+    const constelacoes_padding_bottom = versao_mobile ? .5 : -0.6
 
     const escala_constelacoes = 4
     const atraso_estrelas = .3 * 1000
@@ -35,6 +37,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     const constelacoes = {
 
         python: {
+
             estrelas: [
                 { nome: "DJANGO",      posicao: [-0.7,  0.55, 0], margem_esquerda: 0, margem_cima: 1 },
                 { nome: "FASTAPI",     posicao: [-0.55,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
@@ -46,13 +49,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             ],
 
             estrelas_mobile: [
-                { nome: "DJANGO",      posicao: [-0.55,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "FASTAPI",     posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "PANDAS",      posicao: [-0.70, -0.7, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "NUMPY",       posicao: [-0.00, -.95, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "MATPLOTLIB",  posicao: [ 0.5, -0.50, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "SELENIUM",    posicao: [ 0.40,  0.60, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "DJANGO",      posicao: [-0.00, 0.55, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "FASTAPI",     posicao: [-0.00, 0.35, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "PANDAS",      posicao: [-0.35, 0.15, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "NUMPY",       posicao: [ 0.40, -0.10, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "MATPLOTLIB",  posicao: [-0.55, -0.45, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "REQUESTS",    posicao: [ 0.30, -0.70, 0], margem_esquerda: 1, margem_cima: 2 },
+                { nome: "SELENIUM",    posicao: [-0.15, -0.95, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
             conectar_final : false
@@ -72,13 +75,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             ],
 
             estrelas_mobile : [
-                { nome: "REACT",       posicao: [-0.45,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "THREE.JS",    posicao: [-0.25,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "ANGULAR",     posicao: [ 0.25,  0.45, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "NODE.JS",     posicao: [ 0.1, -0.05, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "TYPESCRIPT",  posicao: [ 0.4, -0.45, 0], margem_esquerda: 1, margem_cima: 2 },
-                { nome: "ROUTER",      posicao: [ -0.20, -0.40, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "VITE",        posicao: [-0.50, -0.9, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "REACT",       posicao: [ 0.10,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "THREE.JS",    posicao: [-0.30,  0.40, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "ANGULAR",     posicao: [ 0.30,  0.25, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "NODE.JS",     posicao: [-0.35, -0.40, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "TYPESCRIPT",  posicao: [ 0.25, -0.35, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "ROUTER",      posicao: [ 0.10, -0.80, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "VITE",        posicao: [-0.35, -0.75, 0], margem_esquerda: 1, margem_cima: 0 },
             ],
 
             conectar_final : false,
@@ -97,12 +100,12 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             ],
 
             estrelas_mobile : [
-                { nome: "FORMS",       posicao: [ 0.00,  0.55, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "RESPONSIVO",         posicao: [ 0.3,  0.25, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "SASS",        posicao: [ 0.5, -0.4, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "ANIMACOES",   posicao: [ 0.00, -0.90, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "TAILWIND",    posicao: [-0.55, -0.20, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "TAGS",        posicao: [-0.30,  0.30, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "RESPONSIVO",  posicao: [ 0.50,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "FORMS",       posicao: [ 0.45, -0.15, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "SASS",        posicao: [ 0.40, -0.80, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "ANIMACOES",   posicao: [-0.40, -0.90, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "TAGS",        posicao: [-0.50, -0.20, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "TAILWIND",    posicao: [-0.50,  0.45, 0], margem_esquerda: 1, margem_cima: 0 },
             ],
 
             conectar_final : false
@@ -118,7 +121,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             ],
 
             estrelas_mobile : [
-                { nome: "ASP.NET",         posicao: [ 0.00,  -0.65, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "ASP.NET",         posicao: [ 0.00,  -0.85, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: ".NET",            posicao: [ 0.0,  -0.10, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: "API REST",        posicao: [-0.55, 0.40, 0], margem_esquerda: 1, margem_cima: 2 },
                 { nome: "WINDOWS FORMS",   posicao: [ 0.5, 0.40, 0], margem_esquerda: 0, margem_cima: 0 },
@@ -198,16 +201,15 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         mobile : {
 
-            python : "/imagens_cenas/orbe/grifo.svg",
+            python : "/imagens_cenas/orbe/snake.svg",
 
-            html_css : "/imagens_cenas/orbe/grifo.svg",
+            html_css : "/imagens_cenas/orbe/formiga.svg",
 
-            javascript : "/imagens_cenas/orbe/lagarto.svg",
+            javascript : "/imagens_cenas/orbe/lagarto_mobile.svg",
 
             csharp : "/imagens_cenas/orbe/candelabro.svg"
 
         },
-
 
         desktop : {
 
@@ -226,8 +228,6 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     return (
 
         <div className={`interface-orbe ${animacao_sair ? "animacao-sair" : ""}`}>
-
-            <h1>STACKS</h1>
 
             <Canvas className="canvas-orbe" camera={{ position: [0, 0, zoom_camera] }}>
 
@@ -285,7 +285,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 </group>
 
                 {/* CONSTELACAO */}
-                <group position={[0, -.6, 0]}>
+                <group position={[0, constelacoes_padding_bottom, 0]}>
 
                     {/* ESTRELAS */}
                     {estrelas.map((estrela, i) => (
@@ -330,10 +330,10 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 <EstrelaEstatica
                 position={[0,0,-10]}
                 cor={"white"}
-                largura={10}
-                altura={10}
+                largura={7.5}
+                altura={12}
                 profundidade={3}
-                particulas={1000}
+                particulas={500}
                 tamanho={2.5}
                 velocidade={0}
                 />:
