@@ -39,13 +39,13 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
         python: {
 
             estrelas: [
-                { nome: "DJANGO",      posicao: [-0.7,  0.55, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "DJANGO",      posicao: [-0.7,  0.50, 0], margem_esquerda: 0, margem_cima: 0 },
                 { nome: "FASTAPI",     posicao: [-0.55,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "PANDAS",      posicao: [-0.10, 0.10, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "PANDAS",      posicao: [-0.10, 0.05, 0], margem_esquerda: 0, margem_cima: 2 },
                 { nome: "NUMPY",       posicao: [ 0.15, -0.35, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "MATPLOTLIB",  posicao: [ 0.05, 0.45, 0], margem_esquerda: 0, margem_cima: 1 },
+                { nome: "MATPLOTLIB",  posicao: [ 0.05, 0.45, 0], margem_esquerda: 2, margem_cima: 0 },
                 { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 2 },
-                { nome: "SELENIUM",    posicao: [ 0.80,  0.50, 0], margem_esquerda: 2, margem_cima: 2 },
+                { nome: "SELENIUM",    posicao: [ 0.80,  0.50, 0], margem_esquerda: 2, margem_cima: 0 },
             ],
 
             estrelas_mobile: [
@@ -58,7 +58,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 { nome: "SELENIUM",    posicao: [-0.15, -0.95, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
-            conectar_final : false
+            conectar_final : false,
+
+            cor : "#277eff"
 
         },
 
@@ -79,12 +81,14 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 { nome: "THREE.JS",    posicao: [-0.30,  0.40, 0], margem_esquerda: 0, margem_cima: 2 },
                 { nome: "ANGULAR",     posicao: [ 0.30,  0.25, 0], margem_esquerda: 1, margem_cima: 0 },
                 { nome: "NODE.JS",     posicao: [-0.35, -0.40, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "TYPESCRIPT",  posicao: [ 0.25, -0.35, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "TYPESCRIPT",  posicao: [ 0.20, -0.35, 0], margem_esquerda: 1, margem_cima: 0 },
                 { nome: "ROUTER",      posicao: [ 0.10, -0.80, 0], margem_esquerda: 2, margem_cima: 0 },
-                { nome: "VITE",        posicao: [-0.35, -0.75, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "VITE",        posicao: [-0.35, -0.75, 0], margem_esquerda: 1, margem_cima: 2 },
             ],
 
             conectar_final : false,
+
+            cor : "#fffc5c"
 
         },
 
@@ -108,11 +112,14 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 { nome: "TAILWIND",    posicao: [-0.50,  0.45, 0], margem_esquerda: 1, margem_cima: 0 },
             ],
 
-            conectar_final : false
+            conectar_final : true,
+
+            cor : "#FF6A00"
 
         },
 
         csharp: {
+
             estrelas: [
                 { nome: "ASP.NET",         posicao: [ 0.00,  -0.30, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: ".NET",            posicao: [ 0.00,  0.00, 0], margem_esquerda: 2, margem_cima: 0 },
@@ -127,20 +134,15 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 { nome: "WINDOWS FORMS",   posicao: [ 0.5, 0.40, 0], margem_esquerda: 0, margem_cima: 0 },
             ],
 
-            conectar_final : false 
+            conectar_final : false,
+            
+            cor : "#8A5CFF"
+
         }
 
     }
 
     const atual = constelacoes[stack]
-
-    const cores_estrelas = [
-        "#ff0000", 
-        "#FF2BD6", 
-        "#8A5CFF", 
-        "#00c711", 
-        "#FF6A00", 
-    ]
 
     //aplica escala das constelacoes
     const estrelas = versao_mobile ? atual.estrelas_mobile.map(estrela => ({
@@ -184,7 +186,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         set_animacao(true)
 
-        //espera .3s para animacao rodas
+        //espera .3s para animacao rodar
         setTimeout(() => {
             if (voltar) {
                 set_direcao(voltar); 
@@ -201,7 +203,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
         mobile : {
 
-            python : "/imagens_cenas/orbe/snake.svg",
+            python : "/imagens_cenas/orbe/cobra.svg",
 
             html_css : "/imagens_cenas/orbe/formiga.svg",
 
@@ -295,7 +297,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                             posicao={estrela.posicao}
                             margem_cima={estrela.margem_cima}
                             margem_esquerda={estrela.margem_esquerda}
-                            cor={cores_estrelas[i % cores_estrelas.length]}
+                            cor={atual.cor}
                             delay={i * atraso_estrelas}
                             delay_texto={estrelas.length * atraso_estrelas}
                         />
@@ -327,26 +329,27 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 {/* ESTRELAS DO FUNDO */}
 
                 {versao_mobile ? 
-                <EstrelaEstatica
-                position={[0,0,-10]}
-                cor={"white"}
-                largura={7.5}
-                altura={12}
-                profundidade={3}
-                particulas={500}
-                tamanho={2.5}
-                velocidade={0}
-                />:
-                <EstrelaEstatica
-                position={[0,0,-7]}
-                cor={"white"}
-                largura={20}
-                altura={11}
-                profundidade={3}
-                particulas={1000}
-                tamanho={2.5}
-                velocidade={0}
-                />}
+                    <EstrelaEstatica
+                    position={[0,0,-10]}
+                    cor={"white"}
+                    largura={7.5}
+                    altura={12}
+                    profundidade={3}
+                    particulas={500}
+                    tamanho={2.5}
+                    velocidade={0}
+                    />:
+                    <EstrelaEstatica
+                    position={[0,0,-7]}
+                    cor={"white"}
+                    largura={20}
+                    altura={11}
+                    profundidade={3}
+                    particulas={1000}
+                    tamanho={2.5}
+                    velocidade={0}
+                    />
+                }
 
             </Canvas>
 
