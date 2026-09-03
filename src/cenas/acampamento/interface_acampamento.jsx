@@ -140,6 +140,8 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
             </div>
 
+            <img className="fundo-pergaminho" src="imagens_cenas/acampamento/pergaminho.png" alt="" />
+
         </div>)
 
 }

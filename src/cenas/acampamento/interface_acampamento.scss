@@ -39,17 +39,6 @@ $cor-texto-claro: #f0e6d2;
     &.animacao_desaparecer {
         animation: desaparecer 0.3s ease forwards;
     }
-
-    //MOLDURA EXTERNA
-    background: radial-gradient(ellipse at center, rgba(212, 184, 150, 0.85), rgba(166, 132, 90, 0.85));
-    box-shadow:
-        0 0 30px rgba(0, 0, 0, 0.6),
-        inset 0 0 40px rgba(0, 0, 0, 0.4);
-
-    //MOLDURA INTERNA
-    border: 6px solid $cor-borda-madeira;
-    border-radius: 12px;
-
     .titulo {
         text-align: center;
         font-family: "cinzel";
@@ -112,6 +101,16 @@ $cor-texto-claro: #f0e6d2;
             }
         }
     }
+}
+
+.fundo-pergaminho {
+
+    z-index: -1;
+    position: absolute;
+    width: 75%;
+    height: 90vh;
+    margin: 0 auto;
+
 }
 
 @keyframes aparecer {
