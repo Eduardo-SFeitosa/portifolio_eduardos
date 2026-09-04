@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 
-import { FaUser } from "react-icons/fa"
+import { FaUser , FaWalking  , FaProjectDiagram } from "react-icons/fa"
+import { DiVisualstudio } from "react-icons/di";
+import { IoIosMail } from 'react-icons/io';
 import ModeloBase from "./modelos_auxiliares/modelo_base"
 import AguaAnimada from "./modelos_auxiliares/agua_animada"
 import Porta from "./cenas/porta/porta"
@@ -27,6 +29,7 @@ function App() {
   const [interface_ativa, set_interface] = useState(null)
   const [caminho_atual , set_caminho] = useState("porta")
 
+  const index_caminho_atual = useRef(0)
   const referencia_camera = useRef(null)
   const controle_de_camera_ref = useRef(null)
   const [direcao_caminho, set_direcao] = useState("avancar")
@@ -141,6 +144,12 @@ function App() {
       controle_de_camera_ref.current.travar_camera("comeco", caminho_atual)
 
     }
+
+    const lista_cenas = Object.keys(posicao_de_cenas)
+
+    const index_atual = lista_cenas.findIndex((cena) => cena == cena_em_foco)
+
+    index_caminho_atual.current = index_atual + 1
 
   }, [cena_em_foco])
 
@@ -299,13 +308,40 @@ function App() {
         : null}
       </div>
 
-      <div className="navegacao">
+      <div className={`navegacao ${cena_em_foco ? "desaparecer" : ""}`}>
 
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("porta")} > <FaUser /> SOBRE</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("acampamento")} >JORNADA</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("orbe")} >STACKS</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("mina")} >PROJETOS</button>
-            <button className="links" style={{zIndex:10, backgroundColor:"white"}} onClick={() => teleportar("bau")} >CONTATO</button>
+            <button className={`links ${index_caminho_atual.current >= 1 ? "ativo" : ""}`} onClick={() => teleportar("porta")} >
+              <FaUser className="icones" /> 
+              <span className="nome" >SOBRE</span>
+            </button>
+
+            <div className="linha-caminho"></div>
+
+            <button className={`links ${index_caminho_atual.current >= 2 ? "ativo" : ""}`} onClick={() => teleportar("acampamento")} >
+              <FaWalking className="icones" /> 
+              <span className="nome" >JORNADA</span>
+            </button>
+
+            <div className="linha-caminho"></div>
+
+            <button className={`links ${index_caminho_atual.current >= 3 ? "ativo" : ""}`} onClick={() => teleportar("orbe")} >
+              <DiVisualstudio className="icones" /> 
+              <span className="nome" >STACKS</span>
+            </button>
+
+            <div className="linha-caminho"></div>
+
+            <button className={`links ${index_caminho_atual.current >= 4 ? "ativo" : ""}`} onClick={() => teleportar("mina")} >
+              <FaProjectDiagram className="icones" /> 
+              <span className="nome" >PROJETOS</span>
+            </button>
+
+            <div className="linha-caminho"></div>
+            
+            <button className={`links ${index_caminho_atual.current >= 5 ? "ativo" : ""}`} onClick={() => teleportar("bau")} >
+              <IoIosMail className="icones" /> 
+              <span className="nome" >CONTATO</span>
+            </button>
 
       </div>
       
