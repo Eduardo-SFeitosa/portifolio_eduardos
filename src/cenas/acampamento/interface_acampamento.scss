@@ -52,11 +52,9 @@ $cor-texto-claro: #f0e6d2;
     .canvas-acampamento {
         width: 100%;
         height: 100%;
-        border-radius: 4px;
-        position: relative;
-
-        background: rgba(0, 0, 0, 0.15);
-        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+        border-radius: 15px;
+        
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
     }
 
     .controle-caminhos {
