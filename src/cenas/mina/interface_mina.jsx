@@ -31,7 +31,8 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
       funcao: "Programador, designer, compositor SFX",
       empresa: null,
       formato: "esmeralda",
-      cor: "azul"
+      cor: "azul",
+      cor_hex: "#4488ff"
     },
     {
       id: 2,
@@ -43,7 +44,8 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
       funcao: "Programador e deisgner",
       empresa: "Moon Shrimp Studio",
       formato: "gota",
-      cor: "laranja"
+      cor: "laranja",
+      cor_hex: "#ff8844"
     }
   ]
 
@@ -79,9 +81,41 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
 
     <div className={`interface-mina ${animacao_sair ? "animacao_desaparecer" : ""}`}>
 
-      {projeto_visivel && projeto_escolhido != null ? <div className="informacoes-projeto">
-        <div className="card-projeto">
-          
+      <Canvas className="canvas-mina" style={{"position" : "fixed"}} onCreated={(state) => {
+        set_camera(state.camera)
+      }}>
+
+        < ambientLight intensity={1} />
+
+        < directionalLight position={[2, 0, 3]} intensity={.2} />
+
+        {projetos.map((projeto, index) => {
+
+          return <Gemas
+            projeto_escolhido={projeto_escolhido}
+            gema_index={index}
+            scale={.2}
+            key={projeto.nome}
+            posicao_inicial={projeto.posicao_gema}
+            posicao_final={[-1.2, 1.7, .8]}
+            rotation={projeto.rotacao_gema}
+            selecionado={projeto_escolhido === projeto.nome}
+            formato={projeto.formato}
+            cor={projeto.cor}
+            set_interface={set_interface_projeto}
+            onPointerDown={() => {
+              set_projeto(index)
+            }}
+          />
+        })}
+
+        <Parede />
+
+      </Canvas>
+
+      {projeto_visivel && projeto_escolhido != null ? <div className="informacoes-projeto" style={{"pointerEvents" : "auto"}}>
+
+        <div className="card-projeto" style={{ '--cor-gema': projetos[projeto_escolhido].cor_hex }}>
           
           <div className="cabecalho">
             <h1 className="titulo">{projetos[projeto_escolhido].nome}</h1>
@@ -114,38 +148,6 @@ export default function Interface_mina({ mudar_caminho, set_direcao , set_interf
           </div>
         </div>
       </div> : null}
-
-      <Canvas className="canvas-mina" onCreated={(state) => {
-        set_camera(state.camera)
-      }}>
-
-        < ambientLight intensity={1} />
-
-        < directionalLight position={[2, 0, 3]} intensity={.2} />
-
-        {projetos.map((projeto, index) => {
-
-          return <Gemas
-            projeto_escolhido={projeto_escolhido}
-            gema_index={index}
-            scale={.2}
-            key={projeto.nome}
-            posicao_inicial={projeto.posicao_gema}
-            posicao_final={[-1.2, 1.7, .8]}
-            rotation={projeto.rotacao_gema}
-            selecionado={projeto_escolhido === projeto.nome}
-            formato={projeto.formato}
-            cor={projeto.cor}
-            set_interface={set_interface_projeto}
-            onPointerDown={() => {
-              set_projeto(index)
-            }}
-          />
-        })}
-
-        <Parede />
-
-      </Canvas>
 
       <div className="controle-caminhos">
 

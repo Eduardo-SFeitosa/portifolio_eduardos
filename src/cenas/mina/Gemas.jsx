@@ -22,14 +22,15 @@ const Gemas = ({formato = "esmeralda" ,cor = null, gema_index , projeto_escolhid
     laranja: "#ff8844",
     roxo: "#aa44ff"
   }
+  
   const material_cores = {
     vermelho : materials['V_01.001'],
     azul : materials['V_02.001'],
     verde : materials['V_03.001'],
     laranja : materials['V_04.001'],
     roxo : materials['V_05.001']
-
   }
+
   const formatos = {
 
     brilhante : {

@@ -39,6 +39,7 @@ $cor-texto-claro: #f0e6d2;
     &.animacao_desaparecer {
         animation: desaparecer 0.3s ease forwards;
     }
+
     .titulo {
         text-align: center;
         font-family: "cinzel";
@@ -136,6 +137,7 @@ $cor-texto-claro: #f0e6d2;
 }
 
 @media (max-width: 640px) {
+
     .interface-acampamento {
         width: 95%;
         height: 90vh;
@@ -155,5 +157,11 @@ $cor-texto-claro: #f0e6d2;
                 font-size: 0.8rem;
             }
         }
+    }
+
+    .fundo-pergaminho {
+
+        display: none;
+
     }
 }

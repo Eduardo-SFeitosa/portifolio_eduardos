@@ -57,6 +57,7 @@ body,
 .navegacao.desaparecer {
 
   animation: desaparecer .3s forwards;
+  pointer-events: none;
 
 }
 
