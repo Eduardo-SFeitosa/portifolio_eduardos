@@ -122,24 +122,6 @@
     animation:
       aparecer .6s cubic-bezier(.2, .8, .2, 1);
 
-
-    // inner decorative border
-
-    &::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 7px;
-
-      border-radius: 12px;
-
-      border: 1px solid rgba(255, 211, 110, .10);
-
-      pointer-events: none;
-    }
-
     &::-webkit-scrollbar {
       width: 5px;
     }

@@ -61,7 +61,9 @@ body,
 
 }
 
-.linha-caminho {
+.navegacao {
+
+  .linha-caminho {
 
   width: 24px;
   height: 8px;
@@ -184,6 +186,8 @@ body,
   transform: scale(1.1);
 
 }
+}
+
 }
 
 @keyframes aparecer {
