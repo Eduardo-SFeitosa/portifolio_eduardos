@@ -98,7 +98,7 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
     },
 
     to : {
-      luz : .35
+      luz : .65
     },
 
     onRest : () => {

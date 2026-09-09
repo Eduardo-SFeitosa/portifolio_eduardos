@@ -11,30 +11,30 @@ import { useFrame } from '@react-three/fiber'
 
 import { CatmullRomCurve3, Vector3 } from 'three'
 
-export default function Bau({ set_interface , ativado , ...props }) {
+export default function Bau({ set_interface, ativado, ...props }) {
 
   const { nodes, materials } = useGLTF('/models/bauDoTesouro.glb')
 
   const tampa = useRef(null)
   const bau = useRef(null)
 
-  const progresso = useRef(0) 
+  const progresso = useRef(0)
   const animacao_inversa = useRef(false)
 
-  const [animacao_atual , set_animacao] = useState("idle")
+  const [animacao_atual, set_animacao] = useState("idle")
 
   const duracao_animacoes = {
-    abrir : .8,
-    comer : .4
+    abrir: .8,
+    comer: .4
   }
-  
+
   const animacao_rotacao_tampa = {
-    abrir : new CatmullRomCurve3([
-      new Vector3(1.6, 0, 0),
+    abrir: new CatmullRomCurve3([
+      new Vector3(1.3, 0, 0),
       new Vector3(-1.3, 0, 0),
     ]),
 
-    comer : new CatmullRomCurve3([
+    comer: new CatmullRomCurve3([
       new Vector3(-1.3, 0, 0),
       new Vector3(-1.3, 0, 0),
       new Vector3(1.6, 0, 0),
@@ -43,19 +43,19 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
   const animacao_corpo_bau = {
 
-    rotacao : new CatmullRomCurve3([
+    rotacao: new CatmullRomCurve3([
       new Vector3(0, .1, 0),
       new Vector3(0.9, 0, -.05),
       new Vector3(0.9, 0, -.05),
     ]),
 
-    posicao : new CatmullRomCurve3([
+    posicao: new CatmullRomCurve3([
       new Vector3(0, 0, 0),
       new Vector3(.1, .35, .4),
       new Vector3(.1, .45, .6),
     ]),
 
-    escala : new CatmullRomCurve3([
+    escala: new CatmullRomCurve3([
       new Vector3(1, 1, 1),
       new Vector3(2, 2, 2),
       new Vector3(2.5, 2.5, 2.5),
@@ -68,16 +68,16 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
     progresso.current += delta
 
-    const inverter_animacao = animacao_inversa.current == 1 ? 1 : 0 
+    const inverter_animacao = animacao_inversa.current == 1 ? 1 : 0
 
     const tempo_atual = inverter_animacao ? 1 - Math.min(progresso.current / duracao_animacoes[animacao_atual], 1)
-    : Math.min(progresso.current / duracao_animacoes[animacao_atual], 1)
+      : Math.min(progresso.current / duracao_animacoes[animacao_atual], 1)
 
     const tampa_rotacao = animacao_rotacao_tampa[animacao_atual].getPoint(tempo_atual)
 
     const bau_tampa = tampa.current
 
-    copy_rotation(bau_tampa ,tampa_rotacao)
+    copy_rotation(bau_tampa, tampa_rotacao)
 
     if (animacao_atual == "comer") {
 
@@ -89,20 +89,20 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
       bau_corpo.position.copy(bau_posicao)
       bau_corpo.scale.copy(bau_escala)
-      copy_rotation(bau_corpo ,bau_rotacao)
+      copy_rotation(bau_corpo, bau_rotacao)
 
     }
 
     if (tempo_atual < 1 && !inverter_animacao || tempo_atual > 0 && inverter_animacao) return
 
-    if (!inverter_animacao && animacao_atual == "comer"){
+    if (!inverter_animacao && animacao_atual == "comer") {
 
       set_interface("bau")
       set_animacao("finalizada")
 
     }
 
-    else if (!inverter_animacao && animacao_atual == "abrir"){
+    else if (!inverter_animacao && animacao_atual == "abrir") {
       progresso.current = 0
       animacao_inversa.current = false
       set_animacao("comer")
@@ -110,12 +110,12 @@ export default function Bau({ set_interface , ativado , ...props }) {
 
     if (!inverter_animacao) return
 
-    if (animacao_atual == "comer"){
+    if (animacao_atual == "comer") {
       progresso.current = 0
       set_animacao("abrir")
     }
 
-    else if (animacao_atual == "abrir"){
+    else if (animacao_atual == "abrir") {
       progresso.current = 0
       animacao_inversa.current = false
       set_animacao("idle")
@@ -131,8 +131,8 @@ export default function Bau({ set_interface , ativado , ...props }) {
       animacao_inversa.current = true
 
     }
-    
-    else{
+
+    else {
 
       progresso.current = 0
       animacao_inversa.current = false
@@ -141,52 +141,84 @@ export default function Bau({ set_interface , ativado , ...props }) {
     }
 
   }, [ativado])
-  
+
   return (
 
     <group {...props} >
-      
+
       {/* bau */}
       <group
         dispose={null}
         ref={bau}
-      
-        onPointerDown={ () => {
 
-          if (!ativado) return       
-        
-        } }>
+        onPointerDown={() => {
 
+          if (!ativado) return
+
+        }}>
+
+        {/* tampa */}
         <group
-        ref={tampa}
-        position={[-0.172, 0.429, -0.285]} >
+          ref={tampa}
+          position={[-0.172, 0.429, -0.285]} >
 
-          <mesh 
-            geometry={nodes.Lid.geometry} 
-            material={materials.chests} 
+          <mesh
+            geometry={nodes.Lid.geometry}
+            material={materials.chests}
           />
+
+          <group scale={0.01} rotation={[ Math.PI / 2  , Math.PI  , Math.PI ]} position={[ -.75 , .29 , .4]} >
+
+            <mesh geometry={nodes.cima1.geometry} material={materials.T_Mimic} position={[161.283, -35.983, -22.651]} rotation={[0.531, -0.144, -0.24]} scale={39.622} />
+            <mesh geometry={nodes.cima2.geometry} material={materials.T_Mimic} position={[190.393, 12.609, -20.72]} rotation={[0.521, 0.177, 0.297]} scale={39.622} />
+            <mesh geometry={nodes.cima3.geometry} material={materials.T_Mimic} position={[177.823, -7.195, -18.65]} rotation={[0.548, 0, 0]} scale={39.622} />
+            <mesh geometry={nodes.cima4.geometry} material={materials.T_Mimic} position={[177.823, -7.195, -22.285]} rotation={[0.548, 0, 0]} scale={39.622} />
+            <mesh geometry={nodes.cima5.geometry} material={materials.T_Mimic} position={[177.823, -26.016, 12.478]} rotation={[-0.005, 0, 0]} scale={39.622} />
+            <mesh geometry={nodes.cima6.geometry} material={materials.T_Mimic} position={[177.823, -7.195, -20.032]} rotation={[0.548, 0, 0]} scale={39.622} />
+
+          </group>
 
         </group>
 
-        <mesh geometry={nodes.Box.geometry} material={materials.chests} />
+        {/* corpo baixo */}
+        <group>
 
-        <mesh geometry={nodes.Gold.geometry}  material={materials.chests} position={[0, 0.379, 0]}  />       
+          <mesh geometry={nodes.Box.geometry} material={materials.chests} />
+
+          <group position={[-0.958, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+              <group position={[2.129, 0, 0]}>
+                <mesh geometry={nodes.baixo1.geometry} material={materials.T_Mimic} position={[166.027, 6.907, 1.676]} scale={33.896} />
+                <mesh geometry={nodes.baixo2.geometry} material={materials.T_Mimic} position={[164.907, 6.907, 4.089]} scale={33.896} />
+                <mesh geometry={nodes.baixo3.geometry} material={materials.T_Mimic} position={[164.907, 6.907, 12.47]} rotation={[-0.204, 0, 0]} scale={33.896} />
+                <mesh geometry={nodes.baixo4.geometry} material={materials.T_Mimic} position={[170.531, 10.752, 3.424]} rotation={[0.021, 0.056, 0.08]} scale={33.896} />
+                <mesh geometry={nodes.baixo5.geometry} material={materials.T_Mimic} position={[169.739, 26.165, 5.127]} rotation={[0, 0, 0.214]} scale={33.896} />
+                <mesh geometry={nodes.baixo6.geometry} material={materials.T_Mimic} position={[155.229, -21.924, 3.609]} rotation={[0, 0, -0.414]} scale={33.896} />
+                <mesh geometry={nodes.baixo7.geometry} material={materials.T_Mimic} position={[160.727, 6.907, 4.957]} scale={33.896} />
+                <mesh geometry={nodes.baixo8.geometry} material={materials.T_Mimic} position={[156.257, 6.907, 2.778]} scale={33.896} />
+              </group>
+            </group>
+          </group>
+
+        </group>
+
+        <mesh geometry={nodes.Gold.geometry} material={materials.chests} position={[0, 0.379, 0]} />
 
       </group>
 
-      < pointLight position={[0,.5,0]} intensity={15} color={"#be9200"} />
+      < pointLight position={[0, .5, 0]} intensity={10} color={"#be9200"} />
 
     </group>
 
   )
-  
+
 }
 
-function copy_rotation(objeto , rotacao){
+function copy_rotation(objeto, rotacao) {
 
-  const axis = ["x","y","z"]
+  const axis = ["x", "y", "z"]
 
-  for ( let i = 0; i < axis.length; i++) {
+  for (let i = 0; i < axis.length; i++) {
 
     objeto.rotation[axis[i]] = rotacao[axis[i]]
 
