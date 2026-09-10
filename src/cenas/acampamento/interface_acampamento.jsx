@@ -3,7 +3,10 @@ import "./interface_acampamento.scss"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei";
 import { useScroll } from '@react-three/drei'
+
 import Caminho_mago from "./caminho_mago";
+import Caminho_navio from "./caminho_navio";
+
 import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
@@ -21,13 +24,12 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const mes_atual = new Date().getMonth() / 12
 
     const duracao_total_anos = ano_atual - ano_inicio
-    const escala_tempo_tamanho = versao_mobile ? 2.5 : 4.5
-    const posicao_x_camera = versao_mobile ? 5 : 9
+    const escala_tempo_tamanho = versao_mobile ? 2.5 : 5.5
+    const posicao_x_camera = versao_mobile ? 5 : 11
 
     const pocoes = [
-        { nome: "Desenvolvimento de jogos", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
+        { nome: "Freelancer - Game Dev", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
         { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#33c1ff" },
-        { nome: "TÉcnico em ADM", inicio: 2024, duracao_anos: 2, duracao_meses: 0, cor: "#8e44ad" },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
 
@@ -66,7 +68,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                 <h1 className="titulo">JORNADA</h1>
 
-                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, 1, 11.5] }}>
+                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, 1, 10] }}>
 
                     <ScrollControls pages={3} damping={0}>
 
@@ -89,20 +91,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                             return (
                                 <group key={i} position={[pos_x, 0, 0]}>
-
                                     <Text position={[0, pocoes.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
-
-                                    <mesh position={[0, 0, 0]}>
-
-                                        <boxGeometry args={[0.05, 
-                                            pocoes.length * 3.2 + 1, 
-                                            0.01]} />
-
-                                        <meshStandardMaterial color={"#dd0b0b0c"}
-                                            transparent={true}
-                                            opacity={0.3} />
-
-                                    </mesh>
                                 </group>
                             )
                         })}
@@ -113,7 +102,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
                             const y_centro = i * 3 - (pocoes.length - 1) * 1.5
 
                             return (
-                                <Caminho_mago
+                                <Caminho_navio
                                     key={i}
                                     posicao={[pos_x_centro, y_centro, 0]}
                                     tamanho={[mago.duracao_anos * escala_tempo_tamanho, 1, .5]}
