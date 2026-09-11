@@ -1,17 +1,15 @@
-import { Html, Text } from "@react-three/drei";
-import "./interface_acampamento.scss"
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls, ScrollControls } from "@react-three/drei";
-import { useScroll } from '@react-three/drei'
-
-import Caminho_mago from "./caminho_mago";
-import Caminho_navio from "./caminho_navio";
+import { Canvas, useFrame } from "@react-three/fiber"
+import { OrbitControls, ScrollControls ,useScroll, Text , RoundedBoxGeometry } from '@react-three/drei'
 
 import { useRef, useState, useEffect } from "react";
-import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 
+import Caminho_navio from "./caminho_navio";
+import "./interface_acampamento.scss"
+
 export default function Interface_acampamento({ mudar_caminho, set_interface }) {
+
+    const referencia_camera = useRef(null)
 
     const [progresso_atual, set_progresso] = useState(0)
     const [animacao_sair, set_animacao] = useState(false)
@@ -40,7 +38,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
         var posicao_x = progresso_atual * duracao_total_anos * escala_tempo_tamanho
 
-        linha_guia.current.position.copy(new Vector3(posicao_x, 1, .1))
+        linha_guia.current.position.copy(new Vector3(posicao_x, 0.9, .1))
 
     }, [progresso_atual])
 
@@ -62,6 +60,11 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
     }
 
+    const configurar_camera = ( camera ) => {
+        const alvo = new Vector3(posicao_x_camera, posicao_y_camera, 0)
+        camera.lookAt(alvo)
+    }
+
     return (
         <div className="container-acampamento">
 
@@ -69,13 +72,17 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                 <h1 className="titulo">JORNADA</h1>
 
-                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, posicao_y_camera, 17] }} style={{"position" : "absolute"}}>
+                <Canvas className="canvas-acampamento" 
+                camera={{ position: [posicao_x_camera, posicao_y_camera, 17] }} 
+                style={{"position" : "absolute"}}
+
+                onCreated={(state) => {
+                    configurar_camera(state.camera)
+                }}>
 
                     <ScrollControls pages={3} damping={0}>
 
                         <Controle_scroll set_progresso={set_progresso} />
-
-                        <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[posicao_x_camera, posicao_y_camera, 0]} />
 
                         < ambientLight intensity={5} />
 
@@ -93,15 +100,18 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                             return (
                                 <group key={i} position={[pos_x, pos_y , 0]}>
+                                    
                                     <Text position={[0, 0, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
+                                    
                                     <mesh position={[0,0,-.05]}>
-                                        <boxGeometry args={[2 , 1, 0.01]} />
-                                            <meshStandardMaterial 
-                                                color={"#ffaeae"} 
-                                                transparent={true} 
-                                                opacity={0.7} 
-                                            />
+                                        <RoundedBoxGeometry args={[2 , 1, 0.01]} />
+                                        <meshStandardMaterial 
+                                            color={"#ebff7c"} 
+                                            transparent={true} 
+                                            opacity={0.7} 
+                                        />
                                     </mesh>
+
                                 </group>
                             )
                         })}

@@ -1,4 +1,4 @@
-import { Text, useTexture } from "@react-three/drei"
+import { Text, useTexture, RoundedBoxGeometry } from "@react-three/drei"
 import { useEffect, useState, useRef } from "react"
 import { Sprite } from "three"
 import { useFrame } from "@react-three/fiber"
@@ -8,7 +8,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
 
     const [escala_x, set_escala] = useState(0)
     const tamanho_x = tamanho[0]
-    const sprite_barco = useRef(null)
+    const sprite_navio = useRef(null)
     const fase_animacao = useRef(
         Math.random() * Math.PI * 2
     )
@@ -25,7 +25,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
 
     useFrame(({ clock }) => {
 
-        if (!sprite_barco.current) return
+        if (!sprite_navio.current) return
 
         const tempo =
             clock.elapsedTime + fase_animacao.current
@@ -36,7 +36,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
             Math.sin(tempo * 1.7) * 0.08
 
 
-        sprite_barco.current.position.y =
+        sprite_navio.current.position.y =
             posicao[1] +
             0.4 +
             movimento_vertical
@@ -46,7 +46,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
         const inclinacao =
             Math.sin(tempo * 1.35) * 0.06
 
-        sprite_barco.current.material.rotation =
+        sprite_navio.current.material.rotation =
             inclinacao
 
 
@@ -55,7 +55,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
         const escala_animada =
             1 + Math.sin(tempo * 2) * 0.025
 
-        sprite_barco.current.scale.set(
+        sprite_navio.current.scale.set(
             1.5 * escala_animada,
             1.5 * escala_animada,
             1
@@ -63,11 +63,11 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
 
     })
 
-    const textura_barco = useTexture("/imagens_cenas/acampamento/navio.png")
+    const textura_navio = useTexture("/imagens_cenas/acampamento/navio.png")
 
     return <group key={nome}>
 
-            {/* PROGRESSO */}
+            {/* PROGRESSO E NAVIO */}
             <group 
                 position={[tamanho_x / 2 * escala_x - tamanho_x / 2 
                 , 0 , 0]}>
@@ -77,11 +77,11 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
                     <meshStandardMaterial color={cor} />
                 </mesh>
 
-                <sprite ref={sprite_barco}
+                <sprite ref={sprite_navio}
                     position={[posicao[0] + tamanho_x / 2 * escala_x, posicao[1] + .4, posicao[2] + .5]} 
                     scale={[1.5, 1.5, 1]}>
                     <spriteMaterial
-                        map={textura_barco}
+                        map={textura_navio}
                         transparent
                         color={cor}
                     />
@@ -99,7 +99,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
             <group position={[posicao[0], posicao[1] + 1.8, posicao[2] + .3]}>
 
                 <mesh position={[0,0,-.05]}>
-                    <boxGeometry args={[0.38 * nome.length + 0.5, 1, 0.01]} />
+                    <RoundedBoxGeometry args={[0.38 * nome.length + 0.5, 1, 0.01]} />
                     <meshStandardMaterial 
                         color={"#2c1a0c"} 
                         transparent={true} 
