@@ -24,13 +24,14 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const mes_atual = new Date().getMonth() / 12
 
     const duracao_total_anos = ano_atual - ano_inicio
-    const escala_tempo_tamanho = versao_mobile ? 2.5 : 5.5
-    const posicao_x_camera = versao_mobile ? 5 : 11
+    const escala_tempo_tamanho = versao_mobile ? 2.8 : 5.5
+    const posicao_x_camera = versao_mobile ? 5.5 : 11
+    const posicao_y_camera = versao_mobile ? -1 : 0
 
     const navios = [
-        { nome: "Freelancer - Game Dev", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
-        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#698cff" },
-        { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
+        { nome: "Freelancer - Game Dev", inicio: 2023.5, duracao_anos: ano_atual - ( ano_inicio + .5 ) - 1 + mes_atual, cor: "#ff5733", finalizado: false },
+        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#698cff", finalizado: true },
+        { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b", finalizado: true },
     ]
 
     useEffect(() => {
@@ -39,7 +40,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
         var posicao_x = progresso_atual * duracao_total_anos * escala_tempo_tamanho
 
-        linha_guia.current.position.copy(new Vector3(posicao_x, 0, .1))
+        linha_guia.current.position.copy(new Vector3(posicao_x, 1, .1))
 
     }, [progresso_atual])
 
@@ -68,19 +69,19 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                 <h1 className="titulo">JORNADA</h1>
 
-                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, 1, 17] }} style={{"position" : "absolute"}}>
+                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, posicao_y_camera, 17] }} style={{"position" : "absolute"}}>
 
                     <ScrollControls pages={3} damping={0}>
 
                         <Controle_scroll set_progresso={set_progresso} />
 
-                        <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[posicao_x_camera, 1, 0]} />
+                        <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[posicao_x_camera, posicao_y_camera, 0]} />
 
                         < ambientLight intensity={5} />
 
                         {/* LINHA DE REFERENCIA */}
                         <mesh ref={linha_guia}>
-                            <boxGeometry args={[0.05, navios.length * 3.5, 0.01]} />
+                            <boxGeometry args={[0.05, navios.length * 4.0, 0.01]} />
                             <meshBasicMaterial color={"black"} />
                         </mesh>
 
@@ -88,10 +89,19 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
                         {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
                             const ano = ano_inicio + i
                             const pos_x = i * escala_tempo_tamanho
+                            const pos_y = 1.5 + navios.length * 2
 
                             return (
-                                <group key={i} position={[pos_x, 0, 0]}>
-                                    <Text position={[0, navios.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
+                                <group key={i} position={[pos_x, pos_y , 0]}>
+                                    <Text position={[0, 0, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
+                                    <mesh position={[0,0,-.05]}>
+                                        <boxGeometry args={[2 , 1, 0.01]} />
+                                            <meshStandardMaterial 
+                                                color={"#ffaeae"} 
+                                                transparent={true} 
+                                                opacity={0.7} 
+                                            />
+                                    </mesh>
                                 </group>
                             )
                         })}
@@ -99,7 +109,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
                         {/* navios */}
                         {navios.map((navio, i) => {
                             const pos_x_centro = (navio.inicio - ano_inicio) * escala_tempo_tamanho + (navio.duracao_anos * escala_tempo_tamanho / 2)
-                            const y_centro = i * 3 - (navios.length - 1) * 1.5
+                            const y_centro = i * 4 - (navios.length - 1) * 2
 
                             return (
                                 <Caminho_navio
@@ -111,6 +121,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
                                     progresso_maximo={navio.inicio - ano_inicio + navio.duracao_anos}
                                     nome={navio.nome}
                                     cor={navio.cor}
+                                    finalizado={navio.finalizado}
                                 />
                             )
                         })}
