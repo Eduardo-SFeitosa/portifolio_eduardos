@@ -48,7 +48,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
             </mesh>
 
             {/* TEXTO */}
-            <group position={[posicao[0], posicao[1] + 1.2, posicao[2] + .2]}>
+            <group position={[posicao[0], posicao[1] + 1.2, posicao[2] + .3]}>
 
                 <mesh position={[0,0,-.005]}>
                     <boxGeometry args={[0.38 * nome.length + 0.5, 1, 0.01]} />

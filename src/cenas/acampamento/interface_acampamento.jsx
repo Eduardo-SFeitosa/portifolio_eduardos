@@ -27,9 +27,9 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const escala_tempo_tamanho = versao_mobile ? 2.5 : 5.5
     const posicao_x_camera = versao_mobile ? 5 : 11
 
-    const pocoes = [
+    const navios = [
         { nome: "Freelancer - Game Dev", inicio: 2023, duracao_anos: ano_atual - ano_inicio - 1 + mes_atual, cor: "#ff5733" },
-        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#33c1ff" },
+        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#698cff" },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b" },
     ]
 
@@ -68,7 +68,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                 <h1 className="titulo">JORNADA</h1>
 
-                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, 1, 10] }}>
+                <Canvas className="canvas-acampamento" camera={{ position: [posicao_x_camera, 1, 17] }} style={{"position" : "absolute"}}>
 
                     <ScrollControls pages={3} damping={0}>
 
@@ -80,7 +80,7 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                         {/* LINHA DE REFERENCIA */}
                         <mesh ref={linha_guia}>
-                            <boxGeometry args={[0.05, pocoes.length * 3.5, 0.01]} />
+                            <boxGeometry args={[0.05, navios.length * 3.5, 0.01]} />
                             <meshBasicMaterial color={"black"} />
                         </mesh>
 
@@ -91,26 +91,26 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                             return (
                                 <group key={i} position={[pos_x, 0, 0]}>
-                                    <Text position={[0, pocoes.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
+                                    <Text position={[0, navios.length * 2, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
                                 </group>
                             )
                         })}
 
-                        {/* POCOES */}
-                        {pocoes.map((mago, i) => {
-                            const pos_x_centro = (mago.inicio - ano_inicio) * escala_tempo_tamanho + (mago.duracao_anos * escala_tempo_tamanho / 2)
-                            const y_centro = i * 3 - (pocoes.length - 1) * 1.5
+                        {/* navios */}
+                        {navios.map((navio, i) => {
+                            const pos_x_centro = (navio.inicio - ano_inicio) * escala_tempo_tamanho + (navio.duracao_anos * escala_tempo_tamanho / 2)
+                            const y_centro = i * 3 - (navios.length - 1) * 1.5
 
                             return (
                                 <Caminho_navio
                                     key={i}
                                     posicao={[pos_x_centro, y_centro, 0]}
-                                    tamanho={[mago.duracao_anos * escala_tempo_tamanho, 1, .5]}
+                                    tamanho={[navio.duracao_anos * escala_tempo_tamanho, 1, .5]}
                                     progresso_total={progresso_atual * duracao_total_anos}
-                                    progresso_minimo={mago.inicio - ano_inicio}
-                                    progresso_maximo={mago.inicio - ano_inicio + mago.duracao_anos}
-                                    nome={mago.nome}
-                                    cor={mago.cor}
+                                    progresso_minimo={navio.inicio - ano_inicio}
+                                    progresso_maximo={navio.inicio - ano_inicio + navio.duracao_anos}
+                                    nome={navio.nome}
+                                    cor={navio.cor}
                                 />
                             )
                         })}
