@@ -233,3 +233,196 @@ body,
     opacity: 0;
   }
 }
+
+@media (max-width: 700px) {
+
+  .navegacao {
+
+    top: auto;
+    bottom: 14px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100vw - 24px);
+    max-width: 460px;
+
+    height: 80px;
+
+    padding: 3px 10px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: start;
+
+    gap: 0;
+
+    border-radius: 22px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(22, 30, 55, .96),
+        rgba(6, 9, 22, .98)
+      );
+
+    border: 2px solid #5c3520;
+
+    box-shadow:
+      0 0 0 2px #24130c,
+      0 10px 25px rgba(0, 0, 0, .65),
+      inset 0 0 20px rgba(40, 70, 130, .2);
+
+    z-index: 1000;
+
+  }
+
+  .navegacao .linha-caminho {
+
+    display: none;
+
+  }
+
+
+  .navegacao .links {
+
+    width: 52px;
+    height: 52px;
+
+    min-width: 52px;
+
+    border-radius: 50%;
+
+    border-width: 2px;
+
+    padding: 0;
+
+    gap: 0;
+
+    position: relative;
+
+    flex-shrink: 0;
+
+    background:
+      radial-gradient(
+        circle at 35% 30%,
+        #172342 0%,
+        #0d1329 55%,
+        #060916 100%
+      );
+
+    box-shadow:
+      0 0 0 1px #24130c,
+      0 4px 10px rgba(0, 0, 0, .7),
+      inset 0 0 8px rgba(40, 70, 130, .3);
+
+    transition:
+      transform .2s ease,
+      background .25s ease,
+      box-shadow .25s ease;
+
+  }
+
+  .navegacao .links .icones {
+
+    font-size: 20px;
+
+    margin: 0;
+
+    transition:
+      transform .2s ease,
+      color .25s ease;
+
+  }
+
+  .navegacao .links .nome {
+
+    position: absolute;
+
+    top: 57px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 8px;
+
+    line-height: 9px;
+
+    letter-spacing: .7px;
+
+    white-space: nowrap;
+
+    color: #d6d9e5;
+
+    opacity: .75;
+
+    pointer-events: none;
+
+  }
+
+  .navegacao .links:hover {
+
+    transform: none;
+
+  }
+
+
+  .navegacao .links.ativo {
+
+    border-color: #a36a2f;
+
+    color: #3b2412;
+
+    background:
+      radial-gradient(
+        circle at 35% 25%,
+        #d4bd81 0%,
+        #b68d34 45%,
+        #704517 100%
+      );
+
+    box-shadow:
+      0 0 0 1px #301a0b,
+      0 0 10px rgba(255, 196, 70, .55),
+      0 4px 12px rgba(0, 0, 0, .75),
+      inset 0 2px 6px rgba(255, 255, 220, .45),
+      inset 0 -6px 10px rgba(100, 55, 10, .3);
+
+  }
+
+
+  .navegacao .links.ativo .icones {
+
+    color: #3b2412;
+
+    transform: scale(1.08);
+
+  }
+
+
+  .navegacao .links.ativo .nome {
+
+    color: #f0d997;
+
+    opacity: 1;
+
+  }
+
+  .navegacao .links:active {
+
+    transform: scale(.9);
+
+  }
+
+
+  .navegacao .links.ativo:hover {
+
+    transform: none;
+
+  }
+
+}
