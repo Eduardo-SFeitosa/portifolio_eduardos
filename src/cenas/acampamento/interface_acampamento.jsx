@@ -17,17 +17,17 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const linha_guia = useRef(null)
     const versao_mobile = window.innerHeight > window.innerWidth ? true : false
 
-    const ano_inicio = 2023
+    const ano_inicio = 2024
     const ano_atual = new Date().getFullYear() + 1
     const mes_atual = new Date().getMonth() / 12
 
     const duracao_total_anos = ano_atual - ano_inicio
-    const escala_tempo_tamanho = versao_mobile ? 2.8 : 5.5
-    const posicao_x_camera = versao_mobile ? 5.5 : 11
+    const escala_tempo_tamanho = versao_mobile ? 3.5 : 6.5
+    const posicao_x_camera = versao_mobile ? 5 : 10
     const posicao_y_camera = versao_mobile ? -1 : 0
 
     const navios = [
-        { nome: "Freelancer - Game Dev", inicio: 2023.5, duracao_anos: ano_atual - ( ano_inicio + .5 ) - 1 + mes_atual, cor: "#ff5733", finalizado: false },
+        { nome: "Freelancer - Game Dev", inicio: 2024.5, duracao_anos: ano_atual - ( ano_inicio + .5 ) - 1 + mes_atual, cor: "#ff5733", finalizado: false },
         { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#698cff", finalizado: true },
         { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b", finalizado: true },
     ]
@@ -35,6 +35,8 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     useEffect(() => {
 
         if (!linha_guia.current) return
+
+        if (progresso_atual * duracao_total_anos >= duracao_total_anos + mes_atual - 1) return
 
         var posicao_x = progresso_atual * duracao_total_anos * escala_tempo_tamanho
 
