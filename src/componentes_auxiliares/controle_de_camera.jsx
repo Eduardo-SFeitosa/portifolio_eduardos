@@ -4,21 +4,15 @@ import { useRef } from 'react'
 import { forwardRef, useImperativeHandle } from "react"
 import { CatmullRomCurve3, Vector3  } from 'three'
 
-const Controle_de_camera = forwardRef((props, ref ) => {
+const Controle_de_camera = forwardRef(({set_termino_caminho, referencia_camera , caminho_atual, camera_travada ,props}, ref ) => {
 
-  const referencia_camera = props.referencia_camera 
   const camera_travada_em = useRef(null)
   const progresso = useRef(0)
   const controlando_camera = useRef(true)
   const caminho_invertido = useRef(false)
 
-  const caminho_atual = props.caminho_atual
-
   useImperativeHandle( ref, () => ({
 
-    progresso_scroll() {
-      return progresso.current
-    },
     travar_camera,
     destravar_camera,
     desativar_controle,
@@ -245,17 +239,29 @@ const Controle_de_camera = forwardRef((props, ref ) => {
 
     progresso.current = caminho_invertido.current ? 1 - scroll.offset : scroll.offset 
 
+    const progresso_atual = progresso.current
+
     if (!referencia_camera || ignorar_scroll.current) return
 
-    if (!coordenadas_caminhos[caminho_atual] || progresso.current < 0) return    
+    if (!coordenadas_caminhos[caminho_atual] || progresso_atual < 0) return    
 
-    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso.current)
+    const localizacao = coordenadas_caminhos[caminho_atual]["posicao"].getPoint(progresso_atual)
       
-    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso.current)
+    const direcao = coordenadas_caminhos[caminho_atual]["direcao"].getPoint(progresso_atual)
     
     referencia_camera.current.lookAt(direcao)
 
     referencia_camera.current.position.copy(localizacao)
+
+    if (progresso_atual >= .95 || progresso_atual <= .05 && caminho_invertido.current) {
+
+      set_termino_caminho(true)
+
+    }else {
+
+      set_termino_caminho(false)
+
+    }
 
   })
 

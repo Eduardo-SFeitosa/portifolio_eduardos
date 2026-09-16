@@ -22,6 +22,7 @@ import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
 import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 import Indicador_scroll from "./componentes_auxiliares/indicador_scroll";
+import Indicador_clique from "./componentes_auxiliares/indicador_clique";
 
 import "./app.scss"
 
@@ -30,6 +31,7 @@ function App() {
   const [cena_em_foco , set_cena_em_foco] = useState(null)
   const [interface_ativa, set_interface] = useState(null)
   const [caminho_atual , set_caminho] = useState("porta")
+  const [caminho_terminou, set_caminho_terminou] = useState(0)
 
   const index_caminho_atual = useRef(0)
   const referencia_camera = useRef(null)
@@ -88,7 +90,7 @@ function App() {
 
     const cena_passada = (cenas_ordem.indexOf(caminho_atual) -1 == index_atual)
 
-    if ( caminho_atual == cena && controle_de_camera_ref.current.progresso_scroll() > .8 || cena_passada ) {
+    if ( caminho_atual == cena && caminho_terminou || cena_passada ) {
 
       set_cena_em_foco(cena)
 
@@ -133,6 +135,17 @@ function App() {
     }
   }
 
+  const controlar_clique = ( cena , acao="clique" ) => {
+
+    //se estiver em desktop ignora necessidade de onPointerUp
+    if (!versao_mobile && acao == "clique" && cena) travar_camera(cena)
+
+    else if (versao_mobile && cena && acao != "clique") {
+      travar_camera(cena)
+    }
+
+  }
+
   useEffect(() => {
 
     if (!cena_em_foco) return
@@ -155,17 +168,6 @@ function App() {
 
   }, [cena_em_foco])
 
-  const controlar_clique = ( cena , acao="clique" ) => {
-
-    //se estiver em desktop ignora necessidade de onPointerUp
-    if (!versao_mobile && acao == "clique" && cena) travar_camera(cena)
-
-    else if (versao_mobile && cena && acao != "clique") {
-      travar_camera(cena)
-    }
-
-  }
-
   return (
 
     <>
@@ -181,6 +183,7 @@ function App() {
             ref={controle_de_camera_ref}
             caminho_atual={caminho_atual}
             camera_travada={cena_em_foco != null}
+            set_termino_caminho={set_caminho_terminou}
           />
           
             < ModeloBase />
@@ -295,7 +298,6 @@ function App() {
 
       <Indicador_scroll></Indicador_scroll>
 
-
       {/* INTERFACES */}
       <div className="interfaces">
         {interface_ativa == null ? null
@@ -313,6 +315,7 @@ function App() {
         : null}
       </div>
 
+      {/* NAVBAR */}
       <div className={`navegacao ${cena_em_foco ? "desaparecer" : ""}`}>
 
             <button className={`links ${index_caminho_atual.current >= 1 ? "ativo" : ""}`} onClick={() => teleportar("porta")} >
@@ -347,6 +350,22 @@ function App() {
               <IoIosMail className="icones" /> 
               <span className="nome" >CONTATO</span>
             </button>
+
+      </div>
+
+      {/* INDICADORES DE CLIQUE */}
+      <div>
+
+          {caminho_atual == "porta" && caminho_terminou && !cena_em_foco && <Indicador_clique/>}
+
+          {caminho_atual == "acampamento" && caminho_terminou && !cena_em_foco && <Indicador_clique esquerda={"8%"} />}
+
+          {caminho_atual == "orbe" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"5%"}/>}
+
+          {caminho_atual == "mina" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"-5%"} esquerda={versao_mobile ? "25%" : "8%"} />}
+
+          {caminho_atual == "bau" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"9%"} esquerda={ versao_mobile ? "-3.5%" : "-1%"} />}
+
 
       </div>
       
