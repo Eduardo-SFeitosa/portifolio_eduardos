@@ -21,6 +21,8 @@ import Interface_bau from "./cenas/bau/interface_bau"
 import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
 import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
+import Indicador_scroll from "./componentes_auxiliares/indicador_scroll";
+
 import "./app.scss"
 
 function App() {
@@ -290,6 +292,9 @@ function App() {
         </group>
 
       </Canvas>
+
+      <Indicador_scroll></Indicador_scroll>
+
 
       {/* INTERFACES */}
       <div className="interfaces">

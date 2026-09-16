@@ -1,0 +1,132 @@
+.indicador-scroll {
+
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+
+    left: 0px;
+    top: 0px;
+
+    background-color: rgba(0, 0, 0, 0.233);
+
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    pointer-events: none;
+
+    animation:
+        aparecer-indicador .6s ease forwards;
+
+    .texto {
+
+        font-family: Georgia, serif;
+
+        font-size: 1.7rem;
+
+        font-weight: 700;
+
+        letter-spacing: .25em;
+
+        color: #d8c79c;
+
+        text-shadow:
+            0 2px 4px rgba(0, 0, 0, .8);
+
+    }
+
+
+    .indicador-movimento {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 2px;
+
+
+        span {
+
+            width: 17px;
+            height: 17px;
+
+            border-right: 2px solid #d8c79c;
+            border-bottom: 2px solid #d8c79c;
+
+            transform: rotate(45deg);
+
+            opacity: .2;
+
+            animation:
+                seta-scroll 1.4s infinite;
+
+        }
+
+
+        span:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+
+        span:nth-child(3) {
+            animation-delay: .3s;
+        }
+
+    }
+
+}
+
+
+@keyframes seta-scroll {
+
+    0% {
+
+        opacity: .15;
+
+        transform:
+            translateY(-3px) rotate(45deg);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: .15;
+
+        transform:
+            translateY(5px) rotate(45deg);
+
+    }
+
+}
+
+
+@keyframes aparecer-indicador {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
