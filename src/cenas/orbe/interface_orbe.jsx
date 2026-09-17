@@ -43,9 +43,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 { nome: "FASTAPI",     posicao: [-0.55,  0.15, 0], margem_esquerda: 0, margem_cima: 2 },
                 { nome: "PANDAS",      posicao: [-0.10, 0.05, 0], margem_esquerda: 0, margem_cima: 2 },
                 { nome: "NUMPY",       posicao: [ 0.15, -0.35, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "MATPLOTLIB",  posicao: [ 0.05, 0.45, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "MATPLOTLIB",  posicao: [ 0.00, 0.45, 0], margem_esquerda: 2, margem_cima: 0 },
                 { nome: "REQUESTS",    posicao: [ 0.50,  0.15, 0], margem_esquerda: 2, margem_cima: 2 },
-                { nome: "SELENIUM",    posicao: [ 0.80,  0.50, 0], margem_esquerda: 2, margem_cima: 0 },
+                { nome: "SELENIUM",    posicao: [ 0.80,  0.50, 0], margem_esquerda: 1, margem_cima: 0 },
             ],
 
             estrelas_mobile: [
@@ -96,7 +96,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
             estrelas: [
                 { nome: "FORMS",       posicao: [ 0.30,  0.50, 0], margem_esquerda: 1, margem_cima: 2 },
-                { nome: "RESPONSIVO",         posicao: [ 0.7,  0.15, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "RESPONSIVO",         posicao: [ 0.7,  0.15, 0], margem_esquerda: 1, margem_cima: 2 },
                 { nome: "SASS",        posicao: [ 0.2, -0.05, 0], margem_esquerda: 1, margem_cima: 2 },
                 { nome: "ANIMACOES",   posicao: [ -0.30, -0.30, 0], margem_esquerda: 0, margem_cima: 1 },
                 { nome: "TAILWIND",    posicao: [-0.55, 0.1, 0], margem_esquerda: 0, margem_cima: 1 },

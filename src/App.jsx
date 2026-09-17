@@ -364,7 +364,7 @@ function App() {
 
           {caminho_atual == "mina" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"-5%"} esquerda={versao_mobile ? "25%" : "8%"} />}
 
-          {caminho_atual == "bau" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"9%"} esquerda={ versao_mobile ? "-3.5%" : "-1%"} />}
+          {caminho_atual == "bau" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"9%"} esquerda={ versao_mobile ? "-3.5%" : "-1.5%"} />}
 
 
       </div>
