@@ -7,6 +7,8 @@ import { Vector3 } from "three";
 import Caminho_navio from "./caminho_navio";
 import "./interface_acampamento.scss"
 
+import Indicador_scroll from "../../componentes_auxiliares/indicador_scroll"
+
 export default function Interface_acampamento({ mudar_caminho, set_interface }) {
 
     const referencia_camera = useRef(null)
@@ -27,9 +29,9 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     const posicao_y_camera = versao_mobile ? -1 : 0
 
     const navios = [
-        { nome: "Freelancer - Game Dev", inicio: 2024.5, duracao_anos: ano_atual - ( ano_inicio + .5 ) - 1 + mes_atual, cor: "#ff5733", finalizado: false },
-        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#698cff", finalizado: true },
-        { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#44ad5b", finalizado: true },
+        { nome: "Freelancer - Game Dev", inicio: 2025.5, duracao_anos: ano_atual - 2025.5 - 1 + mes_atual , cor: "#cf492b", finalizado: false },
+        { nome: "Bacharelado em ADS", inicio: 2024, duracao_anos: 2.5, duracao_meses: 6, cor: "#4263d1", finalizado: true },
+        { nome: "Auxiliar administrativo", inicio: 2024, duracao_anos: 2, cor: "#22923b", finalizado: true },
     ]
 
     useEffect(() => {
@@ -70,6 +72,8 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
     return (
         <div className="container-acampamento">
 
+            <Indicador_scroll set_indicador={() => {}}/>
+
             <div className={`interface-acampamento ${animacao_sair ? "animacao_desaparecer" : ""}`}>
 
                 <h1 className="titulo">JORNADA</h1>
@@ -88,35 +92,40 @@ export default function Interface_acampamento({ mudar_caminho, set_interface }) 
 
                         < ambientLight intensity={5} />
 
-                        {/* LINHA DE REFERENCIA */}
-                        <mesh ref={linha_guia}>
-                            <boxGeometry args={[0.05, navios.length * 4.0, 0.01]} />
-                            <meshBasicMaterial color={"black"} />
-                        </mesh>
+                        
 
                         {/* ANOS E BARRAS */}
-                        {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
-                            const ano = ano_inicio + i
-                            const pos_x = i * escala_tempo_tamanho
-                            const pos_y = 1.5 + navios.length * 2
+                        <group>
 
-                            return (
-                                <group key={i} position={[pos_x, pos_y , 0]}>
-                                    
-                                    <Text position={[0, 0, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
-                                    
-                                    <mesh position={[0,0,-.05]}>
-                                        <RoundedBoxGeometry args={[2 , 1, 0.01]} />
-                                        <meshStandardMaterial 
-                                            color={"#ebff7c"} 
-                                            transparent={true} 
-                                            opacity={0.7} 
-                                        />
-                                    </mesh>
+                            {Array.from({ length: duracao_total_anos + 1 }, (_, i) => {
+                                const ano = ano_inicio + i
+                                const pos_x = i * escala_tempo_tamanho
+                                const pos_y = 1.5 + navios.length * 2
 
-                                </group>
-                            )
-                        })}
+                                return (
+                                    <group key={i} position={[pos_x, pos_y , 0]}>
+                                        
+                                        <Text position={[0, 0, 0]} color="black" fontSize={0.6} anchorX="center">{ano}</Text>
+                                        
+                                        <mesh position={[0,0,-.05]}>
+                                            <RoundedBoxGeometry args={[2 , 1, 0.01]} />
+                                            <meshStandardMaterial 
+                                                color={"#ebff7c"} 
+                                                transparent={true} 
+                                                opacity={0.7} 
+                                            />
+                                        </mesh>
+
+                                    </group>
+                                )
+                            })}
+
+                            <mesh position={[ (duracao_total_anos + mes_atual - 1) * escala_tempo_tamanho ,0.9 ,0 ]} >
+                                <boxGeometry args={[0.1, navios.length * 4.0, 0.01]} />
+                                <meshBasicMaterial color={"white"} />
+                            </mesh>
+
+                        </group>
 
                         {/* navios */}
                         {navios.map((navio, i) => {

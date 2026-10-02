@@ -1,3 +1,5 @@
+
+
 .interface-bau {
 
   width: 100%;
@@ -12,6 +14,60 @@
   pointer-events: none;
 
   font-family: "Inter", sans-serif;
+
+  .filtro-canvas{
+    position: fixed;
+    animation: aparecer-simples 2s forwards ease-in-out;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 5;
+  }
+
+  .mensagem-enviada {
+
+    position: fixed;
+
+    top: 30px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 50;
+
+    padding: 14px 24px;
+
+    border-radius: 10px;
+
+    background:
+      rgba(12, 28, 29, .95);
+
+    border:
+      1px solid rgba(100, 180, 180, .35);
+
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, .45);
+
+    pointer-events: none;
+
+    animation:
+      mensagem-aparecer .25s ease forwards;
+
+    h2 {
+
+      margin: 0;
+
+      color: #cfe8e4;
+
+      font-size: .95rem;
+
+      font-weight: 700;
+
+      letter-spacing: .04em;
+
+    }
+  }
 
   .canvas-bau {
 
@@ -39,6 +95,7 @@
     z-index: 10;
 
     padding: 40px;
+
   }
 
   .card-glow {
@@ -127,7 +184,6 @@
     margin-bottom: 20px;
   }
 
-
   .categoria {
 
     display: block;
@@ -142,7 +198,6 @@
 
     color: #b89042;
   }
-
 
   .titulo-contato {
 
@@ -161,7 +216,6 @@
     text-shadow:
       0 2px 15px rgba(0, 0, 0, .5);
   }
-
 
   .subtitulo {
 
@@ -530,6 +584,38 @@
     filter:
       brightness(1)
       blur(0);
+  }
+}
+
+@keyframes aparecer-simples {
+  from{
+    opacity: 100%;
+  }
+  to{
+    opacity: 60%;
+  }
+}
+
+@keyframes mensagem-aparecer {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateX(-50%)
+      translateY(-10px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+
   }
 }
 

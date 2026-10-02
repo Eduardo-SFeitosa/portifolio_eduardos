@@ -4,13 +4,14 @@ import { useRef } from 'react'
 import { forwardRef, useImperativeHandle } from "react"
 import { CatmullRomCurve3, Vector3  } from 'three'
 
-const Controle_de_camera = forwardRef(({set_termino_caminho, referencia_camera , caminho_atual, camera_travada ,props}, ref ) => {
+const Controle_de_camera = forwardRef(({set_termino_caminho, referencia_camera , caminho_atual, camera_travada , props}, ref ) => {
 
   const camera_travada_em = useRef(null)
   const progresso = useRef(0)
   const controlando_camera = useRef(true)
   const caminho_invertido = useRef(false)
 
+  //COMPARTILHANDO FUNCOES
   useImperativeHandle( ref, () => ({
 
     travar_camera,
@@ -19,6 +20,8 @@ const Controle_de_camera = forwardRef(({set_termino_caminho, referencia_camera ,
     ativar_controle
 
   }))
+
+  const termino_caminho_anterior = useRef(null)
 
   const ignorar_scroll = useRef(false)
 
@@ -253,14 +256,11 @@ const Controle_de_camera = forwardRef(({set_termino_caminho, referencia_camera ,
 
     referencia_camera.current.position.copy(localizacao)
 
-    if (progresso_atual >= .95 || progresso_atual <= .05 && caminho_invertido.current) {
+    const terminou = progresso_atual >= 0.95 || (progresso_atual <= 0.05 && caminho_invertido.current)
 
-      set_termino_caminho(true)
-
-    }else {
-
-      set_termino_caminho(false)
-
+    if (termino_caminho_anterior.current !== terminou) {
+      termino_caminho_anterior.current = terminou
+      set_termino_caminho(terminou)
     }
 
   })

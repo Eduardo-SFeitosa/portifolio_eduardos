@@ -23,6 +23,8 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
 
   const emissor_particulas = useRef(null)
 
+  const versao_mobile = window.innerHeight > window.innerWidth ? true : false
+
   //animacao livro
   const livro = useSpring({
 
@@ -55,7 +57,13 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
         <mesh geometry={nodes.Chest1B003.geometry} material={materials['chests.003']} position={[-1.23, 0.112, -0.539]} rotation={[0, 1.291, 0]} />
         <mesh geometry={nodes.Chest1B003.geometry} material={materials['chests.003']} position={[-1.25, 0.45, -0.47]} rotation={[0, 2, 0]} scale={[0.678341, 0.678341, 0.678341]} />
 
-        <VFXParticles
+      </group>
+
+
+      {/* PARTICULAS */}
+      {versao_mobile ? <></>:
+      <>
+      <VFXParticles
           name="fire"
 
           settings={{
@@ -104,8 +112,7 @@ export default function Acampamento({ ativado, set_interface, ...props }) {
 
           }}
         />
-
-      </group>
+      </>}
 
       <animated.group>
         <Livro  ativado={ativado} set_interface={set_interface} position={livro.posicao} rotation={livro.rotacao} scale={livro.escala}/>

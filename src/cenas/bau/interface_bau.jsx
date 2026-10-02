@@ -8,11 +8,16 @@ import { Moedas_caveira } from "./Moeda_caveira";
 import { useSpring, animated } from "@react-spring/three";
 import emailjs from '@emailjs/browser';
 
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+
 import { OrbitControls } from "@react-three/drei";
 
 export default function Interface_bau({ mudar_caminho, ...props }) {
 
   const [interface_ativa, set_interface] = useState(false)
+  const [mensagem_enviada, set_mensagem_enviada] = useState(false)
+
+  const style = { color: "rgb(219, 153, 20)", fontSize: "2em" }
 
   const [dados_formulario, set_dados] = useState({
     nome: "",
@@ -63,8 +68,6 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
     e.preventDefault();
 
-    console.log("Formulário enviado:", dados_formulario);
-
     //enviar email
     emailjs
       .sendForm(
@@ -76,7 +79,6 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
       .then(
         () => {
-          alert('Email enviado!');
           set_dados({
             nome: "",
             email: "",
@@ -84,6 +86,13 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
             telefone: "",
             whatsapp: false,
           })
+
+          set_mensagem_enviada(true)
+
+          setTimeout(() => {
+            set_mensagem_enviada(false)
+          }, 3000)
+
         },
         (error) => {
           alert('Falha ao mandar email, verifique as informacoes passadas' );
@@ -91,27 +100,9 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
     );
   };
 
-  const {luz} = useSpring({
-
-    from : {
-      luz : 0
-    },
-
-    to : {
-      luz : .65
-    },
-
-    onRest : () => {
-
-      set_interface(true)
-
-    },
-
-    config: { tension: 50, friction: 70, precision:.1 },
-
-    delay : 1000
-    
-  })
+  setTimeout(function() {
+    set_interface(true)
+  },2000)
 
   return (
 
@@ -128,11 +119,19 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
 
         <Moedas_caveira/>
 
-        <animated.ambientLight intensity={luz} />
+        <animated.ambientLight intensity={.5} />
 
         <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} target={[.5,1,-0.018]} /> 
 
       </Canvas>
+
+      <div className="filtro-canvas"></div>
+
+      {mensagem_enviada && (
+        <div className="mensagem-enviada">
+          <h2>Mensagem enviada</h2>
+        </div>
+      )}
       
       {interface_ativa && (
 
@@ -268,10 +267,9 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
                   href="https://github.com/Eduardo-SFeitosa"
                   className="link"
                 >
-                  <img
-                    src="/icones/github.png"
-                    alt="GitHub"
-                  />
+                  
+                  <FaGithub style={style}/>
+
                   <div>
                     <strong>GitHub</strong>
                     <span>Projetos e código</span>
@@ -283,10 +281,9 @@ export default function Interface_bau({ mudar_caminho, ...props }) {
                   href="https://www.linkedin.com/in/eduardo-santos-846970232/"
                   className="link"
                 >
-                  <img
-                    src="/icones/linkedin.png"
-                    alt="LinkedIn"
-                  />
+
+                  <FaLinkedin style={style}/>
+                  
                   <div>
                     <strong>LinkedIn</strong>
                     <span>Perfil profissional</span>

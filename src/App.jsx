@@ -1,25 +1,28 @@
-import { useState, useEffect, useRef } from "react"
-import { Canvas } from "@react-three/fiber"
+import { useState, useEffect, useRef, useMemo } from "react"
+import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, ScrollControls } from "@react-three/drei"
 
 import { FaUser , FaWalking  , FaProjectDiagram } from "react-icons/fa"
 import { DiVisualstudio } from "react-icons/di";
 import { IoIosMail } from 'react-icons/io';
+
 import ModeloBase from "./modelos_auxiliares/modelo_base"
 import AguaAnimada from "./modelos_auxiliares/agua_animada"
+import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
+
 import Porta from "./cenas/porta/porta"
-import Interface_porta from "./cenas/porta/interface_porta"
 import Acampamento from "./cenas/acampamento/acampamento"
-import Interface_acampamento from "./cenas/acampamento/interface_acampamento"
 import Orbe from "./cenas/orbe/orbe"
-import Interface_orbe from "./cenas/orbe/interface_orbe"
 import Mina from "./cenas/mina/mina"
-import Interface_mina from "./cenas/mina/interface_mina"
 import Bau from "./cenas/bau/bau_do_tesouro"
+
+import Interface_acampamento from "./cenas/acampamento/interface_acampamento"
+import Interface_orbe from "./cenas/orbe/interface_orbe"
+import Interface_mina from "./cenas/mina/interface_mina"
 import Interface_bau from "./cenas/bau/interface_bau"
+import Interface_porta from "./cenas/porta/interface_porta"
 
 import Controle_de_camera from "./componentes_auxiliares/controle_de_camera"
-import EstrelaEstatica from "./modelos_auxiliares/estrela_estatica_circulo"
 
 import Indicador_scroll from "./componentes_auxiliares/indicador_scroll";
 import Indicador_clique from "./componentes_auxiliares/indicador_clique";
@@ -32,13 +35,19 @@ function App() {
   const [interface_ativa, set_interface] = useState(null)
   const [caminho_atual , set_caminho] = useState("porta")
   const [caminho_terminou, set_caminho_terminou] = useState(0)
+  const [direcao_caminho, set_direcao] = useState("avancar")
+  const [navegacao_ativa, set_navegacao] = useState(false)
+  const [indicador_scroll, set_indicador_scroll] = useState(true)
 
   const index_caminho_atual = useRef(0)
   const referencia_camera = useRef(null)
   const controle_de_camera_ref = useRef(null)
-  const [direcao_caminho, set_direcao] = useState("avancar")
 
   const versao_mobile = window.innerHeight > window.innerWidth ? true : false
+
+  const quantidade_estrelas = versao_mobile ? 20 : 150
+
+  const movimento_estrelas = versao_mobile ? 0 : 1
 
   const posicao_de_cenas = {
 
@@ -93,6 +102,7 @@ function App() {
     if ( caminho_atual == cena && caminho_terminou || cena_passada ) {
 
       set_cena_em_foco(cena)
+      set_navegacao(false)
 
     }
 
@@ -102,6 +112,8 @@ function App() {
 
     set_cena_em_foco(null)
     set_interface(null)
+    set_navegacao(true)
+    set_indicador_scroll(true)
 
     controle_de_camera_ref.current.destravar_camera(voltar)
 
@@ -168,15 +180,39 @@ function App() {
 
   }, [cena_em_foco])
 
+  const config_canvas = useMemo(
+    () =>
+      versao_mobile
+        ? {
+            dpr: [0.4, 1],
+            gl: {
+              antialias: false,
+              powerPreference: "high-performance",
+              stencil: false,
+            },
+            performance: { min: 0.5, debounce: 250 },
+          }
+        : {
+            dpr: [1, 2],
+            gl: { antialias: true, powerPreference: "high-performance" },
+          },
+    [versao_mobile]
+  )
+
   return (
 
     <>
 
       <Canvas onCreated={(state) => {
         referencia_camera.current = state.camera
-      }} id="canvas">   
+        state.gl.setPixelRatio(Math.min(window.devicePixelRatio, versao_mobile ? 1 : 2))
+      }}
 
-        <ScrollControls pages={cena_em_foco == null ? 4 : 0} damping={0.6} enabled={cena_em_foco == null}>
+      {...config_canvas}
+
+      id="canvas">   
+
+        <ScrollControls pages={4} damping={0.6} enabled={cena_em_foco == null}>
 
           <Controle_de_camera
             referencia_camera={referencia_camera}
@@ -251,22 +287,33 @@ function App() {
             {/* ESTRELAS */}
             <group>
 
-              < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800} />
+              < EstrelaEstatica nome="estrelasEsquerda" position={[ -25, 15, 0 ]} largura={10} 
+              altura={20} profundidade={20} cor={versao_mobile ? "white" : null} 
+              velocidade={movimento_estrelas} particulas={quantidade_estrelas} />
 
-              < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} altura={20} profundidade={20} particulas={800}/>
+              < EstrelaEstatica nome="estrelasDireita" position={[ 25, 15, 0 ]} largura={10} 
+              altura={20} profundidade={20} cor={versao_mobile ? "white" : null} 
+              velocidade={movimento_estrelas} particulas={quantidade_estrelas}/>
 
-              < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
+              < EstrelaEstatica nome="estrelasFrente" position={[ 0, 15, 25 ]} largura={40} 
+              altura={20} profundidade={10} cor={versao_mobile ? "white" : null} 
+              velocidade={movimento_estrelas} particulas={quantidade_estrelas}/>
 
-              < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} altura={20} profundidade={10} particulas={800}/>
+              < EstrelaEstatica nome="estrelasTras" position={[ 0, 15, -30 ]} largura={40} 
+              altura={20} profundidade={10} cor={versao_mobile ? "white" : null} 
+              velocidade={movimento_estrelas} particulas={quantidade_estrelas}/>
 
-              < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} altura={10} profundidade={20} particulas={1000}/>
+              < EstrelaEstatica nome="estrelasCima" position={[ 0, 25, 0 ]} largura={20} 
+              altura={10} profundidade={20} cor={versao_mobile ? "white" : null} 
+              velocidade={movimento_estrelas} particulas={quantidade_estrelas + 50 }/>
 
             </group>
             
             < AguaAnimada 
+              animacao={!versao_mobile}
               rotation={[-Math.PI / 2, 0, -Math.PI / 2]} 
               position={[ 0 , -2.5 , 0.05 ]} 
-              size={[30, 20, 128, 128]}
+              size={[30, 20, 1, 1]}
             />
 
         </ScrollControls>
@@ -286,17 +333,18 @@ function App() {
           < pointLight position={[0, 10, 20]} intensity={700} color={"#2e4daa"} />
 
           {/* BAU / MINA */}
-          < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
-          < pointLight position={[0, 10, -20]} intensity={700} color={"#2e4daa"} />
+          < pointLight position={[0, 10, -20]} intensity={1400} color={"#2e4daa"} />
 
           {/* ENTRADA */}
           < pointLight position={[-10, 10, 0]} intensity={400} color={"#2e4daa"} />
 
         </group>
 
+        
+
       </Canvas>
 
-      <Indicador_scroll></Indicador_scroll>
+      {indicador_scroll && cena_em_foco == null ? <Indicador_scroll set_indicador={set_indicador_scroll} /> : <></>}
 
       {/* INTERFACES */}
       <div className="interfaces">
@@ -316,7 +364,7 @@ function App() {
       </div>
 
       {/* NAVBAR */}
-      <div className={`navegacao ${cena_em_foco ? "desaparecer" : ""}`}>
+      <div className={`navegacao ${cena_em_foco || !navegacao_ativa ? "desaparecer" : ""}`}>
 
             <button className={`links ${index_caminho_atual.current >= 1 ? "ativo" : ""}`} onClick={() => teleportar("porta")} >
               <FaUser className="icones" /> 
@@ -356,16 +404,15 @@ function App() {
       {/* INDICADORES DE CLIQUE */}
       <div>
 
-          {caminho_atual == "porta" && caminho_terminou && !cena_em_foco && <Indicador_clique/>}
+          {caminho_atual == "porta" && caminho_terminou && !indicador_scroll && !cena_em_foco && <Indicador_clique/>}
 
-          {caminho_atual == "acampamento" && caminho_terminou && !cena_em_foco && <Indicador_clique esquerda={"8%"} />}
+          {caminho_atual == "acampamento" && caminho_terminou && !indicador_scroll && !cena_em_foco && <Indicador_clique esquerda={"12%"} topo={"-5%"} />}
 
-          {caminho_atual == "orbe" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"5%"}/>}
+          {caminho_atual == "orbe" && caminho_terminou && !indicador_scroll && !cena_em_foco && <Indicador_clique topo={"5%"}/>}
 
-          {caminho_atual == "mina" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"-5%"} esquerda={versao_mobile ? "25%" : "8%"} />}
+          {caminho_atual == "mina" && caminho_terminou && !indicador_scroll && !cena_em_foco && <Indicador_clique topo={"-5%"} esquerda={versao_mobile ? "25%" : "8%"} />}
 
-          {caminho_atual == "bau" && caminho_terminou && !cena_em_foco && <Indicador_clique topo={"9%"} esquerda={ versao_mobile ? "-3.5%" : "-1.5%"} />}
-
+          {caminho_atual == "bau" && caminho_terminou && !indicador_scroll && !cena_em_foco && <Indicador_clique topo={"9%"} esquerda={ versao_mobile ? "-3.5%" : "-1.5%"} />}
 
       </div>
       
@@ -375,3 +422,29 @@ function App() {
 }
 
 export default App
+
+function DebugPerformance() {
+
+  const tempo = useRef(0)
+
+  useFrame((state, delta) => {
+
+    tempo.current += delta
+
+    if (tempo.current < 1) return
+
+    tempo.current = 0
+
+    console.log({
+      calls: state.gl.info.render.calls,
+      triangles: state.gl.info.render.triangles,
+      points: state.gl.info.render.points,
+      lines: state.gl.info.render.lines,
+      geometries: state.gl.info.memory.geometries,
+      textures: state.gl.info.memory.textures,
+    })
+
+  })
+
+  return null
+}

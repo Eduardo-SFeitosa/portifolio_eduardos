@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "./indicador_scroll.scss"
 
-export default function Indicador_scroll() {
+export default function Indicador_scroll( {set_indicador} ) {
 
   const [visivel, set_visivel] = useState(true)
 
@@ -10,7 +10,10 @@ export default function Indicador_scroll() {
 
   useEffect(() => {
 
+    if (!visivel) return
+
     const esconder = () => {
+      set_indicador(false)
       set_visivel(false)
     }
 

@@ -1,10 +1,9 @@
 import { useLoader } from "@react-three/fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
-export default function ModeloBase ()  {
+export default function ModeloBase() {
 
-    const gltf = useLoader(GLTFLoader, "/models/cenaPrincipal.glb")
+  const gltf = useLoader(GLTFLoader, "/models/cena_principal.glb")
 
-    return <primitive object={gltf.scene} />
-
+  return <primitive object={gltf.scene} />
 }

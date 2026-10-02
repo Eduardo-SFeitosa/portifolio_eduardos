@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react"
 import { Sprite } from "three"
 import { useFrame } from "@react-three/fiber"
 
-
 export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_total, progresso_minimo, progresso_maximo, finalizado = false}) {
 
     const [escala_x, set_escala] = useState(0)
@@ -64,6 +63,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
     })
 
     const textura_navio = useTexture("/imagens_cenas/acampamento/navio.png")
+    const textura_bandeira = useTexture("/imagens_cenas/acampamento/bandeira.png")
 
     return <group key={nome}>
 
@@ -95,6 +95,20 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
                 <meshStandardMaterial color={cor} opacity={.4} transparent />
             </mesh>
 
+            {/* BANDEIRA CHEGADA */}
+            {finalizado ? 
+                <sprite
+                    position={[posicao[0] * 2 + .3, posicao[1] + .7, posicao[2]]} 
+                    scale={[ 1.2 , 1.2 , 1 ]}>
+                    <spriteMaterial
+                        map={textura_bandeira}
+                        transparent
+                        
+                    />
+                </sprite>
+            
+            : null}
+
             {/* TEXTO */}
             <group position={[posicao[0], posicao[1] + 1.8, posicao[2] + .3]}>
 
@@ -103,7 +117,7 @@ export default function Caminho_navio({tamanho, cor, posicao, nome, progresso_to
                     <meshStandardMaterial 
                         color={"#2c1a0c"} 
                         transparent={true} 
-                        opacity={0.7} 
+                        opacity={0.9} 
                     />
                 </mesh>
 

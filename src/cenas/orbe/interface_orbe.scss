@@ -1,11 +1,12 @@
 .interface-orbe {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  background-color: black;
 
   &.animacao-sair{
 
@@ -18,7 +19,7 @@
     height: 100%;
     pointer-events: auto;
     z-index: 1;
-    animation: canvas-aparecer .5s forwards ease;
+    animation: aparecer .5s forwards ease;
   }
 
   .estrela-nome {
@@ -52,12 +53,12 @@
 
   .imagem-constelacao {
 
-    z-index: -1;
     position: absolute;
     width: 100vw;
-    height: 80vh;
+    height: 80dvh;
     opacity: 13%;
-    margin-top: 10vh;
+    margin-top: 10dvh;
+    animation: aparecer-constelacao .6s forwards;
 
   }
 
@@ -102,13 +103,23 @@
 
 }
 
-@keyframes canvas-aparecer {
+@keyframes aparecer {
   from {
     opacity: 0;
   }
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes aparecer-constelacao {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 13%;
   }
 }
 

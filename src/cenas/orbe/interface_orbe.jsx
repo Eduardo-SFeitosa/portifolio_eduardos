@@ -1,5 +1,5 @@
 import { Html, useGLTF } from "@react-three/drei";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei";
 import EstrelaEstatica from "../../modelos_auxiliares/estrela_estatica_circulo.jsx";
@@ -23,7 +23,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
     const [animacao_sair, set_animacao] = useState(false)
     const versao_mobile = window.innerHeight > window.innerWidth ? true : false
 
-    const zoom_camera = versao_mobile ? 7 : 4
+    const zoom_camera = versao_mobile ? 7.5 : 4
 
     const icones_tamanho = versao_mobile ? .008 : .005
     const icones_espacamento = versao_mobile ? .25 : .2
@@ -78,9 +78,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
             estrelas_mobile : [
                 { nome: "REACT",       posicao: [ 0.10,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
-                { nome: "THREE.JS",    posicao: [-0.30,  0.40, 0], margem_esquerda: 0, margem_cima: 2 },
+                { nome: "THREE.JS",    posicao: [-0.30,  0.40, 0], margem_esquerda: 1, margem_cima: 2 },
                 { nome: "ANGULAR",     posicao: [ 0.30,  0.25, 0], margem_esquerda: 1, margem_cima: 0 },
-                { nome: "NODE.JS",     posicao: [-0.35, -0.40, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "NODE.JS",     posicao: [-0.35, -0.40, 0], margem_esquerda: 1, margem_cima: 0 },
                 { nome: "TYPESCRIPT",  posicao: [ 0.20, -0.35, 0], margem_esquerda: 1, margem_cima: 0 },
                 { nome: "ROUTER",      posicao: [ 0.10, -0.80, 0], margem_esquerda: 2, margem_cima: 0 },
                 { nome: "VITE",        posicao: [-0.35, -0.75, 0], margem_esquerda: 1, margem_cima: 2 },
@@ -106,10 +106,10 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             estrelas_mobile : [
                 { nome: "RESPONSIVO",  posicao: [ 0.50,  0.55, 0], margem_esquerda: 0, margem_cima: 0 },
                 { nome: "FORMS",       posicao: [ 0.45, -0.15, 0], margem_esquerda: 0, margem_cima: 2 },
-                { nome: "SASS",        posicao: [ 0.40, -0.80, 0], margem_esquerda: 2, margem_cima: 1 },
+                { nome: "SASS",        posicao: [ 0.40, -0.80, 0], margem_esquerda: 0, margem_cima: 0 },
                 { nome: "ANIMACOES",   posicao: [-0.40, -0.90, 0], margem_esquerda: 1, margem_cima: 0 },
                 { nome: "TAGS",        posicao: [-0.50, -0.20, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "TAILWIND",    posicao: [-0.50,  0.45, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "TAILWIND",    posicao: [-0.50,  0.45, 0], margem_esquerda: 2, margem_cima: 2 },
             ],
 
             conectar_final : true,
@@ -130,8 +130,8 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
             estrelas_mobile : [
                 { nome: "ASP.NET",         posicao: [ 0.00,  -0.85, 0], margem_esquerda: 2, margem_cima: 1 },
                 { nome: ".NET",            posicao: [ 0.0,  -0.10, 0], margem_esquerda: 2, margem_cima: 1 },
-                { nome: "API REST",        posicao: [-0.55, 0.40, 0], margem_esquerda: 1, margem_cima: 2 },
-                { nome: "WINDOWS FORMS",   posicao: [ 0.5, 0.40, 0], margem_esquerda: 0, margem_cima: 0 },
+                { nome: "WINDOWS FORMS",        posicao: [-0.35, 0.40, 0], margem_esquerda: 1, margem_cima: 0 },
+                { nome: "API REST",   posicao: [ 0.34, 0.40, 0], margem_esquerda: 1, margem_cima: 2 },
             ],
 
             conectar_final : false,
@@ -327,7 +327,6 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                 </group>
 
                 {/* ESTRELAS DO FUNDO */}
-
                 {versao_mobile ? 
                     <EstrelaEstatica
                     position={[0,0,-10]}
@@ -335,7 +334,7 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
                     largura={7.5}
                     altura={12}
                     profundidade={3}
-                    particulas={500}
+                    particulas={100}
                     tamanho={2.5}
                     velocidade={0}
                     />:
@@ -353,10 +352,9 @@ export default function Interface_orbe({ mudar_caminho, set_interface, set_direc
 
             </Canvas>
 
-            {versao_mobile ? <img className="imagem-constelacao" src={imagens_src["mobile"][stack]} alt="" />:
-            <img className="imagem-constelacao" src={imagens_src["desktop"][stack]} alt="" />}
+            {versao_mobile ? <img className="imagem-constelacao" src={imagens_src["mobile"][stack]} alt="" />
+            :<img className="imagem-constelacao" src={imagens_src["desktop"][stack]} alt="" />}
             
-
             <div className="controle-caminhos">
 
                 <h1 className="botao" onClick={() => { mudar_animacao("voltar") }}>VOLTAR PARA JORNADA</h1>

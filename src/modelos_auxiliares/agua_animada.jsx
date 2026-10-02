@@ -3,7 +3,7 @@ import { useFrame, useLoader } from '@react-three/fiber'
 import { TextureLoader, RepeatWrapping } from 'three'
 import * as THREE from "three"
 
-export default function AguaAnimada(props) {
+export default function AguaAnimada({ animacao = true  ,...props}) {
 
   const referenciaAgua = useRef()
 
@@ -32,15 +32,17 @@ export default function AguaAnimada(props) {
   // Animação
   useFrame(({ clock }) => {
 
+    if (!animacao) return
+
     const delta = clock.getElapsedTime()
 
     if (referenciaAgua.current) {
 
-      // Velocidade da animação da agua
+      // VELOCIDADE ANIMACAO
       referenciaAgua.current.map.offset.x = delta * 0.01
       referenciaAgua.current.normalMap.offset.x = delta * 0.04
 
-      // Velocidade da animação de noise
+      // VELOCIDADE RUIDO
       referenciaAgua.current.emissiveMap.offset.x = delta * 0.1
       
     }

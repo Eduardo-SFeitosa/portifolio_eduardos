@@ -14,7 +14,7 @@ $cor-texto-claro: #f0e6d2;
 .container-acampamento {
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,7 @@ $cor-texto-claro: #f0e6d2;
 .interface-acampamento {
     width: 100%;
     max-width: 1100px;
-    height: 85vh;
+    height: 85dvh;
     max-height: 750px;
     margin: 0 auto;
 
@@ -142,7 +142,7 @@ $cor-texto-claro: #f0e6d2;
 
     .interface-acampamento {
         width: 95%;
-        height: 90vh;
+        height: 90dvh;
         padding: 4%;
 
         .titulo {
